@@ -7,6 +7,8 @@ This package facilitates discovery of hydrological data, non programmatic access
 
 This folder contains the package hddtools ready to be installed via devtools:
 
+```R
 library(devtools)
 install_github("r_hddtools", username = "cvitolo", subdir = "hddtools")
 library(hddtools)
+```
