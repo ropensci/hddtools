@@ -1,7 +1,7 @@
 Hydrological Data Discovery Tools
 ==========
 
-The R package ``hddtools'' is an open source project is designed to facilitate non programmatic access to online data sources. This typically implies the download of a metadata catalogue, selection of information needed, formal request for dataset(s), de-compression, conversion, manual filtering and parsing. All those operation are made more efficient by re-usable functions. 
+The R package ``hddtools'' is an open source project designed to facilitate non programmatic access to online data sources. This typically implies the download of a metadata catalogue, selection of information needed, formal request for dataset(s), de-compression, conversion, manual filtering and parsing. All those operation are made more efficient by re-usable functions. 
 
 Depending on the data license, functions can provide offline and/or online modes. When redistribution is allowed, for instance, a copy of the dataset is cached within the package and updated twice a year. This is the fastest option and also allows offline use of package's functions. When re-distribution is not allowed, only online mode is provided.
 
@@ -86,3 +86,6 @@ trmm(fileLocation="~/",
      BBlatMin=52.43,
      BBlatMax=52.52)
 ```
+
+# Leave your feedback
+I would greatly appreciate if you could leave your feedbacks either via email (cvitolodev@gmail.com) or taking a short survey (https://www.surveymonkey.com/s/QQ568FT).
