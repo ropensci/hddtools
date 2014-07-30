@@ -1,0 +1,110 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              6457220
+# River:                 WELNA
+# Station:               KOWANOWKO
+# Country:               PL
+# Latitude (dec. °):       52.666700
+# Longitude (de. °):       16.850000
+# Catchment area (km²):     2597.000
+# Altitude (m.a.s.l):          51.28
+# Next d/s station:      6457800
+# Remarks:               
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1960 - 1980
+# No. of years:          21
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1960;  -999.000;00;  -999.000;  -999.000;00;   2
+1961;     4.078;07;     9.442;    19.487;08;  12
+1962;     2.880;08;    10.722;    24.467;04;  12
+1963;     1.109;08;     4.909;     9.919;04;  12
+1964;     1.452;07;     5.462;    12.238;04;  12
+1965;     2.593;07;     9.382;    22.980;04;  12
+1966;     3.140;07;    11.795;    26.313;03;  12
+1967;     6.999;07;    16.955;    39.739;03;  12
+1968;     2.934;08;    14.354;    40.358;01;  12
+1969;     0.929;09;     6.689;    16.923;04;  12
+1970;     2.071;09;    11.331;    55.007;04;  12
+1971;     1.990;09;     7.799;    14.577;01;  12
+1972;     2.249;07;     4.420;     7.305;12;  12
+1973;     1.844;09;     7.490;    14.019;03;  12
+1974;     4.070;09;    12.500;    28.703;12;  12
+1975;     1.782;09;     8.746;    40.213;01;  12
+1976;     1.241;07;     5.238;     8.960;03;  12
+1977;     7.034;07;    16.673;    32.126;03;  12
+1978;     1.361;08;     7.699;    14.116;01;  12
+1979;     1.695;08;    13.621;    56.220;03;  12
+1980;     8.203;02;    17.842;    51.242;07;  10
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+     0.929;    10.061;     0.317;       122;    56.220;  240
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;     2.320;1963;    13.348;    40.358;1968;    10.379;   20
+02;     2.197;1963;    14.217;    36.672;1968;     9.500;   20
+03;     4.921;1972;    17.507;    56.220;1979;    12.810;   20
+04;     5.515;1972;    18.525;    55.007;1970;    13.194;   20
+05;     4.094;1972;    11.414;    27.516;1970;     6.450;   20
+06;     2.411;1963;     6.237;    16.708;1977;     3.846;   20
+07;     1.241;1976;     5.917;    51.242;1980;    10.834;   20
+08;     1.109;1963;     5.443;    27.777;1980;     7.001;   20
+09;     0.929;1969;     4.436;    13.580;1980;     3.887;   20
+10;     1.378;1969;     5.169;    11.801;1974;     3.284;   20
+11;     1.955;1969;     7.406;    22.333;1974;     4.558;   20
+12;     4.013;1969;    11.120;    28.703;1974;     6.002;   20

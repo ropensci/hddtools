@@ -1,0 +1,99 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              2218100
+# River:                 MORGHAB RIVER
+# Station:               BALA MURGHAB
+# Country:               AF
+# Latitude (dec. °):       35.583333
+# Longitude (de. °):       63.316667
+# Catchment area (km²):    20525.000
+# Altitude (m.a.s.l):         468.00
+# Next d/s station:      -
+# Remarks:               USGS-ID: 353500063190000
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1969 - 1978
+# No. of years:          10
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1969;  -999.000;00;  -999.000;  -999.000;00;   9
+1970;    29.868;12;    42.611;    71.440;04;  12
+1971;    26.761;08;    32.860;    51.517;04;  12
+1972;    25.383;02;    51.403;   118.403;05;  12
+1973;    29.552;01;    52.779;   107.090;05;  12
+1974;    30.432;12;    41.742;    81.210;04;  12
+1975;    27.690;01;    74.083;   191.484;05;  12
+1976;    39.884;01;    74.955;   181.613;05;  12
+1977;    27.894;08;    39.139;    57.567;04;  12
+1978;  -999.000;00;  -999.000;  -999.000;00;   9
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+    25.383;    56.490;     1.781;        87;   281.067;  114
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;    26.413;1972;    33.282;    41.690;1970;     5.568;    9
+02;    25.383;1972;    33.923;    44.814;1976;     5.912;    9
+03;    33.329;1971;    48.421;    58.913;1973;     8.034;    9
+04;    51.517;1971;   113.253;   281.067;1969;    67.894;   10
+05;    46.397;1971;   116.078;   227.903;1969;    63.489;   10
+06;    34.567;1971;    79.979;   166.733;1969;    42.446;   10
+07;    30.045;1971;    50.726;    93.452;1969;    21.266;   10
+08;    26.761;1971;    40.347;    64.332;1969;    12.877;   10
+09;    27.880;1971;    38.454;    54.060;1969;     9.389;   10
+10;    29.200;1971;    38.238;    50.019;1976;     8.210;    9
+11;    29.637;1971;    38.066;    52.540;1969;     8.411;    9
+12;    27.081;1971;    36.017;    44.484;1969;     6.779;    9

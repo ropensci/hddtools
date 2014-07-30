@@ -1,0 +1,99 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              2548610
+# River:                 RAPTI RIVER
+# Station:               BAGASOTI GAON
+# Country:               NP
+# Latitude (dec. °):       27.900000
+# Longitude (de. °):       82.850000
+# Catchment area (km²):     3380.000
+# Altitude (m.a.s.l):         381.00
+# Next d/s station:      2548620
+# Remarks:               
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1976 - 1985
+# No. of years:          10
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1976;    19.300;04;    87.967;   258.000;08;  12
+1977;    20.800;04;    77.225;   283.000;08;  12
+1978;    21.600;05;   104.400;   308.000;08;  12
+1979;    14.500;04;    75.258;   254.000;08;  12
+1980;    15.800;04;    98.192;   327.000;09;  12
+1981;    18.200;04;   101.883;   379.000;09;  12
+1982;    16.800;04;    85.883;   276.000;08;  12
+1983;    15.500;04;   101.042;   423.000;09;  12
+1984;    14.200;05;   102.633;   324.000;09;  12
+1985;    18.100;03;    95.408;   253.000;09;  12
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+    14.200;    92.989;     2.933;       868;   423.000;  120
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;    25.900;1979;    31.710;    37.000;1984;     3.965;   10
+02;    22.200;1985;    26.280;    30.700;1977;     2.371;   10
+03;    17.300;1979;    21.450;    24.900;1982;     2.962;   10
+04;    14.500;1979;    18.220;    23.700;1978;     2.831;   10
+05;    14.200;1984;    22.830;    34.900;1983;     5.657;   10
+06;    32.700;1983;    60.280;   132.000;1978;    29.531;   10
+07;    90.200;1983;   192.320;   288.000;1978;    59.726;   10
+08;   226.000;1983;   259.400;   308.000;1978;    23.954;   10
+09;   130.000;1979;   268.300;   423.000;1983;    96.079;   10
+10;    72.700;1977;   116.710;   195.000;1983;    38.332;   10
+11;    46.900;1977;    58.570;    75.800;1983;     8.459;   10
+12;    34.600;1977;    39.800;    47.900;1983;     5.111;   10

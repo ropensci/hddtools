@@ -1,0 +1,137 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              1196103
+# River:                 ELEFANTES / OLIFANTSRIVIER
+# Station:               MOOIFONTEIN (27529001)
+# Country:               ZA
+# Latitude (dec. °):      -25.809167
+# Longitude (de. °):       29.319444
+# Catchment area (km²):     3957.000
+# Altitude (m.a.s.l):        1420.00
+# Next d/s station:      1196102
+# Remarks:               
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1904 - 1951
+# No. of years:          48
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1904;  -999.000;00;  -999.000;  -999.000;00;   4
+1905;     0.010;10;     0.326;     1.184;02;  12
+1906;     0.000;08;     0.369;     1.849;02;  12
+1907;     0.287;09;     7.480;    53.625;02;  12
+1908;     0.030;09;     0.855;     4.268;12;  12
+1909;     0.585;10;    12.822;    57.279;03;  12
+1910;     0.239;08;     3.357;    14.094;02;  12
+1911;     0.258;09;     4.207;    32.516;01;  12
+1912;     0.000;10;     0.666;     3.306;02;  12
+1913;     0.000;12;     0.773;     5.007;01;  12
+1914;  -999.000;00;  -999.000;  -999.000;00;   5
+1915;     0.226;09;     3.459;    11.630;12;  11
+1916;     0.013;09;     1.592;     8.961;12;  10
+1917;     0.031;07;    10.258;    73.183;11;  12
+1918;     0.899;09;    15.311;   109.708;01;  12
+1919;     0.045;10;     3.825;    25.468;01;  12
+1920;     0.021;09;     1.773;    11.587;10;  12
+1921;     0.236;08;     5.162;    26.879;03;  12
+1922;     0.523;09;     6.177;    15.066;11;  12
+1923;     0.001;10;     4.880;    38.494;01;  12
+1924;     0.281;09;     3.671;    12.393;03;  12
+1925;     0.093;12;     4.330;    11.050;05;  12
+1926;     0.017;10;     0.186;     0.634;02;  12
+1927;     0.146;09;     3.389;    14.794;03;  12
+1928;     0.000;10;     0.624;     2.213;02;  12
+1929;     0.107;08;     5.904;    26.425;11;  12
+1930;     0.070;10;     2.425;     9.457;01;  12
+1931;     0.019;06;     0.810;     4.004;02;  12
+1932;     0.007;09;     1.068;     6.430;12;  12
+1933;     0.000;10;     1.369;     7.878;12;  12
+1934;     0.209;09;     4.406;    22.143;02;  12
+1935;     0.000;10;     0.878;     4.994;03;  12
+1936;     0.210;10;     5.700;    30.579;05;  12
+1937;     0.195;09;     6.268;    41.944;02;  12
+1938;     0.265;09;     2.461;    12.698;01;  12
+1939;     0.149;10;    12.686;    68.213;02;  12
+1940;     0.698;04;     9.315;    42.592;12;  12
+1941;     0.160;11;     7.662;    29.125;04;  11
+1942;     0.280;09;     3.210;    18.247;12;  12
+1943;     1.437;02;     7.902;    19.677;07;  12
+1944;     0.350;10;    15.729;   124.450;02;  12
+1945;     0.040;10;     2.358;    16.305;02;  12
+1946;     0.069;10;    10.123;    67.742;02;  12
+1947;     0.005;09;     2.226;    18.510;01;  12
+1948;     0.013;09;     1.924;    11.315;01;  12
+1949;     0.005;09;     4.825;    19.100;12;  12
+1950;     0.035;10;     2.785;    15.026;03;  12
+1951;  -999.000;00;  -999.000;  -999.000;00;   9
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+     0.000;     4.511;     0.142;        36;   124.450;  554
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;     0.403;1926;    11.156;   109.708;1918;    17.956;   46
+02;     0.634;1926;    13.419;   124.450;1944;    23.737;   47
+03;     0.137;1931;     6.634;    57.279;1909;    10.096;   47
+04;     0.041;1906;     2.183;    29.125;1941;     4.544;   47
+05;     0.006;1906;     1.915;    30.579;1936;     5.100;   46
+06;     0.003;1906;     0.954;    13.043;1940;     2.071;   46
+07;     0.001;1906;     0.944;    19.677;1943;     2.877;   46
+08;     0.000;1906;     0.509;     3.141;1943;     0.692;   46
+09;     0.000;1906;     0.441;     5.307;1940;     0.897;   47
+10;     0.000;1912;     1.205;    11.587;1920;     2.403;   45
+11;     0.043;1926;     6.896;    73.183;1917;    12.323;   46
+12;     0.000;1913;     7.770;    42.592;1940;    10.554;   45

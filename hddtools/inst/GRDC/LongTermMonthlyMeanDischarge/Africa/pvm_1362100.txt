@@ -1,0 +1,101 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              1362100
+# River:                 NILE
+# Station:               EL EKHSASE
+# Country:               EG
+# Latitude (dec. °):       29.700000
+# Longitude (de. °):       31.280000
+# Catchment area (km²):  2900000.000
+# Altitude (m.a.s.l):          20.00
+# Next d/s station:      -
+# Remarks:               
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1973 - 1984
+# No. of years:          12
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1973;   735.000;01;  1130.917;  1702.000;07;  12
+1974;   909.000;02;  1185.583;  1650.000;07;  12
+1975;   974.000;10;  1196.667;  1736.000;07;  12
+1976;   964.000;11;  1162.500;  1657.000;07;  12
+1977;   985.000;12;  1223.833;  1642.000;07;  12
+1978;  1157.000;02;  1390.167;  1683.000;07;  12
+1979;  1091.000;11;  1341.750;  1877.000;07;  12
+1980;   979.000;02;  1194.917;  1782.000;07;  12
+1981;  1025.000;02;  1259.417;  1794.000;07;  12
+1982;  1100.000;02;  1343.417;  1875.000;07;  12
+1983;  1093.000;02;  1286.333;  1713.000;07;  12
+1984;  1019.000;02;  1300.417;  1794.000;07;  12
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+   735.000;  1251.326;    39.462;        14;  1877.000;  144
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;   735.000;1973;  1238.750;  1528.000;1982;   231.693;   12
+02;   822.000;1973;  1035.250;  1198.000;1979;   105.710;   12
+03;  1008.000;1973;  1125.750;  1340.000;1978;    98.441;   12
+04;   968.000;1973;  1110.167;  1469.000;1978;   131.286;   12
+05;  1067.000;1976;  1169.750;  1433.000;1978;    94.233;   12
+06;  1447.000;1980;  1542.167;  1643.000;1979;    56.752;   12
+07;  1642.000;1977;  1742.083;  1877.000;1979;    82.334;   12
+08;  1500.000;1976;  1559.500;  1657.000;1979;    53.783;   12
+09;  1076.000;1976;  1190.583;  1308.000;1984;    77.060;   12
+10;   974.000;1975;  1102.583;  1238.000;1984;   100.070;   12
+11;   949.000;1973;  1075.417;  1226.000;1978;    89.093;   12
+12;   955.000;1973;  1123.917;  1347.000;1978;   128.825;   12

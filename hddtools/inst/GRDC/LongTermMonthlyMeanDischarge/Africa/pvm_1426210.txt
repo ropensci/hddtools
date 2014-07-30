@@ -1,0 +1,101 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              1426210
+# River:                 BANDAMA
+# Station:               BRIMBO
+# Country:               CI
+# Latitude (dec. °):        6.000000
+# Longitude (de. °):       -4.430000
+# Catchment area (km²):    60200.000
+# Altitude (m.a.s.l):        -999.00
+# Next d/s station:      1426880
+# Remarks:               
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1982 - 1993
+# No. of years:          12
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1982;    69.000;12;   144.750;   224.000;06;  12
+1983;     6.000;09;    62.167;   116.000;04;  12
+1984;  -999.000;00;  -999.000;  -999.000;00;   0
+1985;  -999.000;00;  -999.000;  -999.000;00;   0
+1986;  -999.000;00;  -999.000;  -999.000;00;   0
+1987;  -999.000;00;  -999.000;  -999.000;00;   0
+1988;  -999.000;00;  -999.000;  -999.000;00;   0
+1989;  -999.000;00;  -999.000;  -999.000;00;   0
+1990;  -999.000;00;  -999.000;  -999.000;00;   0
+1991;  -999.000;00;  -999.000;  -999.000;00;   0
+1992;  -999.000;00;  -999.000;  -999.000;00;   0
+1993;    48.545;01;    77.458;   115.437;06;  12
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+     6.000;    94.792;     2.989;        50;   224.000;   36
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;    48.545;1993;  -999.000;   100.000;1982;  -999.000;    3
+02;    53.846;1993;  -999.000;   130.000;1982;  -999.000;    3
+03;    62.016;1993;  -999.000;   111.000;1982;  -999.000;    3
+04;    65.177;1993;  -999.000;   187.000;1982;  -999.000;    3
+05;   100.242;1993;  -999.000;   197.000;1982;  -999.000;    3
+06;    84.000;1983;  -999.000;   224.000;1982;  -999.000;    3
+07;    56.874;1993;  -999.000;   183.000;1982;  -999.000;    3
+08;     8.000;1983;  -999.000;   142.000;1982;  -999.000;    3
+09;     6.000;1983;  -999.000;   170.000;1982;  -999.000;    3
+10;     6.000;1983;  -999.000;   135.000;1982;  -999.000;    3
+11;    44.000;1983;  -999.000;    89.000;1982;  -999.000;    3
+12;    25.000;1983;  -999.000;    69.194;1993;  -999.000;    3

@@ -1,0 +1,134 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              1258400
+# River:                 SWAKOP
+# Station:               WESTFALENHOF (64732003)
+# Country:               NA
+# Latitude (dec. °):      -22.283333
+# Longitude (de. °):       16.416667
+# Catchment area (km²):     8986.000
+# Altitude (m.a.s.l):        1040.00
+# Next d/s station:      -
+# Remarks:               
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1962 - 2006
+# No. of years:          45
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1962;     0.000;04;     2.685;    29.469;02;  11
+1963;     0.000;05;     6.408;    60.583;01;  12
+1964;     0.000;01;     0.008;     0.102;04;  12
+1965;     0.000;05;     0.367;     3.479;03;  12
+1966;     0.000;04;     1.009;     9.094;02;  12
+1967;     0.000;04;     0.841;     7.391;02;  12
+1968;     0.000;01;     0.068;     0.810;03;  12
+1969;     0.000;01;     0.000;     0.000;01;  12
+1970;     0.000;03;     0.263;     2.541;02;  12
+1971;     0.000;05;     1.403;    12.866;02;  12
+1972;     0.000;02;     1.094;     9.716;03;  12
+1973;     0.000;01;     0.098;     0.707;04;  12
+1974;     0.000;05;     5.111;    27.025;02;  12
+1975;     0.000;01;     0.001;     0.009;03;  12
+1976;     0.000;04;     1.376;     8.199;02;  12
+1977;     0.000;01;     0.053;     0.465;02;  12
+1978;     0.000;01;     0.000;     0.000;01;  12
+1979;     0.000;01;     0.000;     0.000;01;  12
+1980;     0.000;01;     0.011;     0.135;03;  12
+1981;     0.000;01;     0.000;     0.000;01;  12
+1982;     0.000;01;     0.000;     0.003;12;  12
+1983;     0.000;02;     0.002;     0.014;01;  12
+1984;     0.000;01;     0.009;     0.100;02;  11
+1985;     0.000;05;     0.028;     0.287;02;  11
+1986;     0.000;01;     0.004;     0.049;03;  11
+1987;     0.000;01;     0.000;     0.000;01;  12
+1988;     0.000;05;     0.851;     7.053;01;  12
+1989;     0.000;01;     0.334;     4.008;02;  12
+1990;     0.000;04;     0.026;     0.280;01;  11
+1991;     0.000;01;     0.004;     0.036;10;  12
+1992;     0.000;01;     0.000;     0.000;01;  12
+1993;     0.000;01;     0.000;     0.003;03;  12
+1994;     0.000;02;     0.002;     0.023;01;  12
+1995;     0.000;01;     0.005;     0.054;02;  12
+1996;     0.000;01;     0.000;     0.000;01;  12
+1997;  -999.000;00;  -999.000;  -999.000;00;   4
+1998;  -999.000;00;  -999.000;  -999.000;00;   0
+1999;  -999.000;00;  -999.000;  -999.000;00;   0
+2000;  -999.000;00;  -999.000;  -999.000;00;   3
+2001;     0.000;01;     0.001;     0.008;04;  12
+2002;     0.000;01;     0.000;     0.000;01;  12
+2003;     0.000;01;     0.007;     0.080;04;  12
+2004;  -999.000;00;  -999.000;  -999.000;00;   2
+2005;  -999.000;00;  -999.000;  -999.000;00;   8
+2006;  -999.000;00;  -999.000;  -999.000;00;   0
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+     0.000;     0.560;     0.018;         2;    60.583;  468
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;     0.000;1964;     2.580;    60.583;1963;    10.423;   37
+02;     0.000;1964;     2.714;    29.469;1962;     6.805;   38
+03;     0.000;1964;     1.358;    12.532;1974;     3.246;   38
+04;     0.000;1962;     0.281;     4.354;1963;     0.840;   39
+05;     0.000;1962;     0.000;     0.000;1962;     0.000;   40
+06;     0.000;1962;     0.000;     0.000;1962;     0.000;   40
+07;     0.000;1962;     0.000;     0.000;1962;     0.000;   39
+08;     0.000;1962;     0.000;     0.000;1962;     0.000;   39
+09;     0.000;1962;     0.000;     0.000;1962;     0.000;   39
+10;     0.000;1962;     0.001;     0.036;1991;     0.005;   40
+11;     0.000;1962;     0.000;     0.010;1991;     0.001;   40
+12;     0.000;1962;     0.023;     0.555;1970;     0.099;   39

@@ -1,0 +1,102 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              6503350
+# River:                 BARROW
+# Station:               GRAIGUENAMANAGH U/S
+# Country:               IE
+# Latitude (dec. °):       52.540457
+# Longitude (de. °):       -6.950919
+# Catchment area (km²):     2778.100
+# Altitude (m.a.s.l):        -999.00
+# Next d/s station:      -
+# Remarks:               IE-Grid: S 712 439
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1996 - 2008
+# No. of years:          13
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1996;  -999.000;00;  -999.000;  -999.000;00;   3
+1997;    11.151;07;    31.380;    72.855;11;  11
+1998;    14.874;09;    47.146;   111.644;01;  12
+1999;     7.802;08;    39.296;   106.188;01;  12
+2000;     9.108;08;    46.336;   108.824;12;  10
+2001;  -999.000;00;  -999.000;  -999.000;00;   9
+2002;    24.898;07;    57.742;   113.142;11;  10
+2003;     8.215;09;    31.156;    72.547;01;  12
+2004;  -999.000;00;  -999.000;  -999.000;00;   9
+2005;     4.201;09;    30.921;    72.670;01;  12
+2006;     7.432;08;    41.132;   114.762;12;  11
+2007;    14.300;05;    39.458;    88.731;01;  12
+2008;  -999.000;00;  -999.000;  -999.000;00;   6
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+     4.201;    39.966;     1.260;       454;   114.762;  129
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;    23.360;1997;    71.872;   111.644;1998;    27.509;   12
+02;    30.483;2006;    51.092;   100.505;2002;    18.473;   12
+03;    30.469;1997;    43.571;    65.655;2007;    10.048;   12
+04;    13.488;1997;    32.805;    60.963;1998;    12.193;   12
+05;    14.300;2007;    27.629;    47.393;2002;    11.462;   11
+06;    11.180;2005;    21.993;    39.105;1998;    10.468;    9
+07;     6.100;2005;    18.213;    41.279;2007;    11.608;    9
+08;     5.375;2005;    17.588;    50.494;2007;    15.480;    8
+09;     4.201;2005;    17.212;    45.677;1999;    12.589;   10
+10;     8.781;2003;    34.750;    50.302;2006;    13.923;   11
+11;    20.409;2007;    57.825;   113.142;2002;    29.365;   12
+12;    33.902;2001;    64.433;   114.762;2006;    27.780;   11

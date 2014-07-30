@@ -1,0 +1,109 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              1992700
+# River:                 SHIRE
+# Station:               LIWONDE
+# Country:               MW
+# Latitude (dec. °):      -15.070000
+# Longitude (de. °):       35.200000
+# Catchment area (km²):   130200.000
+# Altitude (m.a.s.l):         470.00
+# Next d/s station:      1992710
+# Remarks:               
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1965 - 1984
+# No. of years:          20
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1965;     3.000;12;   291.417;   535.000;04;  12
+1966;    87.000;01;   285.167;   477.000;06;  12
+1967;   313.000;11;   354.667;   383.000;02;  12
+1968;   191.000;12;   386.667;   483.000;05;  12
+1969;   193.000;02;   300.333;   416.000;06;  12
+1970;   165.000;11;   355.083;   496.000;04;  12
+1971;   231.000;01;   363.333;   466.000;04;  12
+1972;   148.000;08;   233.417;   371.000;04;  12
+1973;   150.000;09;   185.000;   218.000;05;  12
+1974;   153.000;09;   308.583;   522.000;05;  12
+1975;   207.000;11;   457.750;   662.000;05;  12
+1976;   388.000;11;   521.167;   703.000;05;  12
+1977;   391.000;11;   513.583;   617.000;04;  12
+1978;   395.000;10;   593.833;   728.000;04;  12
+1979;   618.000;01;   727.833;   848.000;05;  12
+1980;   664.000;11;   824.583;   963.000;05;  12
+1981;   652.000;12;   811.167;   943.000;05;  12
+1982;   641.000;11;   672.167;   702.000;05;  12
+1983;   572.000;12;   652.000;   693.000;04;  12
+1984;   431.000;11;   594.417;   727.000;04;  12
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+     3.000;   471.608;    14.873;       114;   963.000;  240
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;    87.000;1966;   448.000;   799.000;1981;   207.050;   20
+02;   188.000;1974;   492.750;   848.000;1981;   197.173;   20
+03;   193.000;1969;   529.050;   905.000;1980;   213.829;   20
+04;   199.000;1969;   559.050;   944.000;1980;   224.121;   20
+05;   218.000;1973;   580.600;   963.000;1980;   208.691;   20
+06;   159.000;1972;   554.150;   916.000;1980;   205.949;   20
+07;   155.000;1972;   512.450;   850.000;1980;   202.100;   20
+08;    64.000;1965;   446.800;   802.000;1980;   220.968;   20
+09;    23.000;1965;   404.200;   771.000;1980;   226.096;   20
+10;    11.000;1965;   374.550;   736.000;1980;   210.736;   20
+11;     4.000;1965;   362.950;   664.000;1980;   196.827;   20
+12;     3.000;1965;   394.750;   744.000;1980;   206.971;   20

@@ -1,0 +1,100 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              2913200
+# River:                 KARA-TURGAY
+# Station:               AKUTKUL
+# Country:               KZ
+# Latitude (dec. °):       49.920000
+# Longitude (de. °):       64.200000
+# Catchment area (km²):    14700.000
+# Altitude (m.a.s.l):         134.00
+# Next d/s station:      -
+# Remarks:               
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1965 - 1975
+# No. of years:          11
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1965;     0.000;01;     8.167;    77.000;04;  12
+1966;     0.000;02;    15.000;   110.000;03;  12
+1967;     1.000;01;     2.083;    11.000;04;  12
+1968;     0.000;10;     0.833;     2.000;05;  12
+1969;     0.000;01;     1.500;     9.000;05;  10
+1970;     0.000;02;    12.818;   100.000;04;  11
+1971;     0.000;01;    12.083;    99.000;04;  12
+1972;     0.000;01;    10.333;   111.000;04;  12
+1973;     0.000;01;    15.583;   164.000;04;  12
+1974;     0.000;01;    14.083;   155.000;04;  12
+1975;     0.000;01;     5.333;    43.000;04;  12
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+     0.000;     8.977;     0.283;        19;   164.000;  129
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;     0.000;1965;     0.300;     1.000;1966;     0.483;   10
+02;     0.000;1966;     0.273;     1.000;1965;     0.467;   11
+03;     0.000;1969;    13.909;   110.000;1966;    32.638;   11
+04;     1.000;1968;    80.200;   164.000;1973;    56.078;   10
+05;     2.000;1968;     9.182;    29.000;1971;     8.035;   11
+06;     1.000;1968;     1.818;     5.000;1966;     1.250;   11
+07;     1.000;1967;     1.455;     4.000;1966;     0.934;   11
+08;     1.000;1965;     1.273;     3.000;1966;     0.646;   11
+09;     1.000;1965;     1.273;     3.000;1966;     0.646;   11
+10;     0.000;1968;     0.909;     2.000;1966;     0.539;   11
+11;     0.000;1968;     0.636;     2.000;1966;     0.674;   11
+12;     0.000;1968;     1.500;    10.000;1970;     3.027;   10

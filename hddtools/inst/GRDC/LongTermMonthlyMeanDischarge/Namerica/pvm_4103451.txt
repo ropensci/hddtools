@@ -1,0 +1,102 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              4103451
+# River:                 MELOZITNA RIVER
+# Station:               NEAR RUBY, ALAS.
+# Country:               US
+# Latitude (dec. °):       64.792200
+# Longitude (de. °):     -155.563300
+# Catchment area (km²):     6974.870
+# Altitude (m.a.s.l):          57.91
+# Next d/s station:      4103300
+# Remarks:               
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1961 - 1973
+# No. of years:          13
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1961;  -999.000;00;  -999.000;  -999.000;00;   5
+1962;     3.360;03;    61.312;   244.085;06;  12
+1963;     1.870;02;    78.966;   297.423;08;  12
+1964;     2.800;04;    44.778;   296.025;06;  12
+1965;     1.400;03;    80.921;   305.116;06;  12
+1966;     1.400;03;    41.506;   214.331;06;  12
+1967;     0.947;03;    84.835;   283.676;05;  12
+1968;     0.654;12;    51.962;   314.347;06;  12
+1969;     0.098;04;    19.271;    65.922;08;  10
+1970;  -999.000;00;  -999.000;  -999.000;00;   9
+1971;     0.571;03;    62.309;   210.822;05;  12
+1972;     0.809;03;    63.775;   289.063;06;  12
+1973;  -999.000;00;  -999.000;  -999.000;00;   9
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+     0.098;    60.161;     1.897;       272;   340.832;  141
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;     0.181;1969;     2.701;     6.720;1962;     1.918;   11
+02;     0.732;1971;     2.119;     4.760;1962;     1.308;   10
+03;     0.571;1971;     1.742;     3.360;1962;     0.930;   10
+04;     0.098;1969;     1.731;     3.640;1962;     1.002;   12
+05;     3.766;1964;   157.969;   340.832;1973;   103.118;   12
+06;    23.800;1969;   214.691;   314.347;1968;    93.807;   12
+07;    15.192;1969;    70.623;   139.160;1963;    34.980;   12
+08;    21.854;1968;   107.978;   297.423;1963;    87.026;   13
+09;    16.122;1968;    82.435;   204.820;1962;    59.141;   13
+10;     9.059;1969;    35.192;   115.125;1965;    27.827;   12
+11;     2.315;1969;    10.429;    22.960;1965;     5.777;   12
+12;     0.587;1969;     4.282;     9.520;1961;     2.503;   12

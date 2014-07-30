@@ -1,0 +1,134 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              3650385
+# River:                 RIO MUNIM
+# Station:               NINA RODRIGUES
+# Country:               BR
+# Latitude (dec. °):       -3.459440
+# Longitude (de. °):      -43.898890
+# Catchment area (km²):    12450.000
+# Altitude (m.a.s.l):           5.00
+# Next d/s station:      -
+# Remarks:               
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1963 - 2007
+# No. of years:          45
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1963;  -999.000;00;  -999.000;  -999.000;00;   8
+1964;    27.380;09;   149.001;   571.430;04;  11
+1965;    33.774;10;   134.648;   492.390;04;  12
+1966;    17.725;12;    94.428;   264.533;04;  12
+1967;  -999.000;00;  -999.000;  -999.000;00;   4
+1968;  -999.000;00;  -999.000;  -999.000;00;   7
+1969;    14.905;12;   110.040;   389.830;04;  12
+1970;    10.359;12;    60.773;   188.229;04;  12
+1971;    18.645;12;   167.945;   604.684;05;  12
+1972;     8.044;11;    53.732;   209.314;05;  12
+1973;    18.451;11;   154.570;   453.765;05;  12
+1974;    55.882;11;   293.849;   838.433;04;  12
+1975;    37.099;11;   182.581;   501.142;03;  12
+1976;    20.210;12;   104.750;   324.740;04;  12
+1977;    23.909;11;   163.200;   437.630;04;  12
+1978;    20.693;11;    94.049;   375.226;05;  12
+1979;    12.777;10;    58.690;   185.593;05;  12
+1980;    10.095;12;    78.574;   402.013;03;  12
+1981;     9.773;08;    34.271;   124.354;04;  10
+1982;    10.020;08;    55.793;   188.301;03;  12
+1983;    10.115;06;    19.179;    59.877;04;  12
+1984;    11.307;12;   122.848;   579.387;05;  12
+1985;    56.667;01;   306.925;   763.433;04;  12
+1986;    60.919;12;   283.916;   824.437;04;  12
+1987;    20.203;12;    90.223;   280.526;03;  12
+1988;    26.397;11;   142.290;   525.032;05;  12
+1989;    35.385;10;   144.382;   576.626;05;  12
+1990;    18.615;11;    71.194;   148.820;05;  12
+1991;    12.694;12;    85.033;   265.806;05;  12
+1992;     6.379;11;    27.717;   108.085;04;  12
+1993;     4.076;11;    25.902;    80.076;04;  12
+1994;     8.407;12;    88.936;   359.833;04;  12
+1995;    12.543;12;   112.301;   395.633;04;  12
+1996;    10.929;12;    95.177;   354.858;05;  12
+1997;     9.038;12;    60.262;   297.478;04;  12
+1998;     5.597;10;    47.203;   179.531;04;  12
+1999;     9.673;11;    87.359;   348.956;05;  12
+2000;    13.745;11;   116.714;   644.311;04;  12
+2001;    10.437;11;    85.618;   410.084;04;  12
+2002;     7.544;11;    64.741;   223.347;04;  12
+2003;    10.156;01;    88.767;   359.238;04;  12
+2004;     7.275;12;   101.715;   296.256;02;  12
+2005;     3.728;11;    34.997;   149.358;04;  12
+2006;     7.562;11;    83.746;   447.454;05;  12
+2007;     4.959;11;    72.850;   273.883;04;  12
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+     3.728;   105.082;     3.314;       266;   838.433;  520
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;     8.339;2007;    47.167;   130.456;1986;    32.415;   43
+02;    20.831;1983;   106.405;   517.714;1985;    96.590;   43
+03;    20.870;1983;   209.056;   622.213;1986;   128.911;   43
+04;    59.877;1983;   329.748;   838.433;1974;   196.565;   43
+05;    13.929;1983;   281.849;   837.348;1974;   207.527;   42
+06;    10.115;1983;   106.553;   540.563;1974;   111.535;   44
+07;    10.274;1993;    60.169;   208.387;1985;    47.453;   44
+08;     7.419;1993;    39.197;   125.861;1985;    30.768;   44
+09;     5.002;1993;    27.486;    94.920;1985;    21.674;   43
+10;     4.429;2005;    22.457;    81.642;1986;    18.057;   43
+11;     3.728;2005;    19.483;    64.697;1986;    14.668;   44
+12;     4.316;1993;    21.988;    85.055;1985;    18.127;   44

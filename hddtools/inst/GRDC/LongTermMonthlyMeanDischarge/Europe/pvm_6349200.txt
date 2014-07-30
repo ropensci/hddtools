@@ -1,0 +1,105 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              6349200
+# River:                 ADIGE
+# Station:               BRONZOLO (BRANZOLL)
+# Country:               IT
+# Latitude (dec. °):       46.400002
+# Longitude (de. °):       11.316667
+# Catchment area (km²):     6926.000
+# Altitude (m.a.s.l):         227.00
+# Next d/s station:      6349300
+# Remarks:               
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1975 - 1990
+# No. of years:          16
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1975;    74.490;01;   152.544;   292.677;07;  12
+1976;    69.290;01;   127.824;   259.677;10;  12
+1977;    79.413;12;   204.852;   436.419;05;  12
+1978;    76.506;01;   156.340;   334.600;06;  12
+1979;    87.932;01;   177.907;   439.767;06;  12
+1980;    80.483;04;   146.578;   301.161;07;  12
+1981;    66.854;02;   152.920;   313.290;07;  12
+1982;    68.884;03;   147.037;   272.400;06;  12
+1983;    55.116;12;   143.663;   326.833;06;  12
+1984;    52.507;02;   123.937;   292.755;05;  12
+1985;    51.781;03;   123.720;   266.500;06;  12
+1986;    59.871;02;   142.518;   383.516;05;  12
+1987;    54.287;03;   157.464;   337.645;07;  12
+1988;    65.855;03;   142.549;   255.677;07;  12
+1989;    64.836;02;   129.337;   317.194;07;  12
+1990;    57.610;01;   112.510;   236.067;06;  12
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+    51.781;   146.356;     4.615;       666;   439.767;  192
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;    53.742;1984;    72.561;    94.958;1977;    12.645;   16
+02;    52.507;1984;    72.315;   102.696;1977;    13.232;   16
+03;    51.781;1985;    78.763;   140.903;1977;    23.099;   16
+04;    64.610;1984;    95.758;   148.067;1977;    22.650;   16
+05;   113.226;1976;   233.647;   436.419;1977;    89.105;   16
+06;   116.187;1976;   289.368;   439.767;1979;    75.132;   16
+07;   120.232;1976;   256.607;   337.645;1987;    62.454;   16
+08;    98.390;1984;   190.843;   298.806;1977;    55.037;   16
+09;    81.410;1990;   151.260;   218.433;1976;    42.314;   16
+10;    72.874;1983;   133.547;   259.677;1976;    52.708;   16
+11;    62.530;1985;   100.406;   174.067;1976;    31.547;   16
+12;    55.116;1983;    81.201;   110.429;1979;    18.751;   16

@@ -1,0 +1,44 @@
+1	grdc_no	GRDC station number
+2	wmo_reg	WMO region
+3	sub_reg	WMO subregion
+4	mix_reg	Combination of row 2+3
+5	nat_id	national station ID
+6	river	river name 
+7	station	station name 
+8	country_code	country code (ISO 3166)
+9	lat	latitude °
+10	long	longitude °
+11	area	catchment size km2
+12	altitude	height of gauge zero above sea level m
+13	ds_stat_no	GRDC_No of next downstream GRDC station 
+14	w_level	water level data available in addition to discharge 
+15	d_start	daily data available from 
+16	d_end	daily data available until 
+17	d_yrs	# years of daily data
+18	d_miss	percentage of missing values (daily data)
+19	m_start	monthly data available from 
+20	m_end	monthly data available until 
+21	m_yrs	# years of monthly data
+22	m_miss	percentage of missing values (monthly data)
+23	t_start	totally earliest data available
+24	t_end	totally latest data available
+25	t_yrs	# years (maximum using daily and monthly data)
+26	lta_discharge	mean annual streamflow m3/s
+27	r_vol_yr	mean annual volume km3
+28	r_height_yr	mean annual depth mm
+29	proc_tyrs	percentage of t_yrs used for calculation of lta_discharge, r_vol_yr and r_height_yr (only years with > 9 month i.e. > 75 % of monthly data are considered)
+30	proc_tmon	percentage of # of month in proc_tyrs * t_yrs years used for calculation of lta_discharge, r_vol_yr and r_height_yr (minimum 75 % are considered)
+31	f_import	date of first import
+32	f_im_yr	year of first import
+33	l_import	date of last change
+34	l_im_yr	year of last change
+35	provider_id	provider number (to be resolved with address database)
+36	ACSYS	1 if station belongs to the subset of the Arctic Runoff Data Base in the WCRP Arctic Climate System Study 
+37	statmouth	1 if station is used for the GRDC Product "Long Term Mean Annual Freshwater Surface Water Fluxes into the World Oceans" 
+38	GEMS	1 if station corresponds to a GEMS/Water water quality station 
+39	GCOS_GTNH	1 if station belongs to the subset of the Global Terrestrial Network for River Discharge within GTN-H
+40	ltchars	1 if station statistics is available in GRDC Product "Long Term Mean Monthly Discharges and Annual Characteristics of Selected GRDC Stations"
+41	PristineBasins	1 if station belongs to the subset "Pristine Basins"
+42	GRDCReferenceDataset	1 if station belongs to the subset "GRDC Reference Data set"
+43	AdaptAlp	1 if station belongs to the subset "AdaptAlp"
+44	ArcHycos	1 if station belongs to the subset "ArcticHYCOS"

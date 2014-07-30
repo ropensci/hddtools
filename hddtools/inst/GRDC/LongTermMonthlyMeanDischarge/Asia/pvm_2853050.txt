@@ -1,0 +1,101 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              2853050
+# River:                 SABARMATI RIVER
+# Station:               AHMEDABAD
+# Country:               IN
+# Latitude (dec. °):       23.080000
+# Longitude (de. °):       72.630000
+# Catchment area (km²):    12950.000
+# Altitude (m.a.s.l):          50.00
+# Next d/s station:      -
+# Remarks:               
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1968 - 1979
+# No. of years:          12
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1968;     0.000;05;    20.833;   230.000;08;  12
+1969;     0.000;05;     4.917;    30.000;07;  12
+1970;     1.000;01;    45.083;   233.000;09;  12
+1971;     1.000;03;    13.167;    50.000;08;  12
+1972;     0.000;12;     8.417;    46.000;07;  12
+1973;     0.000;01;    61.167;   287.000;09;  12
+1974;     1.000;04;     7.917;    58.000;08;  12
+1975;  -999.000;00;  -999.000;  -999.000;00;   0
+1976;     1.000;03;   108.500;   484.000;09;  12
+1977;     1.000;05;    51.250;   204.000;08;  12
+1978;     2.000;05;    20.500;    56.000;08;  12
+1979;     3.000;12;    16.417;    41.000;08;  12
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+     0.000;    32.561;     1.027;        79;   484.000;  132
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;     0.000;1973;     6.091;    29.000;1979;     8.711;   11
+02;     0.000;1973;     5.909;    30.000;1979;     8.904;   11
+03;     0.000;1973;     4.636;    24.000;1979;     7.365;   11
+04;     0.000;1973;     3.455;    18.000;1979;     5.556;   11
+05;     0.000;1968;     1.364;     7.000;1979;     1.963;   11
+06;     0.000;1968;    13.909;    37.000;1977;    12.267;   11
+07;     0.000;1968;    47.091;   151.000;1970;    46.118;   11
+08;    15.000;1969;   137.545;   441.000;1976;   135.271;   11
+09;     2.000;1969;   117.545;   484.000;1976;   161.685;   11
+10;     1.000;1972;    28.818;   146.000;1976;    42.303;   11
+11;     1.000;1969;    17.182;    97.000;1976;    28.512;   11
+12;     0.000;1972;     7.182;    26.000;1978;     8.530;   11

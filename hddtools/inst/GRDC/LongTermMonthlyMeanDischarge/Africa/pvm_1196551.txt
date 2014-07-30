@@ -1,0 +1,110 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              1196551
+# River:                 LIMPOPO
+# Station:               BEIBRUG D/S
+# Country:               ZA
+# Latitude (dec. °):      -22.226111
+# Longitude (de. °):       29.990278
+# Catchment area (km²):   201001.000
+# Altitude (m.a.s.l):         428.00
+# Next d/s station:      1896502
+# Remarks:               
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1992 - 2012
+# No. of years:          21
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1992;  -999.000;00;  -999.000;  -999.000;00;   5
+1993;     0.542;04;    25.969;   122.724;01;  12
+1994;     0.542;04;    13.373;    83.179;01;  12
+1995;     0.542;05;    44.791;   204.644;02;  12
+1996;     0.542;10;   115.120;   610.043;02;  12
+1997;     0.544;11;    45.081;   136.185;04;  12
+1998;     0.542;04;    13.686;    64.060;02;  12
+1999;     0.542;04;    22.277;   141.329;01;  12
+2000;  -999.000;00;  -999.000;  -999.000;00;   1
+2001;     0.542;09;    41.605;   180.720;12;  12
+2002;     0.443;11;     3.688;    26.522;01;  12
+2003;     0.000;07;    10.556;    47.760;03;  12
+2004;     0.000;08;    51.099;   308.375;03;  12
+2005;     0.000;07;    15.828;   116.692;12;  12
+2006;     0.000;10;    84.697;   411.065;01;  12
+2007;     0.000;05;    16.769;    90.274;12;  12
+2008;     0.000;09;    52.780;   276.167;01;  12
+2009;     0.000;09;    62.294;   341.090;02;  12
+2010;     1.267;10;    52.672;   204.292;04;  12
+2011;     0.020;10;    78.271;   501.297;01;  12
+2012;  -999.000;00;  -999.000;  -999.000;00;   9
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+     0.000;    41.063;     1.295;         6;   610.043;  231
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;     8.522;2003;   133.346;   501.297;2011;   151.521;   19
+02;     0.036;2007;   122.719;   610.043;1996;   146.080;   19
+03;     1.004;1994;    83.757;   308.375;2004;   104.269;   19
+04;     0.542;1993;    47.677;   204.292;2010;    58.192;   19
+05;     0.000;2007;    18.543;   140.195;2010;    33.127;   19
+06;     0.191;2005;    11.215;    76.410;1997;    19.689;   19
+07;     0.000;2003;     4.256;    21.262;1997;     6.600;   19
+08;     0.000;2004;     1.857;    10.380;2010;     2.823;   20
+09;     0.000;2004;     0.919;     4.907;1997;     1.340;   20
+10;     0.000;2004;     1.486;    11.851;2003;     2.798;   19
+11;     0.078;2008;    11.401;    80.931;1995;    20.518;   19
+12;     0.661;1997;    58.821;   240.562;1992;    64.630;   20

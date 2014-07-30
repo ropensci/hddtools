@@ -1,0 +1,107 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              6442050
+# River:                 RABA
+# Station:               SZENTGOTTHARD
+# Country:               HU
+# Latitude (dec. °):       48.952915
+# Longitude (de. °):       16.330000
+# Catchment area (km²):     3084.000
+# Altitude (m.a.s.l):         216.00
+# Next d/s station:      6442450
+# Remarks:               
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1978 - 1995
+# No. of years:          18
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1978;     6.000;11;    13.526;    40.000;07;  12
+1979;    11.871;01;    33.335;    59.710;07;  12
+1980;    12.645;08;    22.035;    48.387;10;  12
+1981;    10.129;12;    15.788;    23.633;06;  12
+1982;    17.000;02;    27.722;    72.387;10;  12
+1983;     9.467;11;    16.750;    30.581;01;  12
+1984;    11.710;01;    18.312;    33.900;04;  12
+1985;    10.935;10;    25.741;    55.806;05;  12
+1986;    10.387;12;    25.495;    66.774;03;  12
+1987;  -999.000;00;  -999.000;  -999.000;00;   0
+1988;    11.667;11;    18.609;    26.966;02;  12
+1989;    10.613;12;    23.209;    53.419;08;  12
+1990;  -999.000;00;  -999.000;  -999.000;00;   0
+1991;    13.750;02;    28.531;    64.300;11;  12
+1992;     9.951;09;    22.873;    43.452;12;  12
+1993;     8.061;09;    17.247;    41.494;10;  12
+1994;    12.048;12;    17.739;    30.158;01;  12
+1995;    12.407;11;    21.152;    39.771;03;  12
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+     6.000;    21.754;     0.686;       222;    72.387;  192
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;     6.032;1978;    17.750;    30.581;1983;     6.778;   16
+02;     8.321;1978;    19.602;    37.429;1979;     7.509;   16
+03;    12.329;1994;    27.209;    66.774;1986;    15.489;   16
+04;    11.733;1978;    22.959;    46.367;1986;     9.281;   16
+05;    10.561;1993;    22.989;    55.806;1985;    11.633;   16
+06;     9.676;1993;    24.414;    36.567;1986;     7.607;   16
+07;     8.539;1993;    23.256;    59.710;1979;    14.568;   16
+08;     9.473;1993;    20.583;    53.419;1989;    12.946;   16
+09;     7.067;1978;    16.806;    36.533;1989;     7.505;   16
+10;     7.226;1978;    22.729;    72.387;1982;    17.077;   16
+11;     6.000;1978;    22.706;    64.300;1991;    15.790;   16
+12;     7.871;1978;    20.048;    43.452;1992;    11.508;   16

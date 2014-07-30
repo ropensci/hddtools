@@ -1,0 +1,100 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              2909157
+# River:                 YENISEY
+# Station:               PODSINIJE
+# Country:               RU
+# Latitude (dec. °):       53.650000
+# Longitude (de. °):       91.570000
+# Catchment area (km²):   192000.000
+# Altitude (m.a.s.l):        -999.00
+# Next d/s station:      2909156
+# Remarks:               
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1953 - 1963
+# No. of years:          11
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1953;  -999.000;00;  -999.000;  -999.000;00;   2
+1954;   245.000;02;  1536.667;  5190.000;06;  12
+1955;   271.000;02;  1544.917;  5140.000;06;  12
+1956;   247.000;03;  1353.667;  3730.000;06;  12
+1957;   232.000;03;  1355.583;  4490.000;06;  12
+1958;   274.000;02;  1711.667;  4920.000;06;  12
+1959;   307.000;02;  1647.833;  5000.000;06;  12
+1960;   310.000;03;  1423.917;  4270.000;06;  12
+1961;   314.000;02;  1819.833;  4970.000;06;  12
+1962;   362.000;02;  1473.083;  3660.000;06;  12
+1963;   311.000;03;  1276.500;  3640.000;06;  12
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+   232.000;  1495.098;    47.149;       246;  5190.000;  122
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;   273.000;1957;   341.300;   410.000;1962;    42.962;   10
+02;   244.000;1957;   292.600;   362.000;1962;    39.427;   10
+03;   232.000;1957;   295.800;   380.000;1962;    40.979;   10
+04;   428.000;1954;   619.300;  1410.000;1961;   285.673;   10
+05;   809.000;1954;  2510.900;  3570.000;1955;   861.464;   10
+06;  3640.000;1963;  4501.000;  5190.000;1954;   634.568;   10
+07;  1930.000;1957;  3142.000;  4170.000;1959;   767.880;   10
+08;  1920.000;1956;  2414.000;  3170.000;1961;   460.921;   10
+09;  1630.000;1962;  2026.000;  2350.000;1961;   248.605;   10
+10;  1090.000;1960;  1155.000;  1300.000;1961;    76.339;   10
+11;   335.000;1953;   472.818;   613.000;1961;    82.182;   11
+12;   303.000;1956;   383.818;   454.000;1960;    49.634;   11

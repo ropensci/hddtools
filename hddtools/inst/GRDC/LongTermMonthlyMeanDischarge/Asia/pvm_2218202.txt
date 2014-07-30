@@ -1,0 +1,104 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              2218202
+# River:                 HARI RUD RIVER
+# Station:               PUL-I-PASHTOON
+# Country:               AF
+# Latitude (dec. °):       34.283333
+# Longitude (de. °):       62.216667
+# Catchment area (km²):    26130.000
+# Altitude (m.a.s.l):         940.00
+# Next d/s station:      2218201
+# Remarks:               USGS-ID: 341700062130000
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1963 - 1977
+# No. of years:          15
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1963;  -999.000;00;  -999.000;  -999.000;00;   9
+1964;     0.051;12;    33.459;   166.733;04;  12
+1965;     0.283;07;    31.134;   182.323;05;  12
+1966;     0.144;08;     6.406;    36.653;04;  12
+1967;     0.417;09;    30.061;   179.955;05;  12
+1968;  -999.000;00;  -999.000;  -999.000;00;   9
+1969;  -999.000;00;  -999.000;  -999.000;00;   0
+1970;  -999.000;00;  -999.000;  -999.000;00;   0
+1971;  -999.000;00;  -999.000;  -999.000;00;   3
+1972;     0.036;08;    46.441;   200.267;04;  12
+1973;     0.229;07;    37.459;   173.445;05;  12
+1974;     0.170;08;    12.964;    80.993;04;  12
+1975;     0.351;09;    66.397;   398.161;05;  12
+1976;     0.453;09;    60.211;   310.968;05;  12
+1977;  -999.000;00;  -999.000;  -999.000;00;   1
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+     0.020;    33.968;     1.071;        41;   398.161;  130
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;     0.892;1967;     5.693;    12.317;1964;     3.619;   11
+02;     1.371;1975;    12.871;    29.579;1964;     9.028;   10
+03;    10.490;1967;    50.698;   127.787;1972;    34.187;   10
+04;    29.959;1963;   132.617;   265.967;1975;    82.450;   11
+05;    13.897;1974;   168.070;   398.161;1975;   112.014;   11
+06;     0.205;1974;    31.540;    79.483;1975;    30.239;   11
+07;     0.020;1968;     0.420;     1.404;1976;     0.399;   11
+08;     0.036;1968;     0.280;     0.518;1967;     0.174;   11
+09;     0.077;1968;     0.341;     0.779;1964;     0.181;   11
+10;     0.345;1974;     0.569;     1.033;1966;     0.201;   11
+11;     0.345;1974;     1.828;     9.589;1976;     2.681;   11
+12;     0.051;1964;     2.292;     8.646;1976;     3.147;   11

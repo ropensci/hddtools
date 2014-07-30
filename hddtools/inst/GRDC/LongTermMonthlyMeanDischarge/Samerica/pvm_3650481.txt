@@ -1,0 +1,115 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              3650481
+# River:                 RIO PARNAIBA
+# Station:               LUZILANDIA
+# Country:               BR
+# Latitude (dec. °):       -3.453890
+# Longitude (de. °):      -42.370000
+# Catchment area (km²):   322823.000
+# Altitude (m.a.s.l):          26.00
+# Next d/s station:      -
+# Remarks:               
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1982 - 2007
+# No. of years:          26
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1982;   304.363;09;   551.763;  1016.513;03;  12
+1983;   283.397;09;   495.608;   990.054;02;  12
+1984;   389.335;08;   817.404;  2225.153;04;  11
+1985;   434.285;08;  1551.269;  4535.800;04;  12
+1986;   321.700;09;  1059.878;  2788.323;03;  12
+1987;   306.000;08;   609.102;  1361.244;03;  12
+1988;   330.326;09;   771.258;  1837.300;04;  12
+1989;   308.012;09;   965.374;  2643.133;04;  12
+1990;   291.750;10;   593.859;  1463.613;01;  12
+1991;   318.290;07;   630.255;  1290.932;04;  12
+1992;   289.663;09;   539.643;  1527.897;02;  12
+1993;   301.968;08;   424.974;   618.903;01;  12
+1994;   348.407;09;   662.729;  1515.006;04;  12
+1995;   359.371;08;   843.766;  2410.522;04;  11
+1996;   347.120;07;   751.784;  1913.057;04;  12
+1997;   324.121;09;   689.119;  1965.091;04;  12
+1998;   261.097;09;   407.989;   691.738;03;  12
+1999;   322.170;09;   586.005;  1223.286;03;  12
+2000;   342.678;10;   803.496;  1910.752;04;  12
+2001;   307.258;10;   564.744;  1185.454;04;  12
+2002;   348.867;09;   670.973;  1587.158;01;  12
+2003;   347.548;09;   619.484;  1305.798;03;  12
+2004;   322.860;08;   864.535;  3206.580;02;  12
+2005;   320.841;08;   581.385;  1399.840;03;  12
+2006;   368.716;01;   731.998;  2066.480;04;  12
+2007;     0.000;09;   233.548;  1455.353;03;  12
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+     0.000;   692.265;    21.831;        68;  4535.800;  310
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;   331.660;2007;   779.612;  1587.158;2002;   336.363;   26
+02;   482.845;2006;  1029.706;  3206.580;2004;   644.232;   25
+03;   531.226;1993;  1254.582;  2788.323;1986;   518.879;   26
+04;    11.466;2007;  1485.748;  4535.800;1985;   924.305;   26
+05;     6.705;2007;   917.305;  2891.640;1985;   618.867;   26
+06;     2.303;2007;   477.427;   976.560;1985;   192.408;   25
+07;     0.787;2007;   363.669;   572.032;1985;    98.665;   26
+08;     0.073;2007;   336.520;   434.285;1985;    79.512;   26
+09;     0.000;2007;   341.555;   458.018;1985;    86.107;   26
+10;     0.000;2007;   358.475;   522.232;1985;    95.948;   26
+11;     0.000;2007;   416.947;   644.817;2006;   127.747;   26
+12;     0.000;2007;   550.351;  1331.415;1985;   274.249;   26

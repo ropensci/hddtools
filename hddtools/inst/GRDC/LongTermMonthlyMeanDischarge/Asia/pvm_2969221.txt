@@ -1,0 +1,99 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              2969221
+# River:                 NAM MUN
+# Station:               BAN HUA HEO
+# Country:               TH
+# Latitude (dec. °):       15.286700
+# Longitude (de. °):      105.470000
+# Catchment area (km²):   117000.000
+# Altitude (m.a.s.l):        -999.00
+# Next d/s station:      2969101
+# Remarks:               
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1972 - 1981
+# No. of years:          10
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1972;  -999.000;00;  -999.000;  -999.000;00;   9
+1973;   116.710;03;   382.915;  1017.000;10;  12
+1974;   122.677;01;   584.805;  1903.667;09;  12
+1975;   135.833;04;  1016.622;  3197.774;10;  12
+1976;   136.015;01;   959.886;  2866.129;10;  12
+1977;    87.503;03;   679.067;  3837.333;09;  12
+1978;    82.135;01;  1580.768;  6771.291;10;  12
+1979;    97.555;12;   947.633;  2608.613;08;  12
+1980;    95.561;03;  1212.813;  4198.709;10;  12
+1981;   175.806;01;   814.767;  3092.581;08;  12
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+    82.135;   939.552;    29.630;       253;  6771.291;  117
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;    82.135;1978;   153.978;   244.839;1979;    51.811;    9
+02;    87.857;1977;   150.594;   216.321;1979;    39.798;    9
+03;    87.503;1977;   158.928;   232.839;1981;    51.515;    9
+04;   120.397;1980;   169.930;   285.033;1981;    49.636;   10
+05;   144.806;1973;   232.942;   360.871;1979;    76.950;   10
+06;   252.167;1973;   632.283;  1649.433;1979;   421.393;   10
+07;   265.645;1977;  1128.784;  2297.097;1979;   699.938;   10
+08;   656.968;1977;  1808.039;  3735.484;1978;  1026.134;   10
+09;   898.567;1973;  2371.347;  3837.333;1977;   968.922;   10
+10;   911.226;1981;  2721.468;  6771.291;1978;  1776.344;   10
+11;   239.900;1979;  1182.210;  2999.333;1980;   955.688;   10
+12;    97.555;1979;   328.608;   789.161;1976;   211.258;   10

@@ -1,0 +1,99 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              3265910
+# River:                 CORRIENTES
+# Station:               PASO LUCERO
+# Country:               AR
+# Latitude (dec. °):      -28.970000
+# Longitude (de. °):      -58.550000
+# Catchment area (km²):    13877.000
+# Altitude (m.a.s.l):        -999.00
+# Next d/s station:      3265810
+# Remarks:               
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1968 - 1977
+# No. of years:          10
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1968;  -999.000;00;  -999.000;  -999.000;00;   5
+1969;    61.000;12;   151.000;   291.000;01;  12
+1970;    82.000;01;   164.667;   254.000;08;  12
+1971;    22.000;12;   179.750;   296.000;02;  12
+1972;    17.000;02;   177.636;   315.000;11;  11
+1973;  -999.000;00;  -999.000;  -999.000;00;   9
+1974;  -999.000;00;  -999.000;  -999.000;00;   6
+1975;  -999.000;00;  -999.000;  -999.000;00;   7
+1976;    47.000;11;    85.091;   134.000;04;  11
+1977;   105.000;06;   175.167;   298.000;02;  12
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+     9.000;   161.247;     5.085;       366;   332.000;   97
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;    11.000;1975;   111.571;   291.000;1969;    94.300;    7
+02;    17.000;1972;   176.875;   298.000;1977;   125.603;    8
+03;    17.000;1972;   186.125;   329.000;1973;   118.618;    8
+04;   117.000;1974;   202.000;   307.000;1973;    78.315;    7
+05;    97.000;1974;   195.500;   332.000;1973;    84.197;    8
+06;    76.000;1974;   166.000;   332.000;1973;    88.456;    8
+07;    62.000;1974;   158.222;   327.000;1973;    84.209;    9
+08;    17.000;1968;   167.000;   331.000;1973;    99.444;    9
+09;    20.000;1968;   145.778;   285.000;1973;    82.879;    9
+10;    51.000;1976;   147.750;   219.000;1972;    64.528;    8
+11;     9.000;1974;   150.625;   315.000;1972;   108.928;    8
+12;    10.000;1974;   128.000;   290.000;1968;    94.344;    8

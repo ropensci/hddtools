@@ -1,0 +1,8 @@
+import(sp)
+import(rgdal)
+import(raster)
+import(stringr)
+import(RCurl)
+# import(XML)
+# import(rnrfa)
+exportPattern("^[[:alpha:]]+")

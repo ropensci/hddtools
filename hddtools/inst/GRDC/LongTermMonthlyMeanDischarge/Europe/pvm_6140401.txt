@@ -1,0 +1,107 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              6140401
+# River:                 ELBE RIVER
+# Station:               USTI NAD LABEM
+# Country:               CZ
+# Latitude (dec. °):       50.656667
+# Longitude (de. °):       14.043611
+# Catchment area (km²):    48540.850
+# Altitude (m.a.s.l):         130.80
+# Next d/s station:      6140400
+# Remarks:               
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1991 - 2008
+# No. of years:          18
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1991;    98.757;09;   164.176;   278.258;01;  12
+1992;    95.427;09;   233.817;   530.903;03;  12
+1993;   117.987;08;   227.184;   551.742;12;  12
+1994;   107.542;07;   278.768;   591.290;01;  12
+1995;   147.452;08;   394.659;   676.214;02;  12
+1996;   189.310;02;   322.549;   663.129;05;  12
+1997;   132.867;11;   297.725;   565.484;03;  12
+1998;   122.758;08;   252.397;   686.167;11;  12
+1999;   109.548;08;   265.062;   833.129;03;  12
+2000;   120.933;09;   279.074;   908.613;03;  12
+2001;   179.355;01;   296.654;   470.133;04;  12
+2002;   175.613;07;   540.128;  1175.613;08;  12
+2003;    89.481;08;   244.411;   877.839;01;  12
+2004;   108.916;08;   241.873;   451.448;02;  12
+2005;   145.367;11;   308.290;   673.323;03;  12
+2006;   167.742;10;   370.742;  1305.167;04;  12
+2007;   129.933;06;   271.958;   520.258;12;  12
+2008;    99.040;09;   231.841;   528.323;03;  12
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+    89.481;   290.073;     9.148;       188;  1305.167;  216
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;   154.000;2000;   341.715;   877.839;2003;   180.629;   18
+02;   141.321;1991;   391.686;   923.571;2002;   198.052;   18
+03;   190.516;1991;   509.233;   908.613;2000;   188.656;   18
+04;   175.767;1991;   450.841;  1305.167;2006;   250.824;   18
+05;   123.419;1998;   266.341;   663.129;1996;   134.661;   18
+06;   121.933;2003;   200.166;   552.167;1995;   111.089;   18
+07;   105.023;2003;   199.405;   549.194;1997;   112.065;   18
+08;    89.481;2003;   222.913;  1175.613;2002;   248.930;   18
+09;    93.920;2003;   190.321;   426.000;1995;   107.420;   18
+10;   100.832;1991;   192.877;   492.774;2002;    94.121;   18
+11;   110.407;2003;   252.761;   766.000;2002;   187.774;   18
+12;   126.606;1999;   262.613;   551.742;1993;   133.674;   18

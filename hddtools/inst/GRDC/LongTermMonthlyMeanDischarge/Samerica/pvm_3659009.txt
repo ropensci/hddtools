@@ -1,0 +1,103 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              3659009
+# River:                 RIO PARANAIBA
+# Station:               FAZENDA SANTA FE
+# Country:               BR
+# Latitude (dec. °):      -19.133330
+# Longitude (de. °):      -50.616670
+# Catchment area (km²):   171000.000
+# Altitude (m.a.s.l):         313.00
+# Next d/s station:      3662100
+# Remarks:               
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1960 - 1973
+# No. of years:          14
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1960;  -999.000;00;  -999.000;  -999.000;00;   5
+1961;   796.000;10;  2742.000;  6543.000;02;  12
+1962;   909.000;09;  2693.667;  5280.000;12;  12
+1963;  -999.000;00;  -999.000;  -999.000;00;   3
+1964;   559.000;09;  1954.250;  4520.000;02;  12
+1965;  1003.000;09;  3096.083;  6820.000;03;  12
+1966;  -999.000;00;  -999.000;  -999.000;00;   7
+1967;  -999.000;00;  -999.000;  -999.000;00;   5
+1968;  -999.000;00;  -999.000;  -999.000;00;   0
+1969;  -999.000;00;  -999.000;  -999.000;00;   7
+1970;   902.000;08;  2272.750;  5031.000;01;  12
+1971;   488.000;09;  1228.167;  3739.000;12;  12
+1972;   692.000;09;  2082.000;  3649.000;12;  12
+1973;  -999.000;00;  -999.000;  -999.000;00;   4
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+   488.000;  2468.991;    77.862;       455;  6820.000;  115
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;  1174.000;1971;  4085.455;  5850.000;1966;  1350.172;   11
+02;  1227.000;1971;  4432.200;  6543.000;1961;  1418.280;   10
+03;  1619.000;1971;  4256.091;  6820.000;1965;  1582.026;   11
+04;  1323.000;1971;  3083.900;  4561.000;1973;   947.512;   10
+05;   914.000;1971;  2051.000;  2848.000;1966;   655.532;    9
+06;   756.000;1971;  1413.333;  2053.000;1966;   473.481;    9
+07;   566.000;1971;  1078.500;  1582.000;1965;   331.116;    8
+08;   495.000;1971;   860.222;  1244.000;1965;   226.365;    9
+09;   488.000;1971;   732.111;  1003.000;1965;   194.724;    9
+10;   796.000;1961;  1137.667;  1651.000;1965;   329.457;    9
+11;  1290.000;1961;  2020.300;  3248.000;1972;   648.526;   10
+12;  1290.000;1970;  3243.600;  5280.000;1962;  1108.797;   10

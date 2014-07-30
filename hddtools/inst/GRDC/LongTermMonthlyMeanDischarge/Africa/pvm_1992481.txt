@@ -1,0 +1,109 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              1992481
+# River:                 BUA
+# Station:               BUA DRIFT (65312604)
+# Country:               MW
+# Latitude (dec. °):      -13.128611
+# Longitude (de. °):       33.678056
+# Catchment area (km²):     9075.000
+# Altitude (m.a.s.l):        -999.00
+# Next d/s station:      1992480
+# Remarks:               
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1959 - 1978
+# No. of years:          20
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1959;  -999.000;00;  -999.000;  -999.000;00;   2
+1960;     0.007;10;    12.741;    57.952;03;  12
+1961;     0.018;10;    25.816;   102.452;03;  12
+1962;     0.293;10;    47.827;   138.774;01;  12
+1963;     0.467;10;    37.427;   163.964;02;  12
+1964;     0.096;10;    29.483;   148.465;01;  12
+1965;     0.141;10;    21.619;    97.371;02;  12
+1966;     0.018;10;    10.252;    55.711;02;  12
+1967;     0.004;10;     8.307;    35.054;02;  12
+1968;     0.006;10;     6.813;    38.474;12;  12
+1969;     0.019;10;    20.864;   124.568;01;  12
+1970;     0.001;09;    10.619;    65.068;01;  12
+1971;     0.040;10;    16.361;    63.500;02;  12
+1972;     0.018;10;     8.143;    32.725;12;  12
+1973;     0.034;09;    38.609;   143.516;01;  12
+1974;     0.225;09;    28.879;   104.071;01;  12
+1975;     0.106;09;    26.865;   135.548;12;  12
+1976;     0.913;09;    53.100;   232.903;01;  12
+1977;     1.053;09;    30.699;   157.935;01;  12
+1978;  -999.000;00;  -999.000;  -999.000;00;   9
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+     0.001;    24.341;     0.768;        85;   232.903;  227
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;     7.088;1968;    89.484;   232.903;1976;    63.895;   19
+02;    10.898;1968;    78.570;   163.964;1963;    45.241;   19
+03;     4.315;1970;    41.396;   123.935;1962;    31.898;   19
+04;     1.572;1968;    14.869;    62.807;1962;    14.044;   19
+05;     0.865;1970;     5.734;    17.581;1962;     3.942;   19
+06;     0.162;1970;     3.281;     7.265;1962;     2.340;   19
+07;     0.019;1970;     1.936;     4.749;1962;     1.470;   19
+08;     0.003;1970;     0.848;     2.661;1962;     0.745;   19
+09;     0.001;1970;     0.346;     1.087;1962;     0.414;   19
+10;     0.004;1967;     3.338;    25.695;1976;     7.298;   18
+11;     0.008;1959;    13.828;    75.470;1976;    18.822;   19
+12;     0.024;1959;    37.357;   135.548;1975;    35.541;   19

@@ -1,0 +1,134 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              3650475
+# River:                 RIO LONGA
+# Station:               ESPERANTINA
+# Country:               BR
+# Latitude (dec. °):       -3.902800
+# Longitude (de. °):      -42.229700
+# Catchment area (km²):    11000.000
+# Altitude (m.a.s.l):          50.00
+# Next d/s station:      3650477
+# Remarks:               
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1963 - 2007
+# No. of years:          45
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1963;  -999.000;00;  -999.000;  -999.000;00;   5
+1964;     0.000;11;   211.952;   893.833;04;  12
+1965;     0.000;10;   100.933;   687.833;04;  12
+1966;     0.000;01;    50.906;   269.233;04;  12
+1967;     0.000;10;   150.548;   663.097;05;  12
+1968;     0.000;10;    78.844;   411.032;03;  12
+1969;     0.000;09;    48.447;   274.133;04;  12
+1970;     0.000;09;    43.747;   247.645;03;  12
+1971;     0.000;11;   115.353;   502.000;04;  12
+1972;     0.000;09;    42.561;   261.933;04;  12
+1973;     1.581;12;   123.273;   577.363;04;  12
+1974;     3.503;11;   274.311;  1091.693;04;  12
+1975;     2.107;11;   138.438;   640.668;05;  12
+1976;     1.068;11;    78.781;   396.227;04;  12
+1977;     0.606;12;   133.769;   625.426;04;  12
+1978;     1.031;11;    52.821;   340.366;05;  12
+1979;     0.620;12;    27.980;    95.147;02;  12
+1980;     0.325;12;    54.878;   346.332;03;  12
+1981;     0.195;12;    21.381;   110.758;04;  12
+1982;     0.237;12;    41.455;   248.374;04;  12
+1983;     0.141;12;     5.481;    37.764;04;  12
+1984;     0.683;12;   121.393;   818.720;04;  12
+1985;     0.086;11;   347.163;  1260.233;04;  12
+1986;     0.000;12;   232.685;  1045.806;03;  12
+1987;     0.000;10;    68.167;   364.429;03;  12
+1988;     0.000;10;   118.852;   653.933;04;  12
+1989;     0.500;10;   142.464;   621.577;05;  12
+1990;     0.000;11;    41.592;   141.561;03;  12
+1991;     0.000;10;    86.565;   332.983;04;  12
+1992;     0.000;01;    20.119;   168.990;04;  12
+1993;  -999.000;00;  -999.000;  -999.000;00;   6
+1994;  -999.000;00;  -999.000;  -999.000;00;   9
+1995;  -999.000;00;  -999.000;  -999.000;00;   9
+1996;  -999.000;00;  -999.000;  -999.000;00;   9
+1997;  -999.000;00;  -999.000;  -999.000;00;   7
+1998;  -999.000;00;  -999.000;  -999.000;00;   8
+1999;  -999.000;00;  -999.000;  -999.000;00;   9
+2000;     0.175;10;    94.103;   552.681;04;  10
+2001;  -999.000;00;  -999.000;  -999.000;00;   8
+2002;     0.000;10;    71.374;   419.088;04;  12
+2003;     0.000;01;    58.351;   284.522;03;  12
+2004;     0.000;10;   102.664;   504.231;02;  12
+2005;     0.000;10;    32.646;   147.582;04;  12
+2006;     0.000;01;   107.755;   568.064;04;  12
+2007;     0.000;01;    61.241;   228.996;04;  12
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+     0.000;   100.991;     3.185;       290;  1260.233;  500
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;     0.000;1966;    32.797;   294.663;1985;    58.240;   40
+02;     7.369;1978;   112.736;   861.383;1985;   155.749;   43
+03;     9.444;1983;   274.235;  1045.806;1986;   206.261;   44
+04;    36.745;1980;   416.755;  1260.233;1985;   301.753;   44
+05;     4.075;1983;   242.542;   880.661;1974;   235.731;   44
+06;     1.812;1983;    36.718;   183.100;1985;    42.924;   44
+07;     0.145;1992;     9.566;    48.765;1989;     9.280;   44
+08;     0.000;1992;     3.229;    12.082;2000;     2.847;   43
+09;     0.000;1963;     1.131;     5.470;1974;     1.424;   42
+10;     0.000;1963;     0.649;     4.289;1975;     1.151;   37
+11;     0.000;1963;     9.264;   323.504;1998;    53.107;   37
+12;     0.000;1964;    17.661;   511.229;1998;    83.469;   38

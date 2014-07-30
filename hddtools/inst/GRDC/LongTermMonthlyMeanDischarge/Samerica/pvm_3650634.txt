@@ -1,0 +1,139 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              3650634
+# River:                 RIO BANABUIU
+# Station:               MORADA NOVA II
+# Country:               BR
+# Latitude (dec. °):       -5.121900
+# Longitude (de. °):      -38.446400
+# Catchment area (km²):    17900.000
+# Altitude (m.a.s.l):          50.00
+# Next d/s station:      -
+# Remarks:               
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1961 - 2010
+# No. of years:          50
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1961;     0.000;11;    73.085;   292.000;04;  10
+1962;     0.000;01;    11.267;   109.000;04;  12
+1963;     0.000;01;    51.754;   304.000;04;  12
+1964;     0.000;09;   136.044;   604.000;04;  11
+1965;     0.000;01;    67.283;   247.000;05;  12
+1966;     0.000;01;     4.007;    36.700;02;  12
+1967;     0.000;01;    81.563;   485.000;04;  12
+1968;     3.120;01;    35.232;   151.000;03;  12
+1969;     1.580;12;    29.646;   190.000;04;  12
+1970;     0.940;10;     1.978;     5.260;04;  12
+1971;     0.000;09;     5.187;    22.300;04;  12
+1972;    60.100;01;   237.225;   339.000;08;  12
+1973;     0.000;01;    34.590;   165.703;05;  11
+1974;     3.100;11;   278.774;  1406.663;04;  12
+1975;     4.693;11;    41.646;   170.302;05;  12
+1976;     3.520;09;    12.076;    64.322;04;  12
+1977;     2.923;08;    29.889;   147.868;05;  12
+1978;     3.496;01;    15.174;   104.812;05;  10
+1979;     4.095;09;     5.952;    13.035;05;  12
+1980;     4.068;01;    32.366;   301.234;03;  12
+1981;     6.339;10;    51.860;   335.964;04;  10
+1982;     1.668;06;     8.871;    22.833;05;  12
+1983;     4.402;01;     6.782;    10.964;03;  12
+1984;     1.700;08;    66.848;   336.048;05;  12
+1985;     4.213;11;   160.853;   999.133;04;  12
+1986;     5.655;10;   112.407;   741.700;04;  12
+1987;     7.818;01;    10.723;    18.662;03;  12
+1988;     9.113;08;    27.260;   175.916;05;  12
+1989;     9.102;08;    99.547;   666.548;05;  12
+1990;     9.930;01;    11.401;    12.929;12;  12
+1991;     9.148;07;    11.876;    19.841;03;  12
+1992;     6.403;07;    10.099;    20.646;04;  12
+1993;     5.667;06;    11.104;    15.643;09;  12
+1994;     3.326;06;     6.681;    10.334;01;  12
+1995;     2.704;07;     6.219;     9.800;05;  12
+1996;     4.324;02;     8.869;    15.663;11;  12
+1997;     6.514;07;    10.812;    16.548;04;  12
+1998;     6.852;02;    10.721;    16.284;10;  12
+1999;     4.444;07;     8.214;    14.634;05;  12
+2000;     3.094;03;     5.270;     9.076;12;  12
+2001;     1.179;09;     2.806;     7.091;04;  12
+2002;     0.654;02;     6.511;    21.819;05;  12
+2003;     2.442;07;     5.333;     9.709;10;  12
+2004;     4.684;05;    83.051;   648.347;02;  12
+2005;     2.826;07;     7.312;    13.635;11;  12
+2006;     2.944;07;     7.149;    23.552;05;  12
+2007;     2.507;06;     7.066;    24.854;04;  12
+2008;     1.498;02;     8.259;    38.378;04;  12
+2009;     2.349;01;    79.905;   659.697;05;  12
+2010;  -999.000;00;  -999.000;  -999.000;00;   8
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+     0.000;    40.931;     1.291;        72;  1406.663;  588
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;     0.000;1962;     8.324;    60.100;1972;    10.491;   49
+02;     0.000;1962;    28.082;   648.347;2004;    96.796;   49
+03;     0.775;2002;    63.470;   613.948;1974;   120.214;   49
+04;     1.230;1966;   145.775;  1406.663;1974;   276.479;   50
+05;     0.910;1966;   121.860;   790.248;1974;   195.222;   49
+06;     1.306;2002;    40.599;   312.000;1972;    69.018;   48
+07;     0.370;1966;    19.003;   338.000;1972;    52.913;   49
+08;     0.000;1966;    12.135;   339.000;1972;    47.777;   49
+09;     0.000;1962;    12.394;   338.000;1972;    47.640;   49
+10;     0.000;1962;    12.723;   330.000;1972;    46.469;   49
+11;     0.000;1961;    12.329;   292.000;1972;    41.027;   49
+12;     0.000;1961;    12.328;   314.000;1972;    44.164;   49

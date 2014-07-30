@@ -1,0 +1,111 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              2549235
+# River:                 BURHI GANDAKI
+# Station:               ARUGHAT
+# Country:               NP
+# Latitude (dec. °):       28.040000
+# Longitude (de. °):       84.820000
+# Catchment area (km²):     4270.000
+# Altitude (m.a.s.l):         485.00
+# Next d/s station:      2549500
+# Remarks:               
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1964 - 1985
+# No. of years:          22
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1964;    27.900;02;   158.817;   446.000;08;  12
+1965;    26.300;02;   160.992;   454.000;08;  12
+1966;    35.200;03;   160.517;   520.000;08;  12
+1967;    23.500;02;   126.683;   389.000;07;  12
+1968;    24.200;02;   148.625;   426.000;07;  12
+1969;    31.800;02;   134.417;   340.000;07;  12
+1970;    29.800;02;   150.183;   370.000;08;  12
+1971;    32.500;02;   154.183;   359.000;07;  12
+1972;    28.200;02;   152.483;   395.000;08;  12
+1973;    39.300;02;   181.008;   407.000;08;  12
+1974;    31.800;03;   151.892;   450.000;08;  12
+1975;    38.700;02;   179.567;   413.000;07;  12
+1976;    32.200;02;   151.867;   400.000;08;  12
+1977;    29.800;02;   163.575;   468.000;07;  12
+1978;    33.300;02;   176.808;   442.000;08;  12
+1979;    30.900;02;   155.683;   420.000;08;  12
+1980;    28.500;02;   175.742;   483.000;07;  12
+1981;    40.600;02;   174.508;   457.000;07;  12
+1982;    35.500;02;   161.933;   385.000;07;  12
+1983;    30.800;02;   155.892;   388.000;08;  12
+1984;    32.700;02;   166.017;   415.000;07;  12
+1985;    31.800;02;   160.850;   410.000;07;  12
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+    23.500;   159.193;     5.020;      1176;   520.000;  264
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;    28.400;1967;    37.368;    46.600;1973;     4.583;   22
+02;    23.500;1967;    31.645;    40.600;1981;     4.461;   22
+03;    23.800;1967;    36.991;    53.200;1973;     7.471;   22
+04;    43.400;1977;    64.209;   108.000;1975;    17.896;   22
+05;    50.000;1967;   105.418;   162.000;1978;    27.917;   22
+06;   142.000;1967;   220.227;   305.000;1973;    44.023;   22
+07;   320.000;1983;   394.091;   483.000;1980;    43.148;   22
+08;   330.000;1969;   408.455;   520.000;1966;    47.804;   22
+09;   234.000;1968;   299.682;   379.000;1984;    41.420;   22
+10;   124.000;1965;   168.636;   258.000;1973;    37.531;   22
+11;    58.500;1967;    89.441;   117.000;1985;    15.788;   22
+12;    37.200;1967;    54.150;    74.300;1972;     8.618;   22

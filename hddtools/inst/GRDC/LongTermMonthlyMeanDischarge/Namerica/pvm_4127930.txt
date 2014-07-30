@@ -1,0 +1,109 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              4127930
+# River:                 MISSISSIPPI RIVER
+# Station:               TARBERT LANDING, MS
+# Country:               US
+# Latitude (dec. °):       31.008500
+# Longitude (de. °):      -91.623700
+# Catchment area (km²):  3250000.000
+# Altitude (m.a.s.l):           2.00
+# Next d/s station:      -
+# Remarks:               
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1965 - 1984
+# No. of years:          20
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1965;  8240.000;08; 17115.416; 34830.000;04;  12
+1966;  6250.000;10; 14320.000; 31700.000;05;  12
+1967;  7930.000;09; 15686.667; 26140.000;05;  12
+1968;  -999.000;00;  -999.000;  -999.000;00;   0
+1969;  6020.000;09; 12889.167; 25760.000;02;  12
+1970;  5970.000;09; 12243.333; 23850.000;05;  12
+1971;  5630.000;10; 10865.000; 24210.000;03;  12
+1972;  7000.000;09; 13437.500; 21950.000;12;  12
+1973;  6340.000;09; 20420.834; 38900.000;05;  12
+1974;  6260.000;10; 16694.166; 30700.000;02;  12
+1975;  7820.000;08; 15982.500; 30400.000;04;  12
+1976;  4810.000;09; 10202.500; 18400.000;03;  12
+1977;  5920.000;02; 10570.833; 18600.000;04;  12
+1978;  4670.000;11; 12869.167; 24100.000;04;  12
+1979; 10700.000;11; 19816.666; 36100.000;04;  12
+1980;  -999.000;00;  -999.000;  -999.000;00;   0
+1981;  -999.000;00;  -999.000;  -999.000;00;   0
+1982;  -999.000;00;  -999.000;  -999.000;00;   0
+1983;  -999.000;00;  -999.000;  -999.000;00;   0
+1984;  6851.000;09; 17437.084; 31470.000;05;  12
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+  4670.000; 14703.389;   463.686;       143; 38900.000;  180
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;  6200.000;1977; 15772.467; 27500.000;1974;  5102.693;   15
+02;  5920.000;1977; 17313.867; 30700.000;1974;  6607.956;   15
+03; 14820.000;1970; 20726.334; 29200.000;1979;  4568.825;   15
+04; 12570.000;1971; 23192.533; 36400.000;1973;  8298.166;   15
+05; 10100.000;1977; 23418.000; 38900.000;1973;  8594.914;   15
+06;  6010.000;1977; 16035.533; 27700.000;1973;  6381.621;   15
+07;  7280.000;1971; 11402.467; 19620.000;1967;  3291.922;   15
+08;  6490.000;1976;  8316.134; 12900.000;1979;  1811.224;   15
+09;  4810.000;1976;  7491.400; 12900.000;1979;  2022.697;   15
+10;  5400.000;1978;  8609.733; 14470.000;1965;  2582.231;   15
+11;  4670.000;1978; 10004.600; 17399.000;1984;  3581.828;   15
+12;  6150.000;1976; 14157.600; 23400.000;1973;  5258.467;   15

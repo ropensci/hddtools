@@ -1,0 +1,109 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              2181300
+# River:                 YALONG JIANG
+# Station:               LUNING
+# Country:               CN
+# Latitude (dec. °):       28.500000
+# Longitude (de. °):      101.833333
+# Catchment area (km²):    58943.000
+# Altitude (m.a.s.l):        -999.00
+# Next d/s station:      2181600
+# Remarks:               
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1981 - 2000
+# No. of years:          20
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1981;   409.258;03;  1350.568;  3657.097;07;  12
+1982;   324.071;02;  1316.355;  4532.903;07;  12
+1983;   320.500;02;  1022.225;  2169.032;07;  12
+1984;   306.207;02;  1058.088;  3208.710;07;  12
+1985;   279.571;02;  1360.552;  3491.936;07;  12
+1986;   353.935;03;  1129.370;  3246.667;09;  12
+1987;   334.806;03;  1519.314;  4129.000;09;  12
+1988;   379.129;03;  1256.081;  3709.333;09;  12
+1989;   350.097;03;  1488.437;  3465.667;09;  12
+1990;   394.548;03;  1639.634;  3833.000;09;  12
+1991;   389.000;03;  1660.446;  4274.839;08;  12
+1992;   367.483;02;  1103.183;  3099.032;07;  12
+1993;   311.429;02;  1686.234;  5805.484;08;  12
+1994;   373.000;03;   974.339;  2156.667;06;  12
+1995;   281.964;02;  1295.246;  3748.064;07;  12
+1996;   398.345;02;  1376.332;  4128.387;07;  12
+1997;   326.714;02;  1196.601;  3424.839;07;  12
+1998;   288.893;02;  1789.954;  5335.161;08;  12
+1999;   441.857;02;  1616.956;  4286.129;07;  12
+2000;   366.161;03;  1619.116;  3907.000;09;  12
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+   279.571;  1372.952;    43.297;       735;  5805.484;  240
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;   304.065;1995;   400.598;   476.516;1981;    57.072;   20
+02;   279.571;1985;   355.750;   441.857;1999;    49.353;   20
+03;   299.903;1998;   359.195;   460.968;1999;    42.875;   20
+04;   374.833;1984;   471.473;   782.867;1992;    97.199;   20
+05;   491.484;1987;   812.755;  1119.355;2000;   166.464;   20
+06;   831.000;1986;  1736.985;  3041.000;1999;   622.257;   20
+07;  1623.871;1994;  3293.603;  4879.355;1998;   883.092;   20
+08;  1446.871;1994;  2770.656;  5805.484;1993;  1176.047;   20
+09;  1675.333;1994;  2937.983;  4129.000;1987;   793.202;   20
+10;  1116.226;1984;  1788.142;  2849.677;1990;   509.701;   20
+11;   638.067;1994;   996.740;  2800.000;1991;   455.544;   20
+12;   399.839;1994;   551.537;   677.032;1989;    85.244;   20

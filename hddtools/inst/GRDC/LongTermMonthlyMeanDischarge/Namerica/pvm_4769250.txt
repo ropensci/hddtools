@@ -1,0 +1,102 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              4769250
+# River:                 COCO
+# Station:               CORRIENTE LIRA
+# Country:               NI
+# Latitude (dec. °):       13.540000
+# Longitude (de. °):      -85.830000
+# Catchment area (km²):     6843.550
+# Altitude (m.a.s.l):         292.00
+# Next d/s station:      -
+# Remarks:               
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1969 - 1981
+# No. of years:          13
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1969;  -999.000;00;  -999.000;  -999.000;00;   7
+1970;    24.247;04;    90.053;   257.707;09;  12
+1971;     9.787;04;    64.518;   226.323;10;  12
+1972;     2.111;04;    37.653;    95.700;08;  12
+1973;     0.456;04;    61.142;   246.503;10;  12
+1974;    10.567;04;    58.087;   212.197;09;  12
+1975;     8.816;05;    71.742;   254.830;09;  12
+1976;     8.635;04;    40.702;    90.123;07;  12
+1977;     6.187;04;    54.806;   203.790;06;  12
+1978;    13.243;04;    69.375;   239.487;07;  12
+1979;    15.519;03;   108.439;   352.645;10;  12
+1980;    16.883;04;   145.571;   625.774;10;  12
+1981;  -999.000;00;  -999.000;  -999.000;00;   4
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+     0.456;    77.403;     2.441;       357;   625.774;  143
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;     8.390;1973;    33.212;    52.616;1980;    15.034;   12
+02;     3.382;1973;    21.384;    40.593;1970;    10.038;   12
+03;     1.331;1973;    14.179;    28.203;1970;     7.399;   12
+04;     0.456;1973;    11.859;    24.247;1970;     7.412;   12
+05;     8.816;1975;    23.376;    45.884;1980;    11.894;   11
+06;    14.253;1975;    87.592;   203.790;1977;    66.584;   12
+07;    29.729;1975;   109.835;   239.487;1978;    55.102;   12
+08;    62.113;1975;   119.951;   233.284;1969;    52.794;   12
+09;    54.690;1976;   168.332;   257.707;1970;    79.916;   12
+10;    35.881;1976;   205.784;   625.774;1980;   171.163;   12
+11;    32.447;1976;    81.324;   192.600;1975;    54.840;   12
+12;    21.248;1974;    47.509;   104.594;1979;    25.548;   12

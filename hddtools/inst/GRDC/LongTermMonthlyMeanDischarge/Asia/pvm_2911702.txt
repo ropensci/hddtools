@@ -1,0 +1,116 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              2911702
+# River:                 KONDA (TRIB. IRTYSH)
+# Station:               MEZHDURECHENSKY
+# Country:               RU
+# Latitude (dec. °):       60.150000
+# Longitude (de. °):       64.830000
+# Catchment area (km²):    41200.000
+# Altitude (m.a.s.l):        -999.00
+# Next d/s station:      2911701
+# Remarks:               
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1958 - 1984
+# No. of years:          27
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1958;  -999.000;00;  -999.000;  -999.000;00;   4
+1959;    39.800;02;   146.158;   343.000;06;  12
+1960;    51.100;03;   188.942;   506.000;06;  12
+1961;    46.600;02;   188.583;   428.000;06;  12
+1962;    58.200;03;   191.850;   441.000;05;  12
+1963;    45.600;03;   156.400;   441.000;06;  12
+1964;    36.600;02;   106.610;   238.000;05;  10
+1965;    54.500;03;   262.358;   766.000;06;  12
+1966;    47.200;02;   223.442;   626.000;06;  12
+1967;    39.000;01;    95.050;   221.000;05;  12
+1968;    42.500;02;   126.600;   264.000;06;  12
+1969;    34.000;02;   272.117;   585.000;07;  12
+1970;    50.200;02;   237.550;   546.000;06;  12
+1971;    46.800;03;   307.325;   564.000;06;  12
+1972;    62.800;03;   205.900;   414.000;06;  12
+1973;    50.300;03;   239.308;   560.000;05;  12
+1974;    52.500;12;   234.433;   704.000;06;  12
+1975;    51.100;01;   145.608;   318.000;06;  12
+1976;    59.000;02;   208.442;   552.000;06;  12
+1977;    40.700;01;   102.958;   267.000;05;  12
+1978;  -999.000;00;  -999.000;  -999.000;00;   5
+1979;  -999.000;00;  -999.000;  -999.000;00;   0
+1980;  -999.000;00;  -999.000;  -999.000;00;   7
+1981;  -999.000;00;  -999.000;  -999.000;00;   5
+1982;  -999.000;00;  -999.000;  -999.000;00;   0
+1983;  -999.000;00;  -999.000;  -999.000;00;   0
+1984;  -999.000;00;  -999.000;  -999.000;00;   5
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+    34.000;   195.393;     6.162;       150;   766.000;  252
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;    39.000;1967;    62.970;   132.000;1974;    25.252;   20
+02;    34.000;1969;    52.010;    78.100;1974;    11.694;   20
+03;    35.200;1969;    51.515;    68.100;1974;     8.312;   20
+04;    47.400;1964;   122.645;   209.000;1973;    44.020;   20
+05;   205.000;1978;   374.136;   560.000;1973;   106.910;   22
+06;   166.000;1967;   452.190;   766.000;1965;   156.822;   21
+07;    98.900;1967;   363.757;   594.000;1965;   143.421;   21
+08;    83.600;1977;   259.164;   584.000;1969;   127.936;   22
+09;    87.800;1977;   194.983;   473.000;1971;   109.843;   23
+10;    76.900;1963;   165.110;   385.000;1971;    80.758;   21
+11;    50.700;1963;   122.529;   296.000;1971;    58.627;   21
+12;    45.800;1963;    88.752;   194.000;1971;    40.433;   21

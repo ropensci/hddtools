@@ -1,0 +1,109 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              1495165
+# River:                 RUNDE
+# Station:               RUNDE U/S INGESI FLUMES (63423133)
+# Country:               ZW
+# Latitude (dec. °):      -20.616667
+# Longitude (de. °):       30.450000
+# Catchment area (km²):     3710.000
+# Altitude (m.a.s.l):        -999.00
+# Next d/s station:      1495160
+# Remarks:               
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1971 - 1990
+# No. of years:          20
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1971;  -999.000;00;  -999.000;  -999.000;00;   2
+1972;  -999.000;00;  -999.000;  -999.000;00;   9
+1973;  -999.000;00;  -999.000;  -999.000;00;   0
+1974;  -999.000;00;  -999.000;  -999.000;00;   0
+1975;  -999.000;00;  -999.000;  -999.000;00;   3
+1976;  -999.000;00;  -999.000;  -999.000;00;   9
+1977;  -999.000;00;  -999.000;  -999.000;00;   3
+1978;     1.539;09;    33.534;   198.154;01;  10
+1979;     0.310;09;     3.580;    12.533;01;  12
+1980;     0.359;10;    11.521;    76.879;02;  12
+1981;     0.539;05;    13.568;    87.659;02;  12
+1982;     0.000;06;     0.299;     2.259;01;  12
+1983;     0.000;06;     0.149;     0.405;12;  12
+1984;     0.000;06;     2.902;    24.416;12;  12
+1985;     0.000;09;    14.085;   106.888;02;  12
+1986;     0.017;09;     4.812;    18.709;04;  12
+1987;     0.000;04;     4.360;    44.381;12;  12
+1988;     0.000;10;    10.626;    64.417;02;  12
+1989;     0.000;07;     1.547;     7.328;02;  12
+1990;  -999.000;00;  -999.000;  -999.000;00;   9
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+     0.000;     8.238;     0.260;        70;   198.154;  177
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;     0.004;1983;    26.057;   198.154;1978;    49.385;   15
+02;     0.383;1983;    33.019;   106.888;1985;    39.613;   15
+03;     0.010;1987;    13.882;    68.742;1976;    20.582;   14
+04;     0.000;1987;     9.097;    45.261;1976;    15.190;   14
+05;     0.000;1987;     1.943;     9.255;1978;     2.913;   15
+06;     0.000;1982;     0.942;     5.330;1978;     1.534;   15
+07;     0.000;1982;     0.711;     3.881;1978;     1.072;   15
+08;     0.000;1982;     0.448;     2.187;1978;     0.679;   15
+09;     0.000;1982;     0.318;     1.539;1978;     0.470;   15
+10;     0.000;1985;     0.613;     2.370;1978;     0.696;   14
+11;     0.000;1987;     1.844;     8.456;1984;     2.538;   15
+12;     0.405;1983;     9.904;    44.381;1987;    12.273;   15

@@ -1,0 +1,110 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              6232100
+# River:                 TORNETRAESK
+# Station:               NEDRE ABISKOJOKK
+# Country:               SE
+# Latitude (dec. °):       68.360000
+# Longitude (de. °):       18.810000
+# Catchment area (km²):     3294.000
+# Altitude (m.a.s.l):         341.00
+# Next d/s station:      6232101
+# Remarks:               Lake coverage 13.3%
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1978 - 1998
+# No. of years:          21
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1978;    11.367;04;    56.769;   154.032;07;  12
+1979;    10.000;04;    57.427;   169.677;07;  12
+1980;     9.000;04;    40.308;   135.533;06;  12
+1981;    11.000;04;    60.585;   168.387;08;  12
+1982;    12.967;04;    57.016;   192.935;07;  12
+1983;    11.967;04;    64.335;   147.613;07;  12
+1984;  -999.000;00;  -999.000;  -999.000;00;   4
+1985;     8.300;04;    44.602;    99.871;07;  12
+1986;    18.548;12;    59.691;   199.667;06;  12
+1987;     9.967;04;    54.932;   165.548;07;  12
+1988;    10.533;04;    51.579;   147.032;07;  12
+1989;    15.700;04;    76.910;   209.290;07;  12
+1990;    14.633;04;    66.645;   216.677;07;  12
+1991;    12.967;04;    62.464;   211.613;07;  12
+1992;    16.300;04;    73.525;   221.200;06;  12
+1993;    17.230;04;    83.362;   307.903;07;  12
+1994;    11.127;04;    46.736;   152.581;07;  12
+1995;    11.777;04;    67.632;   191.600;06;  12
+1996;    11.680;04;    65.322;   215.032;07;  12
+1997;    17.120;04;    74.104;   256.194;07;  12
+1998;    13.877;04;    68.342;   223.968;07;  12
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+     8.300;    61.274;     1.932;       587;   307.903;  244
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;    11.871;1981;    20.929;    31.645;1986;     4.992;   20
+02;    11.464;1985;    17.936;    29.857;1986;     4.877;   20
+03;     9.516;1985;    15.422;    28.742;1986;     4.824;   20
+04;     8.300;1985;    13.266;    27.800;1986;     4.297;   20
+05;     9.806;1985;    25.676;    75.355;1986;    16.074;   20
+06;    64.267;1985;   137.223;   221.200;1992;    42.448;   20
+07;    99.871;1985;   181.726;   307.903;1993;    49.549;   20
+08;    61.355;1980;   125.021;   220.548;1993;    37.771;   20
+09;    39.533;1986;    79.114;   111.767;1983;    18.532;   21
+10;    30.516;1986;    55.206;    71.584;1998;    11.308;   21
+11;    20.733;1980;    38.825;    57.933;1985;     8.612;   21
+12;    14.387;1980;    27.187;    38.194;1985;     6.356;   21

@@ -1,0 +1,110 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              4876800
+# River:                 SIXAOLA
+# Station:               SIXAOLA
+# Country:               CR
+# Latitude (dec. °):        9.500000
+# Longitude (de. °):      -82.600000
+# Catchment area (km²):     2706.000
+# Altitude (m.a.s.l):           2.00
+# Next d/s station:      -
+# Remarks:               
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1973 - 1993
+# No. of years:          21
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1973;  -999.000;00;  -999.000;  -999.000;00;   8
+1974;   108.500;04;   241.498;   356.355;01;  12
+1975;  -999.000;00;  -999.000;  -999.000;00;   4
+1976;  -999.000;00;  -999.000;  -999.000;00;   0
+1977;  -999.000;00;  -999.000;  -999.000;00;   0
+1978;  -999.000;00;  -999.000;  -999.000;00;   0
+1979;  -999.000;00;  -999.000;  -999.000;00;   0
+1980;  -999.000;00;  -999.000;  -999.000;00;   0
+1981;  -999.000;00;  -999.000;  -999.000;00;   0
+1982;  -999.000;00;  -999.000;  -999.000;00;   0
+1983;  -999.000;00;  -999.000;  -999.000;00;   0
+1984;  -999.000;00;  -999.000;  -999.000;00;   0
+1985;  -999.000;00;  -999.000;  -999.000;00;   8
+1986;    99.935;12;   244.800;   526.226;10;  12
+1987;  -999.000;00;  -999.000;  -999.000;00;   4
+1988;  -999.000;00;  -999.000;  -999.000;00;   0
+1989;  -999.000;00;  -999.000;  -999.000;00;   0
+1990;  -999.000;00;  -999.000;  -999.000;00;   8
+1991;    99.032;01;   249.423;   564.806;08;  12
+1992;    87.000;02;   206.018;   358.710;05;  12
+1993;  -999.000;00;  -999.000;  -999.000;00;   4
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+    57.129;   232.391;     7.329;      2708;   629.419;   84
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;    99.032;1991;   184.189;   356.355;1974;    91.672;    7
+02;    87.000;1992;   130.678;   213.107;1993;    41.313;    7
+03;    57.129;1987;   154.115;   316.000;1993;   101.737;    7
+04;    72.833;1975;   157.248;   222.433;1992;    54.160;    7
+05;   146.129;1985;   230.046;   358.710;1992;    70.788;    7
+06;   167.500;1992;   280.510;   346.200;1985;    62.912;    7
+07;   160.968;1985;   237.129;   326.871;1991;    56.954;    7
+08;   189.613;1973;   282.857;   564.806;1991;   130.016;    7
+09;   163.600;1990;   249.181;   406.733;1986;    81.981;    7
+10;   202.710;1985;   307.664;   526.226;1986;   103.981;    7
+11;   149.367;1992;   247.771;   383.267;1973;    78.167;    7
+12;    99.935;1986;   327.309;   629.419;1973;   179.077;    7

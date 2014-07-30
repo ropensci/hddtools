@@ -1,0 +1,109 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              4208986
+# River:                 WILLIAM RIVER
+# Station:               ABOVE CARSWELL RIVER
+# Country:               CA
+# Latitude (dec. °):       58.813889
+# Longitude (de. °):     -109.002777
+# Catchment area (km²):     4030.000
+# Altitude (m.a.s.l):        -999.00
+# Next d/s station:      4208400
+# Remarks:               
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1976 - 1995
+# No. of years:          20
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1976;  -999.000;00;  -999.000;  -999.000;00;   7
+1977;    13.000;01;    23.850;    33.600;05;  12
+1978;    11.000;02;    20.783;    43.200;05;  12
+1979;    12.000;02;    19.592;    41.400;05;  12
+1980;     6.000;12;    12.492;    19.000;04;  12
+1981;     7.000;01;    10.882;    24.700;05;  12
+1982;     6.000;01;    13.083;    33.000;05;  12
+1983;     8.000;01;    15.092;    29.200;05;  12
+1984;     8.000;01;    14.967;    21.000;11;  12
+1985;     9.000;02;    22.275;    50.000;05;  12
+1986;    11.000;01;    22.808;    43.000;05;  12
+1987;    10.000;01;    19.742;    45.100;05;  12
+1988;    11.000;02;    22.600;    42.300;05;  12
+1989;    12.000;03;    21.633;    47.000;05;  12
+1990;    12.000;08;    17.808;    36.100;05;  12
+1991;    10.000;02;    20.033;    41.300;05;  12
+1992;    14.000;02;    23.958;    54.700;05;  12
+1993;    10.000;02;    19.492;    34.000;08;  12
+1994;  -999.000;00;  -999.000;  -999.000;00;   0
+1995;  -999.000;00;  -999.000;  -999.000;00;   0
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+     6.000;    19.051;     0.601;       149;    54.700;  211
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;     6.000;1982;    11.412;    19.000;1990;     3.279;   17
+02;     6.000;1982;    10.941;    17.000;1990;     2.585;   17
+03;     7.000;1982;    11.647;    17.000;1990;     2.572;   17
+04;    10.000;1982;    19.000;    35.000;1985;     6.955;   17
+05;    17.700;1980;    36.947;    54.700;1992;    10.711;   17
+06;    13.400;1980;    24.001;    32.000;1985;     6.183;   18
+07;    12.100;1980;    20.239;    32.500;1986;     6.206;   18
+08;     9.590;1981;    19.455;    34.000;1993;     7.296;   18
+09;     8.540;1981;    20.302;    30.300;1977;     5.908;   18
+10;     9.060;1981;    22.092;    37.800;1992;     6.991;   18
+11;     9.000;1981;    18.500;    27.000;1978;     4.925;   18
+12;     6.000;1980;    13.778;    21.000;1988;     4.180;   18

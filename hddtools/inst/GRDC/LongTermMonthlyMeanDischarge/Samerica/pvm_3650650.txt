@@ -1,0 +1,136 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              3650650
+# River:                 RIO SALGADO
+# Station:               PONTE PATOS
+# Country:               BR
+# Latitude (dec. °):       -6.666670
+# Longitude (de. °):      -38.966670
+# Catchment area (km²):     8900.000
+# Altitude (m.a.s.l):         220.00
+# Next d/s station:      3650745
+# Remarks:               
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1911 - 1957
+# No. of years:          47
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1911;  -999.000;00;  -999.000;  -999.000;00;   5
+1912;     0.000;01;     5.656;    46.345;02;  12
+1913;     0.000;01;     8.985;    76.677;03;  12
+1914;     0.000;02;     3.317;    39.806;01;  12
+1915;     0.000;01;     0.761;     9.133;04;  12
+1916;  -999.000;00;  -999.000;  -999.000;00;   1
+1917;  -999.000;00;  -999.000;  -999.000;00;   0
+1918;  -999.000;00;  -999.000;  -999.000;00;   0
+1919;  -999.000;00;  -999.000;  -999.000;00;   0
+1920;  -999.000;00;  -999.000;  -999.000;00;   0
+1921;     0.000;01;     0.893;     5.903;03;  12
+1922;     0.000;01;     3.592;    30.700;04;  12
+1923;     0.000;01;     1.644;    10.929;02;  12
+1924;     0.000;06;    20.740;   167.967;04;  12
+1925;     0.000;01;     8.351;    57.968;03;  12
+1926;     0.000;01;     7.126;    79.226;03;  12
+1927;     0.000;01;     0.404;     1.767;04;  12
+1928;     0.000;01;     3.127;    28.100;04;  12
+1929;     0.000;05;     0.852;     4.643;02;  12
+1930;     0.000;01;     0.021;     0.258;03;  12
+1931;  -999.000;00;  -999.000;  -999.000;00;   1
+1932;  -999.000;00;  -999.000;  -999.000;00;   0
+1933;  -999.000;00;  -999.000;  -999.000;00;   0
+1934;  -999.000;00;  -999.000;  -999.000;00;   0
+1935;  -999.000;00;  -999.000;  -999.000;00;   0
+1936;  -999.000;00;  -999.000;  -999.000;00;   0
+1937;     0.000;01;    43.922;   261.613;03;  12
+1938;     0.000;07;    10.619;    90.581;03;  11
+1939;     0.000;07;    30.186;   153.839;03;  12
+1940;     0.000;10;    73.411;   362.935;03;  12
+1941;     0.000;08;    24.731;   166.903;03;  12
+1942;     0.000;01;     7.429;    36.161;10;  12
+1943;     0.000;06;    19.849;   154.194;03;  12
+1944;     0.000;01;    19.884;   120.467;04;  12
+1945;     0.233;09;    31.554;   153.516;05;  12
+1946;     0.000;08;    15.770;    65.065;03;  12
+1947;     0.000;06;   123.678;   662.267;04;  12
+1948;     0.000;07;    27.359;   198.161;03;  12
+1949;     0.000;01;    55.387;   356.467;04;  12
+1950;     0.000;06;    31.694;   332.033;04;  12
+1951;     0.000;03;     3.369;    37.167;04;  12
+1952;     0.000;06;    25.783;   151.533;04;  12
+1953;     0.000;01;     2.042;    10.516;03;  12
+1954;     0.000;08;     7.882;    41.806;03;  12
+1955;     0.000;07;    70.873;   462.290;03;  12
+1956;     0.000;01;    76.825;   426.897;02;  12
+1957;  -999.000;00;  -999.000;  -999.000;00;   9
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+     0.000;    23.385;     0.737;        83;   662.267;  423
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;     0.000;1912;     6.044;    52.129;1945;    12.298;   37
+02;     0.000;1911;    47.412;   426.897;1956;    89.526;   36
+03;     0.000;1914;   101.687;   462.290;1955;   125.256;   36
+04;     0.000;1911;    97.302;   662.267;1947;   146.450;   36
+05;     0.000;1911;    12.204;   153.516;1945;    35.011;   36
+06;     0.000;1912;     1.426;    21.933;1946;     4.972;   35
+07;     0.000;1912;     0.083;     1.000;1940;     0.226;   35
+08;     0.000;1912;     0.067;     1.000;1940;     0.236;   35
+09;     0.000;1912;     0.271;     7.200;1953;     1.236;   35
+10;     0.000;1912;     1.327;    36.161;1942;     6.344;   34
+11;     0.000;1912;     1.710;    27.700;1947;     6.525;   34
+12;     0.000;1912;     5.598;   113.258;1947;    19.898;   34

@@ -1,0 +1,100 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              2587403
+# River:                 TOSHIBETSU
+# Station:               TOSHIBETSU
+# Country:               JP
+# Latitude (dec. °):       42.930000
+# Longitude (de. °):      143.450000
+# Catchment area (km²):     2715.200
+# Altitude (m.a.s.l):        -999.00
+# Next d/s station:      2587400
+# Remarks:               
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1993 - 2003
+# No. of years:          11
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1993;    46.620;03;    67.275;   100.108;06;  12
+1994;    45.383;08;    76.492;   155.288;09;  12
+1995;    41.151;02;    78.231;   125.394;05;  12
+1996;    45.478;12;    62.124;   127.726;05;  12
+1997;    41.738;07;    67.578;   100.812;08;  12
+1998;    37.014;06;    84.709;   229.265;09;  12
+1999;  -999.000;00;  -999.000;  -999.000;00;   0
+2000;    43.971;11;    87.627;   223.625;04;  12
+2001;    54.035;02;    86.824;   200.226;09;  12
+2002;    38.402;06;    69.210;   136.669;10;  12
+2003;    40.774;06;    70.835;   174.788;08;  12
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+    37.014;    75.090;     2.368;       872;   229.265;  120
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;    43.565;1997;    52.762;    62.265;2002;     5.832;   10
+02;    41.151;1995;    51.014;    63.749;2002;     7.288;   10
+03;    46.620;1993;    54.087;    69.874;2002;     7.417;   10
+04;    61.731;1998;   107.997;   223.625;2000;    46.001;   10
+05;    43.795;1998;    88.031;   144.235;2000;    34.932;   10
+06;    37.014;1998;    64.220;   100.108;1993;    20.539;   10
+07;    41.738;1997;    63.869;   102.484;2000;    20.241;   10
+08;    45.383;1994;    93.969;   174.788;2003;    41.583;   10
+09;    48.052;2002;   107.042;   229.265;1998;    64.295;   10
+10;    50.017;1996;    92.972;   136.669;2002;    26.282;   10
+11;    43.971;2000;    63.456;    80.357;1997;    11.711;   10
+12;    45.478;1996;    61.666;    82.798;1997;    10.529;   10

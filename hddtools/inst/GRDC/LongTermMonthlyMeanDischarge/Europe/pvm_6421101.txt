@@ -1,0 +1,108 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              6421101
+# River:                 MEUSE
+# Station:               SINT PIETER NOORD
+# Country:               NL
+# Latitude (dec. °):       50.830000
+# Longitude (de. °):        5.710000
+# Catchment area (km²):    21300.000
+# Altitude (m.a.s.l):          44.00
+# Next d/s station:      6421500
+# Remarks:               not recommended by the provider
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1994 - 2012
+# No. of years:          19
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1994;    57.774;08;   292.725;   956.032;01;  12
+1995;    52.677;08;   355.582;  1166.774;01;  12
+1996;    37.413;07;   147.521;   381.358;12;  12
+1997;    37.269;09;   188.490;   515.879;02;  12
+1998;  -999.000;00;  -999.000;  -999.000;00;   0
+1999;    50.733;09;   324.567;   835.194;12;  12
+2000;   102.900;06;   330.465;   646.931;02;  12
+2001;    69.258;08;   388.421;   803.806;03;  12
+2002;    60.067;09;   363.491;  1142.643;02;  12
+2003;    33.233;09;   187.285;   836.806;01;  12
+2004;    63.247;07;   183.551;   551.069;01;  12
+2005;    45.130;10;   160.136;   462.755;02;  12
+2006;    52.197;07;   223.845;   444.483;03;  12
+2007;    77.258;10;   297.907;   664.229;01;  12
+2008;    76.564;09;   290.491;   821.585;03;  12
+2009;    35.900;09;   207.900;   457.296;02;  12
+2010;    37.488;07;   224.025;   510.328;02;  12
+2011;    32.650;11;   189.790;   941.794;01;  12
+2012;    62.487;09;   270.226;   760.745;01;  12
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+    32.650;   257.023;     8.105;       381;  1166.774;  216
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;   125.519;1997;   569.614;  1166.774;1995;   296.703;   18
+02;   266.586;2011;   524.648;  1142.643;2002;   246.908;   18
+03;   163.558;2011;   448.284;   821.585;2008;   220.561;   18
+04;    70.487;1996;   276.323;   699.600;2001;   172.321;   18
+05;    42.784;2011;   179.748;   305.480;2006;    71.065;   18
+06;    51.347;2011;   112.428;   177.433;1995;    43.208;   18
+07;    37.413;1996;    98.928;   263.548;2000;    64.760;   18
+08;    37.613;2003;    85.215;   185.902;2007;    39.963;   18
+09;    33.233;2003;    75.871;   205.767;2001;    41.762;   18
+10;    36.419;2003;    96.630;   201.516;2000;    51.803;   18
+11;    32.650;2011;   215.766;   576.433;2002;   155.950;   18
+12;   132.226;2003;   400.825;   835.194;1999;   173.809;   18

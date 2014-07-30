@@ -1,0 +1,112 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              4358700
+# River:                 RIO TECOLUTLA
+# Station:               REMOLINO
+# Country:               MX
+# Latitude (dec. °):       19.868300
+# Longitude (de. °):      -97.301700
+# Catchment area (km²):     7172.000
+# Altitude (m.a.s.l):          32.00
+# Next d/s station:      -
+# Remarks:               
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1957 - 1979
+# No. of years:          23
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1957;  -999.000;00;  -999.000;  -999.000;00;   7
+1958;     0.083;04;     0.203;     0.406;10;  12
+1959;     0.103;05;     0.210;     0.373;10;  12
+1960;     0.091;05;     0.174;     0.359;09;  12
+1961;     0.083;04;     0.228;     0.560;09;  12
+1962;     0.101;08;     0.146;     0.270;09;  12
+1963;     0.080;04;     0.130;     0.270;09;  12
+1964;     0.079;04;     0.159;     0.269;10;  12
+1965;     0.120;02;     0.169;     0.289;08;  12
+1966;     0.087;05;     0.214;     0.469;09;  12
+1967;     0.095;05;     0.193;     0.544;09;  10
+1968;  -999.000;00;  -999.000;  -999.000;00;   0
+1969;  -999.000;00;  -999.000;  -999.000;00;   0
+1970;  -999.000;00;  -999.000;  -999.000;00;   0
+1971;  -999.000;00;  -999.000;  -999.000;00;   0
+1972;  -999.000;00;  -999.000;  -999.000;00;   0
+1973;  -999.000;00;  -999.000;  -999.000;00;   0
+1974;  -999.000;00;  -999.000;  -999.000;00;   0
+1975;  -999.000;00;  -999.000;  -999.000;00;   0
+1976;    74.000;04;   276.500;   603.000;09;  12
+1977;    44.000;04;   137.583;   314.000;10;  12
+1978;    49.000;05;   192.167;   493.000;10;  12
+1979;    61.000;03;   186.333;   683.000;09;  12
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+     0.079;    55.110;     1.738;       242;   683.000;  173
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;     0.102;1963;    28.310;   153.000;1976;    50.145;   14
+02;     0.108;1964;    23.874;   100.000;1976;    39.959;   14
+03;     0.094;1963;    20.154;    86.000;1976;    33.294;   14
+04;     0.079;1964;    17.928;    74.000;1976;    30.028;   14
+05;     0.084;1961;    25.500;   146.000;1976;    46.821;   14
+06;     0.088;1963;    60.386;   298.000;1976;   108.568;   15
+07;     0.116;1967;    75.074;   515.000;1976;   148.799;   15
+08;     0.101;1962;    90.168;   446.000;1979;   167.182;   15
+09;     0.153;1964;   120.244;   683.000;1979;   236.637;   15
+10;     0.160;1963;   101.489;   594.000;1976;   198.908;   15
+11;     0.127;1962;    55.087;   203.000;1977;    90.231;   14
+12;     0.120;1965;    30.831;   122.000;1976;    50.665;   14

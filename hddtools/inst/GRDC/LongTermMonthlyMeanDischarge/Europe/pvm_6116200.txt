@@ -1,0 +1,134 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              6116200
+# River:                 GUADIANA
+# Station:               PULO DO LOBO
+# Country:               PT
+# Latitude (dec. °):       37.820000
+# Longitude (de. °):       -7.630000
+# Catchment area (km²):    60883.000
+# Altitude (m.a.s.l):          30.00
+# Next d/s station:      -
+# Remarks:               
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1946 - 1990
+# No. of years:          45
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1946;  -999.000;00;  -999.000;  -999.000;00;   3
+1947;     1.285;09;   387.468;  2241.685;03;  12
+1948;     2.150;10;   162.847;   735.502;02;  12
+1949;     2.156;07;    26.288;   158.873;12;  12
+1950;     0.085;09;    30.028;   116.989;01;  12
+1951;     1.143;08;   201.447;   899.401;03;  12
+1952;     4.309;08;   160.403;   701.972;04;  12
+1953;     0.323;09;    45.653;   136.995;12;  12
+1954;     0.000;09;    21.063;   161.229;03;  12
+1955;     0.825;07;   201.938;   885.164;12;  12
+1956;    11.545;12;   208.459;   789.680;03;  12
+1957;     3.033;07;    24.820;   104.766;02;  12
+1958;     7.649;07;   114.391;   980.185;12;  12
+1959;     4.612;07;   137.575;   433.842;02;  12
+1960;    12.406;07;   370.771;  1166.090;02;  12
+1961;    13.650;08;   132.438;   385.148;12;  12
+1962;    21.294;08;   303.399;  1241.144;03;  12
+1963;    35.254;08;   574.076;  1535.321;12;  12
+1964;    36.899;12;   291.271;  1255.436;02;  12
+1965;    10.889;08;   145.108;   423.224;03;  12
+1966;    36.298;08;   341.290;  1410.193;02;  12
+1967;    16.910;08;    68.069;   258.814;02;  12
+1968;    13.464;07;    82.415;   296.346;03;  12
+1969;    23.723;08;   318.573;  1546.039;03;  12
+1970;    32.576;08;   307.544;  2482.507;01;  12
+1971;    21.149;07;    66.416;   126.609;05;  12
+1972;    17.723;07;   109.285;   492.832;02;  12
+1973;    14.342;11;    56.595;   286.004;01;  12
+1974;    11.364;12;    24.561;    58.540;02;  12
+1975;    12.428;01;    45.612;   327.126;03;  12
+1976;     7.844;06;    59.590;   388.887;12;  12
+1977;    25.077;08;   322.471;  1351.571;02;  12
+1978;    41.937;08;   242.904;   973.077;03;  12
+1979;    41.178;08;   390.934;  2012.063;02;  12
+1980;     8.744;12;    26.907;    73.297;03;  12
+1981;     1.774;06;    12.356;    72.283;12;  12
+1982;     0.996;07;    29.832;   230.767;01;  12
+1983;     0.290;08;    62.928;   379.373;11;  11
+1984;     7.133;07;    34.323;    71.835;04;  12
+1985;     9.427;10;   143.405;   639.935;01;  12
+1986;     5.650;06;    71.368;   401.079;02;  12
+1987;     7.375;06;   105.126;   544.097;12;  12
+1988;    11.125;08;    88.846;   493.579;01;  12
+1989;     7.953;07;   168.977;  1478.732;12;  12
+1990;  -999.000;00;  -999.000;  -999.000;00;   9
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+     0.000;   154.122;     4.860;        80;  2482.507;  527
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;     7.448;1981;   349.439;  2482.507;1970;   481.874;   43
+02;     6.285;1981;   433.509;  2012.063;1979;   515.393;   44
+03;     5.313;1983;   358.753;  2241.685;1947;   483.737;   44
+04;     2.763;1983;   154.065;   815.882;1963;   209.401;   44
+05;     4.016;1982;    67.336;   379.815;1948;    76.159;   44
+06;     1.094;1983;    36.944;   128.537;1966;    34.306;   44
+07;     0.174;1954;    17.249;    54.316;1979;    15.728;   44
+08;     0.005;1954;    15.407;    41.937;1978;    12.167;   44
+09;     0.000;1954;    23.825;    83.821;1963;    19.682;   44
+10;     0.000;1954;    47.895;   303.035;1979;    62.014;   44
+11;     0.130;1950;   109.709;   644.939;1960;   157.415;   44
+12;     4.626;1982;   239.769;  1535.321;1963;   361.945;   44

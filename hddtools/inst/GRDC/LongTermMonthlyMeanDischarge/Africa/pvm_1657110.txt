@@ -1,0 +1,99 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              1657110
+# River:                 CUTATO DOS GANGUELAS
+# Station:               CUTATO (44932105)
+# Country:               AO
+# Latitude (dec. °):      -14.366667
+# Longitude (de. °):       16.500000
+# Catchment area (km²):     3101.000
+# Altitude (m.a.s.l):        -999.00
+# Next d/s station:      1657101
+# Remarks:               
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1965 - 1974
+# No. of years:          10
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1965;  -999.000;00;  -999.000;  -999.000;00;   3
+1966;  -999.000;00;  -999.000;  -999.000;00;   9
+1967;  -999.000;00;  -999.000;  -999.000;00;   3
+1968;     4.261;10;    32.619;   126.544;01;  11
+1969;     8.526;10;    41.998;   121.616;03;  12
+1970;     4.877;10;    33.257;    90.603;03;  12
+1971;     3.165;10;    16.129;    33.529;02;  12
+1972;     2.533;10;     9.297;    21.103;05;  12
+1973;     2.815;10;    17.415;    37.043;02;  12
+1974;  -999.000;00;  -999.000;  -999.000;00;   9
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+     2.533;    23.831;     0.752;       242;   126.544;   95
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;     9.044;1974;    43.504;   126.544;1968;    37.098;    8
+02;     7.447;1974;    42.476;    87.318;1970;    29.168;    7
+03;     7.830;1974;    52.681;   121.616;1969;    39.112;    8
+04;    17.527;1972;    43.752;    87.797;1969;    21.673;    8
+05;    21.103;1972;    27.929;    40.655;1969;     7.474;    8
+06;     9.423;1972;    16.912;    25.210;1969;     6.129;    8
+07;     6.219;1972;    12.643;    19.639;1969;     5.382;    8
+08;     4.632;1972;     9.736;    16.771;1969;     4.566;    8
+09;     2.807;1972;     6.078;    11.070;1969;     2.816;    8
+10;     2.533;1972;     4.432;     8.526;1969;     2.066;    8
+11;     3.471;1972;     7.771;    15.953;1969;     4.787;    8
+12;     5.961;1971;    20.389;    61.995;1967;    19.138;    8

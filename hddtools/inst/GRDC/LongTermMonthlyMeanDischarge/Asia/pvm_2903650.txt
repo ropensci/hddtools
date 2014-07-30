@@ -1,0 +1,99 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              2903650
+# River:                 MAMAKAN
+# Station:               MAMAKAN
+# Country:               RU
+# Latitude (dec. °):       57.800000
+# Longitude (de. °):      114.030000
+# Catchment area (km²):     9460.000
+# Altitude (m.a.s.l):        -999.00
+# Next d/s station:      2903050
+# Remarks:               
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1981 - 1990
+# No. of years:          10
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1981;    28.000;03;   239.917;   674.000;07;  12
+1982;    30.300;02;   185.883;   771.000;06;  12
+1983;    29.000;02;   194.275;   633.000;06;  12
+1984;    29.400;02;   140.325;   475.000;06;  12
+1985;    24.600;02;   120.817;   558.000;06;  12
+1986;    17.400;02;   150.583;   691.000;06;  12
+1987;    24.300;02;   123.108;   541.000;06;  12
+1988;    22.800;03;   157.392;   431.000;07;  12
+1989;    23.800;02;   174.025;   619.000;06;  12
+1990;    21.900;03;   153.292;   533.000;06;  12
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+    17.400;   163.962;     5.171;       547;   771.000;  120
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;    24.400;1986;    31.160;    38.700;1984;     4.011;   10
+02;    17.400;1986;    25.700;    30.300;1982;     3.832;   10
+03;    21.900;1990;    28.580;    33.500;1984;     3.882;   10
+04;    28.000;1988;    42.020;    55.300;1981;     8.132;   10
+05;   121.000;1987;   209.400;   308.000;1984;    64.515;   10
+06;   416.000;1988;   584.800;   771.000;1982;   103.278;   10
+07;   175.000;1985;   365.500;   674.000;1981;   167.588;   10
+08;   110.000;1985;   277.300;   507.000;1983;   130.728;   10
+09;   151.000;1990;   215.200;   446.000;1981;    88.551;   10
+10;    82.000;1984;   101.230;   147.000;1981;    21.583;   10
+11;    30.000;1984;    46.410;    62.600;1981;     9.766;   10
+12;    27.900;1987;    40.240;    50.600;1981;     7.037;   10

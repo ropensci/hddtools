@@ -1,0 +1,108 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              3667100
+# River:                 RIO NEGRO (TRIB. PARAGUAY)
+# Station:               FAZENDA RIO NEGRO
+# Country:               BR
+# Latitude (dec. °):      -19.566670
+# Longitude (de. °):      -56.200000
+# Catchment area (km²):    14770.000
+# Altitude (m.a.s.l):         101.00
+# Next d/s station:      3667020
+# Remarks:               
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1968 - 1986
+# No. of years:          19
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1968;     3.897;12;   191.292;   365.655;02;  11
+1969;     2.018;09;    11.255;    32.369;01;  12
+1970;     1.058;11;    15.022;    44.646;03;  12
+1971;     4.251;09;    16.353;    80.562;12;  12
+1972;     6.713;09;    55.249;   148.561;03;  12
+1973;     3.213;09;    52.306;   162.456;12;  12
+1974;     6.948;10;   116.385;   377.187;04;  12
+1975;    10.967;09;   126.089;   326.933;04;  12
+1976;    35.894;08;   108.672;   177.674;02;  12
+1977;    22.498;08;   376.629;   794.129;01;  12
+1978;    12.659;09;    95.668;   265.599;01;  12
+1979;    72.509;05;   243.180;   402.968;12;  12
+1980;    21.588;09;   166.434;   462.484;01;  12
+1981;    19.546;09;   141.857;   488.581;03;  12
+1982;   138.594;01;   368.076;   835.032;03;  12
+1983;   261.484;08;   415.291;   731.226;01;  12
+1984;  -999.000;00;  -999.000;  -999.000;00;   5
+1985;     4.296;12;   378.160;   639.850;02;  12
+1986;     7.722;01;   331.715;   468.433;04;  12
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+     1.058;   183.008;     5.771;       391;   835.032;  220
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;     7.722;1986;   247.950;   794.129;1977;   246.932;   18
+02;     7.642;1971;   259.350;   688.346;1977;   225.401;   18
+03;    15.033;1971;   273.248;   835.032;1982;   222.660;   18
+04;    13.010;1969;   226.206;   542.817;1985;   187.422;   18
+05;    16.261;1971;   164.755;   397.494;1986;   137.770;   18
+06;     8.306;1971;   135.677;   313.567;1982;   110.935;   18
+07;     4.647;1969;   111.173;   329.471;1979;   120.664;   18
+08;     2.779;1969;   117.842;   416.565;1986;   146.909;   19
+09;     1.560;1970;   127.848;   357.430;1984;   144.421;   19
+10;     1.155;1970;   151.190;   419.348;1983;   148.740;   19
+11;     1.058;1970;   189.692;   451.307;1984;   178.927;   18
+12;     1.554;1970;   198.747;   555.516;1977;   195.099;   19

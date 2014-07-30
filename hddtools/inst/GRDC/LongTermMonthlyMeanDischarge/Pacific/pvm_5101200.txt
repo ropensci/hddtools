@@ -1,0 +1,152 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              5101200
+# River:                 BURDEKIN
+# Station:               CLARE
+# Country:               AU
+# Latitude (dec. °):      -19.765000
+# Longitude (de. °):      147.240000
+# Catchment area (km²):   129900.000
+# Altitude (m.a.s.l):           9.40
+# Next d/s station:      5101201
+# Remarks:               
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1950 - 2012
+# No. of years:          63
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1950;     0.000;01;    99.305;   604.793;12;  12
+1951;     0.000;12;   427.738;  3849.540;01;  12
+1952;     0.000;10;    30.168;   181.439;01;  12
+1953;     0.000;12;   363.506;  2781.495;02;  12
+1954;     7.211;09;   700.161;  4575.658;02;  12
+1955;     4.290;11;   766.370;  6226.318;03;  12
+1956;    20.700;10;   812.399;  2945.342;02;  12
+1957;     2.618;11;   201.048;  1308.411;01;  12
+1958;     1.493;11;   932.294;  5128.274;02;  12
+1959;     1.561;10;   208.231;  1283.720;02;  12
+1960;     0.126;10;   146.091;   746.305;02;  12
+1961;     0.024;10;    50.954;   230.068;01;  12
+1962;     0.000;10;    74.917;   419.352;03;  12
+1963;     0.769;11;   313.203;  1550.403;04;  12
+1964;     0.080;09;    82.573;   459.257;02;  12
+1965;     0.000;11;   110.828;   755.195;03;  12
+1966;     0.000;06;    61.624;   325.192;01;  12
+1967;     0.113;10;    88.023;   480.484;03;  12
+1968;     0.159;11;   509.804;  4867.878;02;  12
+1969;     0.005;09;    18.586;   108.809;12;  12
+1970;     0.318;09;   175.180;   942.914;02;  12
+1971;     1.108;10;   252.585;   923.619;12;  12
+1972;     0.255;12;   513.788;  3092.076;01;  12
+1973;     2.157;08;   222.220;  1153.712;12;  12
+1974;    10.544;10;  1638.237; 10700.814;01;  12
+1975;     6.818;08;   342.848;  2222.010;01;  12
+1976;     4.540;09;   322.759;  1642.628;02;  12
+1977;     2.162;11;   237.845;  1406.647;03;  12
+1978;     3.210;10;   182.012;  1596.853;02;  12
+1979;     0.784;11;   496.686;  3036.464;03;  12
+1980;     0.874;10;   144.547;   958.865;01;  12
+1981;     4.997;10;   616.850;  3197.756;02;  12
+1982;     0.481;10;    42.235;   157.236;03;  12
+1983;     0.525;10;   283.980;  2669.878;05;  12
+1984;     2.518;10;   175.380;  1328.670;02;  12
+1985;     1.470;09;    57.641;   156.286;03;  12
+1986;     0.983;09;    99.254;   839.419;02;  12
+1987;     9.611;09;    23.913;    47.324;01;  12
+1988;     8.477;08;   140.475;   807.831;03;  12
+1989;    14.806;10;   283.625;  1734.573;04;  12
+1990;    12.795;09;   337.402;  1439.700;04;  12
+1991;     6.592;08;  1277.120;  8790.353;02;  12
+1992;     8.126;08;    17.091;    26.925;03;  12
+1993;     7.228;09;    19.164;    51.687;01;  12
+1994;    10.727;08;    90.057;   784.337;03;  12
+1995;     9.355;07;    27.307;    83.895;03;  12
+1996;    10.973;08;    65.448;   568.661;01;  12
+1997;     6.077;07;   282.167;  1944.281;03;  12
+1998;     9.590;07;   324.950;  2357.270;01;  12
+1999;     8.262;08;   156.905;   603.306;03;  12
+2000;     8.314;09;   523.623;  2447.999;02;  12
+2001;     7.166;08;   189.491;  1364.282;01;  12
+2002;     8.461;06;   152.678;  1479.395;02;  12
+2003;     8.573;08;    67.410;   483.343;03;  12
+2004;     8.446;06;    48.146;   360.459;02;  12
+2005;     9.493;08;   136.839;  1177.444;01;  12
+2006;     6.799;11;    67.702;   519.761;04;  12
+2007;    19.952;09;   339.501;  3124.475;02;  12
+2008;     8.795;06;   884.112;  6526.042;02;  12
+2009;    10.948;08;   983.428;  8652.620;02;  12
+2010;    12.325;06;   611.448;  3416.906;12;  12
+2011;    15.272;11;   719.375;  2929.615;01;  11
+2012;  -999.000;00;  -999.000;  -999.000;00;   2
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+     0.000;   316.756;     9.989;        77; 10700.814;  745
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;     0.000;1950;   873.673; 10700.814;1974;  1704.502;   63
+02;     0.000;1950;  1427.693;  8790.353;1991;  2043.922;   63
+03;     0.000;1950;   694.566;  6226.318;1955;  1041.550;   62
+04;     0.000;1950;   274.304;  5032.957;1958;   719.560;   61
+05;     0.000;1950;   128.423;  2669.878;1983;   371.996;   62
+06;     0.000;1950;    49.077;   633.147;1990;   105.616;   62
+07;     0.000;1950;    29.413;   665.546;1956;    87.251;   62
+08;     0.000;1950;    12.984;    87.072;1998;    16.716;   62
+09;     0.000;1950;    13.619;   284.406;1998;    36.472;   62
+10;     0.000;1952;    12.620;   104.277;1985;    18.300;   62
+11;     0.000;1965;    55.326;   785.059;2010;   128.921;   62
+12;     0.000;1951;   201.789;  3416.906;2010;   486.710;   62

@@ -1,0 +1,134 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              4356810
+# River:                 CANAL SANTO DOMINGO
+# Station:               SANTO DOMINGO
+# Country:               MX
+# Latitude (dec. °):       16.600000
+# Longitude (de. °):      -94.766667
+# Catchment area (km²):    13164.000
+# Altitude (m.a.s.l):         137.00
+# Next d/s station:      -
+# Remarks:               
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1958 - 2002
+# No. of years:          45
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1958;  -999.000;00;  -999.000;  -999.000;00;   7
+1959;     1.036;05;     1.513;     2.153;12;  12
+1960;     0.799;05;     1.460;     1.930;01;  12
+1961;     0.768;05;     1.211;     1.403;10;  12
+1962;     0.902;05;     1.272;     1.610;11;  12
+1963;     0.565;05;     1.296;     1.815;09;  12
+1964;     0.620;05;     1.449;     1.771;11;  12
+1965;     0.972;04;     1.443;     1.736;11;  12
+1966;     0.897;05;     1.423;     1.677;11;  12
+1967;     0.894;05;     1.352;     1.689;11;  12
+1968;     0.866;04;     1.238;     1.613;10;  12
+1969;     0.296;09;     1.133;     1.625;01;  12
+1970;     0.724;05;     1.153;     1.428;12;  12
+1971;     0.937;04;     1.296;     1.671;01;  12
+1972;     0.862;06;     1.266;     1.565;10;  12
+1973;     0.062;09;     1.029;     1.757;01;  12
+1974;     0.665;08;     0.981;     1.441;12;  12
+1975;     0.765;07;     1.111;     1.413;01;  12
+1976;     0.102;07;     1.189;     1.709;09;  12
+1977;     0.748;05;     1.191;     1.582;10;  12
+1978;     0.000;10;     0.669;     1.386;01;  12
+1979;     0.059;10;     0.976;     1.731;12;  12
+1980;     0.692;06;     1.269;     1.843;12;  12
+1981;     0.212;07;     1.410;     1.976;12;  12
+1982;     1.057;06;     1.758;     2.581;12;  12
+1983;     0.930;05;     1.873;     2.686;12;  12
+1984;     0.798;09;     1.710;     2.210;01;  12
+1985;     0.462;09;     1.379;     2.082;01;  11
+1986;  -999.000;00;  -999.000;  -999.000;00;   0
+1987;  -999.000;00;  -999.000;  -999.000;00;   0
+1988;  -999.000;00;  -999.000;  -999.000;00;   0
+1989;  -999.000;00;  -999.000;  -999.000;00;   0
+1990;  -999.000;00;  -999.000;  -999.000;00;   0
+1991;  -999.000;00;  -999.000;  -999.000;00;   0
+1992;  -999.000;00;  -999.000;  -999.000;00;   0
+1993;     0.557;10;     0.941;     1.593;12;  12
+1994;  -999.000;00;  -999.000;  -999.000;00;   0
+1995;     0.008;09;     1.326;     3.224;12;  12
+1996;     0.159;06;     1.832;     3.109;01;  12
+1997;     0.327;04;     1.515;     2.711;09;  12
+1998;     0.503;10;     1.204;     1.894;08;  12
+1999;     0.754;11;     1.641;     2.560;03;  12
+2000;     0.102;06;     1.608;     2.368;04;  12
+2001;     0.678;04;     1.431;     2.480;08;  12
+2002;  -999.000;00;  -999.000;  -999.000;00;   7
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+     0.000;     1.320;     0.042;         3;     3.224;  433
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;     0.807;1993;     1.545;     3.109;1996;     0.430;   36
+02;     0.807;1993;     1.522;     2.855;1996;     0.402;   36
+03;     0.795;1958;     1.425;     2.719;1996;     0.438;   37
+04;     0.327;1997;     1.145;     2.721;1996;     0.495;   37
+05;     0.353;1958;     1.043;     3.058;1996;     0.523;   37
+06;     0.102;2000;     1.088;     1.871;1997;     0.383;   35
+07;     0.102;1976;     1.218;     1.998;1997;     0.458;   35
+08;     0.012;1995;     1.368;     2.480;2001;     0.479;   35
+09;     0.008;1995;     1.232;     2.711;1997;     0.578;   36
+10;     0.000;1978;     1.217;     2.623;1983;     0.540;   36
+11;     0.000;1978;     1.448;     2.681;1995;     0.513;   37
+12;     0.531;1978;     1.593;     3.224;1995;     0.531;   36

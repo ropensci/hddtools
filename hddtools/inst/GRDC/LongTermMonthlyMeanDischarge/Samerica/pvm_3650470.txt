@@ -1,0 +1,134 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              3650470
+# River:                 RIO POTI
+# Station:               FAZENDA CANTINHO II
+# Country:               BR
+# Latitude (dec. °):       -5.202500
+# Longitude (de. °):      -42.696700
+# Catchment area (km²):    50000.000
+# Altitude (m.a.s.l):          80.00
+# Next d/s station:      3650481
+# Remarks:               
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1963 - 2007
+# No. of years:          45
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1963;  -999.000;00;  -999.000;  -999.000;00;   5
+1964;     2.161;10;   303.436;  1446.900;04;  12
+1965;     1.968;12;   183.197;  1382.533;04;  12
+1966;     0.000;09;    79.137;   492.536;02;  12
+1967;     3.419;10;   260.484;  1298.567;04;  12
+1968;     0.935;10;   168.765;  1153.419;03;  12
+1969;     0.833;09;   119.975;   537.677;03;  12
+1970;     0.267;09;    37.500;   241.419;03;  12
+1971;     0.433;09;    97.299;   548.333;04;  11
+1972;     0.033;11;    46.654;   249.800;04;  12
+1973;     5.900;09;   174.414;   932.667;04;  12
+1974;    17.400;09;   398.269;  2152.133;04;  12
+1975;     5.258;10;   162.654;   690.903;03;  12
+1976;     3.940;09;    74.199;   391.000;02;  12
+1977;     4.130;09;   127.561;   609.000;04;  12
+1978;     3.610;10;    68.000;   291.000;05;  12
+1979;     2.800;10;    78.609;   403.000;02;  12
+1980;     0.940;10;   128.842;   725.000;02;  12
+1981;     1.520;10;    62.731;   335.000;03;  12
+1982;     3.930;09;    45.945;   195.000;03;  12
+1983;     0.740;10;    27.234;   172.000;02;  12
+1984;     0.570;10;   144.998;  1095.000;04;  12
+1985;    16.800;10;   571.433;  2783.000;04;  12
+1986;    16.200;11;   317.508;  1653.000;03;  12
+1987;     5.190;11;    81.915;   531.000;03;  12
+1988;     2.290;09;   159.160;   909.000;04;  12
+1989;     8.910;10;   278.030;  1403.000;04;  12
+1990;     3.920;08;    34.789;   130.000;03;  12
+1991;     7.642;10;    25.220;    71.011;05;  10
+1992;     2.522;11;    47.076;   280.685;04;  12
+1993;     0.421;09;    12.684;    44.045;03;  12
+1994;     2.200;09;    81.950;   282.235;03;  12
+1995;     3.671;10;   163.509;   987.067;04;  12
+1996;     3.842;09;   140.447;   730.155;04;  12
+1997;     2.617;09;    80.020;   369.380;03;  12
+1998;     1.050;10;    15.528;    73.324;03;  12
+1999;     2.167;09;    64.897;   234.334;03;  12
+2000;     2.570;10;   107.369;   528.532;04;  12
+2001;     3.391;10;    62.453;   257.332;04;  12
+2002;     1.271;10;    68.829;   293.755;04;  12
+2003;     1.882;10;    83.686;   415.075;03;  12
+2004;     2.133;10;   142.746;   892.819;02;  12
+2005;     0.616;10;    49.334;   307.793;03;  12
+2006;     3.169;10;   112.863;   588.244;04;  12
+2007;     0.000;09;    37.533;   378.930;02;  11
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+     0.000;   125.223;     3.949;        79;  2783.000;  529
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;     3.697;1993;    88.504;   453.599;2004;   103.346;   44
+02;     5.531;1998;   202.310;  1026.000;1985;   232.769;   44
+03;    44.045;1993;   388.165;  1653.000;1986;   337.118;   42
+04;    11.466;2007;   549.670;  2783.000;1985;   600.059;   43
+05;     3.280;1983;   204.231;   941.000;1985;   244.676;   44
+06;     1.950;1983;    31.872;   222.967;1974;    41.286;   44
+07;     0.787;2007;    12.593;    58.800;1985;    12.403;   44
+08;     0.000;1963;     6.297;    33.100;1985;     6.595;   45
+09;     0.000;1963;     4.291;    21.800;1985;     4.675;   45
+10;     0.000;1963;     4.757;    31.677;1974;     5.928;   44
+11;     0.000;2007;     8.572;    33.135;1999;     7.150;   45
+12;     0.000;2007;    33.210;   358.000;1985;    72.209;   45

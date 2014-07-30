@@ -1,0 +1,103 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              2569002
+# River:                 MEKONG
+# Station:               PHNOM PENH (CHROUI CHANGVAR)
+# Country:               KH
+# Latitude (dec. °):       11.583300
+# Longitude (de. °):      104.942500
+# Catchment area (km²):   663000.000
+# Altitude (m.a.s.l):          -1.08
+# Next d/s station:      2569001
+# Remarks:               no discharges since 1991
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1960 - 1973
+# No. of years:          14
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1960;  1367.333;04; 11795.733; 34853.332;09;  12
+1961;  1933.333;04; 15987.478; 44186.668;09;  12
+1962;  2153.000;04; 13774.405; 35849.031;08;  12
+1963;  1783.333;04; 12938.491; 37932.258;08;  12
+1964;  1864.333;04; 12894.716; 35566.668;09;  12
+1965;  1958.000;04; 12608.726; 31143.334;09;  12
+1966;  -999.000;00;  -999.000;  -999.000;00;   9
+1967;  1804.516;03; 11443.796; 35760.000;09;  12
+1968;  1657.667;04; 10294.176; 37386.668;09;  12
+1969;  1630.333;04; 12857.307; 38016.129;08;  12
+1970;  1675.333;04; 13740.132; 40960.000;09;  12
+1971;  1732.333;04; 13850.006; 37863.332;09;  12
+1972;  1748.065;03; 13470.529; 40750.000;09;  12
+1973;  2200.667;04; 13312.643; 40533.332;09;  12
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+  1367.333; 13250.964;   417.882;       630; 44186.668;  165
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;  2296.129;1969;  3433.846;  4222.903;1962;   599.016;   13
+02;  1841.429;1969;  2377.292;  3185.000;1962;   406.883;   13
+03;  1712.258;1969;  1970.447;  2538.387;1962;   270.749;   13
+04;  1367.333;1960;  1891.024;  2595.667;1967;   316.094;   14
+05;  1690.645;1969;  2796.659;  4295.161;1966;   842.690;   14
+06;  5424.667;1960;  9509.357; 14871.667;1965;  2994.218;   14
+07; 12153.549;1960; 21657.314; 30351.613;1971;  5965.002;   14
+08; 25532.258;1964; 33391.520; 39758.066;1972;  4679.883;   14
+09; 31143.334;1965; 37676.430; 44186.668;1961;  3666.220;   14
+10; 16635.484;1965; 24416.773; 36393.547;1961;  5712.836;   14
+11;  8311.333;1968; 11402.262; 14300.000;1961;  1768.323;   14
+12;  4283.226;1968;  6204.977;  7213.226;1961;   924.157;   14

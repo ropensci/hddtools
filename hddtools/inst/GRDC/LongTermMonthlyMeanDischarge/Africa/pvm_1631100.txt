@@ -1,0 +1,111 @@
+# Title:                 GRDC STATION DATA FILE
+#                        --------------
+# Format:                DOS-ASCII
+# Date format:           YYYY-MM-DD; YYYY-MM; YYYY; MM
+# Field delimiter:       ;
+#
+# file generation data:  2013-08-26
+#
+# GRDC-No.:              1631100
+# River:                 OTI
+# Station:               MANGO
+# Country:               TG
+# Latitude (dec. °):       10.300000
+# Longitude (de. °):        0.470000
+# Catchment area (km²):    35650.000
+# Altitude (m.a.s.l):         108.00
+# Next d/s station:      1531800
+# Remarks:               
+#************************************************************
+#
+# Data Set Content:      MONTHLY PRIMARY VALUES
+#                        ----------------------
+# Unit:                  m³/s
+# Time series:           1953 - 1974
+# No. of years:          22
+#
+# Consists of 3 tables of statistics based on mean daily discharges
+#     - for each single year
+#     - for the entire period
+#     - for each month over the entire period
+#
+# Aggregation thresholds:
+#    nD = 10 (max. number of missing days allowed to calculate a monthly value)
+#    nM = 2  (max. number of missing months allowed for a year to be considered)
+#    nY = 5  (min. number of years for aggregation over the entire period)
+#
+#
+# TABLES
+#
+# For INDIVIDUAL YEARS (n records, one per year)
+#   LQ:    lowest monthly discharge of the given year
+#   month: associated month of occurrence
+#   MQ:    mean discharge of all monthly discharges in the given year
+#   HQ:    highest monthly discharge of the given year
+#   month: associated month of occurrence
+#   n:    number of available values used for MQ calculation
+#
+year;LQ;month;MQ;;HQ;month;m
+1953;  -999.000;00;  -999.000;  -999.000;00;   8
+1954;     1.000;04;    78.583;   418.000;09;  12
+1955;     0.000;04;   246.583;  1140.000;09;  12
+1956;     1.000;03;   101.417;   550.000;09;  12
+1957;     0.000;03;   230.833;  1220.000;09;  12
+1958;     1.000;12;    56.750;   356.000;09;  12
+1959;     0.000;04;   151.333;   893.000;09;  12
+1960;     0.000;03;   128.000;   744.000;10;  12
+1961;     0.000;03;    93.833;   565.000;09;  12
+1962;     0.000;03;   204.417;  1240.000;09;  12
+1963;     1.000;04;   192.250;   864.000;09;  12
+1964;     0.000;05;   172.333;   874.000;09;  12
+1965;     0.000;04;    65.167;   346.000;09;  12
+1966;     0.000;03;    86.417;   377.000;09;  12
+1967;     0.000;03;   106.917;   507.000;09;  12
+1968;     0.000;04;   151.000;   526.000;09;  12
+1969;     1.000;03;   167.833;  1010.000;09;  12
+1970;     1.000;04;   184.833;  1020.000;09;  12
+1971;     1.000;03;   110.583;   661.000;09;  12
+1972;     0.000;03;    80.667;   436.000;09;  12
+1973;     1.000;03;    77.833;   409.000;08;  12
+1974;  -999.000;00;  -999.000;  -999.000;00;   2
+#
+#
+# For ENTIRE PERIOD
+# Calculated only from years with less than 2 months missing
+#
+#   LQ:   lowest monthly discharge from the entire period
+#   MQ_1: mean discharge of all monthly discharges in the period [m³/s]
+#   MQ_2: mean discharge volume per year of all monthly discharges in the period [km³/a]
+#   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
+#   HQ:   highest monthly discharge from the entire periode
+#   n:    number of available months used for MQ calculation
+#
+LQ;MQ_1;MQ_2;MQ_3;HQ;n
+     0.000;   137.684;     4.342;       122;  1240.000;  250
+#
+#
+# For EACH MONTH of the year (12 records covering max. n years)
+# Calculated only for months with <= 10 missing days
+#
+#   month: month (1=January)
+#   LQ:    lowest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   MQ:    mean discharge from all monthly discharges of the given month in the entire period
+#   HQ:    highest monthly discharge of the given month in the entire period
+#   year:  associated year of occurrence (only the first occurence is listed)
+#   std:   standard deviation of all monthly discharges of the given month in the entire period
+#   n:     number of available daily values used for computation
+#
+month;LQ;year;MQ;HQ;year;std;n
+01;     2.000;1959;     5.095;     9.000;1958;     2.256;   21
+02;     1.000;1957;     2.524;     6.000;1958;     1.470;   21
+03;     0.000;1957;     1.000;     4.000;1958;     1.076;   20
+04;     0.000;1955;     0.550;     2.000;1958;     0.686;   20
+05;     0.000;1959;     3.905;    24.000;1953;     5.629;   21
+06;     3.000;1961;    23.429;   155.000;1953;    35.947;   21
+07;     8.000;1958;    74.714;   293.000;1968;    65.848;   21
+08;   107.000;1954;   294.286;   814.000;1955;   173.375;   21
+09;   346.000;1965;   706.952;  1240.000;1962;   305.317;   21
+10;   107.000;1973;   454.619;   861.000;1957;   228.379;   21
+11;    11.000;1958;    60.143;   120.000;1969;    35.699;   21
+12;     1.000;1958;    11.952;    25.000;1969;     5.860;   21
