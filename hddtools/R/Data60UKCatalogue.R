@@ -20,8 +20,8 @@
 
 Data60UKCatalogue <- function(lonMin=-180,lonMax=+180,latMin=-90,latMax=+90){
   
-  #require(XML)
-  #require(rnrfa)
+  # require(XML)
+  # require(rnrfa)
   
   # lonMin=-3.82;lonMax=-3.63;latMin=52.41;latMax=52.52
   # Latitude is the Y axis, longitude is the X axis.  

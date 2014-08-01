@@ -5,13 +5,14 @@ Authors@R: 'Claudia Vitolo <claudia.vitolo@gmail.com> [aut, cre]'
 Description: This package facilitates discovery of hydrological data, non
     programmatic access to catalogues and databases.
 Depends:
-    R (>= 3.0.2),
+    R (>= 3.0.2)
+Imports:
     sp,
     rgdal,
     raster,
     RCurl,
-    XML
-Suggested: rnrfa,
-           zoo
+    XML,
+    zoo,
+    rnrfa
 License: GPL-3
 LazyData: true
