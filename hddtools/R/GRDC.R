@@ -4,10 +4,10 @@
 #' 
 #' @description This function interfaces the Global Runoff Data Centre database which provides river discharge data for about 9000 sites over 157 countries.
 #' 
-#' @param BBlonMin Minimum latitude of bounding box
-#' @param BBlonMax Maximum latitude of bounding box
-#' @param BBlatMin Minimum longitude of bounding box
-#' @param BBlatMax Maximum longitude of bounding box 
+#' @param lonMin Minimum latitude of bounding box
+#' @param lonMax Maximum latitude of bounding box
+#' @param latMin Minimum longitude of bounding box
+#' @param latMax Maximum longitude of bounding box 
 #' 
 #' @param liveData bolean value that allows to switch between the online dataset (liveData=TRUE) and the cached one (liveData = FALSE). The online database retrieval might be slower but more up-to-date compared with the cached one (updated twice a year). 
 #' 
@@ -18,30 +18,12 @@
 #' @export
 #' 
 #' @examples 
-#' # grdcCatalogue(BBlonMin=-3.82,BBlonMax=-3.63,BBlatMin=52.43,BBlatMax=52.52)
+#' # GRDCCatalogue(lonMin=-3.82,lonMax=-3.63,latMin=52.43,latMax=52.52)
 #' 
 
-grdcCatalogue <- function(BBlonMin=-180,BBlonMax=+180,BBlatMin=-90,BBlatMax=+90,                          
+GRDCCatalogue <- function(lonMin=-180,lonMax=+180,latMin=-90,latMax=+90,                          
                           liveData=FALSE,
                           mdDescription=FALSE){
-  
-  # require(sp)
-  
-  # BBlonMin=-3.82;BBlonMax=-3.63;BBlatMin=52.41;BBlatMax=52.52
-  # Latitude is the Y axis, longitude is the X axis.
-  
-#   bbox <- matrix(c(BBlonMin,BBlatMin,BBlonMax,BBlatMax),nrow=2)
-#   rownames(bbox) <- c("lon","lat")
-#   colnames(bbox) <- c('min','max')
-#   # clockwise, 5 points to close it
-#   bboxMat <- rbind( c(bbox['lon','min'],bbox['lat','min']), 
-#                     c(bbox['lon','min'],bbox['lat','max']), 
-#                     c(bbox['lon','max'],bbox['lat','max']), 
-#                     c(bbox['lon','max'],bbox['lat','min']), 
-#                     c(bbox['lon','min'],bbox['lat','min']) ) 
-#   
-#   bbSP <- SpatialPolygons( list(Polygons(list(Polygon(bboxMat)),"bbox")), 
-#                            proj4string=CRS("+proj=longlat +datum=WGS84")  )
   
   if (liveData == FALSE){
     temp <- system.file("GRDC/GRDC_Stations_20140320.csv", package = 'hddtools')
@@ -50,7 +32,7 @@ grdcCatalogue <- function(BBlonMin=-180,BBlonMax=+180,BBlatMin=-90,BBlatMax=+90,
     message("Non implemented yet")
   }
   
-  grdcSelected <- subset(grdcAll, (grdcAll$lat <= BBlatMax & grdcAll$lat >= BBlatMin & grdcAll$lon <= BBlonMax & grdcAll$lon >= BBlonMin) )
+  grdcSelected <- subset(grdcAll, (grdcAll$lat <= latMax & grdcAll$lat >= latMin & grdcAll$lon <= lonMax & grdcAll$lon >= lonMin) )
   
   if (mdDescription==FALSE){
     
@@ -112,10 +94,10 @@ grdcCatalogue <- function(BBlonMin=-180,BBlonMax=+180,BBlatMin=-90,BBlatMax=+90,
 #' @export
 #' 
 #' @examples 
-#' # x <- grdcMonthlyTS(1107700)
+#' # x <- GRDCMonthlyTS(1107700)
 #' 
 
-grdcMonthlyTS <- function(stationNumber,liveData=FALSE){
+GRDCMonthlyTS <- function(stationNumber,liveData=FALSE){
   
   options(warn=-1) 
   

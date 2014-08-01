@@ -4,31 +4,31 @@
 #' 
 #' @description This function interfaces the Data60UK database catalogue (available from http://www.nwl.ac.uk/ih/nrfa/pub/index.html) containing 61 datasets. Dataset catalogue is available from http://www.nwl.ac.uk/ih/nrfa/pub/data.html. 
 #' 
-#' @param BBlonMin Minimum latitude of bounding box
-#' @param BBlonMax Maximum latitude of bounding box
-#' @param BBlatMin Minimum longitude of bounding box
-#' @param BBlatMax Maximum longitude of bounding box 
+#' @param lonMin Minimum latitude of bounding box
+#' @param lonMax Maximum latitude of bounding box
+#' @param latMin Minimum longitude of bounding box
+#' @param latMax Maximum longitude of bounding box 
 #' 
 #' @return This function returns a data frame made of 5 columns: "id" (hydrometric reference number), "name", "location", "Latitude" and "Longitude".
 #' 
 #' @export
 #' 
 #' @examples 
-#' # data60UKCatalogue()
-#' # data60UKCatalogue(BBlonMin=-3.82,BBlonMax=-3.63,BBlatMin=52.41,BBlatMax=52.52)
+#' # Data60UKCatalogue()
+#' # Data60UKCatalogue(lonMin=-3.82,lonMax=-3.63,latMin=52.41,latMax=52.52)
 #' 
 
-data60UKCatalogue <- function(BBlonMin=-180,BBlonMax=+180,BBlatMin=-90,BBlatMax=+90){
+Data60UKCatalogue <- function(lonMin=-180,lonMax=+180,latMin=-90,latMax=+90){
   
-  # require(sp)
-  # require(rnrfa)
-  # require(XML)
+  #require(XML)
+  #require(rnrfa)
   
-  # BBlonMin=-3.82;BBlonMax=-3.63;BBlatMin=52.41;BBlatMax=52.52
+  # lonMin=-3.82;lonMax=-3.63;latMin=52.41;latMax=52.52
   # Latitude is the Y axis, longitude is the X axis.  
   
-  data(StationSummary)
-  
+  load(system.file("data/stationSummary.rda", package = 'rnrfa'))
+  stationSummary <- stationSummary
+    
   theurl <- "http://www.nwl.ac.uk/ih/nrfa/pub/data.html"
   tables <- readHTMLTable(theurl)
   n.rows <- unlist(lapply(tables, function(t) dim(t)[1]))
@@ -36,11 +36,11 @@ data60UKCatalogue <- function(BBlonMin=-180,BBlonMax=+180,BBlatMin=-90,BBlatMax=
   names(temp)[1:3] <- c("id","name","location")
   
   refNumbers <- as.character(temp$id)
-  stationID <- as.character(StationSummary$id)
-  temp$Latitude <- StationSummary[match(refNumbers,stationID),"Latitude"]
-  temp$Longitude <- StationSummary[match(refNumbers,stationID),"Longitude"]
+  stationID <- as.character(stationSummary$id)
+  temp$Latitude <- stationSummary[match(refNumbers,stationID),"Latitude"]
+  temp$Longitude <- stationSummary[match(refNumbers,stationID),"Longitude"]
   
-  myTable <- subset(temp, (temp$Latitude <= BBlatMax & temp$Latitude >= BBlatMin & temp$Longitude <= BBlonMax & temp$Longitude >= BBlonMin) )
+  myTable <- subset(temp, (temp$Latitude <= latMax & temp$Latitude >= latMin & temp$Longitude <= lonMax & temp$Longitude >= lonMin) )
   
   return(myTable)
   
@@ -59,13 +59,15 @@ data60UKCatalogue <- function(BBlonMin=-180,BBlonMax=+180,BBlatMin=-90,BBlatMax=
 #' @export
 #' 
 #' @examples 
-#' # data60UKDailyTS(62001)
+#' # Data60UKDailyTS(62001)
 #' 
 
-data60UKDailyTS <- function(stationNumber){
+Data60UKDailyTS <- function(hydroRefNumber){
   
+  # require(zoo)
   # require(XML)
-  theurl <- paste("http://www.nwl.ac.uk/ih/nrfa/pub/data/rq",stationNumber,".txt",sep="")
+  
+  theurl <- paste("http://www.nwl.ac.uk/ih/nrfa/pub/data/rq",hydroRefNumber,".txt",sep="")
   temp <- read.table(theurl)
   names(temp) <- c("P","Q","DayNumber","Year","nStations")
   

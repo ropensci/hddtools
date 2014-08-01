@@ -10,10 +10,10 @@
 #' @param version this is the version number, default is 7
 #' @param year year of interest, default is 2012
 #' @param type this is the type of information needed, default is "precipitation.accum". Other types could be "gaugeRelativeWeighting.bin" and "relativeError.bin"
-#' @param BBlonMin Minimum latitude of bounding box
-#' @param BBlonMax Maximum latitude of bounding box
-#' @param BBlatMin Minimum longitude of bounding box
-#' @param BBlatMax Maximum longitude of bounding box
+#' @param lonMin Minimum latitude of bounding box
+#' @param lonMax Maximum latitude of bounding box
+#' @param latMin Minimum longitude of bounding box
+#' @param latMax Maximum longitude of bounding box
 #' 
 #' @return Data is loaded as rasterbrick, then converted to a multilayer Geotiff that can 
 # be opened in any GIS software.
@@ -22,25 +22,27 @@
 # http://matinbrandt.wordpress.com/2013/09/04/automatically-downloading-and-processing-trmm-rainfall-data/
 #' and on the TRMM FAQ: http://disc.sci.gsfc.nasa.gov/additional/faq/precipitation_faq.shtml
 #' 
+#' @export
+#' 
 #' @examples 
-#' trmm(fileLocation="~/",url="ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",product="3B43",version=7,year=2012,BBlonMin=-3.82,BBlonMax=-3.63,BBlatMin=52.43,BBlatMax=52.52)
+#' TRMM(fileLocation="~/",url="ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",product="3B43",version=7,year=2012,lonMin=-3.82,lonMax=-3.63,latMin=52.43,latMax=52.52)
 #'
 
-trmm <- function(fileLocation = "~/",
+TRMM <- function(fileLocation = "~/",
                  url = "ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
                  product = "3B43",
                  version = 7,
                  year = 2012,
                  type = "precipitation.accum",
-                 BBlonMin = NULL,
-                 BBlonMax = NULL,
-                 BBlatMin = NULL,
-                 BBlatMax = NULL
+                 lonMin = NULL,
+                 lonMax = NULL,
+                 latMin = NULL,
+                 latMax = NULL
                  ){
   
-  require(raster)
-  require(rgdal)
-  require(RCurl)
+  #require(raster)
+  #require(rgdal)
+  #require(RCurl)
   
   setwd(fileLocation)
   
@@ -87,9 +89,9 @@ trmm <- function(fileLocation = "~/",
   
   trmm <- flip(b, direction='y')
   
-  if (!is.null(BBlonMin) & !is.null(BBlonMax) & !is.null(BBlatMin) & !is.null(BBlatMax)){
+  if (!is.null(lonMin) & !is.null(lonMax) & !is.null(latMin) & !is.null(latMax)){
     # crop to bounding box  
-    e <- extent(BBlatMin, BBlatMax,BBlonMin, BBlonMax)
+    e <- extent(latMin, latMax,lonMin, lonMax)
     trmm <- crop(trmm, e)
   }  
   

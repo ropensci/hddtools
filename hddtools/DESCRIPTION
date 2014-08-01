@@ -2,8 +2,16 @@ Package: hddtools
 Title: Hydrological Data Discovery Tools
 Version: 0.1
 Authors@R: 'Claudia Vitolo <claudia.vitolo@gmail.com> [aut, cre]'
-Description: This package facilitates discovery of hydrological data, non programmatic access to catalogues and databases. 
-Depends: R (>= 3.0.2), sp, rgdal, raster, stringr, RCurl
-Suggested: XML, rnrfa
+Description: This package facilitates discovery of hydrological data, non
+    programmatic access to catalogues and databases.
+Depends:
+    R (>= 3.0.2),
+    sp,
+    rgdal,
+    raster,
+    RCurl,
+    XML
+Suggested: rnrfa,
+           zoo
 License: GPL-3
 LazyData: true
