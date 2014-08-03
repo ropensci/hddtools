@@ -4,7 +4,6 @@ import(raster)
 import(RCurl)
 import(XML)
 import(zoo)
-import(rnrfa)
 
 export(Data60UKCatalogue)
 export(Data60UKDailyTS)

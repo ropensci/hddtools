@@ -26,7 +26,7 @@ Data60UKCatalogue <- function(lonMin=-180,lonMax=+180,latMin=-90,latMax=+90){
   # lonMin=-3.82;lonMax=-3.63;latMin=52.41;latMax=52.52
   # Latitude is the Y axis, longitude is the X axis.  
   
-  load(system.file("data/stationSummary.rda", package = 'rnrfa'))
+  load(system.file("stationSummary.rda", package = 'hddtools'))
   stationSummary <- stationSummary
     
   theurl <- "http://www.nwl.ac.uk/ih/nrfa/pub/data.html"
