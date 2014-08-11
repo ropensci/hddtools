@@ -1,8 +1,8 @@
 Package: hddtools
 Title: Hydrological Data Discovery Tools
 Version: 0.1
-Author: Claudia Vitolo <claudia.vitolo@gmail.com>
-Maintainer: Claudia Vitolo <claudia.vitolo@gmail.com>
+Author: Claudia Vitolo <cvitolodev@gmail.com>
+Maintainer: Claudia Vitolo <cvitolodev@gmail.com>
 Description: This package facilitates discovery of hydrological data, non
     programmatic access to catalogues and databases.
 Depends:
