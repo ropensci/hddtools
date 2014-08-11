@@ -32,7 +32,14 @@ KGClimateClass <- function(lonMin,lonMax,latMin,latMax,updatedBy="Peel"){
   bbox <- matrix(c(lonMin,latMin,lonMax,latMax),nrow=2)
   rownames(bbox) <- c("lon","lat")
   colnames(bbox) <- c('min','max')
-  bboxMat <- rbind( c(bbox['lon','min'],bbox['lat','min']), c(bbox['lon','min'],bbox['lat','max']), c(bbox['lon','max'],bbox['lat','max']), c(bbox['lon','max'],bbox['lat','min']), c(bbox['lon','min'],bbox['lat','min']) ) # clockwise, 5 points to close it
+  
+  # clockwise, 5 points to close it
+  bboxMat <- rbind( c(bbox['lon','min'],bbox['lat','min']), 
+                    c(bbox['lon','min'],bbox['lat','max']), 
+                    c(bbox['lon','max'],bbox['lat','max']), 
+                    c(bbox['lon','max'],bbox['lat','min']), 
+                    c(bbox['lon','min'],bbox['lat','min']) ) 
+  
   bbSP <- SpatialPolygons( list(Polygons(list(Polygon(bboxMat)),"bbox")), 
                            proj4string=CRS("+proj=longlat +datum=WGS84")  )
   
@@ -44,8 +51,16 @@ KGClimateClass <- function(lonMin,lonMax,latMin,latMax,updatedBy="Peel"){
     
     message("OFFLINE results")
     
-    kgRaster <- raster(system.file("KOTTEK_koeppen-geiger.tiff", 
-                                   package = 'hddtools'))
+    # create a temporary directory
+    td <- tempdir()
+    
+    # create the placeholder file
+    tf <- tempfile(tmpdir=td, fileext=".tar.gz")
+    
+    untar(system.file("KOTTEK_KG.tar.gz", 
+                      package = 'hddtools'), exdir = td)
+    
+    kgRaster <- raster(paste(td,"/KOTTEK_koeppen-geiger.tiff",sep=""))
     
     temp <- data.frame(table(extract(kgRaster,bbSP)))
     temp$Class <- kgLegend[which(kgLegend[,1]==temp[,1]),3]
@@ -53,42 +68,27 @@ KGClimateClass <- function(lonMin,lonMax,latMin,latMax,updatedBy="Peel"){
                      Class = temp$Class, 
                      Frequency = temp$Freq)
     
-#     message("ONLINE results")
-#     
-#     temp <- tempfile()
-#     download.file("http://koeppen-geiger.vu-wien.ac.at/data/Koeppen-Geiger-ASCII.zip",temp)
-#     df <- read.table(unz(temp, "Koeppen-Geiger-ASCII.txt"),header=TRUE)
-#     unlink(temp)
-#     # Look for points internal to bounding box
-#     kgSelected <- subset(df, (df$Lat <= latMax & df$Lat >= latMin & df$Lon <= lonMax & df$Lon >= lonMin) )
-#     if (dim(kgSelected)[1]==0){ # if there are no internal points
-#       # Look for closest external points
-#       LonMin <- max(df$Lon[which(lonMin >= df$Lon)])
-#       LonMax <- min(df$Lon[which(df$Lon>=lonMax)])
-#       LatMin <- max(df$Lat[which(latMin >= df$Lat)])
-#       LatMax <- min(df$Lat[which(df$Lat>=latMax)])
-#       kgSelected <- subset(df, 
-#                            (df$Lat <= LatMax & df$Lat >= LatMin & df$Lon <= LonMax & df$Lon >= LonMin) )
-#     }
-#     temp <- data.frame(table(droplevels(kgSelected$Cls)))
-#     df <- data.frame(ID = kgLegend$V1[which(kgLegend$V3==as.character(temp$Var1))], 
-#                      Class = as.character(temp$Var1), 
-#                      Frequency = as.character(temp$Freq) )
-    
   }
   
   if (updatedBy == "Peel") {
     
-    # MAP UPDATED BY Peel
+    # MAP UPDATED BY PEEL
     kgLegend <- read.table(system.file("PEEL_Legend.txt", 
                                        package = 'hddtools'),
                            header=TRUE)
     
     message("OFFLINE results")
     
-    # MAP UPDATED BY PEEL
-    kgRaster <- raster(system.file("PEEL_koppen_ascii.txt", 
-                                   package = 'hddtools'))
+    # create a temporary directory
+    td <- tempdir()
+    
+    # create the placeholder file
+    tf <- tempfile(tmpdir=td, fileext=".tar.gz")
+    
+    untar(system.file("PEEL_KG.tar.gz", 
+                      package = 'hddtools'), exdir = td)
+    
+    kgRaster <- raster(paste(td,"/PEEL_koppen_ascii.txt",sep=""))
     
     temp <- data.frame(table(extract(kgRaster,bbSP)))
     temp$Class <- kgLegend[which(kgLegend[,1]==temp[,1]),2]
@@ -96,24 +96,7 @@ KGClimateClass <- function(lonMin,lonMax,latMin,latMax,updatedBy="Peel"){
     df <- data.frame(ID = temp$Var1, 
                      Class = temp$Class, 
                      Frequency = temp$Freq)
-    
-#     message("ONLINE results")
-#     
-#     temp <- tempfile()
-#     download.file("http://people.eng.unimelb.edu.au/mpeel/Koppen/koppen_ascii.zip",temp)
-#     zipd = tempdir()
-#     unzip(temp, exdir=zipd)
-#     kgRaster = raster(file.path(zipd,"koppen_ascii.txt"))
-#     unlink(temp)
-#     unlink(zipd)
-#     
-#     temp <- data.frame(table(extract(kgRaster,bbSP)))
-#     temp$Class <- kgLegend[which(kgLegend[,1]==temp[,1]),2]
-#     
-#     df <- data.frame(ID = temp$Var1, 
-#                      Class = temp$Class, 
-#                      Frequency = temp$Freq)
-    
+  
   }
   
   return(df)

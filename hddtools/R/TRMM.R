@@ -19,13 +19,18 @@
 # be opened in any GIS software.
 #' 
 #' @details This code is based upon Martin Brandt's blog post: 
-# http://matinbrandt.wordpress.com/2013/09/04/automatically-downloading-and-processing-trmm-rainfall-data/
+#' http://matinbrandt.wordpress.com/2013/09/04/automatically-downloading-and-processing-trmm-rainfall-data/
 #' and on the TRMM FAQ: http://disc.sci.gsfc.nasa.gov/additional/faq/precipitation_faq.shtml
 #' 
 #' @export
 #' 
 #' @examples 
-#' # TRMM(fileLocation="~/",url="ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",product="3B43",version=7,year=2012,lonMin=-3.82,lonMax=-3.63,latMin=52.43,latMax=52.52)
+#' # TRMM(fileLocation="~/",
+#' #      url="ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
+#' #      product="3B43",
+#' #      version=7,
+#' #      year=2012,
+#' #      lonMin=-3.82,lonMax=-3.63,latMin=52.43,latMax=52.52)
 #'
 
 TRMM <- function(fileLocation = "~/",
@@ -80,8 +85,9 @@ TRMM <- function(fileLocation = "~/",
   close(fileConn)
   
   # Within R, the script (trmm.sh) is executed and the virtual-file (TRMM.vrt)
-  # loaded as a rasterbrick. This is flipped in y direction and the files written 
-  # as multilayer Geotiff. This Geotiff contains all the layers for 2012 and can 
+  # loaded as a rasterbrick. This is flipped in y direction and the files 
+  # written as multilayer Geotiff. 
+  # This Geotiff contains all the layers for 2012 and can 
   # be opened in every GIS software.
   
   system(paste("sh ",fileLocation,"myTRMM.sh",sep=""))
