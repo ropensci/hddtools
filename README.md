@@ -46,7 +46,7 @@ GRDCCatalogue(lonMin = -3.82,
               mdDescription = TRUE)
                 
 # 3. Monthly data extraction
-GRDCMonthlyTS(1107700,liveData=FALSE)
+GRDCMonthlyTS(1107700)
 ```
 
 ## The Data60UK dataset
@@ -87,6 +87,9 @@ TRMM(fileLocation="~/",
      latMin=52.43,
      latMax=52.52)
 ```
+
+### Warnings
+This package and functions herein are provided as is, without any guarantee.
 
 # Please leave your feedback
 I would greatly appreciate if you could leave your feedbacks either via email (cvitolodev@gmail.com) or taking a short survey (https://www.surveymonkey.com/s/QQ568FT).

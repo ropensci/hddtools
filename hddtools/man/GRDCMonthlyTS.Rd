@@ -3,12 +3,10 @@
 \alias{GRDCMonthlyTS}
 \title{Interface for the Global Runoff Data Centre database of Monthly Time Series}
 \usage{
-GRDCMonthlyTS(stationNumber, liveData = FALSE)
+GRDCMonthlyTS(stationID)
 }
 \arguments{
-\item{stationNumber}{7 character number that identifies a station, GRDC station number is called "grdc no" in the catalogue.}
-
-\item{liveData}{bolean value that allows to switch between the online dataset (liveData=TRUE) and the cached one (liveData = FALSE). The online database retrieval might be slower but more up-to-date compared with the cached one (updated twice a year).}
+\item{stationID}{7 character number that identifies a station, GRDC station number is called "grdc no" in the catalogue.}
 }
 \value{
 The function returns a list of 3 tables: \describe{
@@ -46,7 +44,7 @@ This function interfaces the Global Runoff Data Centre monthly mean daily discha
 Please note that not all the GRDC stations listed in the catalogue have monthly data available.
 }
 \examples{
-# x <- GRDCMonthlyTS(1107700)
+# x <- GRDCMonthlyTS(stationID=1107700)
 }
 \author{
 Claudia Vitolo

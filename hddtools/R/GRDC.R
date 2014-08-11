@@ -4,12 +4,12 @@
 #' 
 #' @description This function interfaces the Global Runoff Data Centre database which provides river discharge data for about 9000 sites over 157 countries.
 #' 
+#' @param stationID Station ID number, it should be in the range [1104150,6990700]
+#' 
 #' @param lonMin Minimum latitude of bounding box
 #' @param lonMax Maximum latitude of bounding box
 #' @param latMin Minimum longitude of bounding box
 #' @param latMax Maximum longitude of bounding box 
-#' 
-#' @param liveData bolean value that allows to switch between the online dataset (liveData=TRUE) and the cached one (liveData = FALSE). The online database retrieval might be slower but more up-to-date compared with the cached one (updated twice a year). 
 #' 
 #' @param mdDescription boolean value. Default is FALSE (no description is printed)
 #' 
@@ -18,31 +18,34 @@
 #' @export
 #' 
 #' @examples 
-#' # GRDCCatalogue(lonMin=-3.82,lonMax=-3.63,latMin=52.43,latMax=52.52)
+#' # x <- GRDCCatalogue(lonMin=-3.82,lonMax=-3.63,latMin=52.43,latMax=52.52)
 #' 
 
-GRDCCatalogue <- function(lonMin=-180,lonMax=+180,latMin=-90,latMax=+90,                          
-                          liveData=FALSE,
+GRDCCatalogue <- function(stationID=NULL,
+                          lonMin=-180,lonMax=+180,latMin=-90,latMax=+90,
                           mdDescription=FALSE){
+
+  # Retrieve the catalogue
+  temp <- system.file("GRDC/GRDC_Stations_20140320.csv", package = 'hddtools')
+  grdcAll <- read.csv(temp,sep=",")
   
-  if (liveData == FALSE){
-    temp <- system.file("GRDC/GRDC_Stations_20140320.csv", package = 'hddtools')
-    grdcAll <- read.csv(temp,sep=",")    
+  if (!is.null(stationID)) {
+    grdcSelected <- subset(grdcAll, (grdcAll$grdc_no==stationID) )
   }else{
-    message("Non implemented yet")
+    grdcSelected <- grdcAll
   }
   
-  grdcSelected <- subset(grdcAll, (grdcAll$lat <= latMax & grdcAll$lat >= latMin & grdcAll$lon <= lonMax & grdcAll$lon >= lonMin) )
+  grdcSelectedBB <- subset(grdcSelected, (grdcSelected$lat <= latMax & grdcSelected$lat >= latMin & grdcSelected$lon <= lonMax & grdcSelected$lon >= lonMin) )
+    
+  if (mdDescription==FALSE){ 
+    
+    grdcTable <- grdcSelectedBB    
   
-  if (mdDescription==FALSE){
-    
-    grdcTable <- grdcSelected
-    
   }else{
     temp <- system.file("GRDC/GRDC_legend.csv", package = 'hddtools')
     grdcLegend <- read.csv(temp, header=F)
     
-    grdcTable <- cbind(grdcLegend,t(grdcSelected))
+    grdcTable <- cbind(grdcLegend,t(grdcSelectedBB))
     row.names(grdcTable) <- NULL 
     grdcTable$V1 <- NULL
   }  
@@ -57,9 +60,7 @@ GRDCCatalogue <- function(lonMin=-180,lonMax=+180,latMin=-90,latMax=+90,
 #' 
 #' @description This function interfaces the Global Runoff Data Centre monthly mean daily discharges database.
 #' 
-#' @param stationNumber 7 character number that identifies a station, GRDC station number is called "grdc no" in the catalogue.
-#' 
-#' @param liveData bolean value that allows to switch between the online dataset (liveData=TRUE) and the cached one (liveData = FALSE). The online database retrieval might be slower but more up-to-date compared with the cached one (updated twice a year). 
+#' @param stationID 7 character number that identifies a station, GRDC station number is called "grdc no" in the catalogue.
 #' 
 #' @return The function returns a list of 3 tables: \describe{
 #'   \item{\strong{mddPerYear}}{This is a table containing mean daily discharges for each single year (n records, one per year). It is made of 7 columns which description is as follows:}\itemize{
@@ -94,26 +95,47 @@ GRDCCatalogue <- function(lonMin=-180,lonMax=+180,latMin=-90,latMax=+90,
 #' @export
 #' 
 #' @examples 
-#' # x <- GRDCMonthlyTS(1107700)
+#' # x <- GRDCMonthlyTS(stationID=1107700)
 #' 
 
-GRDCMonthlyTS <- function(stationNumber,liveData=FALSE){
+GRDCMonthlyTS <- function(stationID){
   
   options(warn=-1) 
   
-  url <- list.files(path=system.file("GRDC/LongTermMonthlyMeanDischarge", 
-                                     package = 'hddtools'), 
-                    pattern=paste(stationNumber,".txt",sep=""), 
-                    full.names=T, 
-                    recursive=TRUE)
+  # Retrieve look-up table
+  temp <- system.file("GRDC/GRDC_LTMMD.csv", package = 'hddtools')
+  grdcLTMMD <- read.csv(temp,sep="\t") 
   
-  urlDir <- unlist(strsplit(url,'/pvm'))[1]
+  # Retrieve WMO region from catalogue
+  wmoRegion <- GRDCCatalogue(stationID)$wmo_reg
+  
+  # Retrieve ftp server location
+  zipFile <- as.character(grdcLTMMD[which(grdcLTMMD$WMO.Region==wmoRegion),
+                                    "Archive"])
+  
+  # create a temporary directory
+  td <- tempdir()
+  
+  # create the placeholder file
+  tf <- tempfile(tmpdir=td, fileext=".zip")
+  
+  # download into the placeholder file
+  download.file(zipFile, tf)
+  
+  # get the name of the file to unzip
+  fname <- paste("pvm_",stationID,".txt",sep="")
+  
+  # unzip the file to the temporary directory
+  unzip(tf, files=fname, exdir=td, overwrite=TRUE)
+  
+  # fpath is the full path to the extracted file
+  fpath = file.path(td, fname)  
     
-  if ( length(url) > 0 ){
+  if ( file.exists(fpath) ){
     
     message("Station has monthly records")
     
-    TS <- readLines(paste(urlDir,"/pvm_",stationNumber,".txt",sep=""))
+    TS <- readLines(fpath)
     
     header1 <- as.numeric(as.character(c(grep("year;LQ;month;MQ;;HQ;month;m",TS))))
     header2 <- as.numeric(as.character(c(grep("LQ;MQ_1;MQ_2;MQ_3;HQ;n",TS))))

@@ -3,10 +3,12 @@
 \alias{GRDCCatalogue}
 \title{Interface for the Global Runoff Data Centre database catalogue}
 \usage{
-GRDCCatalogue(lonMin = -180, lonMax = +180, latMin = -90, latMax = +90,
-  liveData = FALSE, mdDescription = FALSE)
+GRDCCatalogue(stationID = NULL, lonMin = -180, lonMax = +180,
+  latMin = -90, latMax = +90, mdDescription = FALSE)
 }
 \arguments{
+\item{stationID}{Station ID number, it should be in the range [1104150,6990700]}
+
 \item{lonMin}{Minimum latitude of bounding box}
 
 \item{lonMax}{Maximum latitude of bounding box}
@@ -14,8 +16,6 @@ GRDCCatalogue(lonMin = -180, lonMax = +180, latMin = -90, latMax = +90,
 \item{latMin}{Minimum longitude of bounding box}
 
 \item{latMax}{Maximum longitude of bounding box}
-
-\item{liveData}{bolean value that allows to switch between the online dataset (liveData=TRUE) and the cached one (liveData = FALSE). The online database retrieval might be slower but more up-to-date compared with the cached one (updated twice a year).}
 
 \item{mdDescription}{boolean value. Default is FALSE (no description is printed)}
 }
@@ -26,7 +26,7 @@ list of stations within the bounding box
 This function interfaces the Global Runoff Data Centre database which provides river discharge data for about 9000 sites over 157 countries.
 }
 \examples{
-# GRDCCatalogue(lonMin=-3.82,lonMax=-3.63,latMin=52.43,latMax=52.52)
+# x <- GRDCCatalogue(lonMin=-3.82,lonMax=-3.63,latMin=52.43,latMax=52.52)
 }
 \author{
 Claudia Vitolo
