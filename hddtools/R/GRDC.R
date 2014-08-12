@@ -18,7 +18,7 @@
 #' @export
 #' 
 #' @examples 
-#' # x <- GRDCCatalogue(lonMin=-3.82,lonMax=-3.63,latMin=52.43,latMax=52.52)
+#' GRDCCatalogue(lonMin=-3.82,lonMax=-3.63,latMin=52.43,latMax=52.52)
 #' 
 
 GRDCCatalogue <- function(stationID=NULL,

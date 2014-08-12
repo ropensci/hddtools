@@ -25,12 +25,12 @@
 #' @export
 #' 
 #' @examples 
-#' # TRMM(fileLocation="~/",
-#' #      url="ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
-#' #      product="3B43",
-#' #      version=7,
-#' #      year=2012,
-#' #      lonMin=-3.82,lonMax=-3.63,latMin=52.43,latMax=52.52)
+#' TRMM(fileLocation="~/",
+#'      url="ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
+#'      product="3B43",
+#'      version=7,
+#'      year=2012,
+#'      lonMin=-3.82,lonMax=-3.63,latMin=52.43,latMax=52.52)
 #'
 
 TRMM <- function(fileLocation = "~/",

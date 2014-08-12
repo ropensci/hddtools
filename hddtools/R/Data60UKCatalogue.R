@@ -14,8 +14,8 @@
 #' @export
 #' 
 #' @examples 
-#' # Data60UKCatalogue()
-#' # Data60UKCatalogue(lonMin=-3.82,lonMax=-3.63,latMin=52.41,latMax=52.52)
+#' Data60UKCatalogue()
+#' Data60UKCatalogue(lonMin=-3.82,lonMax=-3.63,latMin=52.41,latMax=52.52)
 #' 
 
 Data60UKCatalogue <- function(lonMin=-180,lonMax=+180,latMin=-90,latMax=+90){

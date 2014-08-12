@@ -16,8 +16,10 @@
 #' @export
 #' 
 #' @examples 
-#' # KGClimateClass(lonMin=-3.82,lonMax=-3.63,latMin=52.41,latMax=52.52,updatedBy="Peel")
-#' # KGClimateClass(lonMin=-3.82,lonMax=-3.63,latMin=52.41,latMax=52.52,updatedBy="Kottek")
+#' KGClimateClass(lonMin=-3.82,lonMax=-3.63,latMin=52.41,latMax=52.52,
+#'                updatedBy="Peel")
+#' KGClimateClass(lonMin=-3.82,lonMax=-3.63,latMin=52.41,latMax=52.52,
+#'                updatedBy="Kottek")
 #'
 
 KGClimateClass <- function(lonMin,lonMax,latMin,latMax,updatedBy="Peel"){
