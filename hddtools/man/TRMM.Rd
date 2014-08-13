@@ -41,12 +41,12 @@ http://matinbrandt.wordpress.com/2013/09/04/automatically-downloading-and-proces
 and on the TRMM FAQ: http://disc.sci.gsfc.nasa.gov/additional/faq/precipitation_faq.shtml
 }
 \examples{
-TRMM(fileLocation="~/",
-     url="ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
-     product="3B43",
-     version=7,
-     year=2012,
-     lonMin=-3.82,lonMax=-3.63,latMin=52.43,latMax=52.52)
+# TRMM(fileLocation="~/",
+#      url="ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
+#      product="3B43",
+#      version=7,
+#      year=2012,
+#      lonMin=-3.82,lonMax=-3.63,latMin=52.43,latMax=52.52)
 }
 \author{
 Claudia Vitolo

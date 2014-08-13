@@ -3,7 +3,8 @@ Title: Hydrological Data Discovery Tools
 Version: 0.2
 Author: Claudia Vitolo <cvitolodev@gmail.com>
 Maintainer: Claudia Vitolo <cvitolodev@gmail.com>
-Description: Facilitates discovery of hydrological data, non-programmatic access to catalogues and databases.
+Description: Facilitates discovery of hydrological data, non-programmatic
+    access to catalogues and databases.
 Depends:
     R (>= 3.0.2)
 Imports:
