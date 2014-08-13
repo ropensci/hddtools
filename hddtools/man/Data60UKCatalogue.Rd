@@ -22,8 +22,8 @@ This function returns a data frame made of 5 columns: "id" (hydrometric referenc
 This function interfaces the Data60UK database catalogue (available from http://www.nwl.ac.uk/ih/nrfa/pub/index.html) containing 61 datasets. Dataset catalogue is available from http://www.nwl.ac.uk/ih/nrfa/pub/data.html.
 }
 \examples{
-# Data60UKCatalogue()
-# Data60UKCatalogue(lonMin=-3.82,lonMax=-3.63,latMin=52.41,latMax=52.52)
+Data60UKCatalogue()
+Data60UKCatalogue(lonMin=-3.82,lonMax=-3.63,latMin=52.41,latMax=52.52)
 }
 \author{
 Claudia Vitolo

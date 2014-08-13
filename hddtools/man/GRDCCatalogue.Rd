@@ -26,7 +26,7 @@ list of stations within the bounding box
 This function interfaces the Global Runoff Data Centre database which provides river discharge data for about 9000 sites over 157 countries.
 }
 \examples{
-# x <- GRDCCatalogue(lonMin=-3.82,lonMax=-3.63,latMin=52.43,latMax=52.52)
+GRDCCatalogue(lonMin=-3.82,lonMax=-3.63,latMin=52.43,latMax=52.52)
 }
 \author{
 Claudia Vitolo
