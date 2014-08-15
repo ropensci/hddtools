@@ -74,7 +74,7 @@ Data60UKCatalogue(lonMin = -3.82,
 Data60UKDailyTS(62001)
 ```
 
-## NASA's Tropical Rainfall Measuring Mission (TRMM)
+## NASA's Tropical Rainfall Measuring Mission (TRMM, only available for github version)
 The Tropical Rainfall Measuring Mission (TRMM) is a joint mission between NASA and the Japan Aerospace Exploration Agency (JAXA) that uses a research satellite to measure precipitation within the tropics in order to improve our understanding of climate and its variability.
 
 The TRMM satellite records global historical rainfall estimation in a gridded format since 1998 with a daily temporal resolution and a spatial resolution of 0.25 degrees. This information is openly available for educational purposes and downloadable from an FTP server.
