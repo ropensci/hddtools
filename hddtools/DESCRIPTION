@@ -1,6 +1,6 @@
 Package: hddtools
 Title: Hydrological Data Discovery Tools
-Version: 0.2
+Version: 0.2.1
 Author: Claudia Vitolo <cvitolodev@gmail.com>
 Maintainer: Claudia Vitolo <cvitolodev@gmail.com>
 Description: Facilitates discovery of hydrological data, non-programmatic
@@ -14,5 +14,6 @@ Imports:
     RCurl,
     XML,
     zoo
+Additional_repositories: http://cvitolo.github.io/r_hddtools/
 License: GPL-3
 LazyData: true
