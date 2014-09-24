@@ -11,3 +11,9 @@
 # Others
 .Rbuildignore
 hddtools.Rproj
+
+# tar files
+*.tar.gz
+
+#test files
+tests
