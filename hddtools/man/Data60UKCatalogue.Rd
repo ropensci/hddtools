@@ -3,17 +3,14 @@
 \alias{Data60UKCatalogue}
 \title{Interface for the Data60UK database catalogue}
 \usage{
-Data60UKCatalogue(lonMin = -180, lonMax = +180, latMin = -90,
-  latMax = +90)
+Data60UKCatalogue(bbox = NULL, metadataColumn = NULL, entryValue = NULL)
 }
 \arguments{
-\item{lonMin}{Minimum latitude of bounding box}
+\item{bbox}{bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)}
 
-\item{lonMax}{Maximum latitude of bounding box}
+\item{metadataColumn}{name of the column to filter}
 
-\item{latMin}{Minimum longitude of bounding box}
-
-\item{latMax}{Maximum longitude of bounding box}
+\item{entryValue}{value to look for in the column named metadataColumn}
 }
 \value{
 This function returns a data frame made of 5 columns: "id" (hydrometric reference number), "name", "location", "Latitude" and "Longitude".
@@ -22,8 +19,15 @@ This function returns a data frame made of 5 columns: "id" (hydrometric referenc
 This function interfaces the Data60UK database catalogue (available from http://www.nwl.ac.uk/ih/nrfa/pub/index.html) containing 61 datasets. Dataset catalogue is available from http://www.nwl.ac.uk/ih/nrfa/pub/data.html.
 }
 \examples{
+# Retrieve the whole catalogue
 Data60UKCatalogue()
-Data60UKCatalogue(lonMin=-3.82,lonMax=-3.63,latMin=52.41,latMax=52.52)
+
+# Define a bounding box
+bbox <- list(lonMin=-3.82,latMin=52.41,lonMax=-3.63,latMax=52.52)
+
+# Filter the catalogue
+Data60UKCatalogue(bbox)
+Data60UKCatalogue(metadataColumn="id",entryValue="62001")
 }
 \author{
 Claudia Vitolo

@@ -4,27 +4,42 @@
 #' 
 #' @description This function interfaces the Data60UK database catalogue (available from http://www.nwl.ac.uk/ih/nrfa/pub/index.html) containing 61 datasets. Dataset catalogue is available from http://www.nwl.ac.uk/ih/nrfa/pub/data.html. 
 #' 
-#' @param lonMin Minimum latitude of bounding box
-#' @param lonMax Maximum latitude of bounding box
-#' @param latMin Minimum longitude of bounding box
-#' @param latMax Maximum longitude of bounding box 
+#' @param bbox bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)   
+#' @param metadataColumn name of the column to filter
+#' @param entryValue value to look for in the column named metadataColumn
 #' 
 #' @return This function returns a data frame made of 5 columns: "id" (hydrometric reference number), "name", "location", "Latitude" and "Longitude".
 #' 
 #' @export
 #' 
 #' @examples 
+#' # Retrieve the whole catalogue
 #' Data60UKCatalogue()
-#' Data60UKCatalogue(lonMin=-3.82,lonMax=-3.63,latMin=52.41,latMax=52.52)
+#' 
+#' # Define a bounding box
+#' bbox <- list(lonMin=-3.82,latMin=52.41,lonMax=-3.63,latMax=52.52)
+#' 
+#' # Filter the catalogue
+#' Data60UKCatalogue(bbox)
+#' Data60UKCatalogue(metadataColumn="id",entryValue="62001")
 #' 
 
-Data60UKCatalogue <- function(lonMin=-180,lonMax=+180,latMin=-90,latMax=+90){
+Data60UKCatalogue <- function(bbox=NULL, metadataColumn=NULL, entryValue=NULL){
   
   # require(XML)
-  # require(rnrfa)
   
-  # lonMin=-3.82;lonMax=-3.63;latMin=52.41;latMax=52.52
   # Latitude is the Y axis, longitude is the X axis.  
+  if (!is.null(bbox)){
+    lonMin <- bbox$lonMin
+    lonMax <- bbox$lonMax
+    latMin <- bbox$latMin
+    latMax <- bbox$latMax
+  }else{    
+    lonMin <- -180
+    lonMax <- +180
+    latMin <- -90
+    latMax <- +90
+  }
   
   load(system.file("stationSummary.rda", package = 'hddtools'))
   stationSummary <- stationSummary
@@ -42,6 +57,18 @@ Data60UKCatalogue <- function(lonMin=-180,lonMax=+180,latMin=-90,latMax=+90){
   
   myTable <- subset(temp, (temp$Latitude <= latMax & temp$Latitude >= latMin & temp$Longitude <= lonMax & temp$Longitude >= lonMin) )
   
+  if (!is.null(metadataColumn) & !is.null(entryValue)){
+    
+    if (metadataColumn == "id" | metadataColumn == "name" | metadataColumn == "location"){
+      myTable <- myTable[which(myTable[,metadataColumn] == entryValue),]
+    }else{
+      message("metadataColumn can only be one of the following: id, name, location")
+    }    
+    
+  } 
+  
+  row.names(myTable) <- NULL
+  
   return(myTable)
   
 }
@@ -53,6 +80,7 @@ Data60UKCatalogue <- function(lonMin=-180,lonMax=+180,latMin=-90,latMax=+90){
 #' @description This function extract the dataset containing daily rainfall and streamflow discharge at one of the Data60UK locations. 
 #' 
 #' @param hydroRefNumber hydrometric reference number
+#' @param plotOption boolean to define whether to plot the results. By default this is set to TRUE.
 #' 
 #' @return The function returns a data frame containing 2 time series (as zoo objects): "P" (precipitation) and "Q" (discharge).
 #' 
@@ -62,7 +90,7 @@ Data60UKCatalogue <- function(lonMin=-180,lonMax=+180,latMin=-90,latMax=+90){
 #' # Data60UKDailyTS(62001)
 #' 
 
-Data60UKDailyTS <- function(hydroRefNumber){
+Data60UKDailyTS <- function(hydroRefNumber, plotOption=FALSE){
   
   # require(zoo)
   # require(XML)
@@ -79,6 +107,14 @@ Data60UKDailyTS <- function(hydroRefNumber){
   Q <- zoo(temp$Q,order.by=datetime) # measured in m3/s
   
   myTS <- merge(P,Q)
+  
+  if (plotOption == TRUE){
+    
+    temp <- Data60UKCatalogue(metadataColumn="id",entryValue=hydroRefNumber)
+    stationName <- as.character(temp$name)
+    plot(myTS, main=stationName, xlab="",ylab=c("P [mm/d]","Q [m3/s]"))
+    
+  }
   
   return(myTS)
   

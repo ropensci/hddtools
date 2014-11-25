@@ -3,10 +3,12 @@
 \alias{Data60UKDailyTS}
 \title{Interface for the Data60UK database of Daily Time Series}
 \usage{
-Data60UKDailyTS(hydroRefNumber)
+Data60UKDailyTS(hydroRefNumber, plotOption = FALSE)
 }
 \arguments{
 \item{hydroRefNumber}{hydrometric reference number}
+
+\item{plotOption}{boolean to define whether to plot the results. By default this is set to TRUE.}
 }
 \value{
 The function returns a data frame containing 2 time series (as zoo objects): "P" (precipitation) and "Q" (discharge).

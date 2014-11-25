@@ -3,10 +3,12 @@
 \alias{GRDCMonthlyTS}
 \title{Interface for the Global Runoff Data Centre database of Monthly Time Series}
 \usage{
-GRDCMonthlyTS(stationID)
+GRDCMonthlyTS(stationID, plotOption = FALSE)
 }
 \arguments{
 \item{stationID}{7 character number that identifies a station, GRDC station number is called "grdc no" in the catalogue.}
+
+\item{plotOption}{boolean to define whether to plot the results. By default this is set to TRUE.}
 }
 \value{
 The function returns a list of 3 tables: \describe{

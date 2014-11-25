@@ -10,10 +10,7 @@
 #' @param version this is the version number, default is 7
 #' @param year year of interest, default is 2012
 #' @param type this is the type of information needed, default is "precipitation.accum". Other types could be "gaugeRelativeWeighting.bin" and "relativeError.bin"
-#' @param lonMin Minimum latitude of bounding box
-#' @param lonMax Maximum latitude of bounding box
-#' @param latMin Minimum longitude of bounding box
-#' @param latMax Maximum longitude of bounding box
+#' @param bbox bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax) 
 #' 
 #' @return Data is loaded as rasterbrick, then converted to a multilayer Geotiff that can 
 # be opened in any GIS software.
@@ -25,12 +22,13 @@
 #' @export
 #' 
 #' @examples 
-#' # TRMM(fileLocation="~/", 
-#' #      url="ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
-#' #      product="3B43",
+#' # Define a bounding box
+#' # bbox <- list(lonMin=-3.82,latMin=52.41,lonMax=-3.63,latMax=52.52)
+#' 
+#' # TRMM(product="3B43",
 #' #      version=7,
 #' #      year=2012,
-#' #      lonMin=-3.82,lonMax=-3.63,latMin=52.43,latMax=52.52)
+#' #      bbox)
 #'
 
 TRMM <- function(fileLocation = "~/",
@@ -39,15 +37,25 @@ TRMM <- function(fileLocation = "~/",
                  version = 7,
                  year = 2012,
                  type = "precipitation.accum",
-                 lonMin = NULL,
-                 lonMax = NULL,
-                 latMin = NULL,
-                 latMax = NULL
+                 bbox = NULL,
+                 timeExtent = NULL
                  ){
   
   #require(raster)
   #require(rgdal)
   #require(RCurl)
+  
+  if (!is.null(bbox)){
+    lonMin <- bbox$lonMin
+    lonMax <- bbox$lonMax
+    latMin <- bbox$latMin
+    latMax <- bbox$latMax
+  }else{    
+    lonMin <- -180
+    lonMax <- +180
+    latMin <- -90
+    latMax <- +90
+  }
   
   setwd(fileLocation)
   

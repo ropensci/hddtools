@@ -3,19 +3,17 @@
 \alias{GRDCCatalogue}
 \title{Interface for the Global Runoff Data Centre database catalogue}
 \usage{
-GRDCCatalogue(stationID = NULL, lonMin = -180, lonMax = +180,
-  latMin = -90, latMax = +90, mdDescription = FALSE)
+GRDCCatalogue(bbox = NULL, stationID = NULL, metadataColumn = NULL,
+  entryValue = NULL, mdDescription = FALSE)
 }
 \arguments{
+\item{bbox}{bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)}
+
 \item{stationID}{Station ID number, it should be in the range [1104150,6990700]}
 
-\item{lonMin}{Minimum latitude of bounding box}
+\item{metadataColumn}{name of the column to filter}
 
-\item{lonMax}{Maximum latitude of bounding box}
-
-\item{latMin}{Minimum longitude of bounding box}
-
-\item{latMax}{Maximum longitude of bounding box}
+\item{entryValue}{value to look for in the column named metadataColumn}
 
 \item{mdDescription}{boolean value. Default is FALSE (no description is printed)}
 }
@@ -26,7 +24,14 @@ list of stations within the bounding box
 This function interfaces the Global Runoff Data Centre database which provides river discharge data for about 9000 sites over 157 countries.
 }
 \examples{
-GRDCCatalogue(lonMin=-3.82,lonMax=-3.63,latMin=52.43,latMax=52.52)
+# Retrieve the whole catalogue
+# GRDCCatalogue()
+
+# Define a bounding box
+# bbox <- list(lonMin=-3.82,latMin=52.41,lonMax=-3.63,latMax=52.52)
+
+# Filter the catalogue
+# GRDCCatalogue(bbox)
 }
 \author{
 Claudia Vitolo

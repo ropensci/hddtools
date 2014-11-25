@@ -5,8 +5,7 @@
 \usage{
 TRMM(fileLocation = "~/",
   url = "ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/", product = "3B43",
-  version = 7, year = 2012, type = "precipitation.accum", lonMin = NULL,
-  lonMax = NULL, latMin = NULL, latMax = NULL)
+  version = 7, year = 2012, type = "precipitation.accum", bbox = NULL)
 }
 \arguments{
 \item{fileLocation}{file path where to save the GeoTiff}
@@ -21,13 +20,7 @@ TRMM(fileLocation = "~/",
 
 \item{type}{this is the type of information needed, default is "precipitation.accum". Other types could be "gaugeRelativeWeighting.bin" and "relativeError.bin"}
 
-\item{lonMin}{Minimum latitude of bounding box}
-
-\item{lonMax}{Maximum latitude of bounding box}
-
-\item{latMin}{Minimum longitude of bounding box}
-
-\item{latMax}{Maximum longitude of bounding box}
+\item{bbox}{bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)}
 }
 \value{
 Data is loaded as rasterbrick, then converted to a multilayer Geotiff that can
@@ -41,12 +34,13 @@ http://matinbrandt.wordpress.com/2013/09/04/automatically-downloading-and-proces
 and on the TRMM FAQ: http://disc.sci.gsfc.nasa.gov/additional/faq/precipitation_faq.shtml
 }
 \examples{
-# TRMM(fileLocation="~/",
-#      url="ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
-#      product="3B43",
+# Define a bounding box
+# bbox <- list(lonMin=-3.82,latMin=52.41,lonMax=-3.63,latMax=52.52)
+
+# TRMM(product="3B43",
 #      version=7,
 #      year=2012,
-#      lonMin=-3.82,lonMax=-3.63,latMin=52.43,latMax=52.52)
+#      bbox)
 }
 \author{
 Claudia Vitolo

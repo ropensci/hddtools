@@ -1,7 +1,9 @@
-Hydrological Data Discovery Tools
-==========
+HDDTOOLS (R package)
+=============================================
 
-The R package ``hddtools'' is an open source project designed to facilitate non-programmatic access to online data sources. This typically implies the download of a metadata catalogue, selection of information needed, formal request for dataset(s), de-compression, conversion, manual filtering and parsing. All those operation are made more efficient by re-usable functions. 
+HDDTOOLS stands for Hydrological Data Discovery Tools. This R package is an open source project designed to facilitate non-programmatic access to avariety of online open data sources relevant for hydrologists and, more in general, environmental scientists and practitioners. 
+
+This typically implies the download of a metadata catalogue, selection of information needed, formal request for dataset(s), de-compression, conversion, manual filtering and parsing. All those operation are made more efficient by re-usable functions. 
 
 Depending on the data license, functions can provide offline and/or online modes. When redistribution is allowed, for instance, a copy of the dataset is cached within the package and updated twice a year. This is the fastest option and also allows offline use of package's functions. When re-distribution is not allowed, only online mode is provided.
 
@@ -16,11 +18,26 @@ The development version is, instead, on github and can be installed via devtools
 
 ```R
 library(devtools)
-install_github("r_hddtools", username = "cvitolo", subdir = "hddtools")
+install_github("cvitolo/r_hddtools", subdir = "hddtools")
 library(hddtools)
 ```
 
+Source the additional function GenerateMap():
+```R
+source_gist("https://gist.github.com/cvitolo/f9d12402956b88935c38")
+```
+
 # Data sources and Functions
+
+The functions provided can filter, slice and dice 2 and 3 dimensional information. 
+
+```R
+# Define a bounding box
+bbox <- list(lonMin=-1,latMin=51,lonMax=0,latMax=52)
+
+# Define a temporal extent
+timeExtent <- seq(as.Date("2012-01-01"), as.Date("2012-12-31"), by="days")
+```
 
 ## The Koppen Climate Classification map
 The Koppen Climate Classification is the most widely used system for classifying the world's climates. Its categories are based on the annual and monthly averages of temperature and precipitation. It was first updated by Rudolf Geiger in 1961, then by Kottek et al. (2006), Peel et al. (2007) and then by Rubel et al. (2010). 
@@ -29,10 +46,10 @@ The package hddtools contains a function to identify the updated Koppen-Greiger 
 
 ```R
 # Extract climate zones from Peel's map:
-KGClimateClass(lonMin=-3.82,lonMax=-3.63,latMin=52.41,latMax=52.52,updatedBy="Peel")
+KGClimateClass(bbox,updatedBy="Peel")
 
 # Extract climate zones from Kottek's map:
-KGClimateClass(lonMin=-3.82,lonMax=-3.63,latMin=52.41,latMax=52.52,updatedBy="Kottek")
+KGClimateClass(bbox,updatedBy="Kottek")
 ```
 
 ## The Global Runoff Data Centre
@@ -41,18 +58,17 @@ The Global Runoff Data Centre (GRDC) is an international archive hosted by the F
 Catalogue, kml files and the product ``Long-Term Mean Monthly Discharges'' are open data and accessible via the hddtools.
 
 ```R
-# 1. GRDC full catalogue
-GRDCCatalogue()
+# GRDC full catalogue
+x <- GRDCCatalogue()
 
-# 2. Filter GRDC catalogue based on a bounding box
-GRDCCatalogue(lonMin = -3.82,
-              lonMax = -3.63,
-              latMin = 52.43,
-              latMax = 52.52,
-              mdDescription = TRUE)
-                
-# 3. Monthly data extraction
-GRDCMonthlyTS(1107700)
+# Filter GRDC catalogue based on a bounding box
+x <- GRDCCatalogue(bbox=bbox, metadataColumn="statistics", entryValue=1)
+
+# Plot a map
+GenerateMap(x)
+
+# Monthly data extraction
+y <- GRDCMonthlyTS(stationID=x$grdc_no[[1]], plotOption=TRUE)
 ```
 
 ## The Data60UK dataset
@@ -61,17 +77,17 @@ In the decade 2003-2012, the IAHS Predictions in Ungauged Basins (PUB) internati
 The hddtools contain two functions to interact with this database: one to retreive the catalogue and another to retreive time series of areal precipitation and streamflow discharge.
 
 ```R
-# 1a. Data60UK full catalogue
-Data60UKCatalogue()
+# Data60UK full catalogue
+x <- Data60UKCatalogue()
 
-# 1.b Filter Data60UK catalogue based on bounding box
-Data60UKCatalogue(lonMin = -3.82,
-                  lonMax = -3.63,
-                  latMin = 52.43,
-                  latMax = 52.52)
+# Filter Data60UK catalogue based on bounding box
+x <- Data60UKCatalogue(bbox)
 
-# 2. Extract time series 
-Data60UKDailyTS(62001)
+# Plot a map
+GenerateMap(x)
+
+# Extract time series 
+y <- Data60UKDailyTS(62001, plotOption=TRUE)
 ```
 
 ## NASA's Tropical Rainfall Measuring Mission (TRMM, only available for github version)
@@ -79,7 +95,7 @@ The Tropical Rainfall Measuring Mission (TRMM) is a joint mission between NASA a
 
 The TRMM satellite records global historical rainfall estimation in a gridded format since 1998 with a daily temporal resolution and a spatial resolution of 0.25 degrees. This information is openly available for educational purposes and downloadable from an FTP server.
 
-HDDTOOLS provides a function, called \verb|TRMM|, to download and convert a selected portion of the TRMM dataset into a raster-brick that can be opened in any GIS software.
+The hddtools provides a function, called \verb|TRMM()|, to download and convert a selected portion of the TRMM dataset into a raster-brick that can be opened in any GIS software.
 
 ```R
 # Retreive mean monthly recipitations from 3B43_V7 for 2012 (based on a bounding box)
@@ -88,14 +104,11 @@ TRMM(fileLocation="~/",
      product="3B43",
      version=7,
      year=2012,
-     lonMin=-3.82,
-     lonMax=-3.63,
-     latMin=52.43,
-     latMax=52.52)
+     bbox)
 ```
 
 ### Warnings
-This package and functions herein are provided as is, without any guarantee.
+This package and functions herein are part of an experimental open-source project. They are provided as is, without any guarantee.
 
 # Please leave your feedback
 I would greatly appreciate if you could leave your feedbacks either via email (cvitolodev@gmail.com) or taking a short survey (https://www.surveymonkey.com/s/QQ568FT).

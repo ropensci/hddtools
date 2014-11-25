@@ -3,18 +3,14 @@
 \alias{KGClimateClass}
 \title{Function to identify the updated Koppen-Greiger climate zone (on a 0.1 x 0.1 degrees resolution map).}
 \usage{
-KGClimateClass(lonMin, lonMax, latMin, latMax, updatedBy = "Peel")
+KGClimateClass(bbox, updatedBy = "Peel", verbose = FALSE)
 }
 \arguments{
-\item{lonMin}{Minimum latitude of bounding box}
+\item{bbox}{bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)}
 
-\item{lonMax}{Maximum latitude of bounding box}
+\item{updatedBy}{this can either be Kottek}
 
-\item{latMin}{Minimum longitude of bounding box}
-
-\item{latMax}{Maximum longitude of bounding box}
-
-\item{updatedBy}{this can either be Kottek (http://koeppen-geiger.vu-wien.ac.at/) or Peel (http://people.eng.unimelb.edu.au/mpeel/koppen.html)}
+\item{verbose}{if TRUE more info are printed on the screen}
 }
 \value{
 List of overlapping climate zones.
@@ -23,12 +19,16 @@ List of overlapping climate zones.
 Given a bounding box, the function identifies the overlapping climate zones.
 }
 \examples{
-KGClimateClass(lonMin=-3.82,lonMax=-3.63,latMin=52.41,latMax=52.52,
-               updatedBy="Peel")
-KGClimateClass(lonMin=-3.82,lonMax=-3.63,latMin=52.41,latMax=52.52,
-               updatedBy="Kottek")
+# Define a bounding box
+# bbox <- list(lonMin=-3.82,latMin=52.41,lonMax=-3.63,latMax=52.52)
+
+# Get climate classes
+# KGClimateClass(bbox)
 }
 \author{
 Claudia Vitolo
+}
+\references{
+Kottek et al. (2006): http://koeppen-geiger.vu-wien.ac.at/. Peel et al. (2007): http://people.eng.unimelb.edu.au/mpeel/koppen.html.
 }
 
