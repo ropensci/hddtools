@@ -71,25 +71,6 @@ GenerateMap(x)
 y <- GRDCMonthlyTS(stationID=x$grdc_no[[1]], plotOption=TRUE)
 ```
 
-## The Data60UK dataset
-In the decade 2003-2012, the IAHS Predictions in Ungauged Basins (PUB) international Top-Down modelling Working Group (TDWG) collated daily datasets of areal precipitation and streamflow discharge across 61 gauging sites in England and Wales. The database was prepared from source databases for research purposes, with the intention to make it re-usable. This is now available in the public domain free of charge. 
-
-The hddtools contain two functions to interact with this database: one to retreive the catalogue and another to retreive time series of areal precipitation and streamflow discharge.
-
-```R
-# Data60UK full catalogue
-x <- Data60UKCatalogue()
-
-# Filter Data60UK catalogue based on bounding box
-x <- Data60UKCatalogue(bbox)
-
-# Plot a map
-GenerateMap(x)
-
-# Extract time series 
-y <- Data60UKDailyTS(62001, plotOption=TRUE)
-```
-
 ## NASA's Tropical Rainfall Measuring Mission (TRMM, only available for github version)
 The Tropical Rainfall Measuring Mission (TRMM) is a joint mission between NASA and the Japan Aerospace Exploration Agency (JAXA) that uses a research satellite to measure precipitation within the tropics in order to improve our understanding of climate and its variability.
 
@@ -107,8 +88,40 @@ TRMM(fileLocation="~/",
      bbox)
 ```
 
+## Top-Down modelling Working Group 
+The Top-Down modelling Working Group (TDWG) for the Prediction in Ungauged Basins (PUB) Decade (2003-2012) is an initiative of the International Association of Hydrological Sciences (IAHS) which collected datasets for hydrological modelling free-of-charge, available [here](http://tdwg.catchment.org/datasets.html). This package provides a common interface to retrieve, browse and filter information.
+
+### MOPEX
+US dataset containing 
+
+### National Land and Water Resources Audit dataset
+
+
+### The Data60UK dataset
+The Data60UK initiative collated datasets of areal precipitation and streamflow discharge across 61 gauging sites in England and Wales (UK). The database was prepared from source databases for research purposes, with the intention to make it re-usable. This is now available in the public domain free of charge. 
+
+The hddtools contain two functions to interact with this database: one to retreive the catalogue and another to retreive time series of areal precipitation and streamflow discharge.
+
+```R
+# Data60UK full catalogue
+x <- Data60UKCatalogue()
+
+# Filter Data60UK catalogue based on bounding box
+x <- Data60UKCatalogue(bbox)
+
+# Plot a map
+GenerateMap(x)
+
+# Extract time series 
+y <- Data60UKDailyTS(39015, plotOption=TRUE)
+
+# Extract time series for a specified teporal window
+timeExtent <- seq(as.Date("1988-01-01"), as.Date("1989-12-31"), by="days")
+y <- Data60UKDailyTS(39015, plotOption=TRUE, timeExtent)
+```
+
 ### Warnings
 This package and functions herein are part of an experimental open-source project. They are provided as is, without any guarantee.
 
 # Please leave your feedback
-I would greatly appreciate if you could leave your feedbacks either via email (cvitolodev@gmail.com) or taking a short survey (https://www.surveymonkey.com/s/QQ568FT).
+I would greatly appreciate if you could leave your feedbacks either via email (cvitolodev@gmail.com) or taking a short survey [here](https://www.surveymonkey.com/s/QQ568FT).
