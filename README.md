@@ -91,12 +91,6 @@ TRMM(fileLocation="~/",
 ## Top-Down modelling Working Group 
 The Top-Down modelling Working Group (TDWG) for the Prediction in Ungauged Basins (PUB) Decade (2003-2012) is an initiative of the International Association of Hydrological Sciences (IAHS) which collected datasets for hydrological modelling free-of-charge, available [here](http://tdwg.catchment.org/datasets.html). This package provides a common interface to retrieve, browse and filter information.
 
-### MOPEX
-US dataset containing 
-
-### National Land and Water Resources Audit dataset
-
-
 ### The Data60UK dataset
 The Data60UK initiative collated datasets of areal precipitation and streamflow discharge across 61 gauging sites in England and Wales (UK). The database was prepared from source databases for research purposes, with the intention to make it re-usable. This is now available in the public domain free of charge. 
 
