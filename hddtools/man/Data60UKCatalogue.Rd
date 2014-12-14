@@ -3,7 +3,8 @@
 \alias{Data60UKCatalogue}
 \title{Interface for the Data60UK database catalogue}
 \usage{
-Data60UKCatalogue(bbox = NULL, metadataColumn = NULL, entryValue = NULL)
+Data60UKCatalogue(bbox = NULL, metadataColumn = NULL, entryValue = NULL,
+  verbose = FALSE)
 }
 \arguments{
 \item{bbox}{bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)}
@@ -11,6 +12,8 @@ Data60UKCatalogue(bbox = NULL, metadataColumn = NULL, entryValue = NULL)
 \item{metadataColumn}{name of the column to filter}
 
 \item{entryValue}{value to look for in the column named metadataColumn}
+
+\item{verbose}{if TRUE it returns whether the data is coming from live or cached data sources}
 }
 \value{
 This function returns a data frame made of 5 columns: "id" (hydrometric reference number), "name", "location", "Latitude" and "Longitude".

@@ -3,12 +3,14 @@
 \alias{Data60UKDailyTS}
 \title{Interface for the Data60UK database of Daily Time Series}
 \usage{
-Data60UKDailyTS(hydroRefNumber, plotOption = FALSE)
+Data60UKDailyTS(hydroRefNumber, plotOption = FALSE, timeExtent = NULL)
 }
 \arguments{
 \item{hydroRefNumber}{hydrometric reference number}
 
 \item{plotOption}{boolean to define whether to plot the results. By default this is set to TRUE.}
+
+\item{timeExtent}{is a vector of dates and times for which the data should be retrieved}
 }
 \value{
 The function returns a data frame containing 2 time series (as zoo objects): "P" (precipitation) and "Q" (discharge).
@@ -17,7 +19,7 @@ The function returns a data frame containing 2 time series (as zoo objects): "P"
 This function extract the dataset containing daily rainfall and streamflow discharge at one of the Data60UK locations.
 }
 \examples{
-# Data60UKDailyTS(62001)
+# Data60UKDailyTS(39015)
 }
 \author{
 Claudia Vitolo

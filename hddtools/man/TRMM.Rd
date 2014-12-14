@@ -5,7 +5,8 @@
 \usage{
 TRMM(fileLocation = "~/",
   url = "ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/", product = "3B43",
-  version = 7, year = 2012, type = "precipitation.accum", bbox = NULL)
+  version = 7, year = 2012, type = "precipitation.accum", bbox = NULL,
+  timeExtent = NULL)
 }
 \arguments{
 \item{fileLocation}{file path where to save the GeoTiff}
@@ -21,6 +22,8 @@ TRMM(fileLocation = "~/",
 \item{type}{this is the type of information needed, default is "precipitation.accum". Other types could be "gaugeRelativeWeighting.bin" and "relativeError.bin"}
 
 \item{bbox}{bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)}
+
+\item{timeExtent}{is a vector of dates and times for which the data should be retrieve}
 }
 \value{
 Data is loaded as rasterbrick, then converted to a multilayer Geotiff that can

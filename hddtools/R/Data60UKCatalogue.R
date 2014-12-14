@@ -7,6 +7,7 @@
 #' @param bbox bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)   
 #' @param metadataColumn name of the column to filter
 #' @param entryValue value to look for in the column named metadataColumn
+#' @param verbose if TRUE it returns whether the data is coming from live or cached data sources
 #' 
 #' @return This function returns a data frame made of 5 columns: "id" (hydrometric reference number), "name", "location", "Latitude" and "Longitude".
 #' 
@@ -24,9 +25,14 @@
 #' Data60UKCatalogue(metadataColumn="id",entryValue="62001")
 #' 
 
-Data60UKCatalogue <- function(bbox=NULL, metadataColumn=NULL, entryValue=NULL){
+Data60UKCatalogue <- function(bbox=NULL, 
+                              metadataColumn=NULL, entryValue=NULL,
+                              verbose=FALSE){
   
   # require(XML)
+  # require(RCurl)
+  
+  CatalogueData60UK <- NULL # to avoid note in check
   
   # Latitude is the Y axis, longitude is the X axis.  
   if (!is.null(bbox)){
@@ -44,8 +50,18 @@ Data60UKCatalogue <- function(bbox=NULL, metadataColumn=NULL, entryValue=NULL){
   load(system.file("stationSummary.rda", package = 'hddtools'))
   stationSummary <- stationSummary
     
-  theurl <- "http://www.nwl.ac.uk/ih/nrfa/pub/data.html"
-  tables <- readHTMLTable(theurl)
+  # Old URL: "http://www.nwl.ac.uk/ih/nrfa/pub/data.html"
+  theurl <- "http://www.ceh.ac.uk/data/nrfa/data/data60uk/data.html" 
+  
+  if(url.exists(theurl)) {
+    if (verbose == TRUE) message("Retrieving data from live web data source.")
+    tables <- readHTMLTable(theurl)
+  }else{
+    if (verbose == TRUE) message("The connection with the live web data source failed. Using cached results.")
+    load(system.file("stationSummary.rda", package = 'hddtools'))
+    tables <- CatalogueData60UK
+  }  
+  
   n.rows <- unlist(lapply(tables, function(t) dim(t)[1]))
   temp <- tables[[which.max(n.rows)]]
   names(temp)[1:3] <- c("id","name","location")
@@ -81,22 +97,52 @@ Data60UKCatalogue <- function(bbox=NULL, metadataColumn=NULL, entryValue=NULL){
 #' 
 #' @param hydroRefNumber hydrometric reference number
 #' @param plotOption boolean to define whether to plot the results. By default this is set to TRUE.
+#' @param timeExtent is a vector of dates and times for which the data should be retrieved
 #' 
 #' @return The function returns a data frame containing 2 time series (as zoo objects): "P" (precipitation) and "Q" (discharge).
 #' 
 #' @export
 #' 
 #' @examples 
-#' # Data60UKDailyTS(62001)
+#' # Data60UKDailyTS(39015)
 #' 
 
-Data60UKDailyTS <- function(hydroRefNumber, plotOption=FALSE){
+Data60UKDailyTS <- function(hydroRefNumber, 
+                            plotOption=FALSE, 
+                            timeExtent = NULL){
   
   # require(zoo)
   # require(XML)
+  # require(RCurl)
   
-  theurl <- paste("http://www.nwl.ac.uk/ih/nrfa/pub/data/rq",hydroRefNumber,".txt",sep="")
-  temp <- read.table(theurl)
+  # Old URL: paste("http://www.nwl.ac.uk/ih/nrfa/pub/data/rq",hydroRefNumber,".txt",sep="")  
+  theurl <- paste("http://www.ceh.ac.uk/data/nrfa/data/data60uk/data/rq",
+                  hydroRefNumber,".txt",sep="")
+  
+  if(url.exists(theurl)) {
+    message("Retrieving data from live web data source.")
+    temp <- read.table(theurl)
+  }else{
+    message("The connection with the live web data source failed. Using cached results.")
+    # create a temporary directory
+    td <- tempdir()
+    
+    # create the placeholder file
+    tf <- tempfile(tmpdir=td, fileext=".zip")
+    
+    # get the name of the file to unzip
+    fname <- paste("data60uk/rq",hydroRefNumber,".txt",sep="")
+    
+    # unzip the file to the temporary directory    
+    unzip(system.file("data60UK/data60uk.zip", 
+                      package = 'hddtools'), exdir = td, overwrite=TRUE)
+    
+    # fpath is the full path to the extracted file
+    fpath = file.path(td, fname) 
+    
+    temp <- read.table(fpath)
+  }  
+  
   names(temp) <- c("P","Q","DayNumber","Year","nStations")
   
   # Combine the first four columns into a character vector
@@ -107,6 +153,18 @@ Data60UKDailyTS <- function(hydroRefNumber, plotOption=FALSE){
   Q <- zoo(temp$Q,order.by=datetime) # measured in m3/s
   
   myTS <- merge(P,Q)
+  
+  if ( !is.null(timeExtent) ){
+    
+    myTS <- window(myTS,
+                   start=as.POSIXct(head(timeExtent)[1]),
+                   end=as.POSIXct(tail(timeExtent)[6]))
+    
+    temp <- Data60UKCatalogue(metadataColumn="id",entryValue=hydroRefNumber)
+    stationName <- as.character(temp$name)
+    plot(myTS, main=stationName, xlab="",ylab=c("P [mm/d]","Q [m3/s]"))
+    
+  }
   
   if (plotOption == TRUE){
     

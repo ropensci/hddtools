@@ -11,6 +11,7 @@
 #' @param year year of interest, default is 2012
 #' @param type this is the type of information needed, default is "precipitation.accum". Other types could be "gaugeRelativeWeighting.bin" and "relativeError.bin"
 #' @param bbox bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax) 
+#' @param timeExtent is a vector of dates and times for which the data should be retrieve
 #' 
 #' @return Data is loaded as rasterbrick, then converted to a multilayer Geotiff that can 
 # be opened in any GIS software.
