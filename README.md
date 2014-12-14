@@ -114,6 +114,21 @@ timeExtent <- seq(as.Date("1988-01-01"), as.Date("1989-12-31"), by="days")
 y <- Data60UKDailyTS(39015, plotOption=TRUE, timeExtent)
 ```
 
+### MOPEX
+US dataset containing 
+
+```R
+# MOPEX full catalogue
+x <- mopexCatalogue()
+
+# Extract time series 
+y <- mopexTS("14359000", plotOption=TRUE)
+
+# Extract time series for a specified teporal window
+timeExtent <- seq(as.Date("1948-01-01"), as.Date("1949-12-31"), by="days")
+y <- mopexTS("14359000", plotOption=TRUE, timeExtent)
+```
+
 ### Warnings
 This package and functions herein are part of an experimental open-source project. They are provided as is, without any guarantee.
 
