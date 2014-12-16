@@ -47,31 +47,26 @@ Data60UKCatalogue <- function(bbox=NULL,
     latMax <- +90
   }
   
-  load(system.file("stationSummary.rda", package = 'hddtools'))
-  stationSummary <- stationSummary
-    
+  load(system.file("data60UK/CatalogueData60UK.rda", package = 'hddtools'))
+  
   # Old URL: "http://www.nwl.ac.uk/ih/nrfa/pub/data.html"
   theurl <- "http://www.ceh.ac.uk/data/nrfa/data/data60uk/data.html" 
   
-  if(url.exists(theurl)) {
+  if( url.exists(theurl) ) {
     if (verbose == TRUE) message("Retrieving data from live web data source.")
-    tables <- readHTMLTable(theurl)
+    #tables <- readHTMLTable(theurl)
+    #n.rows <- unlist(lapply(tables, function(t) dim(t)[1]))
+    #temp <- tables[[which.max(n.rows)]]
+    #names(temp)[1:3] <- c("id","name","location")    
+    # refNumbers <- as.character(temp$id)
+    # stationID <- as.character(stationSummary$id)
+    # temp$Latitude <- stationSummary[match(refNumbers,stationID),"Latitude"]
+    # temp$Longitude <- stationSummary[match(refNumbers,stationID),"Longitude"]
   }else{
     if (verbose == TRUE) message("The connection with the live web data source failed. Using cached results.")
-    load(system.file("stationSummary.rda", package = 'hddtools'))
-    tables <- CatalogueData60UK
   }  
   
-  n.rows <- unlist(lapply(tables, function(t) dim(t)[1]))
-  temp <- tables[[which.max(n.rows)]]
-  names(temp)[1:3] <- c("id","name","location")
-  
-  refNumbers <- as.character(temp$id)
-  stationID <- as.character(stationSummary$id)
-  temp$Latitude <- stationSummary[match(refNumbers,stationID),"Latitude"]
-  temp$Longitude <- stationSummary[match(refNumbers,stationID),"Longitude"]
-  
-  myTable <- subset(temp, (temp$Latitude <= latMax & temp$Latitude >= latMin & temp$Longitude <= lonMax & temp$Longitude >= lonMin) )
+  myTable <- subset(CatalogueData60UK, (CatalogueData60UK$Latitude <= latMax & CatalogueData60UK$Latitude >= latMin & CatalogueData60UK$Longitude <= lonMax & CatalogueData60UK$Longitude >= lonMin) )
   
   if (!is.null(metadataColumn) & !is.null(entryValue)){
     

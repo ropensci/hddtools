@@ -42,9 +42,9 @@ TRMM <- function(fileLocation = "~/",
                  timeExtent = NULL
                  ){
   
-  #require(raster)
-  #require(rgdal)
-  #require(RCurl)
+  # require(raster)
+  # require(rgdal)
+  # require(RCurl)
   
   if (!is.null(bbox)){
     lonMin <- bbox$lonMin

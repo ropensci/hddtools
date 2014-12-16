@@ -19,7 +19,7 @@ The function returns a data frame containing 2 time series (as zoo objects): "P"
 This function extract the dataset containing daily rainfall and streamflow discharge at one of the MOPEX locations.
 }
 \examples{
-# mopexTS("01048000")
+# mopexTS("14359000")
 }
 \author{
 Claudia Vitolo
