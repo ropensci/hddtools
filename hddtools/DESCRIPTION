@@ -1,6 +1,6 @@
 Package: hddtools
 Type: Package
-Version: 0.2.2
+Version: 0.2.3
 Date: 2014-11-21
 Title: Hydrological Data Discovery and utility Tools
 Description: Facilitates discovery and handling of hydrological data,
@@ -25,3 +25,5 @@ Imports:
 License: GPL-3
 LazyData: true
 Repository: CRAN
+Keywords: hydrology, hydrological modelling, hydrologic modeling, time
+    series, environmental data, web technologies and services

@@ -92,7 +92,7 @@ TRMM(fileLocation="~/",
 The Top-Down modelling Working Group (TDWG) for the Prediction in Ungauged Basins (PUB) Decade (2003-2012) is an initiative of the International Association of Hydrological Sciences (IAHS) which collected datasets for hydrological modelling free-of-charge, available [here](http://tdwg.catchment.org/datasets.html). This package provides a common interface to retrieve, browse and filter information.
 
 ### MOPEX
-US dataset containing 
+US dataset containing historical hydrometeorological data and river basin characteristics for hundreds of river basins from a range of climates throughout the world. 
 
 ```R
 # MOPEX full catalogue
