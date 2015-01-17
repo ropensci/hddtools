@@ -1,8 +1,8 @@
 Package: hddtools
 Type: Package
-Version: 0.2.3
+Version: 0.2.4
 Date: 2014-11-21
-Title: Hydrological Data Discovery and utility Tools
+Title: Hydrological Data Discovery Tools
 Description: Facilitates discovery and handling of hydrological data,
     non-programmatic access to catalogues and databases.
 Authors@R: c(person("Claudia", "Vitolo", role = c("aut", "cre"),
