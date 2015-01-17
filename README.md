@@ -7,7 +7,7 @@ This typically implies the download of a metadata catalogue, selection of inform
 
 Depending on the data license, functions can provide offline and/or online modes. When redistribution is allowed, for instance, a copy of the dataset is cached within the package and updated twice a year. This is the fastest option and also allows offline use of package's functions. When re-distribution is not allowed, only online mode is provided.
 
-### Basics
+# Basics
 The stable version (preferred option) of hddtools is available from CRAN (http://www.cran.r-project.org/web/packages/hddtools/index.html):
 
 ```R
@@ -106,7 +106,7 @@ timeExtent <- seq(as.Date("1948-01-01"), as.Date("1949-12-31"), by="days")
 y <- mopexTS("14359000", plotOption=TRUE, timeExtent)
 ```
 
-### Warnings
+# Warnings
 This package and functions herein are part of an experimental open-source project. They are provided as is, without any guarantee.
 
 # Please leave your feedback
