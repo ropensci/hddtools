@@ -15,10 +15,10 @@
 #' 
 #' @examples 
 #' # Retrieve the whole catalogue
-#' # mopexCatalogue()
+#' # MOPEXCatalogue()
 #' 
 
-mopexCatalogue <- function(bbox=NULL, 
+MOPEXCatalogue <- function(bbox=NULL, 
                            metadataColumn=NULL, entryValue=NULL,
                            verbose=FALSE){
   
@@ -65,10 +65,10 @@ mopexCatalogue <- function(bbox=NULL,
 #' @export
 #' 
 #' @examples 
-#' # mopexTS("14359000")
+#' # MOPEXTS("14359000")
 #' 
 
-mopexTS <- function(hydroRefNumber, plotOption=FALSE, timeExtent = NULL){
+MOPEXTS <- function(hydroRefNumber, plotOption=FALSE, timeExtent = NULL){
   
   # require(zoo)
   # require(XML)
@@ -133,7 +133,7 @@ mopexTS <- function(hydroRefNumber, plotOption=FALSE, timeExtent = NULL){
   
   if (plotOption == TRUE){
     
-#     temp <- mopexCatalogue(metadataColumn="id",entryValue=hydroRefNumber)
+#     temp <- MOPEXCatalogue(metadataColumn="id",entryValue=hydroRefNumber)
 #     stationName <- as.character(temp$name)
 #     plot(myTS, main=stationName, xlab="",ylab=c("P [mm/d]","Q [m3/s]"))
     
