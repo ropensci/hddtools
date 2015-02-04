@@ -16,18 +16,18 @@
 #' 
 #' @examples
 #' # Retrieve the whole catalogue
-#' # GRDCCatalogue()
+#' # GRDC_Catalogue()
 #' 
 #' # Define a bounding box
 #' # bbox <- list(lonMin=-3.82,latMin=52.41,lonMax=-3.63,latMax=52.52)
 #' 
 #' # Filter the catalogue
-#' # GRDCCatalogue(bbox)
+#' # GRDC_Catalogue(bbox)
 #' 
 
-GRDCCatalogue <- function(bbox = NULL, stationID = NULL, 
-                          metadataColumn=NULL, entryValue=NULL,
-                          mdDescription=FALSE){
+GRDC_Catalogue <- function(bbox = NULL, stationID = NULL, 
+                           metadataColumn=NULL, entryValue=NULL,
+                           mdDescription=FALSE){
 
   # Retrieve the catalogue
   temp <- system.file("GRDC/GRDC_Stations_20140320.csv", package = 'hddtools')
@@ -138,14 +138,14 @@ GRDCCatalogue <- function(bbox = NULL, stationID = NULL,
 #' @export
 #' 
 #' @examples 
-#' # x <- GRDCMonthlyTS(stationID=1107700)
+#' # x <- GRDC_TS(stationID=1107700)
 #' 
 
-GRDCMonthlyTS <- function(stationID, plotOption=FALSE){
+GRDC_TS <- function(stationID, plotOption=FALSE){
   
   options(warn=-1) 
   
-  temp <- GRDCCatalogue()  
+  temp <- GRDC_Catalogue()  
     
   if ( temp[which(temp$grdc_no==stationID),"statistics"] == 1 ){
     
@@ -154,7 +154,7 @@ GRDCMonthlyTS <- function(stationID, plotOption=FALSE){
     grdcLTMMD <- read.csv(temp,sep="\t") 
     
     # Retrieve WMO region from catalogue
-    wmoRegion <- GRDCCatalogue(stationID = stationID)$wmo_reg
+    wmoRegion <- GRDC_Catalogue(stationID = stationID)$wmo_reg
     
     # Retrieve ftp server location
     zipFile <- as.character(grdcLTMMD[which(grdcLTMMD$WMO.Region==wmoRegion),
@@ -226,8 +226,8 @@ GRDCMonthlyTS <- function(stationID, plotOption=FALSE){
       
       plot(zoo(table3$MQ, order.by=dummyTime),
            main=paste("Monthly statistics: ",
-                      GRDCCatalogue(stationID = stationID)$name,
-                      " (",GRDCCatalogue(stationID = stationID)$country_code,
+                      GRDC_Catalogue(stationID = stationID)$name,
+                      " (",GRDC_Catalogue(stationID = stationID)$country_code,
                       ")",sep=""),
            type="l",ylim=c(min(table3$LQ),max(table3$HQ)),
            xlab="",ylab="m3/s",xaxt = "n")

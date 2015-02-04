@@ -22,27 +22,17 @@
 #' # KGClimateClass(bbox)
 #'
 
-KGClimateClass <- function(bbox,updatedBy="Peel",verbose=FALSE){
+KGClimateClass <- function(bbox=NULL,updatedBy="Peel",verbose=FALSE){
   
   # require(sp)
   # require(rgdal)
   # require(raster)
   
-  # Latitude is the Y axis, longitude is the X axis.
-  boundingBox <- matrix(c(bbox$lonMin,bbox$latMin,bbox$lonMax,bbox$latMax),
-                        nrow=2)
-  rownames(boundingBox) <- c("lon","lat")
-  colnames(boundingBox) <- c('min','max')
-  
-  # clockwise, 5 points to close it
-  boundingBoxMat <- rbind( c(boundingBox['lon','min'],boundingBox['lat','min']), 
-                    c(boundingBox['lon','min'],boundingBox['lat','max']), 
-                    c(boundingBox['lon','max'],boundingBox['lat','max']), 
-                    c(boundingBox['lon','max'],boundingBox['lat','min']), 
-                    c(boundingBox['lon','min'],boundingBox['lat','min']) ) 
-  
-  bbSP <- SpatialPolygons( list(Polygons(list(Polygon(boundingBoxMat)),"boundingBox")), 
-                           proj4string=CRS("+proj=longlat +datum=WGS84")  )
+  # crop to bounding box  
+  if (is.null(bbox)){
+    bbox <- list(lonMin=-180,latMin=-90,lonMax=+180,latMax=+90)
+  }  
+  bbSP <- bboxSpatialPolygon(bbox)
   
   if (updatedBy == "Kottek") {
     

@@ -4,7 +4,7 @@
 \alias{KGClimateClass}
 \title{Function to identify the updated Koppen-Greiger climate zone (on a 0.1 x 0.1 degrees resolution map).}
 \usage{
-KGClimateClass(bbox, updatedBy = "Peel", verbose = FALSE)
+KGClimateClass(bbox = NULL, updatedBy = "Peel", verbose = FALSE)
 }
 \arguments{
 \item{bbox}{bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)}

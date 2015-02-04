@@ -15,12 +15,12 @@
 #' 
 #' @examples 
 #' # Retrieve the whole catalogue
-#' # MOPEXCatalogue()
+#' # MOPEX_Catalogue()
 #' 
 
-MOPEXCatalogue <- function(bbox=NULL, 
-                           metadataColumn=NULL, entryValue=NULL,
-                           verbose=FALSE){
+MOPEX_Catalogue <- function(bbox=NULL, 
+                            metadataColumn=NULL, entryValue=NULL,
+                            verbose=FALSE){
   
   # require(XML)
   # require(RCurl)
@@ -65,10 +65,10 @@ MOPEXCatalogue <- function(bbox=NULL,
 #' @export
 #' 
 #' @examples 
-#' # MOPEXTS("14359000")
+#' # MOPEX_TS("14359000")
 #' 
 
-MOPEXTS <- function(hydroRefNumber, plotOption=FALSE, timeExtent = NULL){
+MOPEX_TS <- function(hydroRefNumber, plotOption=FALSE, timeExtent = NULL){
   
   # require(zoo)
   # require(XML)

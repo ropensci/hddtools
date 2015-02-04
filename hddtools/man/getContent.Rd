@@ -17,8 +17,8 @@ This function extracts all the links in a ftp page
 }
 \examples{
 # Retrieve mopex daily catalogue
-url <- "ftp://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/Us_438_Daily"
-getContent(url)
+# url <- "ftp://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/Us_438_Daily"
+# getContent(url)
 }
 \author{
 Claudia Vitolo

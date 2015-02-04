@@ -12,8 +12,8 @@
 #' 
 #' @examples 
 #' # Retrieve mopex daily catalogue
-#' url <- "ftp://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/Us_438_Daily"
-#' getContent(url)
+#' # url <- "ftp://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/Us_438_Daily"
+#' # getContent(url)
 #' 
 
 getContent <- function(dirs) {

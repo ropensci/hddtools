@@ -38,10 +38,10 @@ The functions provided can filter, slice and dice 2 and 3 dimensional informatio
 
 ```R
 # Define a bounding box
-bbox <- list(lonMin=-1,latMin=51,lonMax=0,latMax=52)
+bbox <- list(lonMin=-10,latMin=48,lonMax=5,latMax=62)
 
 # Define a temporal extent
-timeExtent <- seq(as.Date("2012-01-01"), as.Date("2012-12-31"), by="days")
+timeExtent <- seq(as.Date("2012-01-01"), as.Date("2012-01-31"), by="months")
 ```
 
 ## The Koppen Climate Classification map
@@ -64,16 +64,16 @@ Catalogue, kml files and the product ``Long-Term Mean Monthly Discharges'' are o
 
 ```R
 # GRDC full catalogue
-x <- GRDCCatalogue()
+x <- GRDC_Catalogue()
 
 # Filter GRDC catalogue based on a bounding box
-x <- GRDCCatalogue(bbox=bbox, metadataColumn="statistics", entryValue=1)
+x <- GRDC_Catalogue(bbox=bbox, metadataColumn="statistics", entryValue=1)
 
 # Plot a map
 GenerateMap(x)
 
 # Monthly data extraction
-y <- GRDCMonthlyTS(stationID=x$grdc_no[[1]], plotOption=TRUE)
+y <- GRDC_TS(stationID="6122300", plotOption=TRUE)
 ```
 
 ## NASA's Tropical Rainfall Measuring Mission (TRMM, only available for github version)
@@ -84,13 +84,8 @@ The TRMM satellite records global historical rainfall estimation in a gridded fo
 The hddtools provides a function, called \verb|TRMM()|, to download and convert a selected portion of the TRMM dataset into a raster-brick that can be opened in any GIS software.
 
 ```R
-# Retreive mean monthly recipitations from 3B43_V7 for 2012 (based on a bounding box)
-TRMM(fileLocation="~/",
-     url="ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
-     product="3B43",
-     version=7,
-     year=2012,
-     bbox)
+# Retreive mean monthly precipitations from 3B43_V7 (based on a bounding box and time extent)
+TRMM(bbox,timeExtent)
 ```
 
 ## Top-Down modelling Working Group 
@@ -101,14 +96,14 @@ US dataset containing historical hydrometeorological data and river basin charac
 
 ```R
 # MOPEX full catalogue
-x <- mopexCatalogue()
+x <- MOPEX_Catalogue()
 
 # Extract time series 
-y <- mopexTS("14359000", plotOption=TRUE)
+y <- MOPEX_TS("14359000", plotOption=TRUE)
 
 # Extract time series for a specified teporal window
 timeExtent <- seq(as.Date("1948-01-01"), as.Date("1949-12-31"), by="days")
-y <- mopexTS("14359000", plotOption=TRUE, timeExtent)
+y <- MOPEX_TS("14359000", plotOption=TRUE, timeExtent)
 ```
 
 # Warnings

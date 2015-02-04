@@ -4,14 +4,13 @@
 #' 
 #' @description The TRMM dataset provide global historical rainfall estimation in a gridded format.  
 #' 
+#' @param bbox bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax) 
+#' @param timeExtent is a vector of dates and times for which the data should be retrieve
 #' @param fileLocation file path where to save the GeoTiff
 #' @param url url where data is stored (e.g. "ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/3B43_V7/2012/")
 #' @param product this is the code that identifies a product, default is "3B43"
 #' @param version this is the version number, default is 7
-#' @param year year of interest, default is 2012
 #' @param type this is the type of information needed, default is "precipitation.accum". Other types could be "gaugeRelativeWeighting.bin" and "relativeError.bin"
-#' @param bbox bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax) 
-#' @param timeExtent is a vector of dates and times for which the data should be retrieve
 #' 
 #' @return Data is loaded as rasterbrick, then converted to a multilayer Geotiff that can 
 # be opened in any GIS software.
@@ -24,55 +23,56 @@
 #' 
 #' @examples 
 #' # Define a bounding box
-#' # bbox <- list(lonMin=-3.82,latMin=52.41,lonMax=-3.63,latMax=52.52)
-#' 
-#' # TRMM(product="3B43",
-#' #      version=7,
-#' #      year=2012,
-#' #      bbox)
+#' # bbox <- list(lonMin=-3.82, latMin=52.43,lonMax=-3.63, latMax=52.52)
+#' # twindow <- seq(as.Date("2012-01-01"), as.Date("2012-01-31"), by="months")
+#' #
+#' # TRMM(bbox,twindow)
 #'
 
-TRMM <- function(fileLocation = "~/",
+TRMM <- function(bbox = NULL,
+                 timeExtent = NULL,
+                 fileLocation = "~/",
                  url = "ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
                  product = "3B43",
                  version = 7,
-                 year = 2012,
-                 type = "precipitation.accum",
-                 bbox = NULL,
-                 timeExtent = NULL
+                 type = "precipitation.accum"
                  ){
   
   # require(raster)
   # require(rgdal)
   # require(RCurl)
   
-  if (!is.null(bbox)){
-    lonMin <- bbox$lonMin
-    lonMax <- bbox$lonMax
-    latMin <- bbox$latMin
-    latMax <- bbox$latMax
-  }else{    
-    lonMin <- -180
-    lonMax <- +180
-    latMin <- -90
-    latMax <- +90
-  }
-  
   setwd(fileLocation)
   
-  myURL <- paste(url, product, "_V", version, "/", year, "/", sep="")
-  # by default this is 
-  # myURL <- "ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/3B43_V7/2012/"
+  years <- unique(format(timeExtent,"%Y"))
   
-  filenames <- getURL(myURL, ftp.use.epsv = FALSE, ftplistonly=TRUE, crlf=TRUE)
+  months <- format(timeExtent,"%m")
   
-  filePaths <- paste(myURL, strsplit(filenames, "\r*\n")[[1]], sep="")
+  selectedfilePaths <- c()
   
-  # the following line allows to download only files with a certain pattern,
-  # e.g. only certain months or days. 
-  # "*precipitation.accum" means monthly accumulated rainfall here.
-  selectedfilePaths <- filePaths[grep(filePaths, 
-                                      pattern=paste("*",type,sep=""))] 
+  for (myYear in years){
+    
+    myURL <- paste(url, product, "_V", version, "/", myYear, "/", sep="")
+    # by default this is 
+    # myURL <- "ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/3B43_V7/2012/"
+    
+    filenames <- getURL(myURL, ftp.use.epsv = FALSE, ftplistonly=TRUE, crlf=TRUE)
+    
+    # filePaths <- paste(myURL, strsplit(filenames, "\r*\n")[[1]], sep="")
+    # the following line allows to download only files with a certain pattern,
+    # e.g. only certain months or days. 
+    # "*precipitation.accum" means monthly accumulated rainfall here.
+    # selectedfilePaths <- filePaths[grep(filePaths, 
+    #                                     pattern=paste("*",type,sep=""))] 
+    
+    for (myMonth in months){
+      filePaths <- paste(myURL,product,".",substr(myYear,3,4),myMonth,"01",
+                           ".",version,".",type,sep="")
+      
+      selectedfilePaths <- c(selectedfilePaths,filePaths)
+    }
+    
+  }
   
   # download files
   mapply(download.file, selectedfilePaths, basename(selectedfilePaths)) 
@@ -87,7 +87,8 @@ TRMM <- function(fileLocation = "~/",
   fileConn <- file(paste(fileLocation,"myTRMM.sh",sep=""))
   shOut <- readLines(system.file("trmm.sh", package="hddtools"),-1)
   shOut[3] <- paste(" <SRS>WGS84</SRS>' >",fileLocation,"TRMM.vrt;",sep="")
-  shOut[4] <- paste("for i in 3B43.",substr(as.character(year),3,4),"*",sep="")
+  #shOut[4] <- paste("for i in 3B43.",substr(as.character(year),3,4),"*",sep="")
+  shOut[4] <- "for i in 3B43.*"
   shOut[11] <- paste(" </VRTRasterBand>' >>",fileLocation,"TRMM.vrt",sep="")
   shOut[13] <- paste("echo '</VRTDataset>' >>",fileLocation,"TRMM.vrt",sep="")
   writeLines(shOut, fileConn)
@@ -100,18 +101,23 @@ TRMM <- function(fileLocation = "~/",
   # be opened in every GIS software.
   
   system(paste("sh ",fileLocation,"myTRMM.sh",sep=""))
+  
+  # trmm <- brick(paste(fileLocation,"TRMM.vrt",sep=""))
   b <- brick(paste(fileLocation,"TRMM.vrt",sep=""))
+  trmm <- flip(b, direction='y')  
   
-  trmm <- flip(b, direction='y')
-  
-  if (!is.null(lonMin) & !is.null(lonMax) & !is.null(latMin) & !is.null(latMax)){
-    # crop to bounding box  
-    e <- extent(latMin, latMax,lonMin, lonMax)
-    trmm <- crop(trmm, e)
+  # crop to bounding box  
+  if (is.null(bbox)){
+    bbox <- list(lonMin=-180,latMin=-90,lonMax=+180,latMax=+90)
   }  
+  bbSP <- bboxSpatialPolygon(bbox)
+  
+  # e <- extent(lonMin, lonMax, latMin, latMax)
+  # trmm <- crop(trmm, e)
+  trmm <- crop(trmm, bbSP)
   
   writeRaster(trmm, 
-              filename=paste(fileLocation,"trmm_acc_",year,".tif",sep=""), 
+              filename=paste(fileLocation,"trmm_acc.tif",sep=""), 
               format="GTiff", 
               overwrite=TRUE)
   
@@ -121,6 +127,6 @@ TRMM <- function(fileLocation = "~/",
   file.remove(paste(fileLocation,"myTRMM.sh",sep=""))
   
   message(paste("Done. The raster-brick was saved in",
-                paste(fileLocation,"trmm_acc_",year,".tif",sep="")))
+                paste(fileLocation,"trmm_acc.tif",sep="")))
   
 }

@@ -4,12 +4,15 @@
 \alias{TRMM}
 \title{Download and convert TRMM data}
 \usage{
-TRMM(fileLocation = "~/",
+TRMM(bbox = NULL, timeExtent = NULL, fileLocation = "~/",
   url = "ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/", product = "3B43",
-  version = 7, year = 2012, type = "precipitation.accum", bbox = NULL,
-  timeExtent = NULL)
+  version = 7, type = "precipitation.accum")
 }
 \arguments{
+\item{bbox}{bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)}
+
+\item{timeExtent}{is a vector of dates and times for which the data should be retrieve}
+
 \item{fileLocation}{file path where to save the GeoTiff}
 
 \item{url}{url where data is stored (e.g. "ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/3B43_V7/2012/")}
@@ -18,13 +21,7 @@ TRMM(fileLocation = "~/",
 
 \item{version}{this is the version number, default is 7}
 
-\item{year}{year of interest, default is 2012}
-
 \item{type}{this is the type of information needed, default is "precipitation.accum". Other types could be "gaugeRelativeWeighting.bin" and "relativeError.bin"}
-
-\item{bbox}{bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)}
-
-\item{timeExtent}{is a vector of dates and times for which the data should be retrieve}
 }
 \value{
 Data is loaded as rasterbrick, then converted to a multilayer Geotiff that can
@@ -39,12 +36,10 @@ and on the TRMM FAQ: http://disc.sci.gsfc.nasa.gov/additional/faq/precipitation_
 }
 \examples{
 # Define a bounding box
-# bbox <- list(lonMin=-3.82,latMin=52.41,lonMax=-3.63,latMax=52.52)
-
-# TRMM(product="3B43",
-#      version=7,
-#      year=2012,
-#      bbox)
+# bbox <- list(lonMin=-3.82, latMin=52.43,lonMax=-3.63, latMax=52.52)
+# twindow <- seq(as.Date("2012-01-01"), as.Date("2012-01-31"), by="months")
+#
+# TRMM(bbox,twindow)
 }
 \author{
 Claudia Vitolo
