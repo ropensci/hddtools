@@ -106,6 +106,27 @@ timeExtent <- seq(as.Date("1948-01-01"), as.Date("1949-12-31"), by="days")
 y <- MOPEX_TS("14359000", plotOption=TRUE, timeExtent)
 ```
 
+## SEPA river level data
+The Scottish Environment Protection Agency (SEPA) manages river level data for hundreds of gauging stations in the UK. The catalogue of stations was derived by an unofficial list (available here: http://pennine.ddns.me.uk/riverlevels/ConciseList.html). 
+
+```R
+# SEPA unofficial catalogue
+x <- SEPA_Catalogue()
+```
+
+The time series of the last few days is available from SEPA website and downloadable using the following function:
+
+```R
+# Single time series extraction
+y <- SEPA_TS(hydroRefNumber=234253, plotOption=TRUE)
+
+# Multiple time series extraction
+y <- SEPA_TS(hydroRefNumber=c(234253,234174,234305))
+plot(y[[1]])
+plot(y[[2]])
+plot(y[[3]])
+```
+
 # Warnings
 This package and functions herein are part of an experimental open-source project. They are provided as is, without any guarantee.
 
