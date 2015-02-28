@@ -10,7 +10,7 @@ This typically implies the download of a metadata catalogue, selection of inform
 Depending on the data license, functions can provide offline and/or online modes. When redistribution is allowed, for instance, a copy of the dataset is cached within the package and updated twice a year. This is the fastest option and also allows offline use of package's functions. When re-distribution is not allowed, only online mode is provided.
 
 **To cite this software:**  
-C. Vitolo, Hydrological Data Discovery Tools (hddtools, R package), (2015), GitHub repository, https://github.com/cvitolo/r_hddtools, doi: http://dx.doi.org/10.5281/zenodo.14721
+Vitolo C., Hydrological Data Discovery Tools (hddtools, R package), (2014), GitHub repository, https://github.com/cvitolo/r_hddtools, doi: http://dx.doi.org/10.5281/zenodo.14721
 
 # Basics
 The stable version (preferred option) of hddtools is available from CRAN (http://www.cran.r-project.org/web/packages/hddtools/index.html):
