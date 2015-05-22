@@ -122,7 +122,7 @@ TRMM <- function(bbox = NULL,
               overwrite=TRUE)
   
   message("Removing temporary files")
-  mapply(file.remove, selectedfilePaths, basename(selectedfilePaths)) 
+  # mapply(file.remove, selectedfilePaths, basename(selectedfilePaths)) 
   file.remove(paste(fileLocation,"TRMM.vrt",sep=""))
   file.remove(paste(fileLocation,"myTRMM.sh",sep=""))
   
