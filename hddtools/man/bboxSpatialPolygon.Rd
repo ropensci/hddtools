@@ -22,11 +22,6 @@ A SpatialPolygons object of the bounding box
 Convert a bounding box to a SpatialPolygons object
 Bounding box is first created (in lat/lon) then projected if specified
 }
-\examples{
-bb <- matrix(c(3,2,5,4),nrow=2)
-rownames(bb) <- c("lon","lat")
-colnames(bb) <- c('min','max')
-}
 \references{
 http://gis.stackexchange.com/questions/46954/clip-spatial-object-to-bounding-box-in-r
 }

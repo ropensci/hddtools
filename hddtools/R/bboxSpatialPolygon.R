@@ -1,14 +1,17 @@
 #' Convert a bounding box to a SpatialPolygons object
 #' Bounding box is first created (in lat/lon) then projected if specified
+#' 
 #' @param bbox Bounding box: a 2x2 numerical matrix of lat/lon coordinates
 #' @param proj4stringFrom Projection string for the current bbox coordinates (defaults to lat/lon, WGS84)
 #' @param proj4stringTo Projection string, or NULL to not project
+#' 
 #' @return A SpatialPolygons object of the bounding box
+#' 
 #' @references http://gis.stackexchange.com/questions/46954/clip-spatial-object-to-bounding-box-in-r
-#' @examples
-#' bb <- matrix(c(3,2,5,4),nrow=2)
-#' rownames(bb) <- c("lon","lat")
-#' colnames(bb) <- c('min','max')
+#' 
+#' @export
+#' 
+
 bboxSpatialPolygon <- function( bbox, 
                                      proj4stringFrom=CRS("+proj=longlat +datum=WGS84"), 
                                      proj4stringTo=NULL ) {

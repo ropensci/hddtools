@@ -54,7 +54,16 @@ KGClimateClass <- function(bbox=NULL,updatedBy="Peel",verbose=FALSE){
     kgRaster <- raster(paste(td,"/KOTTEK_koeppen-geiger.tiff",sep=""))
     
     temp <- data.frame(table(extract(kgRaster,bbSP)))
-    temp$Class <- kgLegend[which(kgLegend[,1]==temp[,1]),3]
+    temp$Class <- NA
+    for (i in 1:dim(temp)[1]){
+      class1 <- which(kgLegend[,1]==temp[i,1])
+      if (length(class1) > 0){
+        temp$Class[i] <- as.character(kgLegend[class1,3])        
+      }
+    }
+    
+    temp <- temp[which(!is.na(temp$Class)),]
+    
     df <- data.frame(ID = temp$Var1, 
                      Class = temp$Class, 
                      Frequency = temp$Freq)
@@ -82,7 +91,15 @@ KGClimateClass <- function(bbox=NULL,updatedBy="Peel",verbose=FALSE){
     kgRaster <- raster(paste(td,"/PEEL_koppen_ascii.txt",sep=""))
     
     temp <- data.frame(table(extract(kgRaster,bbSP)))
-    temp$Class <- kgLegend[which(kgLegend[,1]==temp[,1]),2]
+    temp$Class <- NA
+    for (i in 1:dim(temp)[1]){
+      class1 <- which(kgLegend[,1]==temp[i,1])
+      if (length(class1) > 0){
+        temp$Class[i] <- as.character(kgLegend[class1,2])        
+      }
+    }
+    
+    temp <- temp[which(!is.na(temp$Class)),]
     
     df <- data.frame(ID = temp$Var1, 
                      Class = temp$Class, 

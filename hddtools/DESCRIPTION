@@ -18,8 +18,7 @@ Imports:
     raster,
     RCurl,
     XML,
-    zoo
+    zoo,
+    rnrfa
 License: GPL-3
 Repository: CRAN
-Keywords: hydrology, hydrological modelling, hydrologic modeling, time
-    series, environmental data, web technologies and services

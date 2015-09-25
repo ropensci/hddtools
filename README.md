@@ -13,6 +13,13 @@ Depending on the data license, functions can provide offline and/or online modes
 Vitolo C., Hydrological Data Discovery Tools (hddtools, R package), (2014), GitHub repository, https://github.com/cvitolo/r_hddtools, doi: http://dx.doi.org/10.5281/zenodo.14721
 
 # Basics
+First, install all the dependencies:
+```R
+install.packages(c("sp","rgdal","raster","RCurl","XML","zoo","devtools"))
+library(devtools)
+install_github("cvitolo/r_rnrfa", subdir = "rnrfa")
+```
+
 The stable version (preferred option) of hddtools is available from CRAN (http://www.cran.r-project.org/web/packages/hddtools/index.html):
 
 ```R
@@ -22,7 +29,6 @@ install.packages("hddtools")
 The development version is, instead, on github and can be installed via devtools:
 
 ```R
-library(devtools)
 install_github("cvitolo/r_hddtools", subdir = "hddtools")
 library(hddtools)
 ```
@@ -86,10 +92,35 @@ The hddtools provides a function, called \verb|TRMM()|, to download and convert 
 ```R
 # Retreive mean monthly precipitations from 3B43_V7 (based on a bounding box and time extent)
 TRMM(bbox,timeExtent)
+plot(raster("~/trmm_acc.tif"))
 ```
 
 ## Top-Down modelling Working Group 
 The Top-Down modelling Working Group (TDWG) for the Prediction in Ungauged Basins (PUB) Decade (2003-2012) is an initiative of the International Association of Hydrological Sciences (IAHS) which collected datasets for hydrological modelling free-of-charge, available [here](http://tdwg.catchment.org/datasets.html). This package provides a common interface to retrieve, browse and filter information.
+
+### The Data60UK dataset (This won't work as the server is down from December 2014)
+The Data60UK initiative collated datasets of areal precipitation and streamflow discharge across 61 gauging sites in England and Wales (UK). The database was prepared from source databases for research purposes, with the intention to make it re-usable. This is now available in the public domain free of charge. 
+
+The hddtools contain two functions to interact with this database: one to retreive the catalogue and another to retreive time series of areal precipitation and streamflow discharge.
+
+```R
+# Data60UK full catalogue
+x <- Data60UKCatalogue()
+
+# Filter Data60UK catalogue based on bounding box
+bbox <- list(lonMin=-3.82,latMin=52.41,lonMax=-3.63,latMax=52.52)
+x <- Data60UKCatalogue(bbox)
+
+# Plot a map
+GenerateMap(x)
+
+# Extract time series 
+y <- Data60UKDailyTS(39015, plotOption=TRUE)
+
+# Extract time series for a specified teporal window
+timeExtent <- seq(as.Date("1988-01-01"), as.Date("1989-12-31"), by="days")
+y <- Data60UKDailyTS(39015, plotOption=TRUE, timeExtent)
+```
 
 ### MOPEX
 US dataset containing historical hydrometeorological data and river basin characteristics for hundreds of river basins from a range of climates throughout the world. 
@@ -101,7 +132,7 @@ x <- MOPEX_Catalogue()
 # Extract time series 
 y <- MOPEX_TS("14359000", plotOption=TRUE)
 
-# Extract time series for a specified teporal window
+# Extract time series for a specified temporal window
 timeExtent <- seq(as.Date("1948-01-01"), as.Date("1949-12-31"), by="days")
 y <- MOPEX_TS("14359000", plotOption=TRUE, timeExtent)
 ```
