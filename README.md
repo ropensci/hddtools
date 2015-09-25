@@ -15,7 +15,8 @@ Vitolo C., Hydrological Data Discovery Tools (hddtools, R package), (2014), GitH
 # Basics
 First, install all the dependencies:
 ```R
-install.packages(c("sp","rgdal","raster","RCurl","XML","zoo","devtools"))
+install.packages(c("sp","rgdal","raster","RCurl","XML","zoo",
+                   "devtools","XML2R","rjson","stringr"))
 library(devtools)
 install_github("cvitolo/r_rnrfa", subdir = "rnrfa")
 ```
