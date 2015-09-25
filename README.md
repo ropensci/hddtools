@@ -94,6 +94,9 @@ The hddtools provides a function, called \verb|TRMM()|, to download and convert 
 # Retreive mean monthly precipitations from 3B43_V7 (based on a bounding box and time extent)
 TRMM(bbox,timeExtent)
 plot(raster("~/trmm_acc.tif"))
+# or
+b <- brick("~/trmm_acc.tif")
+plot(b)
 ```
 
 ## Top-Down modelling Working Group 
