@@ -4,13 +4,13 @@
 #' 
 #' @description The TRMM dataset provide global historical rainfall estimation in a gridded format.  
 #' 
-#' @param bbox bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax) 
-#' @param timeExtent is a vector of dates and times for which the data should be retrieve
-#' @param fileLocation file path where to save the GeoTiff
-#' @param url url where data is stored (e.g. "ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/3B43_V7/2012/")
+#' @param inputLocation location where data is stored. By default it points to the TRMM ftp server ("ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/") but it can also be a local directory. If you are using a local directory, this function expects to find inside 'inputLocation' a folder with the name of product and version (e.g. "i3B43_V7") and inside this a folder for each year( e.g. "2012"). 
 #' @param product this is the code that identifies a product, default is "3B43"
 #' @param version this is the version number, default is 7
 #' @param type this is the type of information needed, default is "precipitation.accum". Other types could be "gaugeRelativeWeighting.bin" and "relativeError.bin"
+#' @param timeExtent is a vector of dates and times for which the data should be retrieve
+#' @param bbox OPTIONAL bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)
+#' @param outputfileLocation file path where to save the GeoTiff
 #' 
 #' @return Data is loaded as rasterbrick, then converted to a multilayer Geotiff that can 
 # be opened in any GIS software.
@@ -26,23 +26,32 @@
 #' # bbox <- list(lonMin=-3.82, latMin=52.43,lonMax=-3.63, latMax=52.52)
 #' # twindow <- seq(as.Date("2012-01-01"), as.Date("2012-01-31"), by="months")
 #' #
-#' # TRMM(bbox,twindow)
+#' # TRMM(inputLocation="ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
+#' #      product = "3B43",
+#' #      version = 7,
+#' #      type = "precipitation.accum",
+#' #      timeExtent = twindow,
+#' #      bbox = bbox,
+#' #      outputfileLocation = "~/")
+#' #
+#' # or simply
+#' # TRMM(timeExtent = twindow, bbox = bbox)
 #'
 
-TRMM <- function(bbox = NULL,
-                 timeExtent = NULL,
-                 fileLocation = "~/",
-                 url = "ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
+TRMM <- function(inputLocation="ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
                  product = "3B43",
                  version = 7,
-                 type = "precipitation.accum"
+                 type = "precipitation.accum",
+                 timeExtent = NULL,
+                 bbox = NULL,
+                 outputfileLocation = "~/"
                  ){
   
   # require(raster)
   # require(rgdal)
   # require(RCurl)
   
-  setwd(fileLocation)
+  setwd(outputfileLocation)
   
   years <- unique(format(timeExtent,"%Y"))
   
@@ -50,7 +59,8 @@ TRMM <- function(bbox = NULL,
   
   if ( any(years=="NULL",months=="NULL") ){
     
-    message("Please select a suitable timeExtent")
+    # timeExtent <- seq(as.Date("1998-01-01"), as.Date(Sys.Date()), by="months")
+    message("This function cannot be executed because your timeExtent is not in the correct format. Please enter a suitable timeExtent, then try again.")
     
   }else{
     
@@ -58,19 +68,17 @@ TRMM <- function(bbox = NULL,
     
     for (myYear in years){
       
-      myURL <- paste(url, product, "_V", version, "/", myYear, "/", sep="")
-      # by default this is 
-      # myURL <- "ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/3B43_V7/2012/"
+      myURL <- paste(inputLocation, 
+                     product, "_V", version, "/", myYear, "/", sep="")
       
-      filenames <- getURL(myURL, ftp.use.epsv = FALSE, ftplistonly=TRUE, crlf=TRUE)
+      filenames <- getURL(myURL, 
+                          ftp.use.epsv = FALSE, 
+                          ftplistonly=TRUE, 
+                          crlf=TRUE)
       
-      # filePaths <- paste(myURL, strsplit(filenames, "\r*\n")[[1]], sep="")
       # the following line allows to download only files with a certain pattern,
-      # e.g. only certain months or days. 
-      # "*precipitation.accum" means monthly accumulated rainfall here.
-      # selectedfilePaths <- filePaths[grep(filePaths, 
-      #                                     pattern=paste("*",type,sep=""))] 
-      
+      # e.g. only certain months. 
+      # "*precipitation.accum" means monthly accumulated rainfall here.      
       for (myMonth in months){
         filePaths <- paste(myURL,product,".",substr(myYear,3,4),myMonth,"01",
                            ".",version,".",type,sep="")
@@ -81,22 +89,26 @@ TRMM <- function(bbox = NULL,
     }
     
     # download files
-    mapply(download.file, selectedfilePaths, basename(selectedfilePaths)) 
+    # Thanks to Fabien Wagner this also works for windows' users!
+    mapply(download.file, selectedfilePaths, 
+           basename(selectedfilePaths), method="wget") 
     
     # Now I create a virtual file as the downloaded TRMM data come as binaries. 
     # The VRT-file contains all the downloaded binary files with the appropriate 
     # geo-informations. 
     # To automate the process, there is a template script in inst/trmm.sh that 
     # generates the VRT-file (TRMM.vrt) for all 2012 data. 
-    # Change “3B43.12″ accordingly to the downloaded data. 
+    # Change “3B43.12″ according to your timeExtent.. 
     
-    fileConn <- file(paste(fileLocation,"myTRMM.sh",sep=""))
+    fileConn <- file(paste(outputfileLocation,"myTRMM.sh",sep=""))
     shOut <- readLines(system.file("trmm.sh", package="hddtools"),-1)
-    shOut[3] <- paste(" <SRS>WGS84</SRS>' >",fileLocation,"TRMM.vrt;",sep="")
-    #shOut[4] <- paste("for i in 3B43.",substr(as.character(year),3,4),"*",sep="")
-    shOut[4] <- "for i in 3B43.*"
-    shOut[11] <- paste(" </VRTRasterBand>' >>",fileLocation,"TRMM.vrt",sep="")
-    shOut[13] <- paste("echo '</VRTDataset>' >>",fileLocation,"TRMM.vrt",sep="")
+    shOut[3] <- paste(" <SRS>WGS84</SRS>' >",
+                      outputfileLocation,"TRMM.vrt;",sep="")
+    shOut[4] <- paste("for i in ",product,".*",sep="")
+    shOut[11] <- paste(" </VRTRasterBand>' >>",
+                       outputfileLocation,"TRMM.vrt",sep="")
+    shOut[13] <- paste("echo '</VRTDataset>' >>",
+                       outputfileLocation,"TRMM.vrt",sep="")
     writeLines(shOut, fileConn)
     close(fileConn)
     
@@ -104,12 +116,16 @@ TRMM <- function(bbox = NULL,
     # loaded as a rasterbrick. This is flipped in y direction and the files 
     # written as multilayer Geotiff. 
     # This Geotiff contains all the layers for 2012 and can 
-    # be opened in every GIS software.
+    # be opened in any GIS software.
     
-    system(paste("sh ",fileLocation,"myTRMM.sh",sep=""))
+    if (.Platform$OS.type == "unix"){
+      system(paste("sh ",outputfileLocation,"myTRMM.sh",sep=""))
+    }else{
+      system(paste("sh ",outputfileLocation,"myTRMM.sh",sep=""))
+      message("Beware this function was tested on a unix machine. If you are not using a unix machine your results could be wrong. Please report any problem to cvitolodev@gmail.com, thanks!")
+    }
     
-    # trmm <- brick(paste(fileLocation,"TRMM.vrt",sep=""))
-    b <- brick(paste(fileLocation,"TRMM.vrt",sep=""))
+    b <- brick(paste(outputfileLocation,"TRMM.vrt",sep=""))
     trmm <- flip(b, direction='y')  
     
     # crop to bounding box  
@@ -117,23 +133,19 @@ TRMM <- function(bbox = NULL,
       bbox <- list(lonMin=-180,latMin=-90,lonMax=+180,latMax=+90)
     }  
     bbSP <- bboxSpatialPolygon(bbox)
-    
-    # e <- extent(lonMin, lonMax, latMin, latMax)
-    # trmm <- crop(trmm, e)
     trmm <- crop(trmm, bbSP)
     
     writeRaster(trmm, 
-                filename=paste(fileLocation,"trmm_acc.tif",sep=""), 
+                filename=paste(outputfileLocation,"trmm_acc.tif",sep=""), 
                 format="GTiff", 
                 overwrite=TRUE)
     
     message("Removing temporary files")
-    # mapply(file.remove, selectedfilePaths, basename(selectedfilePaths)) 
-    file.remove(paste(fileLocation,"TRMM.vrt",sep=""))
-    file.remove(paste(fileLocation,"myTRMM.sh",sep=""))
+    file.remove(paste(outputfileLocation,"TRMM.vrt",sep=""))
+    file.remove(paste(outputfileLocation,"myTRMM.sh",sep=""))
     
     message(paste("Done. The raster-brick was saved in",
-                  paste(fileLocation,"trmm_acc.tif",sep="")))
+                  paste(outputfileLocation,"trmm_acc.tif",sep="")))
     
   }
 

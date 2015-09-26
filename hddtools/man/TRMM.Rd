@@ -4,24 +4,24 @@
 \alias{TRMM}
 \title{Download and convert TRMM data}
 \usage{
-TRMM(bbox = NULL, timeExtent = NULL, fileLocation = "~/",
-  url = "ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/", product = "3B43",
-  version = 7, type = "precipitation.accum")
+TRMM(inputLocation = "ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
+  product = "3B43", version = 7, type = "precipitation.accum",
+  timeExtent = NULL, bbox = NULL, outputfileLocation = "~/")
 }
 \arguments{
-\item{bbox}{bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)}
-
-\item{timeExtent}{is a vector of dates and times for which the data should be retrieve}
-
-\item{fileLocation}{file path where to save the GeoTiff}
-
-\item{url}{url where data is stored (e.g. "ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/3B43_V7/2012/")}
+\item{inputLocation}{location where data is stored. By default it points to the TRMM ftp server ("ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/") but it can also be a local directory. If you are using a local directory, this function expects to find inside 'inputLocation' a folder with the name of product and version (e.g. "i3B43_V7") and inside this a folder for each year( e.g. "2012").}
 
 \item{product}{this is the code that identifies a product, default is "3B43"}
 
 \item{version}{this is the version number, default is 7}
 
 \item{type}{this is the type of information needed, default is "precipitation.accum". Other types could be "gaugeRelativeWeighting.bin" and "relativeError.bin"}
+
+\item{timeExtent}{is a vector of dates and times for which the data should be retrieve}
+
+\item{bbox}{OPTIONAL bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)}
+
+\item{outputfileLocation}{file path where to save the GeoTiff}
 }
 \value{
 Data is loaded as rasterbrick, then converted to a multilayer Geotiff that can
@@ -39,7 +39,16 @@ and on the TRMM FAQ: http://disc.sci.gsfc.nasa.gov/additional/faq/precipitation_
 # bbox <- list(lonMin=-3.82, latMin=52.43,lonMax=-3.63, latMax=52.52)
 # twindow <- seq(as.Date("2012-01-01"), as.Date("2012-01-31"), by="months")
 #
-# TRMM(bbox,twindow)
+# TRMM(inputLocation="ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
+#      product = "3B43",
+#      version = 7,
+#      type = "precipitation.accum",
+#      timeExtent = twindow,
+#      bbox = bbox,
+#      outputfileLocation = "~/")
+#
+# or simply
+# TRMM(timeExtent = twindow, bbox = bbox)
 }
 \author{
 Claudia Vitolo

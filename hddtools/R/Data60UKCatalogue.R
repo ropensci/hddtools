@@ -7,7 +7,6 @@
 #' @param bbox bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)   
 #' @param metadataColumn name of the column to filter
 #' @param entryValue value to look for in the column named metadataColumn
-#' @param verbose if TRUE it returns whether the data is coming from live or cached data sources
 #' 
 #' @return This function returns a data frame made of 5 columns: "id" (hydrometric reference number), "name", "location", "Latitude", "Longitude" and "area".
 #' 
@@ -25,12 +24,11 @@
 #' # Data60UKCatalogue(metadataColumn="id",entryValue="62001")
 #' 
 
-Data60UKCatalogue <- function(bbox=NULL, 
-                              metadataColumn=NULL, entryValue=NULL,
-                              verbose=FALSE){
+Data60UKCatalogue <- function(bbox=NULL, metadataColumn=NULL, entryValue=NULL){
   
   # require(XML)
   # require(RCurl)
+  # require(rnrfa)
   
   CatalogueData60UK <- NULL # to avoid note in check
   
@@ -119,13 +117,13 @@ Data60UKDailyTS <- function(hydroRefNumber,
   # require(XML)
   # require(RCurl)
   
-  theurl <- paste("http://www.ceh.ac.uk/data/nrfa/data/data60uk/data/rq",
+  theurl <- paste("http://nrfaapps.ceh.ac.uk/datauk60/data/rq",
                   hydroRefNumber,".txt",sep="")
   
   if( url.exists(theurl) ) {
     
     message("Retrieving data from live web data source.")
-    temp <- read.table(theurl) #temp <- readHTMLTable(theurl)
+    temp <- read.table(theurl)
     names(temp) <- c("P","Q","DayNumber","Year","nStations")
     
     # Combine the first four columns into a character vector
@@ -137,17 +135,19 @@ Data60UKDailyTS <- function(hydroRefNumber,
     
     myTS <- merge(P,Q)
     
-    if ( !is.null(timeExtent) ){
+    if ( is.null(timeExtent) ){
       
-      myTS <- window(myTS,
-                     start=as.POSIXct(head(timeExtent)[1]),
-                     end=as.POSIXct(tail(timeExtent)[6]))
-      
-      temp <- Data60UKCatalogue(metadataColumn="id",entryValue=hydroRefNumber)
-      stationName <- as.character(temp$name)
-      plot(myTS, main=stationName, xlab="",ylab=c("P [mm/d]","Q [m3/s]"))
+      timeExtent <- seq(as.Date("1980-01-01"), as.Date("1990-12-31"), by="days")
       
     }
+    
+    myTS <- window(myTS,
+                   start=as.POSIXct(head(timeExtent, n=1)[1]),
+                   end=as.POSIXct(tail(timeExtent, n=1)[1]))
+    
+    temp <- Data60UKCatalogue(metadataColumn="id",entryValue=hydroRefNumber)
+    stationName <- as.character(temp$name)
+    plot(myTS, main=stationName, xlab="",ylab=c("P [mm/d]","Q [m3/s]"))
     
     if (plotOption == TRUE){
       

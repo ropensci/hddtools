@@ -48,7 +48,7 @@ The functions provided can filter, slice and dice 2 and 3 dimensional informatio
 bbox <- list(lonMin=-10,latMin=48,lonMax=5,latMax=62)
 
 # Define a temporal extent
-timeExtent <- seq(as.Date("2012-01-01"), as.Date("2012-01-31"), by="months")
+timeExtent <- seq(as.Date("2012-01-01"), as.Date("2012-03-31"), by="months")
 ```
 
 ## The Koppen Climate Classification map
@@ -92,9 +92,8 @@ The hddtools provides a function, called \verb|TRMM()|, to download and convert 
 
 ```R
 # Retreive mean monthly precipitations from 3B43_V7 (based on a bounding box and time extent)
-TRMM(bbox,timeExtent)
-plot(raster("~/trmm_acc.tif"))
-# or
+TRMM(timeExtent = timeExtent, bbox = bbox)
+library(raster)
 b <- brick("~/trmm_acc.tif")
 plot(b)
 ```
@@ -112,18 +111,19 @@ The hddtools contain two functions to interact with this database: one to retrei
 x <- Data60UKCatalogue()
 
 # Filter Data60UK catalogue based on bounding box
-bbox <- list(lonMin=-3.82,latMin=52.41,lonMax=-3.63,latMax=52.52)
+bbox <- list(lonMin=-4,latMin=51,lonMax=-3,latMax=53)
 x <- Data60UKCatalogue(bbox)
 
 # Plot a map
 GenerateMap(x)
 
 # Extract time series 
-y <- Data60UKDailyTS(39015, plotOption=TRUE)
+hydroRefNumber <- as.numeric(as.character(x$id[1])) # e.g. 55012
+y <- Data60UKDailyTS(hydroRefNumber, plotOption=TRUE)
 
 # Extract time series for a specified teporal window
 timeExtent <- seq(as.Date("1988-01-01"), as.Date("1989-12-31"), by="days")
-y <- Data60UKDailyTS(39015, plotOption=TRUE, timeExtent)
+y <- Data60UKDailyTS(hydroRefNumber, plotOption=TRUE, timeExtent)
 ```
 
 ### MOPEX
