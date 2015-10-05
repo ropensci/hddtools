@@ -6,7 +6,7 @@
 \usage{
 TRMM(inputLocation = "ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
   product = "3B43", version = 7, type = "precipitation.accum",
-  timeExtent = NULL, bbox = NULL, outputfileLocation = "~/")
+  timeExtent = NULL, bbox = NULL, outputfileLocation = NULL)
 }
 \arguments{
 \item{inputLocation}{location where data is stored. By default it points to the TRMM ftp server ("ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/") but it can also be a local directory. If you are using a local directory, this function expects to find inside 'inputLocation' a folder with the name of product and version (e.g. "i3B43_V7") and inside this a folder for each year( e.g. "2012").}
@@ -36,7 +36,7 @@ and on the TRMM FAQ: http://disc.sci.gsfc.nasa.gov/additional/faq/precipitation_
 }
 \examples{
 # Define a bounding box
-# bbox <- list(lonMin=-3.82, latMin=52.43,lonMax=-3.63, latMax=52.52)
+# bbox <- list(lonMin=-3.82, latMin=48,lonMax=-3.63, latMax=50)
 # twindow <- seq(as.Date("2012-01-01"), as.Date("2012-01-31"), by="months")
 #
 # TRMM(inputLocation="ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
@@ -49,6 +49,8 @@ and on the TRMM FAQ: http://disc.sci.gsfc.nasa.gov/additional/faq/precipitation_
 #
 # or simply
 # TRMM(timeExtent = twindow, bbox = bbox)
+#
+#  plot(brick("~/trmm_acc.tif"))
 }
 \author{
 Claudia Vitolo

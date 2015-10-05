@@ -23,7 +23,7 @@
 #' 
 #' @examples 
 #' # Define a bounding box
-#' # bbox <- list(lonMin=-3.82, latMin=52.43,lonMax=-3.63, latMax=52.52)
+#' # bbox <- list(lonMin=-3.82, latMin=48,lonMax=-3.63, latMax=50)
 #' # twindow <- seq(as.Date("2012-01-01"), as.Date("2012-01-31"), by="months")
 #' #
 #' # TRMM(inputLocation="ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
@@ -36,6 +36,8 @@
 #' #
 #' # or simply
 #' # TRMM(timeExtent = twindow, bbox = bbox)
+#' # 
+#' #  plot(brick("~/trmm_acc.tif"))
 #'
 
 TRMM <- function(inputLocation="ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
@@ -44,22 +46,53 @@ TRMM <- function(inputLocation="ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
                  type = "precipitation.accum",
                  timeExtent = NULL,
                  bbox = NULL,
-                 outputfileLocation = "~/"
+                 outputfileLocation = NULL
                  ){
   
   # require(raster)
   # require(rgdal)
   # require(RCurl)
   
+  # Check output file location
+  if ( is.null(outputfileLocation) ) outputfileLocation <- getwd()
   setwd(outputfileLocation)
   
-  years <- unique(format(timeExtent,"%Y"))
+  # Check bounding box extent is within original raster extent
+  if (is.null(bbox)){
+    bbox <- list(lonMin=-180,latMin=-50,lonMax=+180,latMax=+50) # TRMM max extent
+  }
+  if (bbox$lonMin < -180 | bbox$lonMin > 180) {
+    bbox$lonMin <- -180
+    message(paste("lonMin of bbox is out of the maximum extent [-180,180],",
+                  "new lonMin of bbox is modified as follows:",
+                  "lonMin =", bbox$lonMin))
+  }
+  if (bbox$lonMax < -180 | bbox$lonMax > 180) {
+    bbox$lonMax <- 180
+    message(paste("lonMax of bbox is out of the maximum extent [-180,180],",
+                  "new lonMax of bbox is modified as follows:",
+                  "lonMax =", bbox$lonMax))
+  }
+  if (bbox$latMin < -50 | bbox$latMin > 50) {
+    bbox$latMin <- -50
+    message(paste("latMin of bbox is out of the maximum extent [-50,50],",
+                  "new latMin of bbox is modified as follows:",
+                  "latMin =", bbox$latMin))
+  }
+  if (bbox$latMax < -50 | bbox$latMax > 50) {
+    bbox$latMax <- 50
+    message(paste("latMax of bbox is out of the maximum extent [-50,50],",
+                  "new latMax of bbox is modified as follows:",
+                  "latMax =", bbox$latMax))
+  }
+  bbSP <- bboxSpatialPolygon(bbox)
   
+  # Check time extent
+  years <- unique(format(timeExtent,"%Y"))
   months <- format(timeExtent,"%m")
   
   if ( any(years=="NULL",months=="NULL") ){
     
-    # timeExtent <- seq(as.Date("1998-01-01"), as.Date(Sys.Date()), by="months")
     message("This function cannot be executed because your timeExtent is not in the correct format. Please enter a suitable timeExtent, then try again.")
     
   }else{
@@ -100,15 +133,10 @@ TRMM <- function(inputLocation="ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
     # generates the VRT-file (TRMM.vrt) for all 2012 data. 
     # Change “3B43.12″ according to your timeExtent.. 
     
-    fileConn <- file(paste(outputfileLocation,"myTRMM.sh",sep=""))
+    # fileConn <- file(paste(outputfileLocation,"myTRMM.sh",sep=""))
+    fileConn <- file("myTRMM.sh")
     shOut <- readLines(system.file("trmm.sh", package="hddtools"),-1)
-    shOut[3] <- paste(" <SRS>WGS84</SRS>' >",
-                      outputfileLocation,"TRMM.vrt;",sep="")
     shOut[4] <- paste("for i in ",product,".*",sep="")
-    shOut[11] <- paste(" </VRTRasterBand>' >>",
-                       outputfileLocation,"TRMM.vrt",sep="")
-    shOut[13] <- paste("echo '</VRTDataset>' >>",
-                       outputfileLocation,"TRMM.vrt",sep="")
     writeLines(shOut, fileConn)
     close(fileConn)
     
@@ -118,34 +146,32 @@ TRMM <- function(inputLocation="ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
     # This Geotiff contains all the layers for 2012 and can 
     # be opened in any GIS software.
     
-    if (.Platform$OS.type == "unix"){
-      system(paste("sh ",outputfileLocation,"myTRMM.sh",sep=""))
-    }else{
-      system(paste("sh ",outputfileLocation,"myTRMM.sh",sep=""))
+    if (.Platform$OS.type != "unix"){
       message("Beware this function was tested on a unix machine. If you are not using a unix machine your results could be wrong. Please report any problem to cvitolodev@gmail.com, thanks!")
     }
+    system(paste("sh","myTRMM.sh"))
     
-    b <- brick(paste(outputfileLocation,"TRMM.vrt",sep=""))
-    trmm <- flip(b, direction='y')  
+    b <- brick("TRMM.vrt")
+    trmm <- flip(b, direction='y')
     
-    # crop to bounding box  
-    if (is.null(bbox)){
-      bbox <- list(lonMin=-180,latMin=-90,lonMax=+180,latMax=+90)
-    }  
-    bbSP <- bboxSpatialPolygon(bbox)
-    trmm <- crop(trmm, bbSP)
+    # Crop TRMM raster based on bbox, if necessary
+    if ( extent(bbSP) == extent(trmm) ){
+      message("Using full spatial extent.")
+    }else{
+      message("Cropping raster to bbox extent.")
+      trmm <- crop(trmm, bbSP)
+    } 
     
     writeRaster(trmm, 
-                filename=paste(outputfileLocation,"trmm_acc.tif",sep=""), 
+                filename="trmm_acc.tif", 
                 format="GTiff", 
                 overwrite=TRUE)
     
     message("Removing temporary files")
-    file.remove(paste(outputfileLocation,"TRMM.vrt",sep=""))
-    file.remove(paste(outputfileLocation,"myTRMM.sh",sep=""))
+    file.remove(c("TRMM.vrt","myTRMM.sh"))
     
     message(paste("Done. The raster-brick was saved in",
-                  paste(outputfileLocation,"trmm_acc.tif",sep="")))
+                  paste(outputfileLocation,"/trmm_acc.tif",sep="")))
     
   }
 

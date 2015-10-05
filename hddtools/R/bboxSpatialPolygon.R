@@ -12,9 +12,9 @@
 #' @export
 #' 
 
-bboxSpatialPolygon <- function( bbox, 
-                                     proj4stringFrom=CRS("+proj=longlat +datum=WGS84"), 
-                                     proj4stringTo=NULL ) {
+bboxSpatialPolygon <- function(bbox, 
+                               proj4stringFrom=CRS("+proj=longlat +datum=WGS84"), 
+                               proj4stringTo=NULL ) {
   
   bb <- matrix(as.numeric(c(bbox$lonMin,bbox$latMin,bbox$lonMax,bbox$latMax)),
                nrow=2)
@@ -33,5 +33,7 @@ bboxSpatialPolygon <- function( bbox,
   if(!is.null(proj4stringTo)) {
     bboxSP <- spTransform( bboxSP, proj4stringTo )
   }
-  bboxSP
+  
+  return(bboxSP)
+  
 }
