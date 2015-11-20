@@ -162,6 +162,35 @@ plot(y[[2]])
 plot(y[[3]])
 ```
 
+## Met Office Hadley Centre Observation Data: HadUKP Data
+The Met Office Hadley Centre provides daily precipitation time series averaged over UK regions and subregions. 
+
+```R
+# Get the list of time series (11)
+x <- HadDAILY()
+```
+
+Below is the list of names used to extract time series for regions/subregions:
+
+- England & Wales: EWP
+- South East England: SEEP
+- South West England & Wales: SWEP
+- Central England: CEP
+- North West England & Wales: NWEP
+- North East England: NEEP
+- Scotland: SP
+- South Scotland: SSP
+- North Scotland: NSP
+- East Scotland: ESP
+- Northern Ireland: NIP
+
+For example, here is how to plot the time series for England and Wales:
+
+```R
+plot(x$EWP)
+```
+
+
 # Warnings
 This package and functions herein are part of an experimental open-source project. They are provided as is, without any guarantee.
 
