@@ -21,7 +21,7 @@ library(devtools)
 install_github("cvitolo/r_rnrfa", subdir = "rnrfa")
 ```
 
-The stable version (preferred option) of hddtools is available from CRAN (http://www.cran.r-project.org/web/packages/hddtools/index.html):
+The stable version (preferred option) of hddtools is available from CRAN:
 
 ```R
 install.packages("hddtools")
