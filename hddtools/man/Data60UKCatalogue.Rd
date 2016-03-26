@@ -4,14 +4,14 @@
 \alias{Data60UKCatalogue}
 \title{Interface for the Data60UK database catalogue}
 \usage{
-Data60UKCatalogue(bbox = NULL, metadataColumn = NULL, entryValue = NULL)
+Data60UKCatalogue(bbox = NULL, columnName = NULL, columnValue = NULL)
 }
 \arguments{
 \item{bbox}{bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)}
 
-\item{metadataColumn}{name of the column to filter}
+\item{columnName}{name of the column to filter}
 
-\item{entryValue}{value to look for in the column named metadataColumn}
+\item{columnValue}{value to look for in the column named columnName}
 }
 \value{
 This function returns a data frame made of 5 columns: "id" (hydrometric reference number), "name", "location", "Latitude", "Longitude" and "area".
@@ -28,7 +28,7 @@ This function interfaces the Data60UK database catalogue (available from http://
 
 # Filter the catalogue
 # Data60UKCatalogue(bbox)
-# Data60UKCatalogue(metadataColumn="id",entryValue="62001")
+# Data60UKCatalogue(columnName="id",columnValue="62001")
 
 }
 \author{
