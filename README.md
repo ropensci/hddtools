@@ -2,6 +2,8 @@ HDDTOOLS (R package)
 =============================================
 
 [![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.14721.svg)](http://dx.doi.org/10.5281/zenodo.14721)
+[![CRAN Status Badge](http://www.r-pkg.org/badges/version/hddtools)](http://cran.r-project.org/web/packages/hddtools)
+[![CRAN Downloads](http://cranlogs.r-pkg.org/badges/hddtools)](http://cran.rstudio.com/web/packages/hddtools/index.html)
 
 HDDTOOLS stands for Hydrological Data Discovery Tools. This R package is an open source project designed to facilitate non-programmatic access to avariety of online open data sources relevant for hydrologists and, more in general, environmental scientists and practitioners. 
 
@@ -32,11 +34,6 @@ The development version is, instead, on github and can be installed via devtools
 ```R
 install_github("cvitolo/r_hddtools", subdir = "hddtools")
 library(hddtools)
-```
-
-Source the additional function GenerateMap():
-```R
-source_gist("https://gist.github.com/cvitolo/f9d12402956b88935c38")
 ```
 
 # Data sources and Functions
@@ -71,16 +68,19 @@ Catalogue, kml files and the product ``Long-Term Mean Monthly Discharges'' are o
 
 ```R
 # GRDC full catalogue
-x <- GRDC_Catalogue()
+x <- catalogueGRDC()
 
 # Filter GRDC catalogue based on a bounding box
-x <- GRDC_Catalogue(bbox=bbox, metadataColumn="statistics", entryValue=1)
+x <- catalogueGRDC(bbox=bbox, metadataColumn="statistics", entryValue=1)
 
-# Plot a map
-GenerateMap(x)
+# Visualise outlets on an interactive map
+library(leaflet)
+leaflet(data = x) %>%
+  addTiles() %>%  # Add default OpenStreetMap map tiles
+  addMarkers(~Longitude, ~Latitude, popup=~name)
 
 # Monthly data extraction
-y <- GRDC_TS(stationID="6122300", plotOption=TRUE)
+y <- tsGRDC(stationID="6122300", plotOption=TRUE)
 ```
 
 ## NASA's Tropical Rainfall Measuring Mission (TRMM, only available for github version)
@@ -94,7 +94,7 @@ The hddtools provides a function, called \verb|TRMM()|, to download and convert 
 # Retreive mean monthly precipitations from 3B43_V7 (based on a bounding box and time extent)
 TRMM(timeExtent = timeExtent, bbox = bbox)
 library(raster)
-b <- brick("~/trmm_acc.tif")
+b <- brick("trmm_acc.tif")
 plot(b)
 ```
 
@@ -108,22 +108,25 @@ The hddtools contain two functions to interact with this database: one to retrei
 
 ```R
 # Data60UK full catalogue
-x <- Data60UKCatalogue()
+x <- catalogueData60UK()
 
 # Filter Data60UK catalogue based on bounding box
 bbox <- list(lonMin=-4,latMin=51,lonMax=-3,latMax=53)
-x <- Data60UKCatalogue(bbox)
+x <- catalogueData60UK(bbox)
 
-# Plot a map
-GenerateMap(x)
+# Visualise outlets on an interactive map
+library(leaflet)
+leaflet(data = x) %>%
+  addTiles() %>%  # Add default OpenStreetMap map tiles
+  addMarkers(~Longitude, ~Latitude, popup=~Location)
 
 # Extract time series 
 hydroRefNumber <- as.numeric(as.character(x$id[1])) # e.g. 55012
-y <- Data60UKDailyTS(hydroRefNumber, plotOption=TRUE)
+y <- tsData60UK(hydroRefNumber, plotOption=TRUE)
 
-# Extract time series for a specified teporal window
+# Extract time series for a specified temporal window
 timeExtent <- seq(as.Date("1988-01-01"), as.Date("1989-12-31"), by="days")
-y <- Data60UKDailyTS(hydroRefNumber, plotOption=TRUE, timeExtent)
+y <- tsData60UK(hydroRefNumber, plotOption=TRUE, timeExtent)
 ```
 
 ### MOPEX
@@ -131,14 +134,20 @@ US dataset containing historical hydrometeorological data and river basin charac
 
 ```R
 # MOPEX full catalogue
-x <- MOPEX_Catalogue()
+x <- catalogueMOPEX()
+
+# Visualise outlets on an interactive map
+library(leaflet)
+leaflet(data = x) %>%
+  addTiles() %>%  # Add default OpenStreetMap map tiles
+  addMarkers(~Longitude, ~Latitude, popup=~name)
 
 # Extract time series 
-y <- MOPEX_TS("14359000", plotOption=TRUE)
+y <- tsMOPEX("14359000", plotOption=TRUE)
 
 # Extract time series for a specified temporal window
 timeExtent <- seq(as.Date("1948-01-01"), as.Date("1949-12-31"), by="days")
-y <- MOPEX_TS("14359000", plotOption=TRUE, timeExtent)
+y <- tsMOPEX("14359000", plotOption=TRUE, timeExtent)
 ```
 
 ## SEPA river level data
@@ -146,17 +155,17 @@ The Scottish Environment Protection Agency (SEPA) manages river level data for h
 
 ```R
 # SEPA unofficial catalogue
-x <- SEPA_Catalogue()
+x <- catalogueSEPA()
 ```
 
 The time series of the last few days is available from SEPA website and downloadable using the following function:
 
 ```R
-# Single time series extraction
-y <- SEPA_TS(hydroRefNumber=234253, plotOption=TRUE)
+# Single time series extraction (sever is currently down!)
+y <- tsSEPA(hydroRefNumber = 234253, plotOption = TRUE)
 
 # Multiple time series extraction
-y <- SEPA_TS(hydroRefNumber=c(234253,234174,234305))
+y <- tsSEPA(hydroRefNumber = c(234253, 234174, 234305))
 plot(y[[1]])
 plot(y[[2]])
 plot(y[[3]])
