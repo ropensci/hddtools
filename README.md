@@ -3,7 +3,8 @@ HDDTOOLS (R package)
 
 [![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.14721.svg)](http://dx.doi.org/10.5281/zenodo.14721)
 [![CRAN Status Badge](http://www.r-pkg.org/badges/version/hddtools)](http://cran.r-project.org/web/packages/hddtools)
-[![CRAN Downloads](http://cranlogs.r-pkg.org/badges/hddtools)](http://cran.rstudio.com/web/packages/hddtools/index.html)
+[![CRAN Total Downloads](http://cranlogs.r-pkg.org/badges/grand-total/hddtools)](http://cran.rstudio.com/web/packages/hddtools/index.html)
+[![CRAN Monthly Downloads](http://cranlogs.r-pkg.org/badges/hddtools)](http://cran.rstudio.com/web/packages/hddtools/index.html)
 
 HDDTOOLS stands for Hydrological Data Discovery Tools. This R package is an open source project designed to facilitate non-programmatic access to avariety of online open data sources relevant for hydrologists and, more in general, environmental scientists and practitioners. 
 
