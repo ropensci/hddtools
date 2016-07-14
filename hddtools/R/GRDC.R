@@ -16,16 +16,16 @@
 #' 
 #' @examples
 #' # Retrieve the whole catalogue
-#' # GRDC_Catalogue()
+#' # catalogueGRDC()
 #' 
 #' # Define a bounding box
 #' # bbox <- list(lonMin=-3.82,latMin=52.41,lonMax=-3.63,latMax=52.52)
 #' 
 #' # Filter the catalogue
-#' # GRDC_Catalogue(bbox)
+#' # catalogueGRDC(bbox)
 #' 
 
-GRDC_Catalogue <- function(bbox = NULL, stationID = NULL, 
+catalogueGRDC <- function(bbox = NULL, stationID = NULL, 
                            metadataColumn=NULL, entryValue=NULL,
                            mdDescription=FALSE){
 
@@ -138,14 +138,14 @@ GRDC_Catalogue <- function(bbox = NULL, stationID = NULL,
 #' @export
 #' 
 #' @examples 
-#' # x <- GRDC_TS(stationID=1107700)
+#' # x <- tsGRDC(stationID=1107700)
 #' 
 
-GRDC_TS <- function(stationID, plotOption=FALSE){
+tsGRDC <- function(stationID, plotOption=FALSE){
   
   options(warn=-1) 
   
-  temp <- GRDC_Catalogue()  
+  temp <- catalogueGRDC()  
     
   if ( temp[which(temp$grdc_no==stationID),"statistics"] == 1 ){
     
@@ -154,7 +154,7 @@ GRDC_TS <- function(stationID, plotOption=FALSE){
     grdcLTMMD <- read.csv(temp,sep="\t") 
     
     # Retrieve WMO region from catalogue
-    wmoRegion <- GRDC_Catalogue(stationID = stationID)$wmo_reg
+    wmoRegion <- catalogueGRDC(stationID = stationID)$wmo_reg
     
     # Retrieve ftp server location
     zipFile <- as.character(grdcLTMMD[which(grdcLTMMD$WMO.Region==wmoRegion),
@@ -226,8 +226,8 @@ GRDC_TS <- function(stationID, plotOption=FALSE){
       
       plot(zoo(table3$MQ, order.by=dummyTime),
            main=paste("Monthly statistics: ",
-                      GRDC_Catalogue(stationID = stationID)$name,
-                      " (",GRDC_Catalogue(stationID = stationID)$country_code,
+                      catalogueGRDC(stationID = stationID)$name,
+                      " (",catalogueGRDC(stationID = stationID)$country_code,
                       ")",sep=""),
            type="l",ylim=c(min(table3$LQ),max(table3$HQ)),
            xlab="",ylab="m3/s",xaxt = "n")
@@ -235,9 +235,7 @@ GRDC_TS <- function(stationID, plotOption=FALSE){
       polygon(c(dummyTime,rev(dummyTime)), c(table3$HQ,rev(table3$LQ)),
               col = "orange", 
               lty = 0, 
-              lwd = 2, 
-              #border = ""
-              )
+              lwd = 2)
       lines(zoo(table3$MQ, order.by=dummyTime), lty=2, lwd=3, col="red")
       
       legend("top", legend = c("Min-Max range", "Mean"), 

@@ -4,47 +4,30 @@
 #' 
 #' @description This function interfaces the MOPEX database catalogue (available from ftp://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/) containing 438 daily datasets.
 #' 
-#' @param bbox bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)   
-#' @param metadataColumn name of the column to filter
-#' @param entryValue value to look for in the column named metadataColumn
-#' @param verbose if TRUE it returns whether the data is coming from live or cached data sources
-#' 
 #' @return This function returns a data frame made of 5 columns: "id" (hydrometric reference number), "name", "location", "Latitude" and "Longitude".
 #' 
 #' @export
 #' 
 #' @examples 
-#' # Retrieve the whole catalogue
-#' # MOPEX_Catalogue()
+#' # Retrieve the MOPEX catalogue
+#' # catalogueMOPEX()
 #' 
 
-MOPEX_Catalogue <- function(bbox=NULL, 
-                            metadataColumn=NULL, entryValue=NULL,
-                            verbose=FALSE){
+catalogueMOPEX <- function(){
   
   # require(XML)
   # require(RCurl)
   
-  theurl <- "ftp://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/Us_438_Daily" 
+  # theurl <- "ftp://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/Us_438_Daily"
+  myTable <- read.fwf(
+    file = url("ftp://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/Basin_Characteristics/usgs431.txt"),
+    widths = c(8, 10, 10, 11, 11, 8, 8, 4, 4, 3, 9, 50)
+    )
+  myTable$V1 <- str_pad(myTable$V1, width=8, side="left", pad="0")
   
-  if(url.exists(theurl)) {
-    if (verbose == TRUE) message("Retrieving data from live web data source.")
-    x <- getContent(theurl)
-    stationID <- c()
-    for (i in 1:length(x)) {
-      if ( !grepl("readme.txt", x[i]) ){
-        stationID <- c(stationID, substr(x[i],66,73))
-      }
-    }
-  }else{
-    if (verbose == TRUE) message("The connection with the live web data source failed. No cached results available.")
-  } 
-  
-  myTable <- data.frame("id"=stationID)
-  myTable$name <- NA
-  myTable$location <- NA
-  myTable$Latitude <- NA
-  myTable$Longitude <- NA  
+  names(myTable) <- c("id", "Longitude", "Latitude", "V4", "V5", 
+                      "start", "stop", "V8",
+                      "V9", "STATEcode", "V11", "name")
   
   return(myTable)
   
@@ -65,64 +48,46 @@ MOPEX_Catalogue <- function(bbox=NULL,
 #' @export
 #' 
 #' @examples 
-#' # MOPEX_TS("14359000")
+#' # tsMOPEX("14359000")
 #' 
 
-MOPEX_TS <- function(hydroRefNumber, plotOption=FALSE, timeExtent = NULL){
+tsMOPEX <- function(hydroRefNumber, plotOption=FALSE, timeExtent = NULL){
   
   # require(zoo)
   # require(XML)
   # require(RCurl)
+  # hydroRefNumber <- "14359000"
   
   theurl <- paste("ftp://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/Us_438_Daily/",hydroRefNumber,".dly",sep="")
   
   if(url.exists(theurl)) {
     message("Retrieving data from live web data source.")   
-    temp <- getURL(theurl, ftp.use.epsv = FALSE) 
-    temp2 <- unlist(strsplit(temp,"\r\n"))
     
-    # From readme.txt
-    # Col. 1: date (yyyymmdd)
-    #      2: mean areal precipitation (mm)
-    #      3: climatic potential evaporation (mm)
-    #         (based NOAA Freewater Evaporation Atlas)
-    #      4: daily streamflow discharge (mm)
-    #      5: daily maximum air temperature (Celsius)
-    #      6: daily minimum air temperature (Celsius)
+    myTable <- read.fwf(
+      file = url(theurl),
+      widths = c(4, 2, 2, 11, 11, 8, 8, 4)
+    )
+    myTable[,2] <- str_pad(myTable[,2], width=2, side="left", pad="0")
+    myTable[,3] <- str_pad(myTable[,3], width=2, side="left", pad="0")
     
-    date <- c()    
-    P <- c() 
-    E <- c() 
-    Q <- c() 
-    Tmax <- c() 
-    Tmin <- c() 
-    
-    for ( i in 1:length(temp2) ){
-      year <- as.numeric(substr(temp2[i],1,4))
-      month <- as.numeric(substr(temp2[i],5,6))
-      day <- as.numeric(substr(temp2[i],7,8))
-      date <- c(date, as.character(as.POSIXct(paste(year,month,day,sep="-",
-                                 format="%Y-%m-%d", tz = "UTC"))) )     
-      P <- c(P, as.numeric(substr(temp2[i],9,18)) )
-      E <- c(E, as.numeric(substr(temp2[i],19,28)) )
-      Q <- c(Q, as.numeric(substr(temp2[i],29,38)) )
-      Tmax <- c(Tmax, as.numeric(substr(temp2[i],39,48)) )
-      Tmin <- c(Tmin, as.numeric(substr(temp2[i],49,58)) )   
-    }
+    date <- paste(myTable[,1], "-", myTable[,2], "-", myTable[,3], sep = "")
+    x <- data.frame(date, myTable[,4:8])
+    names(x) <- c("date", "P", "E", "Q", "Tmax", "Tmin")
     
   }else{
     message("The connection with the live web data source failed. No cached results available.")
   }  
   
-  # Coerse first column into a date
-  datetime <- strptime(date, "%Y-%m-%d")
-  P <- zoo(P,order.by=datetime) # measured in ?
-  E <- zoo(E,order.by=datetime) # measured in ?
-  Q <- zoo(Q,order.by=datetime) # measured in ?
-  Tmax <- zoo(Tmax,order.by=datetime) # measured in ?
-  Tmin <- zoo(Tmin,order.by=datetime) # measured in ?
+  # From readme.txt
+  # Col. 1: date (yyyymmdd)
+  #      2: mean areal precipitation (mm)
+  #      3: climatic potential evaporation (mm)
+  #         (based NOAA Freewater Evaporation Atlas)
+  #      4: daily streamflow discharge (mm)
+  #      5: daily maximum air temperature (Celsius)
+  #      6: daily minimum air temperature (Celsius)
   
-  myTS <- merge(P,E,Q,Tmax,Tmin)
+  myTS <- zoo(x[,2:6], order.by = as.Date(x$date))
   
   if ( !is.null(timeExtent) ){
     
@@ -133,12 +98,9 @@ MOPEX_TS <- function(hydroRefNumber, plotOption=FALSE, timeExtent = NULL){
   
   if (plotOption == TRUE){
     
-#     temp <- MOPEXCatalogue(metadataColumn="id",entryValue=hydroRefNumber)
-#     stationName <- as.character(temp$name)
-#     plot(myTS, main=stationName, xlab="",ylab=c("P [mm/d]","Q [m3/s]"))
-    
     plot(myTS, main="", xlab="",
-         ylab = c("P [mm/day]","E [mm/day]", "Q [mm/day]", "Tmax [C]","Tmin [C]"))
+         ylab = c("P [mm/day]","E [mm/day]", 
+                  "Q [mm/day]", "Tmax [C]","Tmin [C]"))
     
   }
   

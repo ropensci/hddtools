@@ -18,6 +18,7 @@ Imports:
     XML,
     zoo,
     rnrfa,
+    stringr,
     Hmisc
 License: GPL-3
 Repository: CRAN

@@ -14,17 +14,17 @@
 #'
 #' @examples
 #' # Retrieve the whole catalogue
-#' # Data60UKCatalogue()
+#' # catalogueData60UK()
 #'
 #' # Define a bounding box
 #' # bbox <- list(lonMin=-3.82,latMin=52.41,lonMax=-3.63,latMax=52.52)
 #'
 #' # Filter the catalogue
-#' # Data60UKCatalogue(bbox)
-#' # Data60UKCatalogue(columnName="id",columnValue="62001")
+#' # catalogueData60UK(bbox)
+#' # catalogueData60UK(columnName="id",columnValue="62001")
 #'
 
-Data60UKCatalogue <- function(bbox=NULL, columnName=NULL, columnValue=NULL){
+catalogueData60UK <- function(bbox=NULL, columnName=NULL, columnValue=NULL){
 
   # require(XML)
   # require(RCurl)
@@ -105,10 +105,10 @@ Data60UKCatalogue <- function(bbox=NULL, columnName=NULL, columnValue=NULL){
 #' @export
 #'
 #' @examples
-#' # Data60UKDailyTS(39015)
+#' # tsData60UK(39015)
 #'
 
-Data60UKDailyTS <- function(hydroRefNumber,
+tsData60UK <- function(hydroRefNumber,
                             plotOption=FALSE,
                             timeExtent = NULL){
 
@@ -144,13 +144,13 @@ Data60UKDailyTS <- function(hydroRefNumber,
                    start=as.POSIXct(head(timeExtent, n=1)[1]),
                    end=as.POSIXct(tail(timeExtent, n=1)[1]))
 
-    temp <- Data60UKCatalogue(columnName="id",columnValue=hydroRefNumber)
+    temp <- catalogueData60UK(columnName="id",columnValue=hydroRefNumber)
     stationName <- as.character(temp$name)
     plot(myTS, main=stationName, xlab="",ylab=c("P [mm/d]","Q [m3/s]"))
 
     if (plotOption == TRUE){
 
-      temp <- Data60UKCatalogue(columnName="id",columnValue=hydroRefNumber)
+      temp <- catalogueData60UK(columnName="id",columnValue=hydroRefNumber)
       stationName <- as.character(temp$name)
       plot(myTS, main=stationName, xlab="",ylab=c("P [mm/d]","Q [m3/s]"))
 

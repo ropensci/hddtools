@@ -15,10 +15,10 @@
 #' 
 #' @examples 
 #' # Retrieve the whole catalogue
-#' # SEPA_Catalogue()
+#' # catalogueSEPA()
 #' 
 
-SEPA_Catalogue <- function(bbox=NULL, 
+catalogueSEPA <- function(bbox=NULL, 
                            metadataColumn=NULL, entryValue=NULL,
                            verbose=FALSE){
   
@@ -60,37 +60,39 @@ SEPA_Catalogue <- function(bbox=NULL,
 #' @export
 #' 
 #' @examples 
-#' # SEPA_TS("234253")
+#' # tsSEPA("234253")
 #' 
 
-SEPA_TS <- function(hydroRefNumber, plotOption=FALSE, timeExtent = NULL){
+tsSEPA <- function(hydroRefNumber, plotOption=FALSE, timeExtent = NULL){
   
   # require(zoo)
   # require(XML)
   # require(RCurl)
   
+  myTS <- NULL
   myList <- list()
   counter <- 0
   
-  for (id in hydroRefNumber){
+  for (id in as.list(hydroRefNumber)){
     counter <- counter + 1
     
     theurl <- paste("http://apps.sepa.org.uk/database/riverlevels/",
-                    id,".csv",sep="")
+                    id,"-SG.csv",sep="")
     
     if(url.exists(theurl)) {
       message("Retrieving data from live web data source.")       
-      sepaTS <- read.csv(theurl)   
+      sepaTS <- read.csv(theurl, skip = 6)   
       
       # Coerse first column into a date
       datetime <- strptime(sepaTS[,1], "%d/%m/%Y %H:%M")
-      myTS <- zoo(sepaTS[,2],order.by=datetime) # measured in m
+      myTS <- zoo(sepaTS[,2], order.by=datetime) # measured in m
       
       if ( !is.null(timeExtent) ){
         
         myTS <- window(myTS,
                        start=as.POSIXct(head(timeExtent)[1]),
                        end=as.POSIXct(tail(timeExtent)[6]))
+        
       }
       
       if (plotOption == TRUE){
