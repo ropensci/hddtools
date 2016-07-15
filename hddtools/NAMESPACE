@@ -1,13 +1,17 @@
-import(sp)
-import(rgdal)
-import(raster)
-import(RCurl)
-import(XML)
-import(zoo)
-import(rnrfa)
-importFrom(stringr, str_pad)
-importFrom(Hmisc, monthDays)
-
+importFrom("stringr", "str_pad")
+importFrom("Hmisc", "monthDays")
+importFrom("graphics", "axis", "legend", "polygon", "lines", "plot")
+importFrom("stats", "window")
+importFrom("utils", "download.file", "read.csv", "read.fwf",
+           "read.table", "untar", "unzip", "head", "tail")
+importFrom("sp", "CRS", "SpatialPolygons", "Polygons", "Polygon", "spTransform")
+importFrom("raster", "brick", "crop", "extent", "extract", "flip", "raster", 
+           "writeRaster")
+importFrom("RCurl", "getURL", "url.exists")
+importFrom("XML", "readHTMLTable")
+importFrom("zoo", "zoo")
+importFrom("rnrfa", "catalogue")
+  
 export(bboxSpatialPolygon)
 export(catalogueData60UK)
 export(tsData60UK)
