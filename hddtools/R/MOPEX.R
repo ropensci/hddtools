@@ -18,7 +18,6 @@ catalogueMOPEX <- function(){
   # require(XML)
   # require(RCurl)
 
-  # theurl <- "ftp://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/Us_438_Daily"
   myTable <- read.fwf(
     file = url("ftp://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/Basin_Characteristics/usgs431.txt"),
     widths = c(8, 10, 10, 11, 11, 8, 8, 4, 4, 3, 9, 50)
@@ -53,9 +52,10 @@ catalogueMOPEX <- function(){
 
 tsMOPEX <- function(hydroRefNumber, plotOption=FALSE, timeExtent = NULL){
 
-  # require(zoo)
-  # require(XML)
-  # require(RCurl)
+  # library(zoo)
+  # library(XML)
+  # library(RCurl)
+  # library(stringr)
   # hydroRefNumber <- "14359000"
 
   theurl <- paste("ftp://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/Us_438_Daily/",hydroRefNumber,".dly",sep="")
