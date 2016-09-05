@@ -25,14 +25,16 @@ list of stations within the bounding box
 This function interfaces the Global Runoff Data Centre database which provides river discharge data for about 9000 sites over 157 countries.
 }
 \examples{
-# Retrieve the whole catalogue
-# catalogueGRDC()
+\dontrun{
+  # Retrieve the whole catalogue
+  catalogueGRDC()
 
-# Define a bounding box
-# bbox <- list(lonMin=-3.82,latMin=52.41,lonMax=-3.63,latMax=52.52)
+  # Define a bounding box
+  bbox <- list(lonMin=-3.82,latMin=52.41,lonMax=-3.63,latMax=52.52)
 
-# Filter the catalogue
-# catalogueGRDC(bbox)
+  # Filter the catalogue
+  catalogueGRDC(bbox)
+}
 
 }
 \author{

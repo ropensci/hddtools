@@ -1,12 +1,30 @@
+---
+output:
+  html_document: 
+    keep_md: yes
+    variant: markdown_github
+    toc: true
+---
 
 <!-- Edit the README.Rmd only!!! The README.md is generated automatically from README.Rmd. -->
 
-
+```{r echo=FALSE}
+knitr::opts_chunk$set(
+  comment = '#>',
+  collapse = TRUE,
+  warning = FALSE,
+  message = FALSE,
+  eval = FALSE,
+  cache = TRUE
+)
+```
 
 hddtools: Hydrological Data Discovery Tools
 ===========================================
 
 [![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.14721.svg)](http://dx.doi.org/10.5281/zenodo.14721)
+[![Travis-CI Build Status](https://travis-ci.org/cvitolo/hddtools.svg?branch=master)](https://travis-ci.org/cvitolo/hddtools)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/cvitolo/hddtools?branch=master&svg=true)](https://ci.appveyor.com/project/cvitolo/hddtools)
 [![CRAN Status Badge](http://www.r-pkg.org/badges/version/hddtools)](https://cran.r-project.org/package=hddtools)
 [![CRAN Total Downloads](http://cranlogs.r-pkg.org/badges/grand-total/hddtools)](https://cran.r-project.org/package=hddtools)
 [![CRAN Monthly Downloads](http://cranlogs.r-pkg.org/badges/hddtools)](https://cran.r-project.org/package=hddtools)
@@ -20,32 +38,28 @@ Depending on the data license, functions can provide offline and/or online modes
 ## Dependencies & Installation
 The hddtools package depends on other CRAN packages. Check for missing dependencies and install them using the commands below:
 
-
-```r
-packs <- c("sp","rgdal","raster","RCurl","XML","zoo",
-                   "devtools","XML2R","rjson","stringr")
+```{r}
+packs <- c('zoo', 'sp', 'RCurl', 'XML', 'rnrfa', 'Hmisc', 'raster', 
+           'stringr', 'devtools')
 new.packages <- packs[!(packs %in% installed.packages()[,'Package'])]
 if(length(new.packages)) install.packages(new.packages)
 ```
 
 You can install this package from CRAN:
 
-
-```r
+```{r}
 install.packages('hddtools')
 ```
 
 Or you can install the development version from Github with [devtools](https://github.com/hadley/devtools):
 
-
-```r
+```{r}
 devtools::install_github('cvitolo/hddtools', subdir = 'hddtools')
 ```
 
 Load the hddtools package:
 
-
-```r
+```{r, eval = TRUE}
 library('hddtools')
 ```
 
@@ -58,7 +72,7 @@ The functions provided can filter, slice and dice 2 and 3 dimensional informatio
 bbox <- list(lonMin=-10,latMin=48,lonMax=5,latMax=62)
 
 # Define a temporal extent
-timeExtent <- seq(as.Date("2012-01-01"), as.Date("2012-03-31"), by="months")
+timeExtent <- seq(as.Date('2012-01-01'), as.Date('2012-03-31'), by='months')
 ```
 
 ## The Koppen Climate Classification map
@@ -68,10 +82,10 @@ The package hddtools contains a function to identify the updated Koppen-Greiger 
 
 ```R
 # Extract climate zones from Peel's map:
-KGClimateClass(bbox,updatedBy="Peel")
+KGClimateClass(bbox,updatedBy='Peel')
 
 # Extract climate zones from Kottek's map:
-KGClimateClass(bbox,updatedBy="Kottek")
+KGClimateClass(bbox,updatedBy='Kottek')
 ```
 
 ## The Global Runoff Data Centre
@@ -84,7 +98,7 @@ Catalogue, kml files and the product ``Long-Term Mean Monthly Discharges'' are o
 x <- catalogueGRDC()
 
 # Filter GRDC catalogue based on a bounding box
-x <- catalogueGRDC(bbox=bbox, metadataColumn="statistics", entryValue=1)
+x <- catalogueGRDC(bbox=bbox, metadataColumn='statistics', entryValue=1)
 
 # Visualise outlets on an interactive map
 library(leaflet)
@@ -93,7 +107,7 @@ leaflet(data = x) %>%
   addMarkers(~Longitude, ~Latitude, popup=~name)
 
 # Monthly data extraction
-y <- tsGRDC(stationID="6122300", plotOption=TRUE)
+y <- tsGRDC(stationID='6122300', plotOption=TRUE)
 ```
 
 ## NASA's Tropical Rainfall Measuring Mission (TRMM, only available for github version)
@@ -107,7 +121,7 @@ The hddtools provides a function, called \verb|TRMM()|, to download and convert 
 # Retreive mean monthly precipitations from 3B43_V7 (based on a bounding box and time extent)
 TRMM(timeExtent = timeExtent, bbox = bbox)
 library(raster)
-b <- brick("trmm_acc.tif")
+b <- brick('trmm_acc.tif')
 plot(b)
 ```
 
@@ -138,7 +152,7 @@ hydroRefNumber <- as.numeric(as.character(x$id[1])) # e.g. 55012
 y <- tsData60UK(hydroRefNumber, plotOption=TRUE)
 
 # Extract time series for a specified temporal window
-timeExtent <- seq(as.Date("1988-01-01"), as.Date("1989-12-31"), by="days")
+timeExtent <- seq(as.Date('1988-01-01'), as.Date('1989-12-31'), by='days')
 y <- tsData60UK(hydroRefNumber, plotOption=TRUE, timeExtent)
 ```
 
@@ -156,11 +170,11 @@ leaflet(data = x) %>%
   addMarkers(~Longitude, ~Latitude, popup=~name)
 
 # Extract time series 
-y <- tsMOPEX("14359000", plotOption=TRUE)
+y <- tsMOPEX('14359000', plotOption=TRUE)
 
 # Extract time series for a specified temporal window
-timeExtent <- seq(as.Date("1948-01-01"), as.Date("1949-12-31"), by="days")
-y <- tsMOPEX("14359000", plotOption=TRUE, timeExtent)
+timeExtent <- seq(as.Date('1948-01-01'), as.Date('1949-12-31'), by='days')
+y <- tsMOPEX('14359000', plotOption=TRUE, timeExtent)
 ```
 
 ## SEPA river level data

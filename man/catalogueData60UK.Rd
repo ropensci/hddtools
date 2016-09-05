@@ -20,15 +20,17 @@ This function returns a data frame made of 5 columns: "id" (hydrometric referenc
 This function interfaces the Data60UK database catalogue (available from http://www.nwl.ac.uk/ih/nrfa/pub/index.html) containing 61 datasets. Dataset catalogue is available from http://www.nwl.ac.uk/ih/nrfa/pub/data.html.
 }
 \examples{
-# Retrieve the whole catalogue
-# catalogueData60UK()
+\dontrun{
+  # Retrieve the whole catalogue
+  catalogueData60UK()
 
-# Define a bounding box
-# bbox <- list(lonMin=-3.82,latMin=52.41,lonMax=-3.63,latMax=52.52)
+  # Define a bounding box
+  bbox <- list(lonMin=-3.82,latMin=52.41,lonMax=-3.63,latMax=52.52)
 
-# Filter the catalogue
-# catalogueData60UK(bbox)
-# catalogueData60UK(columnName="id",columnValue="62001")
+  # Filter the catalogue
+  catalogueData60UK(bbox)
+  catalogueData60UK(columnName="id",columnValue="62001")
+}
 
 }
 \author{

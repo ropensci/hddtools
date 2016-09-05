@@ -13,11 +13,12 @@ list of 11 time series (1 per region/subregion)
 This function interfaces the Met Office Hadley Centre observations datasets: HadUKP which provides daily precipitation data for 3 regions and 8 subregions in the United Kingdom.
 }
 \examples{
-# Retrieve the full dataset (list of 11 time series)
-# require(Hmisc)
-# require(zoo)
-# x <- HadDAILY()
-# plot(x$EWP) # time series for England and Wales
+\dontrun{
+  # Retrieve the full dataset (list of 11 time series)
+  x <- HadDAILY()
+  plot(x$EWP) # time series for England and Wales
+}
+
 }
 \author{
 Claudia Vitolo

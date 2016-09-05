@@ -6,19 +6,12 @@ Description: Facilitates discovery and handling of hydrological data,
     non-programmatic access to catalogues and databases.
 Author: Claudia Vitolo [aut, cre]
 Maintainer: Claudia Vitolo <cvitolodev@gmail.com>
-URL: http://cvitolo.github.io/r_hddtools/
-BugReports: https://github.com/cvitolo/r_hddtools/issues
+URL: http://cvitolo.github.io/hddtools/
+BugReports: https://github.com/cvitolo/hddtools/issues
 Depends:
     R (>= 3.0.2)
-Imports:
-    sp,
-    raster,
-    RCurl,
-    XML,
-    zoo,
-    rnrfa,
-    stringr,
-    Hmisc
+Imports: zoo, sp, RCurl, XML, rnrfa, Hmisc, raster, stringr
+Suggests: testthat
 License: GPL-3
 Repository: CRAN
 RoxygenNote: 5.0.1

@@ -5,8 +5,7 @@
 \title{Convert a bounding box to a SpatialPolygons object
 Bounding box is first created (in lat/lon) then projected if specified}
 \usage{
-bboxSpatialPolygon(bbox, proj4stringFrom = CRS("+proj=longlat +datum=WGS84"),
-  proj4stringTo = NULL)
+bboxSpatialPolygon(bbox, proj4stringFrom = NULL, proj4stringTo = NULL)
 }
 \arguments{
 \item{bbox}{Bounding box: a 2x2 numerical matrix of lat/lon coordinates}
@@ -21,6 +20,13 @@ A SpatialPolygons object of the bounding box
 \description{
 Convert a bounding box to a SpatialPolygons object
 Bounding box is first created (in lat/lon) then projected if specified
+}
+\examples{
+\dontrun{
+  bbox <- list(lonMin=-180,latMin=-50,lonMax=+180,latMax=+50)
+  bbSP <- bboxSpatialPolygon(bbox)
+}
+
 }
 \references{
 http://gis.stackexchange.com/questions/46954/clip-spatial-object-to-bounding-box-in-r

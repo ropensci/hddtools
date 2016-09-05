@@ -30,27 +30,28 @@ Data is loaded as rasterbrick, then converted to a multilayer Geotiff that can
 The TRMM dataset provide global historical rainfall estimation in a gridded format.
 }
 \details{
-This code is based upon Martin Brandt's blog post: 
+This code is based upon Martin Brandt's blog post:
 http://matinbrandt.wordpress.com/2013/09/04/automatically-downloading-and-processing-trmm-rainfall-data/
 and on the TRMM FAQ: http://disc.sci.gsfc.nasa.gov/additional/faq/precipitation_faq.shtml
 }
 \examples{
-# Define a bounding box
-# bbox <- list(lonMin=-3.82, latMin=48,lonMax=-3.63, latMax=50)
-# twindow <- seq(as.Date("2012-01-01"), as.Date("2012-01-31"), by="months")
-#
-# TRMM(inputLocation="ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
-#      product = "3B43",
-#      version = 7,
-#      type = "precipitation.accum",
-#      timeExtent = twindow,
-#      bbox = bbox,
-#      outputfileLocation = "~/")
-#
-# or simply
-# TRMM(timeExtent = twindow, bbox = bbox)
-# 
-#  plot(brick("~/trmm_acc.tif"))
+\dontrun{
+  # Define a bounding box
+  bbox <- list(lonMin=-3.82, latMin=48,lonMax=-3.63, latMax=50)
+  twindow <- seq(as.Date("2012-01-01"), as.Date("2012-01-31"), by="months")
+
+  TRMM(inputLocation="ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
+       product = "3B43",
+       version = 7,
+       type = "precipitation.accum",
+       timeExtent = twindow,
+       bbox = bbox,
+       outputfileLocation = "~/")
+
+  # or simply
+  TRMM(timeExtent = twindow, bbox = bbox)#'
+  plot(brick("~/trmm_acc.tif"))
+}
 
 }
 \author{

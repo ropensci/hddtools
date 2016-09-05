@@ -13,8 +13,10 @@ This function returns a data frame made of 5 columns: "id" (hydrometric referenc
 This function interfaces the MOPEX database catalogue (available from ftp://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/) containing 438 daily datasets.
 }
 \examples{
-# Retrieve the MOPEX catalogue
-# catalogueMOPEX()
+\dontrun{
+  # Retrieve the MOPEX catalogue
+  catalogueMOPEX()
+}
 
 }
 \author{

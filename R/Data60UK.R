@@ -13,15 +13,17 @@
 #' @export
 #'
 #' @examples
-#' # Retrieve the whole catalogue
-#' # catalogueData60UK()
+#' \dontrun{
+#'   # Retrieve the whole catalogue
+#'   catalogueData60UK()
 #'
-#' # Define a bounding box
-#' # bbox <- list(lonMin=-3.82,latMin=52.41,lonMax=-3.63,latMax=52.52)
+#'   # Define a bounding box
+#'   bbox <- list(lonMin=-3.82,latMin=52.41,lonMax=-3.63,latMax=52.52)
 #'
-#' # Filter the catalogue
-#' # catalogueData60UK(bbox)
-#' # catalogueData60UK(columnName="id",columnValue="62001")
+#'   # Filter the catalogue
+#'   catalogueData60UK(bbox)
+#'   catalogueData60UK(columnName="id",columnValue="62001")
+#' }
 #'
 
 catalogueData60UK <- function(bbox=NULL, columnName=NULL, columnValue=NULL){
@@ -59,7 +61,7 @@ catalogueData60UK <- function(bbox=NULL, columnName=NULL, columnValue=NULL){
     IDs <- unlist(as.numeric(as.character(myTable$id)))
 
     # Find grid reference browsing the NRFA catalogue
-    temp <- catalogue(columnName = "id", columnValue = IDs)
+    temp <- rnrfa::catalogue(columnName = "id", columnValue = IDs)
     refs <- temp$gridReference
     myTable$gridReference <- unlist(refs)
 

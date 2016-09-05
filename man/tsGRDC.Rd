@@ -47,7 +47,9 @@ This function interfaces the Global Runoff Data Centre monthly mean daily discha
 Please note that not all the GRDC stations listed in the catalogue have monthly data available.
 }
 \examples{
-# x <- tsGRDC(stationID=1107700)
+\dontrun{
+  x <- tsGRDC(stationID=1107700)
+}
 
 }
 \author{

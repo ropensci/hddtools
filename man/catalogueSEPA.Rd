@@ -23,8 +23,10 @@ This function returns a data frame made of 9 columns: "idNRFA","aspxpage"       
 This function provides an unofficial SEPA database catalogue of river level data (available from http://pennine.ddns.me.uk/riverlevels/ConciseList.html) containing info for 1752 stations. Some are NRFA stations.
 }
 \examples{
-# Retrieve the whole catalogue
-# catalogueSEPA()
+\dontrun{
+  # Retrieve the whole catalogue
+  x <- catalogueSEPA()
+}
 
 }
 \author{

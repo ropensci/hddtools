@@ -20,11 +20,12 @@ List of overlapping climate zones.
 Given a bounding box, the function identifies the overlapping climate zones.
 }
 \examples{
-# Define a bounding box
-# bbox <- list(lonMin=-3.82,latMin=52.41,lonMax=-3.63,latMax=52.52)
-
-# Get climate classes
-# KGClimateClass(bbox)
+\dontrun{
+  # Define a bounding box
+  bbox <- list(lonMin=-3.82,latMin=52.41,lonMax=-3.63,latMax=52.52)
+  # Get climate classes
+  KGClimateClass(bbox)
+}
 
 }
 \author{

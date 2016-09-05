@@ -1,19 +1,20 @@
 #' Interface for the HadUKP - UK regional precipitation series
-#' 
+#'
 #' @author Claudia Vitolo
-#' 
+#'
 #' @description This function interfaces the Met Office Hadley Centre observations datasets: HadUKP which provides daily precipitation data for 3 regions and 8 subregions in the United Kingdom.
-#' 
+#'
 #' @return list of 11 time series (1 per region/subregion)
-#' 
+#'
 #' @export
-#' 
+#'
 #' @examples
-#' # Retrieve the full dataset (list of 11 time series)
-#' # require(Hmisc)
-#' # require(zoo)
-#' # x <- HadDAILY()
-#' # plot(x$EWP) # time series for England and Wales
+#' \dontrun{
+#'   # Retrieve the full dataset (list of 11 time series)
+#'   x <- HadDAILY()
+#'   plot(x$EWP) # time series for England and Wales
+#' }
+#'
 
 HadDAILY <- function(){
 
@@ -45,9 +46,11 @@ HadDAILY <- function(){
     dataSTART <- as.Date(paste(tmp[1,1], "-", tmp[1,2], "-", "01", sep = ""))
     dataEND <- as.Date(paste(tmp[dim(tmp)[1],1], "-",
                              tmp[dim(tmp)[1],2], "-",
-                             monthDays(as.Date(paste(tmp[dim(tmp)[1],1], "-",
-                                                     tmp[dim(tmp)[1],2], "-",
-                                                     "01", sep = ""))),
+                             Hmisc::monthDays(as.Date(paste(tmp[dim(tmp)[1],1],
+                                                            "-",
+                                                            tmp[dim(tmp)[1],2],
+                                                            "-",
+                                                            "01", sep = ""))),
                              sep = ""))
 
     dailydataREGION <- zoo(NA, seq(from = dataSTART, to = dataEND, by = "day"))
@@ -60,7 +63,7 @@ HadDAILY <- function(){
 
       tmpDate <- as.Date(paste(tmpYear, "-", tmpMonth, "-", "01", sep = ""))
 
-      for (tmpDay in 1:monthDays(tmpDate)){
+      for (tmpDay in 1:Hmisc::monthDays(tmpDate)){
         counter <- counter + 1
         dailydataREGION[[counter]] <- ifelse(tmp[i,tmpDay + 2] < 0, NA,
                                              tmp[i,tmpDay + 2])

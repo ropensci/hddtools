@@ -20,7 +20,9 @@ The function returns river level data in a zoo object.
 This function extract the dataset containing daily rainfall and streamflow discharge at one of the MOPEX locations.
 }
 \examples{
-# tsSEPA("234253")
+\dontrun{
+  x <- tsSEPA("234253")
+}
 
 }
 \author{

@@ -9,8 +9,10 @@
 #' @export
 #'
 #' @examples
-#' # Retrieve the MOPEX catalogue
-#' # catalogueMOPEX()
+#' \dontrun{
+#'   # Retrieve the MOPEX catalogue
+#'   catalogueMOPEX()
+#' }
 #'
 
 catalogueMOPEX <- function(){
@@ -22,7 +24,7 @@ catalogueMOPEX <- function(){
     file = url("ftp://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/Basin_Characteristics/usgs431.txt"),
     widths = c(8, 10, 10, 11, 11, 8, 8, 4, 4, 3, 9, 50)
     )
-  myTable$V1 <- str_pad(myTable$V1, width=8, side="left", pad="0")
+  myTable$V1 <- stringr::str_pad(myTable$V1, width=8, side="left", pad="0")
 
   names(myTable) <- c("id", "Longitude", "Latitude", "V4", "V5",
                       "start", "stop", "V8",
@@ -47,7 +49,9 @@ catalogueMOPEX <- function(){
 #' @export
 #'
 #' @examples
-#' # tsMOPEX("14359000")
+#' \dontrun{
+#'   x <- tsMOPEX("14359000")
+#' }
 #'
 
 tsMOPEX <- function(hydroRefNumber, plotOption=FALSE, timeExtent = NULL){
@@ -67,8 +71,8 @@ tsMOPEX <- function(hydroRefNumber, plotOption=FALSE, timeExtent = NULL){
       file = url(theurl),
       widths = c(4, 2, 2, 10, 10, 10, 10, 10)
     )
-    myTable[,2] <- str_pad(myTable[,2], width=2, side="left", pad="0")
-    myTable[,3] <- str_pad(myTable[,3], width=2, side="left", pad="0")
+    myTable[,2] <- stringr::str_pad(myTable[,2], width=2, side="left", pad="0")
+    myTable[,3] <- stringr::str_pad(myTable[,3], width=2, side="left", pad="0")
 
     date <- paste(myTable[,1], "-", myTable[,2], "-", myTable[,3], sep = "")
     x <- data.frame(date, myTable[,4:8])

@@ -20,7 +20,9 @@ The function returns a data frame containing 2 time series (as zoo objects): "P"
 This function extract the dataset containing daily rainfall and streamflow discharge at one of the MOPEX locations.
 }
 \examples{
-# tsMOPEX("14359000")
+\dontrun{
+  x <- tsMOPEX("14359000")
+}
 
 }
 \author{
