@@ -1,6 +1,6 @@
 Package: hddtools
 Type: Package
-Version: 0.2.5
+Version: 0.3.0
 Title: Hydrological Data Discovery Tools
 Description: Facilitates discovery and handling of hydrological data,
     non-programmatic access to catalogues and databases.
