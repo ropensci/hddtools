@@ -9,8 +9,6 @@
 #'
 #' @references http://gis.stackexchange.com/questions/46954/clip-spatial-object-to-bounding-box-in-r
 #'
-#' @export
-#'
 #' @examples
 #' \dontrun{
 #'   bbox <- list(lonMin=-180,latMin=-50,lonMax=+180,latMax=+50)
@@ -24,14 +22,14 @@ bboxSpatialPolygon <- function(bbox,
 
   if (is.null(proj4stringFrom)){
 
-    message('proj4stringFrom is set to CRS("+proj=longlat +datum=WGS84")')
+    # message('proj4stringFrom is set to CRS("+proj=longlat +datum=WGS84")')
     proj4stringFrom <- sp::CRS("+proj=longlat +datum=WGS84")
 
   }
 
   if (is.null(proj4stringTo)){
 
-    message('proj4stringTo is NULL, no transformation required')
+    # message('proj4stringTo is NULL, no transformation required')
 
   }
 

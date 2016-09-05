@@ -146,10 +146,6 @@ tsData60UK <- function(hydroRefNumber,
                    start=as.POSIXct(head(timeExtent, n=1)[1]),
                    end=as.POSIXct(tail(timeExtent, n=1)[1]))
 
-    temp <- catalogueData60UK(columnName="id",columnValue=hydroRefNumber)
-    stationName <- as.character(temp$name)
-    plot(myTS, main=stationName, xlab="",ylab=c("P [mm/d]","Q [m3/s]"))
-
     if (plotOption == TRUE){
 
       temp <- catalogueData60UK(columnName="id",columnValue=hydroRefNumber)
