@@ -4,9 +4,9 @@ This is a resubmission after adapting the package to include unit tests.
 
 ## Release Summary
 
-This is the second release of rdefra. In this release, we added the following:
+In this new release, we added the following:
 
-* unist tests (using testthat framework)
+* unit tests (using testthat framework)
 * Travis-CI integration
 * Appveyor 
 
