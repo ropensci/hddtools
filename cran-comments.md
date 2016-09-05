@@ -1,4 +1,4 @@
-This is a resubmission after adapting the package to include unit tests.
+This is a resubmission after adapting the package to make it suitable for inclusion in the ropensci framework.
 
 ---------------------------------
 
@@ -6,9 +6,9 @@ This is a resubmission after adapting the package to include unit tests.
 
 In this new release, we added the following:
 
-* unit tests (using testthat framework)
-* Travis-CI integration
-* Appveyor 
+* a vignette
+* paper for submission to JOSS
+* documented the submission to the ropensci project
 
 ## Test environment
 * Ubuntu 14.04, R 3.3.1

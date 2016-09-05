@@ -1,33 +1,22 @@
 ---
-output:
-  html_document: 
-    keep_md: yes
-    variant: markdown_github
-    toc: true
+title: "hddtools: Hydrological Data Discovery Tools"
+author: "Claudia Vitolo"
+date: "5 September 2016"
+output: html_document
 ---
-
-<!-- Edit the README.Rmd only!!! The README.md is generated automatically from README.Rmd. -->
 
 ```{r echo=FALSE}
 knitr::opts_chunk$set(
-  comment = '#>',
+  comment = "#>",
   collapse = TRUE,
   warning = FALSE,
   message = FALSE,
-  eval = FALSE,
-  cache = TRUE
+  cache = TRUE,
+  eval = FALSE
 )
 ```
 
-hddtools: Hydrological Data Discovery Tools
-===========================================
-
-[![DOI](https://zenodo.org/badge/9118/cvitolo/hddtools.svg)](https://zenodo.org/badge/latestdoi/9118/cvitolo/hddtools)
-[![Travis-CI Build Status](https://travis-ci.org/cvitolo/hddtools.svg?branch=master)](https://travis-ci.org/cvitolo/hddtools)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/cvitolo/hddtools?branch=master&svg=true)](https://ci.appveyor.com/project/cvitolo/hddtools)
-[![CRAN Status Badge](http://www.r-pkg.org/badges/version/hddtools)](https://cran.r-project.org/package=hddtools)
-[![CRAN Total Downloads](http://cranlogs.r-pkg.org/badges/grand-total/hddtools)](https://cran.r-project.org/package=hddtools)
-[![CRAN Monthly Downloads](http://cranlogs.r-pkg.org/badges/hddtools)](https://cran.r-project.org/package=hddtools)
+# Introduction
 
 **hddtools** stands for Hydrological Data Discovery Tools. This R package is an open source project designed to facilitate non-programmatic access to a variety of online open data sources relevant for hydrologists and, more in general, environmental scientists and practitioners. 
 
@@ -93,7 +82,7 @@ The Global Runoff Data Centre (GRDC) is an international archive hosted by the F
 
 Catalogue, kml files and the product ``Long-Term Mean Monthly Discharges'' are open data and accessible via the hddtools.
 
-```{r}
+```{r, eval = TRUE}
 # GRDC full catalogue
 x <- catalogueGRDC()
 
@@ -106,8 +95,6 @@ leaflet(data = x) %>%
   addTiles() %>%  # Add default OpenStreetMap map tiles
   addMarkers(~Longitude, ~Latitude, popup=~name)
 ```
-
-![](assets/figures/leaflet.png)
 
 ```{r, eval = TRUE}
 # Monthly data extraction
@@ -129,8 +116,6 @@ b <- brick('trmm_acc.tif')
 plot(b)
 ```
 
-![](assets/figures/TRMM.png)
-
 ### Top-Down modelling Working Group (Data60UK and MOPEX)
 The Top-Down modelling Working Group (TDWG) for the Prediction in Ungauged Basins (PUB) Decade (2003-2012) is an initiative of the International Association of Hydrological Sciences (IAHS) which collected datasets for hydrological modelling free-of-charge, available [here](http://tdwg.catchment.org/datasets.html). This package provides a common interface to retrieve, browse and filter information.
 
@@ -146,17 +131,13 @@ x <- catalogueData60UK()
 # Filter Data60UK catalogue based on bounding box
 bbox <- list(lonMin=-4,latMin=51,lonMax=-3,latMax=53)
 x <- catalogueData60UK(bbox)
-```
 
-```{r}
 # Visualise outlets on an interactive map
 library(leaflet)
 leaflet(data = x) %>%
   addTiles() %>%  # Add default OpenStreetMap map tiles
   addMarkers(~Longitude, ~Latitude, popup=~Location)
 ```
-
-![](assets/figures/leaflet2.png)
 
 ```{r, eval = TRUE}
 # Extract time series 
@@ -229,19 +210,3 @@ For example, here is how to plot the time series for England and Wales:
 ```{r, eval = TRUE}
 plot(x$EWP)
 ```
-
-## T&C
-
-Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
-
-This package and functions herein are part of an experimental open-source project. They are provided as is, without any guarantee.
-
-## Meta
-
-* Please [report any issues or bugs](https://github.com/kehraProject/hddtools/issues).
-* License: [GPL-3](https://opensource.org/licenses/GPL-3.0)
-* Get citation information for `hddtools` in R doing `citation(package = 'hddtools')`
-
-<br/>
-
-[![ropensci_footer](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)

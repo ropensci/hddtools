@@ -1,0 +1,69 @@
+### Summary
+
+-   What does this package do? (explain in 50 words or less):
+
+This R package is an open source project designed to facilitate non-programmatic access to a variety of online open data sources: the Global Runoff Data Center (GRDC), the Scottish Environment Protection Agency (SEPA), the Top-Down modelling Working Group (Data60UK and MOPEX), Met Office Hadley Centre Observation Data (HadUKP Data) and NASA's Tropical Rainfall Measuring Mission (TRMM).
+
+-   Paste the full DESCRIPTION file inside a code block below:
+
+```
+Package: hddtools
+Type: Package
+Title: Hydrological Data Discovery Tools
+Version: 0.3.0
+Date: 2016-09-05
+Authors@R: c(person("Claudia", "Vitolo", email = "cvitolodev@gmail.com", role = c("aut", "cre")))
+Maintainer: Claudia Vitolo <cvitolodev@gmail.com>
+URL: https://github.com/cvitolo/hddtools/
+BugReports: https://github.com/cvitolo/hddtools/issues
+Description: Facilitates discovery and handling of hydrological data, non-programmatic access to catalogues and databases.
+Depends:
+    R (>= 3.0.2)
+Imports: zoo, sp, RCurl, XML, rnrfa, Hmisc, raster, stringr
+Suggests: testthat
+License: GPL-3
+Repository: CRAN
+RoxygenNote: 5.0.1
+```
+
+-   URL for the package (the development repository, not a stylized html page):
+
+https://github.com/cvitolo/hddtools/
+
+-   Who is the target audience?
+
+Hydrologists, environmental scientists and practitioners.
+
+-   Are there other R packages that accomplish the same thing? If so, what is different about yours?
+
+### Requirements
+
+Confirm each of the following by checking the box.  This package:
+
+- [x] does not violate the Terms of Service of any service it interacts with.
+- [x] has a CRAN and OSI accepted license.
+- [x] contains a README with instructions for installing the development version.
+- [x] includes documentation with examples for all functions.
+- [x] contains a vignette with examples of its essential functions and uses.
+- [x] has a test suite.
+- [x] has continuous integration with Travis CI and/or another service.
+
+#### Publication options
+
+- [x] Do you intend for this package to go on CRAN?
+- [x] Do you wish to automatically submit to the [Journal of Open Source Software](http://joss.theoj.org/)? If so:
+    - [x] The package contains a [`paper.md`](http://joss.theoj.org/about#paper_structure) with a high-level description in the package root or in `inst/`.
+    - [x] The package is deposited in a long-term repository with the DOI:
+    http://dx.doi.org/10.5281/zenodo.61570
+
+### Detail
+
+- [x] Does `R CMD check` (or `devtools::check()`) succeed?  Paste and describe any errors or warnings:
+
+- [x] Does the package conform to [rOpenSci packaging guidelines](https://github.com/ropensci/packaging_guide)? Please describe any exceptions:
+
+- If this is a resubmission following rejection, please explain the change in circumstances:
+
+- If possible, please provide recommendations of reviewers - those with experience with similar packages and/or likely users of your package - and their GitHub user names:
+
+@masalmon

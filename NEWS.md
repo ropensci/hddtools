@@ -1,10 +1,16 @@
-# hddtools 0.3.0
+# hddtools 0.4
+
+* Added a vignette
+* Added paper for submission to JOSS
+* Added a document to review the package under the ropensci project
+
+# hddtools 0.3
 
 * Added unist tests (using testthat framework), 
 * Added Travis CI
 * Added Appveyor
 
-# hddtools 0.2.0
+# hddtools 0.2
 
 * Added functions to get data from the following source:
 
@@ -15,6 +21,6 @@
   - SEPA
   - Met Office Hadley Centre
 
-# hddtools 0.1.0
+# hddtools 0.1
 
 * Initial release
