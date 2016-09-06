@@ -3,6 +3,7 @@ context("Data60UK")
 test_that("Test catalogueData60UK function", {
 
   skip_on_cran()
+  skip_on_travis()
 
   # Retrieve the whole catalogue
   x <- try(catalogueData60UK(), silent = TRUE)
@@ -27,8 +28,7 @@ test_that("Test tsData60UK function", {
   # Retrieve sample data
   x <- tsData60UK(hydroRefNumber = 39015)
   expect_that(class(x) == "zoo", equals(TRUE))
-  expect_that(all(names(x) == c("P", "Q")),
-              equals(TRUE))
+  expect_that(all(names(x) == c("P", "Q")), equals(TRUE))
 
 })
 

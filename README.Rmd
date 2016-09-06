@@ -1,9 +1,14 @@
 ---
-output:
-  html_document: 
-    keep_md: yes
-    variant: markdown_github
-    toc: true
+output: 
+  github_document:
+    toc: true # table of content true
+    # depth: 4  # upto four depths of headings (specified by #, ##, ### and ####)
+    # number_sections: true  ## if you want number sections at each table header
+    # theme: united  # many options for theme, this one is my favorite.
+    # highlight: tango  # specifies the syntax highlighting style
+    # css: my.css   # you can add your custom css, should be in same folder
+    # keep_md: yes  # for html_document
+    # variant: markdown_github  # for html_document
 ---
 
 <!-- Edit the README.Rmd only!!! The README.md is generated automatically from README.Rmd. -->
