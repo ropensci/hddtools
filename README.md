@@ -35,15 +35,16 @@ new.packages <- packs[!(packs %in% installed.packages()[,'Package'])]
 if(length(new.packages)) install.packages(new.packages)
 ```
 
-You can install this package from CRAN:
+Get the released version from CRAN:
 
 ``` r
 install.packages('hddtools')
 ```
 
-Or you can install the development version from Github with [devtools](https://github.com/hadley/devtools):
+Or the development version from github using [devtools](https://github.com/hadley/devtools):
 
 ``` r
+# install.packages("devtools")
 devtools::install_github('cvitolo/hddtools')
 ```
 
