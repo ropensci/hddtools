@@ -37,7 +37,10 @@ catalogueSEPA <- function(bbox=NULL,
                               "Location",
                               "GridRef","Operator","CatchmentArea(km2)")
   }else{
-    if (verbose == TRUE) message("The connection with the live web data source failed. Cached results are now loaded.")
+    if (verbose == TRUE) {
+      message(paste("The connection with the live web data source failed.",
+                    "Cached results are now loaded."))
+    }
     load(system.file("data/SEPAcatalogue.rda", package="hddtools"))
   }
 
@@ -95,19 +98,20 @@ tsSEPA <- function(hydroRefNumber, plotOption=FALSE, timeExtent = NULL){
 
       if (plotOption == TRUE){
 
-        #     temp <- MOPEXCatalogue(metadataColumn="id",entryValue=hydroRefNumber)
-        #     stationName <- as.character(temp$name)
-        #     plot(myTS, main=stationName, xlab="",ylab=c("P [mm/d]","Q [m3/s]"))
+        # temp <- MOPEXCatalogue(metadataColumn="id",entryValue=hydroRefNumber)
+        # stationName <- as.character(temp$name)
+        # plot(myTS, main=stationName, xlab="",ylab=c("P [mm/d]","Q [m3/s]"))
 
-        plot(myTS, main="", xlab="",
-             ylab = "River level [m]")
+        plot(myTS, main="", xlab="", ylab = "River level [m]")
 
       }
 
       myList[[counter]] <- myTS
 
     }else{
-      message(paste("For station id",id, "the connection with the live web data source failed. No cached results available."))
+      message(paste("For station id",id,
+                    "the connection with the live web data source failed.",
+                    "No cached results available."))
     }
 
   }

@@ -21,7 +21,8 @@ catalogueMOPEX <- function(){
   # require(RCurl)
 
   myTable <- read.fwf(
-    file = url("ftp://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/Basin_Characteristics/usgs431.txt"),
+    file = url(paste0("ftp://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/",
+                      "Basin_Characteristics/usgs431.txt")),
     widths = c(8, 10, 10, 11, 11, 8, 8, 4, 4, 3, 9, 50)
     )
   myTable$V1 <- stringr::str_pad(myTable$V1, width=8, side="left", pad="0")
@@ -62,7 +63,8 @@ tsMOPEX <- function(hydroRefNumber, plotOption=FALSE, timeExtent = NULL){
   # library(stringr)
   # hydroRefNumber <- "14359000"
 
-  theurl <- paste("ftp://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/Us_438_Daily/",hydroRefNumber,".dly",sep="")
+  theurl <- paste0("ftp://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/",
+                   "Us_438_Daily/",hydroRefNumber,".dly")
 
   if(url.exists(theurl)) {
     message("Retrieving data from live web data source.")
@@ -79,7 +81,8 @@ tsMOPEX <- function(hydroRefNumber, plotOption=FALSE, timeExtent = NULL){
     names(x) <- c("date", "P", "E", "Q", "Tmax", "Tmin")
 
   }else{
-    message("The connection with the live web data source failed. No cached results available.")
+    message(paste("The connection with the live web data source failed.",
+                  "No cached results available."))
   }
 
   # From readme.txt

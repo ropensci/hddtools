@@ -57,7 +57,8 @@ TRMM <- function(inputLocation="ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
 
   # Check bounding box extent is within original raster extent
   if (is.null(bbox)){
-    bbox <- list(lonMin=-180,latMin=-50,lonMax=+180,latMax=+50) # TRMM max extent
+    # Use TRMM max extent
+    bbox <- list(lonMin=-180,latMin=-50,lonMax=+180,latMax=+50)
   }
   if (bbox$lonMin < -180 | bbox$lonMin > 180) {
     bbox$lonMin <- -180
@@ -91,7 +92,9 @@ TRMM <- function(inputLocation="ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
 
   if ( any(years=="NULL",months=="NULL") ){
 
-    message("This function cannot be executed because your timeExtent is not in the correct format. Please enter a suitable timeExtent, then try again.")
+    message(paste("This function cannot be executed because your timeExtent",
+                  "is not in the correct format.",
+                  "Please enter a suitable timeExtent, then try again."))
 
   }else{
 
@@ -145,7 +148,10 @@ TRMM <- function(inputLocation="ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
     # be opened in any GIS software.
 
     if (.Platform$OS.type != "unix"){
-      message("Beware this function was tested on a unix machine. If you are not using a unix machine your results could be wrong. Please report any problem to cvitolodev@gmail.com, thanks!")
+      message(paste("Beware this function was tested on a unix machine.",
+                    "If you are not using a unix machine your results could be",
+                    "wrong. Please report any problem to cvitolodev@gmail.com,",
+                    "thanks!"))
     }
     system(paste("sh","myTRMM.sh"))
 
