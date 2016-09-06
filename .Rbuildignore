@@ -1,0 +1,17 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+
+preparePackage.R
+^README\.Rmd$
+^README-.*\.png$
+^CONDUCT\.md$
+^\.travis\.yml$
+^appveyor\.yml$
+
+README.html
+README_cache
+README_files
+assets
+cran-comments.md
+NEWS.md
+vignettes/hddtools_vignette_cache/*

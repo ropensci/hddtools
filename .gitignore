@@ -7,9 +7,10 @@
 # R data files from past sessions
 .Rdata
 .Rproj.user
+.RData
+old
 
 # Others
-.Rbuildignore
 hddtools.Rproj
 
 # tar files
@@ -18,10 +19,7 @@ hddtools.Rproj
 #test files
 tests
 
-r_hddtools.Rproj
-
-.RData
-old
+# Text files
 README.html
 README_cache/
 
