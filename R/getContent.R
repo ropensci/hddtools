@@ -20,7 +20,7 @@ getContent <- function(dirs) {
 
   urls <- paste(dirs, "/", sep="")
   fls <- strsplit(RCurl::getURL(urls, dirlistonly=TRUE), "\n")
-  ok <- sapply(fls, length) > 0
+  ok <- vapply(fls, length) > 0
   links <- unlist(mapply(paste, urls[ok], fls[ok], sep="", SIMPLIFY=FALSE),
                   use.names=FALSE)
 

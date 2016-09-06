@@ -16,6 +16,6 @@ test_that("Test TRMM function", {
        bbox = bbox,
        outputfileLocation = "."), silent = TRUE)
 
-  expect_that("NULL" %in% class(x), equals(TRUE))
+  expect_that(is.null(x), equals(TRUE))
 
 })

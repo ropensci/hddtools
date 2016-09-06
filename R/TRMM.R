@@ -51,6 +51,7 @@ TRMM <- function(inputLocation="ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
                  ){
 
   # Check output file location
+  originalwd <- getwd()
   if ( is.null(outputfileLocation) ) outputfileLocation <- getwd()
   setwd(outputfileLocation)
 
@@ -171,5 +172,7 @@ TRMM <- function(inputLocation="ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
                   paste(outputfileLocation,"/trmm_acc.tif",sep="")))
 
   }
+
+  on.exit(expr = {setwd(originalwd)})
 
 }

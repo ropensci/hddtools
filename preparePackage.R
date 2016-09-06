@@ -23,3 +23,6 @@ devtools::spell_check()
 devtools::check()
 # The above will also run the unit tests using testthat
 # devtools::test()
+
+# Good practice (on ROPENSCI)???
+# goodpractice::gp()

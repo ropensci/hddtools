@@ -15,3 +15,4 @@ assets
 cran-comments.md
 NEWS.md
 vignettes/hddtools_vignette_cache/*
+.travis.yml

@@ -68,14 +68,20 @@ catalogueData60UK <- function(bbox=NULL, columnName=NULL, columnValue=NULL){
     myTable$Latitude <- temp$lat
     myTable$Longitude <- temp$lon
 
-    myTable <- subset(myTable, (myTable$Latitude <= latMax & myTable$Latitude >= latMin & myTable$Longitude <= lonMax & myTable$Longitude >= lonMin) )
+    myTable <- subset(myTable, (myTable$Latitude <= latMax &
+                                  myTable$Latitude >= latMin &
+                                  myTable$Longitude <= lonMax &
+                                  myTable$Longitude >= lonMin) )
 
     if (!is.null(columnName) & !is.null(columnValue)){
 
-      if (columnName == "id" | columnName == "name" | columnName == "location"){
+      if (columnName == "id" |
+          columnName == "name" |
+          columnName == "location"){
         myTable <- myTable[which(myTable[,columnName] == columnValue),]
       }else{
-        message("columnName can only be one of the following: id, name, location")
+        message(paste("columnName can only be one of the following:",
+                      "id, name, location"))
       }
 
     }

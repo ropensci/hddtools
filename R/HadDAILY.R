@@ -40,7 +40,7 @@ HadDAILY <- function(){
     regionCOUNTER <- regionCOUNTER + 1
 
     fullURL <- paste(baseURL, region, "_daily_qc.txt", sep="")
-    tmp <- read.table(fullURL, skip = 3, header = F)
+    tmp <- read.table(fullURL, skip = 3, header = FALSE)
 
     # create empty time series
     dataSTART <- as.Date(paste(tmp[1,1], "-", tmp[1,2], "-", "01", sep = ""))

@@ -48,7 +48,7 @@ Please note that not all the GRDC stations listed in the catalogue have monthly 
 }
 \examples{
 \dontrun{
-  x <- tsGRDC(stationID=1107700)
+  x <- tsGRDC(stationID = 1107700)
 }
 
 }

@@ -20,7 +20,8 @@
 #'   catalogueGRDC()
 #'
 #'   # Define a bounding box
-#'   bbox <- list(lonMin=-3.82,latMin=52.41,lonMax=-3.63,latMax=52.52)
+#'   bbox <- list(lonMin = -3.82, latMin = 52.41,
+#'                lonMax = -3.63, latMax = 52.52)
 #'
 #'   # Filter the catalogue
 #'   catalogueGRDC(bbox)
@@ -28,16 +29,16 @@
 #'
 
 catalogueGRDC <- function(bbox = NULL, stationID = NULL,
-                           metadataColumn=NULL, entryValue=NULL,
-                           mdDescription=FALSE){
+                          metadataColumn = NULL, entryValue = NULL,
+                          mdDescription = FALSE){
 
   # Retrieve the catalogue
   temp <- system.file("extdata/GRDC/GRDC_Stations_20140320.csv",
                       package = 'hddtools')
-  grdcAll <- read.csv(temp,sep=",")
+  grdcAll <- read.csv(temp,sep = ",")
 
   if (!is.null(stationID)) {
-    grdcSelected <- subset(grdcAll, (grdcAll$grdc_no==stationID) )
+    grdcSelected <- subset(grdcAll, (grdcAll$grdc_no == stationID) )
   }else{
     grdcSelected <- grdcAll
   }
@@ -88,10 +89,10 @@ catalogueGRDC <- function(bbox = NULL, stationID = NULL,
   names(grdcTable)[9]  <- "Latitude"
   names(grdcTable)[10] <- "Longitude"
 
-  if (mdDescription==TRUE){
+  if (mdDescription == TRUE){
 
     temp <- system.file("extdata/GRDC/GRDC_legend.csv", package = 'hddtools')
-    grdcLegend <- read.csv(temp, header=F)
+    grdcLegend <- read.csv(temp, header = FALSE)
 
     grdcTable <- cbind(grdcLegend,t(grdcTable))
     row.names(grdcTable) <- NULL
@@ -146,46 +147,46 @@ catalogueGRDC <- function(bbox = NULL, stationID = NULL,
 #'
 #' @examples
 #' \dontrun{
-#'   x <- tsGRDC(stationID=1107700)
+#'   x <- tsGRDC(stationID = 1107700)
 #' }
 #'
 
-tsGRDC <- function(stationID, plotOption=FALSE){
+tsGRDC <- function(stationID, plotOption = FALSE){
 
-  options(warn=-1)
+  options(warn = -1)
 
   temp <- catalogueGRDC()
 
-  if ( temp[which(temp$grdc_no==stationID),"statistics"] == 1 ){
+  if ( temp[which(temp$grdc_no == stationID),"statistics"] == 1 ){
 
     # Retrieve look-up table
     temp <- system.file("extdata/GRDC/GRDC_LTMMD.csv", package = 'hddtools')
-    grdcLTMMD <- read.csv(temp,sep="\t")
+    grdcLTMMD <- read.csv(temp, sep = "\t")
 
     # Retrieve WMO region from catalogue
     wmoRegion <- catalogueGRDC(stationID = stationID)$wmo_reg
 
     # Retrieve ftp server location
-    zipFile <- as.character(grdcLTMMD[which(grdcLTMMD$WMO.Region==wmoRegion),
+    zipFile <- as.character(grdcLTMMD[which(grdcLTMMD$WMO.Region == wmoRegion),
                                       "Archive"])
 
     # create a temporary directory
     td <- tempdir()
 
     # create the placeholder file
-    tf <- tempfile(tmpdir=td, fileext=".zip")
+    tf <- tempfile(tmpdir = td, fileext = ".zip")
 
     # download into the placeholder file
     download.file(zipFile, tf)
 
     # get the name of the file to unzip
-    fname <- paste("pvm_",stationID,".txt",sep="")
+    fname <- paste("pvm_", stationID, ".txt", sep = "")
 
     # unzip the file to the temporary directory
-    unzip(tf, files=fname, exdir=td, overwrite=TRUE)
+    unzip(tf, files = fname, exdir = td, overwrite = TRUE)
 
     # fpath is the full path to the extracted file
-    fpath = file.path(td, fname)
+    fpath <- file.path(td, fname)
 
     message("Station has monthly records")
 
@@ -196,7 +197,9 @@ tsGRDC <- function(stationID, plotOption=FALSE){
     header3 <- as.numeric(as.character(c(grep("month;LQ;year;MQ;HQ;year;std;n",TS))))
     headerTS <- c(header1,header2,header3)
 
-    myTables <- list("mddPerYear"=NULL,"mddAllPeriod"=NULL,"mddPerMonth"=NULL)
+    myTables <- list("mddPerYear" = NULL,
+                     "mddAllPeriod" = NULL,
+                     "mddPerMonth" = NULL)
 
     for (i in 1:3){
       header <- headerTS[i]
@@ -212,11 +215,11 @@ tsGRDC <- function(stationID, plotOption=FALSE){
       firstTS <- TS[rowStart01:rowEnd01]
       numberOfCol <- length( unlist( strsplit(TS[rowStart01:rowEnd01],";")[1] ) )
       numberOfRow <- length( unlist( strsplit(TS[rowStart01:rowEnd01],";") ) ) / numberOfCol
-      m <- matrix( as.numeric(as.character(unlist( strsplit(TS[rowStart01:rowEnd01],";") ) )), ncol=numberOfCol, nrow=numberOfRow, byrow=TRUE)
-      m[m==-999] <- NA
+      m <- matrix( as.numeric(as.character(unlist( strsplit(TS[rowStart01:rowEnd01],";") ) )), ncol = numberOfCol, nrow = numberOfRow, byrow = TRUE)
+      m[m == -999] <- NA
       m <- data.frame(m)
-      n <- unlist(strsplit(TS[header],";"))
-      n <- n[n!=""]
+      n <- unlist(strsplit(TS[header], ";"))
+      n <- n[n != ""]
       names(m) <- n
 
       myTables[[i]] <- m
@@ -231,21 +234,23 @@ tsGRDC <- function(stationID, plotOption=FALSE){
 
       dummyTime <- seq(as.Date("2012-01-01"),
                        as.Date("2012-12-31"),
-                       by="months")
+                       by = "months")
 
-      plot(zoo(table3$MQ, order.by=dummyTime),
-           main=paste("Monthly statistics: ",
-                      catalogueGRDC(stationID = stationID)$name,
-                      " (",catalogueGRDC(stationID = stationID)$country_code,
-                      ")",sep=""),
-           type="l",ylim=c(min(table3$LQ),max(table3$HQ)),
-           xlab="",ylab="m3/s",xaxt = "n")
+      plot(zoo(table3$MQ, order.by = dummyTime),
+           main = paste("Monthly statistics: ",
+                        catalogueGRDC(stationID = stationID)$name,
+                        " (",
+                        catalogueGRDC(stationID = stationID)$country_code,
+                        ")",
+                        sep=""),
+           type = "l", ylim = c(min(table3$LQ), max(table3$HQ)),
+           xlab = "", ylab = "m3/s", xaxt = "n")
       axis(1, at = dummyTime, labels = format(dummyTime, "%b"))
       polygon(c(dummyTime,rev(dummyTime)), c(table3$HQ,rev(table3$LQ)),
               col = "orange",
               lty = 0,
               lwd = 2)
-      lines(zoo(table3$MQ, order.by=dummyTime), lty=2, lwd=3, col="red")
+      lines(zoo(table3$MQ, order.by = dummyTime), lty = 2, lwd = 3, col = "red")
 
       legend("top", legend = c("Min-Max range", "Mean"),
              bty = "n",

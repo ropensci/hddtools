@@ -6,7 +6,7 @@ test_that("Test catalogueData60UK function", {
 
   # Retrieve the whole catalogue
   x <- catalogueData60UK()
-  expect_that("data.frame" %in% class(x), equals(TRUE))
+  expect_that(class(x) == "data.frame", equals(TRUE))
 
   # Define a bounding box
   bbox <- list(lonMin=-4,latMin=52,lonMax=-3,latMax=53)
