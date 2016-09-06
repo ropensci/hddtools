@@ -13,7 +13,7 @@ hddtools: Hydrological Data Discovery Tools
 [![CRAN Total Downloads](http://cranlogs.r-pkg.org/badges/grand-total/hddtools)](https://cran.r-project.org/package=hddtools)
 [![CRAN Monthly Downloads](http://cranlogs.r-pkg.org/badges/hddtools)](https://cran.r-project.org/package=hddtools)
 
-**hddtools** stands for Hydrological Data Discovery Tools. This R package is an open source project designed to facilitate non-programmatic access to avariety of online open data sources relevant for hydrologists and, more in general, environmental scientists and practitioners. 
+**hddtools** stands for Hydrological Data Discovery Tools. This R package is an open source project designed to facilitate non-programmatic access to a variety of online open data sources relevant for hydrologists and, more in general, environmental scientists and practitioners. 
 
 This typically implies the download of a metadata catalogue, selection of information needed, formal request for dataset(s), de-compression, conversion, manual filtering and parsing. All those operation are made more efficient by re-usable functions. 
 
@@ -269,6 +269,10 @@ This package and functions herein are part of an experimental open-source projec
 
 ## Meta
 
-* Please [report any issues or bugs](https://github.com/kehraProject/hddtools/issues).
+* Please [report any issues or bugs](https://github.com/cvitolo/hddtools/issues).
 * License: [GPL-3](https://opensource.org/licenses/GPL-3.0)
 * Get citation information for `hddtools` in R doing `citation(package = 'hddtools')`
+
+<br/>
+
+[![ropensci_footer](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)

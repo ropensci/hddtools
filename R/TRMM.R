@@ -128,7 +128,7 @@ TRMM <- function(inputLocation="ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
     # geo-informations.
     # To automate the process, there is a template script in inst/trmm.sh that
     # generates the VRT-file (TRMM.vrt) for all 2012 data.
-    # Change “3B43.12″ according to your timeExtent..
+    # Change "3B43.12" according to your timeExtent.
 
     # fileConn <- file(paste(outputfileLocation,"myTRMM.sh",sep=""))
     fileConn <- file("myTRMM.sh")

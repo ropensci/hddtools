@@ -238,7 +238,7 @@ This package and functions herein are part of an experimental open-source projec
 
 ## Meta
 
-* Please [report any issues or bugs](https://github.com/kehraProject/hddtools/issues).
+* Please [report any issues or bugs](https://github.com/cvitolo/hddtools/issues).
 * License: [GPL-3](https://opensource.org/licenses/GPL-3.0)
 * Get citation information for `hddtools` in R doing `citation(package = 'hddtools')`
 

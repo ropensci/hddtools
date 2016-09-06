@@ -6,7 +6,6 @@ citEntry(entry = "manual",
   year = "2016",
   note = "R package version 0.3.0",
   url = "https://CRAN.R-project.org/package=hddtools",
-  doi = "http://dx.doi.org/10.5281/zenodo.61570",
-  textVersion = "Claudia Vitolo. hddtools: Hydrological Data Discovery Tools. R package version 0.3.0
-  https://CRAN.R-project.org/package=hddtools, DOI: http://dx.doi.org/10.5281/zenodo.61570"
+  doi = "10.5281/zenodo.61570",
+  textVersion = "Claudia Vitolo. hddtools: Hydrological Data Discovery Tools. R package version 0.3.0, https://CRAN.R-project.org/package=hddtools, DOI: 10.5281/zenodo.61570"
 )
