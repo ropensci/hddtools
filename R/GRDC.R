@@ -192,9 +192,11 @@ tsGRDC <- function(stationID, plotOption = FALSE){
 
     TS <- readLines(fpath)
 
-    header1 <- as.numeric(as.character(c(grep("year;LQ;month;MQ;;HQ;month;m",TS))))
+    header1 <- as.numeric(as.character(c(grep("year;LQ;month;MQ;;HQ;month;m",
+                                              TS))))
     header2 <- as.numeric(as.character(c(grep("LQ;MQ_1;MQ_2;MQ_3;HQ;n",TS))))
-    header3 <- as.numeric(as.character(c(grep("month;LQ;year;MQ;HQ;year;std;n",TS))))
+    header3 <- as.numeric(as.character(c(grep("month;LQ;year;MQ;HQ;year;std;n",
+                                              TS))))
     headerTS <- c(header1,header2,header3)
 
     myTables <- list("mddPerYear" = NULL,
@@ -213,9 +215,12 @@ tsGRDC <- function(stationID, plotOption = FALSE){
         rowEnd01 <- length(TS)
       }
       firstTS <- TS[rowStart01:rowEnd01]
-      numberOfCol <- length( unlist( strsplit(TS[rowStart01:rowEnd01],";")[1] ) )
-      numberOfRow <- length( unlist( strsplit(TS[rowStart01:rowEnd01],";") ) ) / numberOfCol
-      m <- matrix( as.numeric(as.character(unlist( strsplit(TS[rowStart01:rowEnd01],";") ) )), ncol = numberOfCol, nrow = numberOfRow, byrow = TRUE)
+      numberOfCol <- length(unlist(strsplit(TS[rowStart01:rowEnd01],";")[1]))
+      numberOfRow <- length(unlist(strsplit(TS[rowStart01:rowEnd01],
+                                            ";")))/numberOfCol
+      mtemp <- as.numeric(as.character(unlist(strsplit(TS[rowStart01:rowEnd01],
+                                                       ";"))))
+      m <- matrix(mtemp, ncol = numberOfCol, nrow = numberOfRow, byrow = TRUE)
       m[m == -999] <- NA
       m <- data.frame(m)
       n <- unlist(strsplit(TS[header], ";"))

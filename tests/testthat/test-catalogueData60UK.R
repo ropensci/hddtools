@@ -1,12 +1,11 @@
-context("catalogueData60UK")
+context("Data60UK")
 
 test_that("Test catalogueData60UK function", {
 
   skip_on_cran()
 
   # Retrieve the whole catalogue
-  x <- catalogueData60UK()
-  expect_that(class(x) == "data.frame", equals(TRUE))
+  expect_that(class(catalogueData60UK()) == "data.frame", equals(TRUE))
 
   # Define a bounding box
   bbox <- list(lonMin=-4,latMin=52,lonMax=-3,latMax=53)
@@ -19,3 +18,16 @@ test_that("Test catalogueData60UK function", {
   expect_that(x$Location == "Glan Teifi", equals(TRUE))
 
 })
+
+test_that("Test tsData60UK function", {
+
+  skip_on_cran()
+
+  # Retrieve sample data
+  x <- tsData60UK(hydroRefNumber = 39015)
+  expect_that(class(x) == "zoo", equals(TRUE))
+  expect_that(all(names(x) == c("P", "Q")),
+              equals(TRUE))
+
+})
+

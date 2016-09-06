@@ -114,7 +114,8 @@ KGClimateClass <- function(bbox=NULL,updatedBy="Peel",verbose=FALSE){
     criterion <- "A = Tmin >= +18 C"
 
     if (secondPart == "f"){
-      description <- paste(description,"\nf = Equatorial rainforest, fully humid")
+      description <- paste(description,
+                           "\nf = Equatorial rainforest, fully humid")
       criterion <- paste(criterion,"\nf = Pmin >= 60mm")
     }
     if (secondPart == "m"){
@@ -122,11 +123,13 @@ KGClimateClass <- function(bbox=NULL,updatedBy="Peel",verbose=FALSE){
       criterion <- paste(criterion,"\nm = Pann >= 25*(100 - Pmin)")
     }
     if (secondPart == "s"){
-      description <- paste(description,"\ns = Equatorial savannah with dry summer")
+      description <- paste(description,
+                           "\ns = Equatorial savannah with dry summer")
       criterion <- paste(criterion,"\ns = Pmin < 60mm in summer")
     }
     if (secondPart == "w"){
-      description <- paste(description,"\nw = Equatorial savannah with dry winter")
+      description <- paste(description,
+                           "\nw = Equatorial savannah with dry winter")
       criterion <- paste(criterion,"\nw = Pmin < 60mm in winter")
     }
   }
@@ -152,16 +155,25 @@ KGClimateClass <- function(bbox=NULL,updatedBy="Peel",verbose=FALSE){
     criterion <- "C = -3 C < Tmin < +18 C"
 
     if (secondPart == "s"){
-      description <- paste(description,"\ns = Warm temperate climate with dry summer")
-      criterion <- paste(criterion,"\ns = Psmin < Pwmin , Pwmax > 3 Psmin and Psmin < 40mm")
+      description <- paste(description,
+                           "\ns = Warm temperate climate with dry summer")
+      criterion <- paste(criterion,
+                         "\ns = Psmin < Pwmin , Pwmax > 3",
+                         "Psmin and Psmin < 40mm")
     }
     if (secondPart == "w"){
-      description <- paste(description,"\nw = Warm temperate climate with dry winter")
-      criterion <- paste(criterion,"\nw = Pwmin < Psmin and Psmax > 10 Pwmin")
+      description <- paste(description,
+                           "\nw = Warm temperate climate with dry winter")
+      criterion <- paste(criterion,
+                         "\nw = Pwmin < Psmin and Psmax > 10 Pwmin")
     }
     if (secondPart == "f"){
-      description <- paste(description,"\nf = Warm temperate climate, fully humid")
-      criterion <- paste(criterion,"\nf = neither Cs nor Cw","\n(Cs's criterion: Psmin < Pwmin , Pwmax > 3 Psmin and Psmin < 40mm. \nCw's criterion: Pwmin < Psmin and Psmax > 10 Pwmin.)")
+      description <- paste(description,
+                           "\nf = Warm temperate climate, fully humid")
+      criterion <- paste(criterion,
+                         "\nf = neither Cs nor Cw","\n(Cs's criterion: Psmin <",
+                         "Pwmin , Pwmax > 3 Psmin and Psmin < 40mm. \nCw's",
+                         "criterion: Pwmin < Psmin and Psmax > 10 Pwmin.)")
     }
   }
   if (firstPart == "D"){
@@ -171,7 +183,9 @@ KGClimateClass <- function(bbox=NULL,updatedBy="Peel",verbose=FALSE){
 
     if (secondPart == "s"){
       description <- paste(description,"\ns = Snow climate with dry summer")
-      criterion <- paste(criterion,"\ns = Psmin < Pwmin , Pwmax > 3 Psmin and Psmin < 40mm")
+      criterion <- paste(criterion,
+                         "\ns = Psmin < Pwmin , Pwmax > 3",
+                         "Psmin and Psmin < 40mm")
     }
     if (secondPart == "w"){
       description <- paste(description,"\nw = Snow climate with dry winter")
@@ -179,7 +193,10 @@ KGClimateClass <- function(bbox=NULL,updatedBy="Peel",verbose=FALSE){
     }
     if (secondPart == "f"){
       description <- paste(description,"\nf = Snow climate, fully humid")
-      criterion <- paste(criterion,"\nf = neither Ds nor Dw","\n(Ds's criterion: Psmin < Pwmin , Pwmax > 3 Psmin and Psmin < 40mm. \nDw's criterion: Pwmin < Psmin and Psmax > 10 Pwmin.)")
+      criterion <- paste(criterion,"\nf = neither Ds nor Dw","\n(Ds's",
+                         "criterion: Psmin < Pwmin , Pwmax > 3 Psmin and",
+                         "Psmin < 40mm. \nDw's criterion: Pwmin < Psmin and",
+                         "Psmax > 10 Pwmin.)")
     }
   }
   if (firstPart == "E"){
@@ -210,16 +227,19 @@ KGClimateClass <- function(bbox=NULL,updatedBy="Peel",verbose=FALSE){
     criterion <- paste(criterion,"\na = Tmax >= +22 C")
   }
   if (thirdPart == "b"){
-    description <- paste(description,"\nb = Warm summer")
-    criterion <- paste(criterion,"\nb = Tmax < +22 C & at least 4 Tmon >= +10 C")
+    description <- paste(description, "\nb = Warm summer")
+    criterion <- paste(criterion,
+                       "\nb = Tmax < +22 C & at least 4 Tmon >= +10 C")
   }
   if (thirdPart == "c"){
-    description <- paste(description,"\nc = Cool summer and cold winter")
-    criterion <- paste(criterion,"\nc = Tmax >= +22 C & 4 Tmon < +10 C & Tmin > -38 C")
+    description <- paste(description, "\nc = Cool summer and cold winter")
+    criterion <- paste(criterion,
+                       "\nc = Tmax >= +22 C & 4 Tmon < +10 C & Tmin > -38 C")
   }
   if (thirdPart == "d"){
-    description <- paste(description,"\nd = Extremely continental")
-    criterion <- paste(criterion,"\nd = Tmax >= +22 C & 4 Tmon < +10 C & Tmin <= -38 C")
+    description <- paste(description, "\nd = Extremely continental")
+    criterion <- paste(criterion,
+                       "\nd = Tmax >= +22 C & 4 Tmon < +10 C & Tmin <= -38 C")
   }
 
   if ( verbose == TRUE ){

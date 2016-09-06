@@ -24,5 +24,7 @@ devtools::check()
 # The above will also run the unit tests using testthat
 # devtools::test()
 
-# Good practice (on ROPENSCI)???
-# goodpractice::gp()
+# Good practice (@MangoTheCat)
+# devtools::install_github("MangoTheCat/goodpractice")
+library(goodpractice)
+gp(path = getwd())
