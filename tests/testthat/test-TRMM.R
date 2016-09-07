@@ -3,7 +3,6 @@ context("TRMM")
 test_that("Test TRMM function", {
 
   skip_on_cran()
-  skip_on_travis()
 
   # Define a bounding box
   bbox <- list(lonMin=-3.82, latMin=48,lonMax=-3.63, latMax=50)

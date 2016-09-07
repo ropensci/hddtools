@@ -3,7 +3,6 @@ context("KGClimateClass")
 test_that("Test KGClimateClass function", {
 
   skip_on_cran()
-  skip_on_travis()
 
   # Define a bounding box
   bbox <- list(lonMin=-3.82,latMin=52.41,lonMax=-3.63,latMax=52.52)

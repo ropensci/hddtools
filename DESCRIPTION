@@ -9,7 +9,7 @@ BugReports: https://github.com/cvitolo/hddtools/issues
 Description: Facilitates discovery and handling of hydrological data, non-programmatic access to catalogues and databases.
 Depends:
     R (>= 3.0.2)
-Imports: zoo, sp, RCurl, XML, rnrfa, Hmisc, raster, stringr
+Imports: zoo, sp, rgdal, RCurl, XML, rnrfa, Hmisc, raster, stringr
 Suggests: testthat
 License: GPL-3
 Repository: CRAN

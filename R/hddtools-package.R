@@ -15,6 +15,7 @@
 #' @importFrom stats window
 #' @importFrom utils download.file head read.csv read.fwf read.table tail untar unzip
 #' @importFrom zoo zoo
+#' @import rgdal
 #' @importFrom sp CRS SpatialPolygons Polygon Polygons
 #' @importFrom RCurl url.exists getURL
 #' @importFrom XML readHTMLTable
