@@ -17,9 +17,9 @@ hddtools: Hydrological Data Discovery Tools
 
 [![DOI](https://zenodo.org/badge/9118/cvitolo/hddtools.svg)](https://zenodo.org/badge/latestdoi/9118/cvitolo/hddtools) [![status](http://joss.theoj.org/papers/3287a12e7ce5d7e89938a6b4f56fc225/status.svg)](http://joss.theoj.org/papers/3287a12e7ce5d7e89938a6b4f56fc225)
 
-[![Travis-CI Build Status](https://travis-ci.org/cvitolo/hddtools.svg?branch=master)](https://travis-ci.org/cvitolo/hddtools) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/cvitolo/hddtools?branch=master&svg=true)](https://ci.appveyor.com/project/cvitolo/hddtools) [![codecov.io](https://codecov.io/github/cvitolo/hddtools/coverage.svg?branch=master)](https://codecov.io/github/cvitolo/hddtools?branch=master)
-
 [![CRAN Status Badge](http://www.r-pkg.org/badges/version/hddtools)](https://cran.r-project.org/package=hddtools) [![CRAN Total Downloads](http://cranlogs.r-pkg.org/badges/grand-total/hddtools)](https://cran.r-project.org/package=hddtools) [![CRAN Monthly Downloads](http://cranlogs.r-pkg.org/badges/hddtools)](https://cran.r-project.org/package=hddtools)
+
+[![Travis-CI Build Status](https://travis-ci.org/cvitolo/hddtools.svg?branch=master)](https://travis-ci.org/cvitolo/hddtools) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/cvitolo/hddtools?branch=master&svg=true)](https://ci.appveyor.com/project/cvitolo/hddtools) [![codecov.io](https://codecov.io/github/cvitolo/hddtools/coverage.svg?branch=master)](https://codecov.io/github/cvitolo/hddtools?branch=master)
 
 **hddtools** stands for Hydrological Data Discovery Tools. This R package is an open source project designed to facilitate non-programmatic access to a variety of online open data sources relevant for hydrologists and, more in general, environmental scientists and practitioners.
 
