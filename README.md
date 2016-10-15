@@ -8,7 +8,6 @@
         -   [Top-Down modelling Working Group (Data60UK and MOPEX)](#top-down-modelling-working-group-data60uk-and-mopex)
         -   [SEPA river level data](#sepa-river-level-data)
         -   [Met Office Hadley Centre Observation Data: HadUKP Data](#met-office-hadley-centre-observation-data-hadukp-data)
-    -   [T&C](#tc)
     -   [Meta](#meta)
 
 <!-- Edit the README.Rmd only!!! The README.md is generated automatically from README.Rmd. -->
@@ -263,16 +262,11 @@ plot(x$EWP)
 
 ![](README_files/figure-markdown_github/unnamed-chunk-19-1.png)
 
-T&C
----
-
-Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
-
-This package and functions herein are part of an experimental open-source project. They are provided as is, without any guarantee.
-
 Meta
 ----
 
+-   This package and functions herein are part of an experimental open-source project. They are provided as is, without any guarantee.
+-   Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
 -   Please [report any issues or bugs](https://github.com/cvitolo/hddtools/issues).
 -   License: [GPL-3](https://opensource.org/licenses/GPL-3.0)
 -   Get citation information for `hddtools` in R doing `citation(package = 'hddtools')`
