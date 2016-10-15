@@ -1,7 +1,7 @@
 Package: hddtools
 Type: Package
 Title: Hydrological Data Discovery Tools
-Version: 0.3.0
+Version: 0.3.1
 Authors@R: c(person("Claudia", "Vitolo", email = "cvitolodev@gmail.com", role = c("aut", "cre")))
 Maintainer: Claudia Vitolo <cvitolodev@gmail.com>
 URL: https://github.com/cvitolo/hddtools/
