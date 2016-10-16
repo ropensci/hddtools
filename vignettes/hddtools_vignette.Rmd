@@ -71,10 +71,10 @@ The package hddtools contains a function to identify the updated Koppen-Greiger 
 
 ```{r, eval = TRUE}
 # Extract climate zones from Peel's map:
-KGClimateClass(bbox, updatedBy = "Peel")
+KGClimateClass(bbox = bbox, updatedBy = "Peel")
 
 # Extract climate zones from Kottek's map:
-KGClimateClass(bbox, updatedBy = "Kottek")
+KGClimateClass(bbox = bbox, updatedBy = "Kottek")
 ```
 
 ### The Global Runoff Data Centre
@@ -134,7 +134,7 @@ x <- catalogueData60UK()
 
 # Filter Data60UK catalogue based on bounding box
 bbox <- list(lonMin = -4, latMin = 51, lonMax = -3, latMax = 53)
-x <- catalogueData60UK(bbox)
+x <- catalogueData60UK(bbox = bbox)
 ```
 
 ```{r}
@@ -154,7 +154,9 @@ y <- tsData60UK(hydroRefNumber, plotOption = FALSE)
 
 # Extract time series for a specified temporal window
 timeExtent <- seq(as.Date("1988-01-01"), as.Date("1989-12-31"), by = "days")
-y <- tsData60UK(hydroRefNumber, plotOption = TRUE, timeExtent)
+y <- tsData60UK(hydroRefNumber = hydroRefNumber, 
+                plotOption = TRUE, 
+                timeExtent = timeExtent)
 ```
 
 #### MOPEX
@@ -164,7 +166,7 @@ Dataset containing historical hydrometeorological data and river basin character
 x <- catalogueMOPEX()
 
 # Extract time series 
-y <- tsMOPEX("14359000", plotOption = TRUE)
+y <- tsMOPEX(hydroRefNumber = "14359000", plotOption = TRUE)
 ```
 
 ### SEPA river level data
@@ -179,12 +181,12 @@ The time series of the last few days is available from SEPA website and download
 
 ```{r}
 # Single time series extraction
-y <- tsSEPA(hydroRefNumber = 234253, plotOption = FALSE)
+y <- tsSEPA(hydroRefNumber = "234253", plotOption = FALSE)
 ```
 
 ```{r, eval = TRUE}
 # Multiple time series extraction
-y <- tsSEPA(hydroRefNumber = c(234253, 234174, 234305))
+y <- tsSEPA(hydroRefNumber = c("234253", "234174", "234305"))
 plot(y[[1]])
 plot(y[[2]])
 plot(y[[3]])

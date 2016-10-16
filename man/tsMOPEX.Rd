@@ -21,7 +21,7 @@ This function extract the dataset containing daily rainfall and streamflow disch
 }
 \examples{
 \dontrun{
-  x <- tsMOPEX("14359000")
+  x <- tsMOPEX(hydroRefNumber = "14359000")
 }
 
 }

@@ -20,7 +20,9 @@ The function returns a data frame containing 2 time series (as zoo objects): "P"
 This function extract the dataset containing daily rainfall and streamflow discharge at one of the Data60UK locations.
 }
 \examples{
-# tsData60UK(39015)
+\dontrun{
+  tsData60UK(hydroRefNumber = 39015)
+}
 
 }
 \author{

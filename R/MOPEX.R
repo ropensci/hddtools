@@ -52,7 +52,7 @@ catalogueMOPEX <- function(){
 #'
 #' @examples
 #' \dontrun{
-#'   x <- tsMOPEX("14359000")
+#'   x <- tsMOPEX(hydroRefNumber = "14359000")
 #' }
 #'
 

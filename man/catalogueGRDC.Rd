@@ -34,7 +34,7 @@ This function interfaces the Global Runoff Data Centre database which provides r
                lonMax = -3.63, latMax = 52.52)
 
   # Filter the catalogue
-  catalogueGRDC(bbox)
+  catalogueGRDC(bbox = bbox)
 }
 
 }

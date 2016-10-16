@@ -21,7 +21,7 @@ This function extract the dataset containing daily rainfall and streamflow disch
 }
 \examples{
 \dontrun{
-  x <- tsSEPA("234253")
+  x <- tsSEPA(hydroRefNumber = "234253")
 }
 
 }

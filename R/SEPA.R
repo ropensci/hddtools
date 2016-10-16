@@ -64,7 +64,7 @@ catalogueSEPA <- function(bbox = NULL,
 #'
 #' @examples
 #' \dontrun{
-#'   x <- tsSEPA("234253")
+#'   x <- tsSEPA(hydroRefNumber = "234253")
 #' }
 #'
 

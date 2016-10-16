@@ -8,11 +8,13 @@
 #'
 #' @return vector containing all the links in the page
 #'
+#' @export
+#'
 #' @examples
 #' \dontrun{
 #'   # Retrieve mopex daily catalogue
 #'   url <- "ftp://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/Us_438_Daily"
-#'   getContent(url)
+#'   getContent(dirs = url)
 #' }
 #'
 

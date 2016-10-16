@@ -20,7 +20,7 @@
 #'   bbox <- list(lonMin = -3.82, latMin = 52.41,
 #'                lonMax = -3.63, latMax = 52.52)
 #'   # Get climate classes
-#'   KGClimateClass(bbox)
+#'   KGClimateClass(bbox = bbox)
 #' }
 #'
 

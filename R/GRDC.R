@@ -24,7 +24,7 @@
 #'                lonMax = -3.63, latMax = 52.52)
 #'
 #'   # Filter the catalogue
-#'   catalogueGRDC(bbox)
+#'   catalogueGRDC(bbox = bbox)
 #' }
 #'
 

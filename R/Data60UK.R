@@ -115,7 +115,9 @@ catalogueData60UK <- function(bbox = NULL, columnName = NULL,
 #' @export
 #'
 #' @examples
-#' # tsData60UK(39015)
+#' \dontrun{
+#'   tsData60UK(hydroRefNumber = 39015)
+#' }
 #'
 
 tsData60UK <- function(hydroRefNumber, plotOption = FALSE, timeExtent = NULL){
