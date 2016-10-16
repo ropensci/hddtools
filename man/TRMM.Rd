@@ -37,8 +37,8 @@ and on the TRMM FAQ: http://disc.sci.gsfc.nasa.gov/additional/faq/precipitation_
 \examples{
 \dontrun{
   # Define a bounding box
-  bbox <- list(lonMin=-3.82, latMin=48,lonMax=-3.63, latMax=50)
-  twindow <- seq(as.Date("2012-01-01"), as.Date("2012-01-31"), by="months")
+  bbox <- list(lonMin = -3.82, latMin = 48, lonMax = -3.63, latMax = 50)
+  twindow <- seq(as.Date("2012-01-01"), as.Date("2012-01-31"), by = "months")
 
   TRMM(inputLocation="ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
        product = "3B43",

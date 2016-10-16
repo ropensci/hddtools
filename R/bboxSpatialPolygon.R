@@ -11,7 +11,7 @@
 #'
 #' @examples
 #' \dontrun{
-#'   bbox <- list(lonMin=-180,latMin=-50,lonMax=+180,latMax=+50)
+#'   bbox <- list(lonMin = -180, latMin = -50, lonMax = +180, latMax = +50)
 #'   bbSP <- bboxSpatialPolygon(bbox)
 #' }
 #'
@@ -33,18 +33,19 @@ bboxSpatialPolygon <- function(bbox,
 
   }
 
-  bb <- matrix(as.numeric(c(bbox$lonMin,bbox$latMin,bbox$lonMax,bbox$latMax)),
+  bb <- matrix(as.numeric(c(bbox$lonMin, bbox$latMin,
+                            bbox$lonMax, bbox$latMax)),
                nrow=2)
-  rownames(bb) <- c("lon","lat")
-  colnames(bb) <- c("min","max")
+  rownames(bb) <- c("lon", "lat")
+  colnames(bb) <- c("min", "max")
 
   # Create unprojected bbox as spatial object
   # clockwise, 5 points to close it
-  bboxMat <- rbind( c(bb['lon','min'],bb['lat','min']),
-                    c(bb['lon','min'],bb['lat','max']),
-                    c(bb['lon','max'],bb['lat','max']),
-                    c(bb['lon','max'],bb['lat','min']),
-                    c(bb['lon','min'],bb['lat','min']) )
+  bboxMat <- rbind( c(bb["lon", "min"], bb["lat", "min"]),
+                    c(bb["lon", "min"], bb["lat", "max"]),
+                    c(bb["lon", "max"], bb["lat", "max"]),
+                    c(bb["lon", "max"], bb["lat", "min"]),
+                    c(bb["lon", "min"], bb["lat", "min"]) )
 
   bboxSP <- sp::SpatialPolygons(list(sp::Polygons(list(sp::Polygon(bboxMat)),
                                                   "bbox")),

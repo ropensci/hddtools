@@ -25,7 +25,8 @@ catalogueMOPEX <- function(){
                       "Basin_Characteristics/usgs431.txt")),
     widths = c(8, 10, 10, 11, 11, 8, 8, 4, 4, 3, 9, 50)
     )
-  myTable$V1 <- stringr::str_pad(myTable$V1, width=8, side="left", pad="0")
+  myTable$V1 <- stringr::str_pad(myTable$V1, width = 8,
+                                 side = "left", pad = "0")
 
   names(myTable) <- c("id", "Longitude", "Latitude", "V4", "V5",
                       "start", "stop", "V8",
@@ -55,7 +56,7 @@ catalogueMOPEX <- function(){
 #' }
 #'
 
-tsMOPEX <- function(hydroRefNumber, plotOption=FALSE, timeExtent = NULL){
+tsMOPEX <- function(hydroRefNumber, plotOption = FALSE, timeExtent = NULL){
 
   # library(zoo)
   # library(XML)
@@ -64,7 +65,7 @@ tsMOPEX <- function(hydroRefNumber, plotOption=FALSE, timeExtent = NULL){
   # hydroRefNumber <- "14359000"
 
   theurl <- paste0("ftp://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/",
-                   "Us_438_Daily/",hydroRefNumber,".dly")
+                   "Us_438_Daily/", hydroRefNumber, ".dly")
 
   if(url.exists(theurl)) {
     message("Retrieving data from live web data source.")
@@ -73,8 +74,10 @@ tsMOPEX <- function(hydroRefNumber, plotOption=FALSE, timeExtent = NULL){
       file = url(theurl),
       widths = c(4, 2, 2, 10, 10, 10, 10, 10)
     )
-    myTable[,2] <- stringr::str_pad(myTable[,2], width=2, side="left", pad="0")
-    myTable[,3] <- stringr::str_pad(myTable[,3], width=2, side="left", pad="0")
+    myTable[,2] <- stringr::str_pad(myTable[,2], width = 2,
+                                    side = "left", pad = "0")
+    myTable[,3] <- stringr::str_pad(myTable[,3], width = 2,
+                                    side = "left", pad = "0")
 
     date <- paste(myTable[,1], "-", myTable[,2], "-", myTable[,3], sep = "")
     x <- data.frame(date, myTable[,4:8])

@@ -20,9 +20,9 @@
 #' }
 #'
 
-catalogueSEPA <- function(bbox=NULL,
-                           metadataColumn=NULL, entryValue=NULL,
-                           verbose=FALSE){
+catalogueSEPA <- function(bbox = NULL,
+                           metadataColumn = NULL, entryValue = NULL,
+                           verbose = FALSE){
 
   theurl <- "http://pennine.ddns.me.uk/riverlevels/ConciseList.html"
 
@@ -33,15 +33,15 @@ catalogueSEPA <- function(bbox=NULL,
     SEPAcatalogue <- tables[[which.max(n.rows)]]
     SEPAcatalogue <- SEPAcatalogue[SEPAcatalogue$stationId!=0,c(1:3,5:9)]
     row.names(SEPAcatalogue) <- NULL
-    names(SEPAcatalogue) <- c("idNRFA","aspxpage","stationId","River",
+    names(SEPAcatalogue) <- c("idNRFA", "aspxpage", "stationId", "River",
                               "Location",
-                              "GridRef","Operator","CatchmentArea(km2)")
+                              "GridRef", "Operator", "CatchmentArea(km2)")
   }else{
     if (verbose == TRUE) {
       message(paste("The connection with the live web data source failed.",
                     "Cached results are now loaded."))
     }
-    load(system.file("data/SEPAcatalogue.rda", package="hddtools"))
+    load(system.file("data/SEPAcatalogue.rda", package = "hddtools"))
   }
 
   return(SEPAcatalogue)
@@ -68,7 +68,7 @@ catalogueSEPA <- function(bbox=NULL,
 #' }
 #'
 
-tsSEPA <- function(hydroRefNumber, plotOption=FALSE, timeExtent = NULL){
+tsSEPA <- function(hydroRefNumber, plotOption = FALSE, timeExtent = NULL){
 
   myTS <- NULL
   myList <- list()
@@ -78,7 +78,7 @@ tsSEPA <- function(hydroRefNumber, plotOption=FALSE, timeExtent = NULL){
     counter <- counter + 1
 
     theurl <- paste("http://apps.sepa.org.uk/database/riverlevels/",
-                    id,"-SG.csv",sep="")
+                    id, "-SG.csv", sep = "")
 
     if(RCurl::url.exists(theurl)) {
       message("Retrieving data from live web data source.")
@@ -86,7 +86,7 @@ tsSEPA <- function(hydroRefNumber, plotOption=FALSE, timeExtent = NULL){
 
       # Coerse first column into a date
       datetime <- strptime(sepaTS[,1], "%d/%m/%Y %H:%M")
-      myTS <- zoo::zoo(sepaTS[,2], order.by=datetime) # measured in m
+      myTS <- zoo::zoo(sepaTS[,2], order.by = datetime) # measured in m
 
       if ( !is.null(timeExtent) ){
 
@@ -102,14 +102,14 @@ tsSEPA <- function(hydroRefNumber, plotOption=FALSE, timeExtent = NULL){
         # stationName <- as.character(temp$name)
         # plot(myTS, main=stationName, xlab="",ylab=c("P [mm/d]","Q [m3/s]"))
 
-        plot(myTS, main="", xlab="", ylab = "River level [m]")
+        plot(myTS, main = "", xlab = "", ylab = "River level [m]")
 
       }
 
       myList[[counter]] <- myTS
 
     }else{
-      message(paste("For station id",id,
+      message(paste("For station id", id,
                     "the connection with the live web data source failed.",
                     "No cached results available."))
     }

@@ -34,8 +34,8 @@ catalogueGRDC <- function(bbox = NULL, stationID = NULL,
 
   # Retrieve the catalogue
   temp <- system.file("extdata/GRDC/GRDC_Stations_20140320.csv",
-                      package = 'hddtools')
-  grdcAll <- read.csv(temp,sep = ",")
+                      package = "hddtools")
+  grdcAll <- read.csv(temp, sep = ",")
 
   if (!is.null(stationID)) {
     grdcSelected <- subset(grdcAll, (grdcAll$grdc_no == stationID) )
@@ -91,7 +91,7 @@ catalogueGRDC <- function(bbox = NULL, stationID = NULL,
 
   if (mdDescription == TRUE){
 
-    temp <- system.file("extdata/GRDC/GRDC_legend.csv", package = 'hddtools')
+    temp <- system.file("extdata/GRDC/GRDC_legend.csv", package = "hddtools")
     grdcLegend <- read.csv(temp, header = FALSE)
 
     grdcTable <- cbind(grdcLegend,t(grdcTable))
@@ -157,10 +157,10 @@ tsGRDC <- function(stationID, plotOption = FALSE){
 
   temp <- catalogueGRDC()
 
-  if ( temp[which(temp$grdc_no == stationID),"statistics"] == 1 ){
+  if ( temp[which(temp$grdc_no == stationID), "statistics"] == 1 ){
 
     # Retrieve look-up table
-    temp <- system.file("extdata/GRDC/GRDC_LTMMD.csv", package = 'hddtools')
+    temp <- system.file("extdata/GRDC/GRDC_LTMMD.csv", package = "hddtools")
     grdcLTMMD <- read.csv(temp, sep = "\t")
 
     # Retrieve WMO region from catalogue
@@ -205,7 +205,7 @@ tsGRDC <- function(stationID, plotOption = FALSE){
 
     for (i in 1:3){
       header <- headerTS[i]
-      skipTS <- as.numeric(as.character(grep("#",TS)))
+      skipTS <- as.numeric(as.character(grep("#", TS)))
       skip01 <- 1:header
       rowStart01 <- header + 1
       if ( length(skipTS[which(skipTS > header)]) > 0 ){

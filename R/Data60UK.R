@@ -18,15 +18,17 @@
 #'   catalogueData60UK()
 #'
 #'   # Define a bounding box
-#'   bbox <- list(lonMin=-3.82,latMin=52.41,lonMax=-3.63,latMax=52.52)
+#'   bbox <- list(lonMin = -3.82, latMin = 52.41,
+#'                lonMax = -3.63, latMax = 52.52)
 #'
 #'   # Filter the catalogue
 #'   catalogueData60UK(bbox)
-#'   catalogueData60UK(columnName="id",columnValue="62001")
+#'   catalogueData60UK(columnName = "id", columnValue = "62001")
 #' }
 #'
 
-catalogueData60UK <- function(bbox=NULL, columnName=NULL, columnValue=NULL){
+catalogueData60UK <- function(bbox = NULL, columnName = NULL,
+                              columnValue = NULL){
 
   # require(XML)
   # require(RCurl)
@@ -116,47 +118,48 @@ catalogueData60UK <- function(bbox=NULL, columnName=NULL, columnValue=NULL){
 #' # tsData60UK(39015)
 #'
 
-tsData60UK <- function(hydroRefNumber,
-                            plotOption=FALSE,
-                            timeExtent = NULL){
+tsData60UK <- function(hydroRefNumber, plotOption = FALSE, timeExtent = NULL){
 
   # require(zoo)
   # require(XML)
   # require(RCurl)
 
   theurl <- paste("http://nrfaapps.ceh.ac.uk/datauk60/data/rq",
-                  hydroRefNumber,".txt",sep="")
+                  hydroRefNumber, ".txt", sep="")
 
   if( url.exists(theurl) ) {
 
     message("Retrieving data from live web data source.")
     temp <- read.table(theurl)
-    names(temp) <- c("P","Q","DayNumber","Year","nStations")
+    names(temp) <- c("P", "Q", "DayNumber", "Year", "nStations")
 
     # Combine the first four columns into a character vector
     date_info <- with(temp, paste(Year, DayNumber))
     # Parse that character vector
     datetime <- strptime(date_info, "%Y %j")
-    P <- zoo(temp$P,order.by=datetime) # measured in mm
-    Q <- zoo(temp$Q,order.by=datetime) # measured in m3/s
+    P <- zoo(temp$P, order.by = datetime) # measured in mm
+    Q <- zoo(temp$Q, order.by = datetime) # measured in m3/s
 
     myTS <- merge(P,Q)
 
     if ( is.null(timeExtent) ){
 
-      timeExtent <- seq(as.Date("1980-01-01"), as.Date("1990-12-31"), by="days")
+      timeExtent <- seq(as.Date("1980-01-01"), as.Date("1990-12-31"),
+                        by = "days")
 
     }
 
     myTS <- window(myTS,
-                   start=as.POSIXct(head(timeExtent, n=1)[1]),
-                   end=as.POSIXct(tail(timeExtent, n=1)[1]))
+                   start = as.POSIXct(head(timeExtent, n = 1)[1]),
+                   end = as.POSIXct(tail(timeExtent, n = 1)[1]))
 
     if (plotOption == TRUE){
 
-      temp <- catalogueData60UK(columnName="id",columnValue=hydroRefNumber)
+      temp <- catalogueData60UK(columnName = "id",
+                                columnValue = hydroRefNumber)
       stationName <- as.character(temp$name)
-      plot(myTS, main=stationName, xlab="",ylab=c("P [mm/d]","Q [m3/s]"))
+      plot(myTS, main = stationName, xlab = "",
+           ylab = c("P [mm/d]", "Q [m3/s]"))
 
     }
 

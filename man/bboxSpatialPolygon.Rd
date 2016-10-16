@@ -23,7 +23,7 @@ Bounding box is first created (in lat/lon) then projected if specified
 }
 \examples{
 \dontrun{
-  bbox <- list(lonMin=-180,latMin=-50,lonMax=+180,latMax=+50)
+  bbox <- list(lonMin = -180, latMin = -50, lonMax = +180, latMax = +50)
   bbSP <- bboxSpatialPolygon(bbox)
 }
 

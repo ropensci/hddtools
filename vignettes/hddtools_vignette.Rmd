@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 # Introduction
 
-**hddtools** stands for Hydrological Data Discovery Tools. This R package is an open source project designed to facilitate non-programmatic access to a variety of online open data sources relevant for hydrologists and, more in general, environmental scientists and practitioners. 
+**hddtools** stands for Hydrological Data Discovery Tools. This R package is an open source project designed to facilitate access to a variety of online open data sources relevant for hydrologists and, more in general, environmental scientists and practitioners. 
 
 This typically implies the download of a metadata catalogue, selection of information needed, formal request for dataset(s), de-compression, conversion, manual filtering and parsing. All those operation are made more efficient by re-usable functions. 
 
@@ -30,17 +30,17 @@ The hddtools package depends on other CRAN packages. Check for missing dependenc
 ```{r}
 packs <- c('zoo', 'sp', 'RCurl', 'XML', 'rnrfa', 'Hmisc', 'raster', 
            'stringr', 'devtools')
-new.packages <- packs[!(packs %in% installed.packages()[,'Package'])]
-if(length(new.packages)) install.packages(new.packages)
+new_packages <- packs[!(packs %in% installed.packages()[,'Package'])]
+if(length(new_packages)) install.packages(new_packages)
 ```
 
-You can install this package from CRAN:
+Get the released version from CRAN:
 
 ```{r}
 install.packages('hddtools')
 ```
 
-Or you can install the development version from Github with [devtools](https://github.com/hadley/devtools):
+Or the development version from github using [devtools](https://github.com/hadley/devtools):
 
 ```{r}
 devtools::install_github('cvitolo/hddtools')
@@ -58,10 +58,10 @@ The functions provided can filter, slice and dice 2 and 3 dimensional informatio
 
 ```{r, eval = TRUE}
 # Define a bounding box
-bbox <- list(lonMin=-10,latMin=48,lonMax=5,latMax=62)
+bbox <- list(lonMin = -10, latMin = 48, lonMax = 5, latMax = 62)
 
 # Define a temporal extent
-timeExtent <- seq(as.Date('2012-01-01'), as.Date('2012-03-31'), by='months')
+timeExtent <- seq(as.Date("2012-01-01"), as.Date("2012-03-31"), by = "months")
 ```
 
 ### The Koppen Climate Classification map
@@ -71,34 +71,36 @@ The package hddtools contains a function to identify the updated Koppen-Greiger 
 
 ```{r, eval = TRUE}
 # Extract climate zones from Peel's map:
-KGClimateClass(bbox,updatedBy='Peel')
+KGClimateClass(bbox, updatedBy = "Peel")
 
 # Extract climate zones from Kottek's map:
-KGClimateClass(bbox,updatedBy='Kottek')
+KGClimateClass(bbox, updatedBy = "Kottek")
 ```
 
 ### The Global Runoff Data Centre
 The Global Runoff Data Centre (GRDC) is an international archive hosted by the Federal Institute of Hydrology (Bundesanstalt für Gewässerkunde or BfG) in Koblenz, Germany. The Centre operates under the auspices of the World Meteorological Organisation and retains services and datasets for all the major rivers in the world.
 
-Catalogue, kml files and the product ``Long-Term Mean Monthly Discharges'' are open data and accessible via the hddtools.
+Catalogue, kml files and the product Long-Term Mean Monthly Discharges are open data and accessible via the hddtools.
 
-```{r, eval = TRUE}
+```{r}
 # GRDC full catalogue
 x <- catalogueGRDC()
 
 # Filter GRDC catalogue based on a bounding box
-x <- catalogueGRDC(bbox=bbox, metadataColumn='statistics', entryValue=1)
+x <- catalogueGRDC(bbox = bbox, metadataColumn = "statistics", entryValue = 1)
 
 # Visualise outlets on an interactive map
 library(leaflet)
 leaflet(data = x) %>%
   addTiles() %>%  # Add default OpenStreetMap map tiles
-  addMarkers(~Longitude, ~Latitude, popup=~name)
+  addMarkers(~Longitude, ~Latitude, popup = ~name)
 ```
+
+![](../assets/figures/leaflet.png)
 
 ```{r, eval = TRUE}
 # Monthly data extraction
-y <- tsGRDC(stationID='6122300', plotOption=TRUE)
+y <- tsGRDC(stationID = "6122300", plotOption = TRUE)
 ```
 
 ### NASA's Tropical Rainfall Measuring Mission (TRMM, only available for github version)
@@ -106,15 +108,17 @@ The Tropical Rainfall Measuring Mission (TRMM) is a joint mission between NASA a
 
 The TRMM satellite records global historical rainfall estimation in a gridded format since 1998 with a daily temporal resolution and a spatial resolution of 0.25 degrees. This information is openly available for educational purposes and downloadable from an FTP server.
 
-The hddtools provides a function, called \verb|TRMM()|, to download and convert a selected portion of the TRMM dataset into a raster-brick that can be opened in any GIS software.
+The hddtools provides a function, called TRMM(), to download and convert a selected portion of the TRMM dataset into a raster-brick that can be opened in any GIS software.
 
 ```{r}
 # Retreive mean monthly precipitations from 3B43_V7 (based on a bounding box and time extent)
 TRMM(timeExtent = timeExtent, bbox = bbox)
 library(raster)
-b <- brick('trmm_acc.tif')
+b <- brick("trmm_acc.tif")
 plot(b)
 ```
+
+![](../assets/figures/TRMM.png)
 
 ### Top-Down modelling Working Group (Data60UK and MOPEX)
 The Top-Down modelling Working Group (TDWG) for the Prediction in Ungauged Basins (PUB) Decade (2003-2012) is an initiative of the International Association of Hydrological Sciences (IAHS) which collected datasets for hydrological modelling free-of-charge, available [here](http://tdwg.catchment.org/datasets.html). This package provides a common interface to retrieve, browse and filter information.
@@ -129,24 +133,28 @@ The hddtools contain two functions to interact with this database: one to retrei
 x <- catalogueData60UK()
 
 # Filter Data60UK catalogue based on bounding box
-bbox <- list(lonMin=-4,latMin=51,lonMax=-3,latMax=53)
+bbox <- list(lonMin = -4, latMin = 51, lonMax = -3, latMax = 53)
 x <- catalogueData60UK(bbox)
+```
 
+```{r}
 # Visualise outlets on an interactive map
 library(leaflet)
 leaflet(data = x) %>%
   addTiles() %>%  # Add default OpenStreetMap map tiles
-  addMarkers(~Longitude, ~Latitude, popup=~Location)
+  addMarkers(~Longitude, ~Latitude, popup = ~Location)
 ```
+
+![](../assets/figures/leaflet2.png)
 
 ```{r, eval = TRUE}
 # Extract time series 
 hydroRefNumber <- as.numeric(as.character(x$id[1])) # e.g. 55012
-y <- tsData60UK(hydroRefNumber, plotOption=FALSE)
+y <- tsData60UK(hydroRefNumber, plotOption = FALSE)
 
 # Extract time series for a specified temporal window
-timeExtent <- seq(as.Date('1988-01-01'), as.Date('1989-12-31'), by='days')
-y <- tsData60UK(hydroRefNumber, plotOption=TRUE, timeExtent)
+timeExtent <- seq(as.Date("1988-01-01"), as.Date("1989-12-31"), by = "days")
+y <- tsData60UK(hydroRefNumber, plotOption = TRUE, timeExtent)
 ```
 
 #### MOPEX
@@ -157,7 +165,7 @@ US dataset containing historical hydrometeorological data and river basin charac
 x <- catalogueMOPEX()
 
 # Extract time series 
-y <- tsMOPEX('14359000', plotOption=TRUE)
+y <- tsMOPEX("14359000", plotOption = TRUE)
 ```
 
 ### SEPA river level data
