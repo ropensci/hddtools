@@ -28,28 +28,28 @@ Depending on the data license, functions can provide offline and/or online modes
 The hddtools package depends on other CRAN packages. Check for missing dependencies and install them using the commands below:
 
 ```{r}
-packs <- c('zoo', 'sp', 'RCurl', 'XML', 'rnrfa', 'Hmisc', 'raster', 
-           'stringr', 'devtools')
-new_packages <- packs[!(packs %in% installed.packages()[,'Package'])]
+packs <- c("zoo", "sp", "RCurl", "XML", "rnrfa", "Hmisc", "raster", 
+           "stringr", "devtools")
+new_packages <- packs[!(packs %in% installed.packages()[,"Package"])]
 if(length(new_packages)) install.packages(new_packages)
 ```
 
 Get the released version from CRAN:
 
 ```{r}
-install.packages('hddtools')
+install.packages("hddtools")
 ```
 
 Or the development version from github using [devtools](https://github.com/hadley/devtools):
 
 ```{r}
-devtools::install_github('cvitolo/hddtools')
+devtools::install_github("cvitolo/hddtools")
 ```
 
 Load the hddtools package:
 
 ```{r, eval = TRUE}
-library('hddtools')
+library("hddtools")
 ```
 
 ## Data sources and Functions

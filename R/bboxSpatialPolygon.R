@@ -7,7 +7,9 @@
 #'
 #' @return A SpatialPolygons object of the bounding box
 #'
-#' @references http://gis.stackexchange.com/questions/46954/clip-spatial-object-to-bounding-box-in-r
+#' @references \url{http://gis.stackexchange.com/questions/46954/clip-spatial-object-to-bounding-box-in-r}
+#'
+#' @export
 #'
 #' @examples
 #' \dontrun{

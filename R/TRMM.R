@@ -4,7 +4,7 @@
 #'
 #' @description The TRMM dataset provide global historical rainfall estimation in a gridded format.
 #'
-#' @param inputLocation location where data is stored. By default it points to the TRMM ftp server ("ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/") but it can also be a local directory. If you are using a local directory, this function expects to find inside 'inputLocation' a folder with the name of product and version (e.g. "i3B43_V7") and inside this a folder for each year( e.g. "2012").
+#' @param inputLocation location where data is stored. By default it points to the TRMM ftp server (\url{ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/}) but it can also be a local directory. If you are using a local directory, this function expects to find inside 'inputLocation' a folder with the name of product and version (e.g. "i3B43_V7") and inside this a folder for each year( e.g. "2012").
 #' @param product this is the code that identifies a product, default is "3B43"
 #' @param version this is the version number, default is 7
 #' @param type this is the type of information needed, default is "precipitation.accum". Other types could be "gaugeRelativeWeighting.bin" and "relativeError.bin"
@@ -16,8 +16,8 @@
 # be opened in any GIS software.
 #'
 #' @details This code is based upon Martin Brandt's blog post:
-#' http://matinbrandt.wordpress.com/2013/09/04/automatically-downloading-and-processing-trmm-rainfall-data/
-#' and on the TRMM FAQ: http://disc.sci.gsfc.nasa.gov/additional/faq/precipitation_faq.shtml
+#' \url{http://matinbrandt.wordpress.com/2013/09/04/automatically-downloading-and-processing-trmm-rainfall-data/}
+#' and on the TRMM FAQ: \url{http://disc.sci.gsfc.nasa.gov/additional/faq/precipitation_faq.shtml}
 #'
 #' @export
 #'

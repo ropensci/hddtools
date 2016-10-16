@@ -9,7 +9,7 @@
 #' @param entryValue value to look for in the column named metadataColumn
 #' @param verbose if TRUE it returns whether the data is coming from live or cached data sources
 #'
-#' @return This function returns a data frame made of 9 columns: "idNRFA","aspxpage"           , "stationId", "River", "Location", "GridRef", "Operator", "CatchmentArea(km2)" and "note". Column idNRFA shows the National River Flow Archive station id. Column "aspxpage" returns the Environment Agency gauges id. The column "stationId" is the id number used by SEPA. Use these id numbers to retrieve the time series of water levels.
+#' @return This function returns a data frame made of 9 columns: "idNRFA","aspxpage", "stationId", "River", "Location", "GridRef", "Operator", "CatchmentArea(km2)" and "note". Column idNRFA shows the National River Flow Archive station id. Column "aspxpage" returns the Environment Agency gauges id. The column "stationId" is the id number used by SEPA. Use these id numbers to retrieve the time series of water levels.
 #'
 #' @export
 #'

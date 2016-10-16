@@ -3,6 +3,7 @@
 export(HadDAILY)
 export(KGClimateClass)
 export(TRMM)
+export(bboxSpatialPolygon)
 export(catalogueData60UK)
 export(catalogueGRDC)
 export(catalogueMOPEX)

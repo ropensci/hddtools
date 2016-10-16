@@ -17,7 +17,7 @@ catalogueData60UK(bbox = NULL, columnName = NULL, columnValue = NULL)
 This function returns a data frame made of 5 columns: "id" (hydrometric reference number), "name", "location", "Latitude", "Longitude" and "area".
 }
 \description{
-This function interfaces the Data60UK database catalogue (available from http://www.nwl.ac.uk/ih/nrfa/pub/index.html) containing 61 datasets. Dataset catalogue is available from http://www.nwl.ac.uk/ih/nrfa/pub/data.html.
+This function interfaces the Data60UK database catalogue (available from http://www.nwl.ac.uk/ih/nrfa/pub/index.html) containing 61 datasets. Dataset catalogue is available from \url{http://www.nwl.ac.uk/ih/nrfa/pub/data.html}.
 }
 \examples{
 \dontrun{
