@@ -7,7 +7,7 @@
 tsGRDC(stationID, plotOption = FALSE)
 }
 \arguments{
-\item{stationID}{7 character number that identifies a station, GRDC station number is called "grdc no" in the catalogue.}
+\item{stationID}{7 string that identifies a station, GRDC station number is called "grdc no" in the catalogue.}
 
 \item{plotOption}{boolean to define whether to plot the results. By default this is set to TRUE.}
 }
@@ -48,7 +48,7 @@ Please note that not all the GRDC stations listed in the catalogue have monthly 
 }
 \examples{
 \dontrun{
-  x <- tsGRDC(stationID = 1107700)
+  x <- tsGRDC(stationID = "1107700")
 }
 
 }

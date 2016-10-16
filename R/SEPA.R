@@ -54,7 +54,7 @@ catalogueSEPA <- function(bbox = NULL,
 #'
 #' @description This function extract the dataset containing daily rainfall and streamflow discharge at one of the MOPEX locations.
 #'
-#' @param hydroRefNumber hydrometric reference number
+#' @param hydroRefNumber hydrometric reference number (string)
 #' @param plotOption boolean to define whether to plot the results. By default this is set to TRUE.
 #' @param timeExtent is a vector of dates and times for which the data should be retrieved
 #'

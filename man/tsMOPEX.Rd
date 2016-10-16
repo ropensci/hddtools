@@ -7,7 +7,7 @@
 tsMOPEX(hydroRefNumber, plotOption = FALSE, timeExtent = NULL)
 }
 \arguments{
-\item{hydroRefNumber}{hydrometric reference number}
+\item{hydroRefNumber}{hydrometric reference number (string)}
 
 \item{plotOption}{boolean to define whether to plot the results. By default this is set to TRUE.}
 

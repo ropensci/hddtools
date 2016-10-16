@@ -110,7 +110,7 @@ catalogueGRDC <- function(bbox = NULL, stationID = NULL,
 #'
 #' @description This function interfaces the Global Runoff Data Centre monthly mean daily discharges database.
 #'
-#' @param stationID 7 character number that identifies a station, GRDC station number is called "grdc no" in the catalogue.
+#' @param stationID 7 string that identifies a station, GRDC station number is called "grdc no" in the catalogue.
 #' @param plotOption boolean to define whether to plot the results. By default this is set to TRUE.
 #'
 #' @return The function returns a list of 3 tables: \describe{
@@ -147,7 +147,7 @@ catalogueGRDC <- function(bbox = NULL, stationID = NULL,
 #'
 #' @examples
 #' \dontrun{
-#'   x <- tsGRDC(stationID = 1107700)
+#'   x <- tsGRDC(stationID = "1107700")
 #' }
 #'
 
