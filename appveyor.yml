@@ -23,7 +23,7 @@ environment:
   - R_VERSION: patched
   - R_VERSION: oldrel
   - R_VERSION: 3.0.1
-    RTOOLS_VERSION: 33
+    RTOOLS_VERSION: 30
 
 build_script:
   - travis-tool.sh install_deps
