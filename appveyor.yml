@@ -22,7 +22,7 @@ environment:
   - R_VERSION: stable
   - R_VERSION: patched
   - R_VERSION: oldrel
-  - R_VERSION: 3.0.1
+  - R_VERSION: 3.0
     RTOOLS_VERSION: 30
 
 build_script:
