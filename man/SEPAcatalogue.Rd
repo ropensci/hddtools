@@ -3,7 +3,7 @@
 \docType{data}
 \name{SEPAcatalogue}
 \alias{SEPAcatalogue}
-\title{SEPAcatalogue}
+\title{Data set: The SEPA Catalogue}
 \format{A data frame with 830 observations on the following 8 variables.
 \describe{
   \item{\code{idNRFA}}{National River Flow Archive id number.}

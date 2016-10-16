@@ -26,7 +26,7 @@
 #'
 NULL
 
-#' SEPAcatalogue
+#' Data set: The SEPA Catalogue
 #'
 #' @description The SEPA catalogue
 #'
