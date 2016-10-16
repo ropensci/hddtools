@@ -2,7 +2,7 @@
 % Please edit documentation in R/GRDC.R
 \name{catalogueGRDC}
 \alias{catalogueGRDC}
-\title{Interface for the Global Runoff Data Centre database catalogue}
+\title{Data source: Global Runoff Data Centre catalogue}
 \usage{
 catalogueGRDC(bbox = NULL, stationID = NULL, metadataColumn = NULL,
   entryValue = NULL, mdDescription = FALSE)

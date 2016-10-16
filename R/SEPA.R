@@ -1,4 +1,4 @@
-#' Interface for the SEPA database catalogue
+#' Data source: SEPA catalogue
 #'
 #' @author Claudia Vitolo
 #'

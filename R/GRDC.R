@@ -1,4 +1,4 @@
-#' Interface for the Global Runoff Data Centre database catalogue
+#' Data source: Global Runoff Data Centre catalogue
 #'
 #' @author Claudia Vitolo
 #'

@@ -2,7 +2,7 @@
 % Please edit documentation in R/MOPEX.R
 \name{catalogueMOPEX}
 \alias{catalogueMOPEX}
-\title{Interface for the MOPEX database catalogue}
+\title{Data source: MOPEX catalogue}
 \usage{
 catalogueMOPEX()
 }

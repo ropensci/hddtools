@@ -2,7 +2,7 @@
 % Please edit documentation in R/Data60UK.R
 \name{catalogueData60UK}
 \alias{catalogueData60UK}
-\title{Interface for the Data60UK database catalogue}
+\title{Data source: Data60UK catalogue}
 \usage{
 catalogueData60UK(bbox = NULL, columnName = NULL, columnValue = NULL)
 }

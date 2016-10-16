@@ -2,7 +2,7 @@
 % Please edit documentation in R/SEPA.R
 \name{catalogueSEPA}
 \alias{catalogueSEPA}
-\title{Interface for the SEPA database catalogue}
+\title{Data source: SEPA catalogue}
 \usage{
 catalogueSEPA(bbox = NULL, metadataColumn = NULL, entryValue = NULL,
   verbose = FALSE)

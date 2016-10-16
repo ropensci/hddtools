@@ -1,4 +1,4 @@
-#' Interface for the Data60UK database catalogue
+#' Data source: Data60UK catalogue
 #'
 #' @author Claudia Vitolo
 #'

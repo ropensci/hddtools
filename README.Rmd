@@ -75,7 +75,7 @@ The package contains functions to interact with the data providers listed below.
 
 * [Data60UK](http://tdwg.catchment.org/datasets.html): The Data60UK initiative collated datasets of areal precipitation and streamflow discharge across 61 gauging sites in England and Wales (UK). 
 
-* [MOPEX](ftp://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/): This dataset contains historical hydrometeorological data and river basin characteristics for hundreds of river basins in the US.
+* [MOPEX](http://tdwg.catchment.org/datasets.html): This dataset contains historical hydrometeorological data and river basin characteristics for hundreds of river basins in the US.
 
 * [SEPA](http://apps.sepa.org.uk/waterlevels/): The Scottish Environment Protection Agency (SEPA) provides river level data for hundreds of gauging stations in the UK.
 

@@ -1,4 +1,4 @@
-#' Interface for the MOPEX database catalogue
+#' Data source: MOPEX catalogue
 #'
 #' @author Claudia Vitolo
 #'
