@@ -158,8 +158,7 @@ y <- tsData60UK(hydroRefNumber, plotOption = TRUE, timeExtent)
 ```
 
 #### MOPEX
-US dataset containing historical hydrometeorological data and river basin characteristics for hundreds of river basins from a range of climates throughout the world. 
-
+Dataset containing historical hydrometeorological data and river basin characteristics for hundreds of river basins from a range of climates in the US. 
 ```{r, eval = TRUE}
 # MOPEX full catalogue
 x <- catalogueMOPEX()

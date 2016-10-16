@@ -50,19 +50,19 @@ Data sources and Functions
 
 The package contains functions to interact with the data providers listed below. For examples of the various functionalities see the [vignette](vignettes/hddtools_vignette.Rmd).
 
--   KGClimateClass: The Koppen Climate Classification map is used for classifying the world's climates based on the annual and monthly averages of temperature and precipitation.
+-   [KGClimateClass](http://koeppen-geiger.vu-wien.ac.at/): The Koppen Climate Classification map is used for classifying the world's climates based on the annual and monthly averages of temperature and precipitation.
 
--   GRDC: The Global Runoff Data Centre (GRDC) provides datasets for all the major rivers in the world.
+-   [GRDC](http://www.bafg.de/GRDC/EN/Home/homepage_node.html): The Global Runoff Data Centre (GRDC) provides datasets for all the major rivers in the world.
 
--   TRMM: The NASA's Tropical Rainfall Measuring Mission records global historical rainfall estimation in a gridded format since 1998 with a daily temporal resolution and a spatial resolution of 0.25 degrees.
+-   [TRMM](http://trmm.gsfc.nasa.gov/): The NASA's Tropical Rainfall Measuring Mission records global historical rainfall estimation in a gridded format since 1998 with a daily temporal resolution and a spatial resolution of 0.25 degrees.
 
--   Data60UK: The Data60UK initiative collated datasets of areal precipitation and streamflow discharge across 61 gauging sites in England and Wales (UK).
+-   [Data60UK](http://tdwg.catchment.org/datasets.html): The Data60UK initiative collated datasets of areal precipitation and streamflow discharge across 61 gauging sites in England and Wales (UK).
 
--   MOPEX: This dataset contains historical hydrometeorological data and river basin characteristics for hundreds of river basins from a range of climates throughout the world.
+-   [MOPEX](ftp://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/): This dataset contains historical hydrometeorological data and river basin characteristics for hundreds of river basins in the US.
 
--   SEPA: The Scottish Environment Protection Agency (SEPA) provides river level data for hundreds of gauging stations in the UK.
+-   [SEPA](http://apps.sepa.org.uk/waterlevels/): The Scottish Environment Protection Agency (SEPA) provides river level data for hundreds of gauging stations in the UK.
 
--   HadUKP: The Met Office Hadley Centre Observation Data Centre provides daily precipitation time series averaged over UK regions and subregions.
+-   [HadUKP](http://www.metoffice.gov.uk/hadobs/hadukp/): The Met Office Hadley Centre Observation Data Centre provides daily precipitation time series averaged over UK regions and subregions.
 
 Meta
 ----
