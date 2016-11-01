@@ -7,34 +7,31 @@
 #' @param bbox bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)
 #' @param columnName name of the column to filter
 #' @param columnValue value to look for in the column named columnName
+#' @param cached boolean value. Default is TRUE (use cached datasets).
 #'
-#' @return This function returns a data frame made of 5 columns: "id" (hydrometric reference number), "name", "location", "Latitude", "Longitude" and "area".
+#' @return This function returns a data frame made of 61 rows (gauging stations) and 6 columns: "id" (hydrometric reference number), "River", "Location", "gridReference", "Latitude", "Longitude".
 #'
 #' @export
 #'
 #' @examples
 #' \dontrun{
 #'   # Retrieve the whole catalogue
-#'   catalogueData60UK()
+#'   x <- catalogueData60UK()
 #'
 #'   # Define a bounding box
 #'   bbox <- list(lonMin = -3.82, latMin = 52.41,
 #'                lonMax = -3.63, latMax = 52.52)
 #'
 #'   # Filter the catalogue
-#'   catalogueData60UK(bbox)
-#'   catalogueData60UK(columnName = "id", columnValue = "62001")
+#'   x <- catalogueData60UK(bbox)
+#'   x <- catalogueData60UK(columnName = "id", columnValue = "62001")
 #' }
 #'
 
 catalogueData60UK <- function(bbox = NULL, columnName = NULL,
-                              columnValue = NULL){
+                              columnValue = NULL, cached = TRUE){
 
-  # require(XML)
-  # require(RCurl)
-  # require(rnrfa)
-
-  CatalogueData60UK <- NULL # to avoid note in check
+  Data60UKcatalogue <- NULL
 
   # Latitude is the Y axis, longitude is the X axis.
   if (!is.null(bbox)){
@@ -49,54 +46,61 @@ catalogueData60UK <- function(bbox = NULL, columnName = NULL,
     latMax <- +90
   }
 
-  # Check the url
-  theurl <- "http://nrfaapps.ceh.ac.uk/datauk60/data.html"
+  if (cached == FALSE){
 
-  if( url.exists(theurl) ) {
+    message("Downloading data from source")
+    # Check the url
+    theurl <- "http://nrfaapps.ceh.ac.uk/datauk60/data.html"
 
-    message("Retrieving data from live web data source.")
+    if( url.exists(theurl) ) {
 
-    tables <- readHTMLTable(theurl)
-    n.rows <- unlist(lapply(tables, function(t) dim(t)[1]))
-    myTable <- tables[[which.max(n.rows)]]
-    names(myTable) <- c("id", "River", "Location")
-    IDs <- unlist(as.numeric(as.character(myTable$id)))
+      message("Retrieving data from live web data source.")
 
-    # Find grid reference browsing the NRFA catalogue
-    temp <- rnrfa::catalogue(columnName = "id", columnValue = IDs)
-    refs <- temp$gridReference
-    myTable$gridReference <- unlist(refs)
+      tables <- XML::readHTMLTable(theurl)
+      n.rows <- unlist(lapply(tables, function(t) dim(t)[1]))
+      myTable <- tables[[which.max(n.rows)]]
+      names(myTable) <- c("id", "River", "Location")
+      IDs <- unlist(as.numeric(as.character(myTable$id)))
 
-    myTable$Latitude <- temp$lat
-    myTable$Longitude <- temp$lon
+      # Find grid reference browsing the NRFA catalogue
+      temp <- rnrfa::catalogue(columnName = "id", columnValue = IDs)
+      refs <- temp$gridReference
+      myTable$gridReference <- unlist(refs)
 
-    myTable <- subset(myTable, (myTable$Latitude <= latMax &
-                                  myTable$Latitude >= latMin &
-                                  myTable$Longitude <= lonMax &
-                                  myTable$Longitude >= lonMin) )
-
-    if (!is.null(columnName) & !is.null(columnValue)){
-
-      if (columnName == "id" |
-          columnName == "name" |
-          columnName == "location"){
-        myTable <- myTable[which(myTable[,columnName] == columnValue),]
-      }else{
-        message(paste("columnName can only be one of the following:",
-                      "id, name, location"))
-      }
+      myTable$Latitude <- temp$lat
+      myTable$Longitude <- temp$lon
 
     }
 
-    row.names(myTable) <- NULL
-
-    return(myTable)
-
   }else{
 
-    message("The connection with the live web data source failed.")
+    message("Using cached data.")
+    load(system.file("data/Data60UKcatalogue.rda", package = "hddtools"))
+    myTable <- Data60UKcatalogue
 
   }
+
+  myTable <- subset(myTable, (myTable$Latitude <= latMax &
+                                myTable$Latitude >= latMin &
+                                myTable$Longitude <= lonMax &
+                                myTable$Longitude >= lonMin) )
+
+  if (!is.null(columnName) & !is.null(columnValue)){
+
+    if (columnName == "id" |
+        columnName == "name" |
+        columnName == "location"){
+      myTable <- myTable[which(myTable[,columnName] == columnValue),]
+    }else{
+      message(paste("columnName can only be one of the following:",
+                    "id, name, location"))
+    }
+
+  }
+
+  row.names(myTable) <- NULL
+
+  return(myTable)
 
 }
 

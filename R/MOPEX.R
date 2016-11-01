@@ -4,14 +4,14 @@
 #'
 #' @description This function interfaces the MOPEX database catalogue (available from \url{ftp://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/}) containing 438 daily datasets.
 #'
-#' @return This function returns a data frame made of 5 columns: "id" (hydrometric reference number), "name", "location", "Latitude" and "Longitude".
+#' @return This function returns a data frame made of 431 rows (gauging stations) and 12 columns containing stations metadata.
 #'
 #' @export
 #'
 #' @examples
 #' \dontrun{
 #'   # Retrieve the MOPEX catalogue
-#'   catalogueMOPEX()
+#'   x <- catalogueMOPEX()
 #' }
 #'
 

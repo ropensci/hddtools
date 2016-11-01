@@ -5,7 +5,7 @@
 \title{Data source: Global Runoff Data Centre catalogue}
 \usage{
 catalogueGRDC(bbox = NULL, stationID = NULL, metadataColumn = NULL,
-  entryValue = NULL, mdDescription = FALSE)
+  entryValue = NULL, mdDescription = FALSE, cached = TRUE)
 }
 \arguments{
 \item{bbox}{bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)}
@@ -17,9 +17,11 @@ catalogueGRDC(bbox = NULL, stationID = NULL, metadataColumn = NULL,
 \item{entryValue}{value to look for in the column named metadataColumn}
 
 \item{mdDescription}{boolean value. Default is FALSE (no description is printed)}
+
+\item{cached}{boolean value. Default is TRUE (use cached datasets).}
 }
 \value{
-list of stations within the bounding box
+This function returns a data frame made of 8966 rows (gauging stations, as per October 2016) and 44 columns containing metadata.
 }
 \description{
 This function interfaces the Global Runoff Data Centre database which provides river discharge data for about 9000 sites over 157 countries.
@@ -27,14 +29,14 @@ This function interfaces the Global Runoff Data Centre database which provides r
 \examples{
 \dontrun{
   # Retrieve the whole catalogue
-  catalogueGRDC()
+  x <- catalogueGRDC()
 
   # Define a bounding box
   bbox <- list(lonMin = -3.82, latMin = 52.41,
                lonMax = -3.63, latMax = 52.52)
 
   # Filter the catalogue
-  catalogueGRDC(bbox = bbox)
+  x <- catalogueGRDC(bbox = bbox)
 }
 
 }

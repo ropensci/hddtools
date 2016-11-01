@@ -184,12 +184,15 @@ The time series of the last few days is available from SEPA website and download
 y <- tsSEPA(hydroRefNumber = "234253", plotOption = FALSE)
 ```
 
+Plese note that this data is updated every 15 minutes and the code will always generate different plots. 
+
 ```{r, eval = TRUE}
 # Multiple time series extraction
 y <- tsSEPA(hydroRefNumber = c("234253", "234174", "234305"))
-plot(y[[1]])
-plot(y[[2]])
-plot(y[[3]])
+plot(y[[1]], ylim = c(0, max(y[[1]], y[[2]], y[[3]])), 
+     xlab = "", ylab = "Water level [m]")
+lines(y[[2]], col = "red")
+lines(y[[3]], col = "blue")
 ```
 
 ### Met Office Hadley Centre Observation Data: HadUKP Data

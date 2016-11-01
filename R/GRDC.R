@@ -6,41 +6,60 @@
 #'
 #' @param bbox bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)
 #' @param stationID Station ID number, it should be in the range [1104150,6990700]
-#' @param mdDescription boolean value. Default is FALSE (no description is printed)
 #' @param metadataColumn name of the column to filter
 #' @param entryValue value to look for in the column named metadataColumn
+#' @param mdDescription boolean value. Default is FALSE (no description is printed)
+#' @param cached boolean value. Default is TRUE (use cached datasets).
 #'
-#' @return list of stations within the bounding box
+#' @return This function returns a data frame made of 8966 rows (gauging stations, as per October 2016) and 44 columns containing metadata.
 #'
 #' @export
 #'
 #' @examples
 #' \dontrun{
 #'   # Retrieve the whole catalogue
-#'   catalogueGRDC()
+#'   x <- catalogueGRDC()
 #'
 #'   # Define a bounding box
 #'   bbox <- list(lonMin = -3.82, latMin = 52.41,
 #'                lonMax = -3.63, latMax = 52.52)
 #'
 #'   # Filter the catalogue
-#'   catalogueGRDC(bbox = bbox)
+#'   x <- catalogueGRDC(bbox = bbox)
 #' }
 #'
 
 catalogueGRDC <- function(bbox = NULL, stationID = NULL,
                           metadataColumn = NULL, entryValue = NULL,
-                          mdDescription = FALSE){
+                          mdDescription = FALSE, cached = TRUE){
 
-  # Retrieve the catalogue
-  temp <- system.file("extdata/GRDC/GRDC_Stations_20140320.csv",
-                      package = "hddtools")
-  grdcAll <- read.csv(temp, sep = ",")
+  url <- "http://www.bafg.de/GRDC/EN/02_srvcs/21_tmsrs/211_ctlgs/GRDC_Stations.zip?__blob=publicationFile"
+
+  if (cached == FALSE){
+
+    message("Downloading data from source")
+    # Retrieve the catalogue
+    temp <- tempfile()
+    download.file(url,temp)
+    GRDCcatalogue <- gdata::read.xls(utils::unzip(zipfile = temp,
+                                                  exdir = dirname(temp)),
+                                     sheet = "grdc_metadata")
+    unlink(temp)
+    GRDCcatalogue[] <- lapply(GRDCcatalogue, as.character)
+    GRDCcatalogue$lat <- as.numeric(GRDCcatalogue$lat)
+    GRDCcatalogue$long <- as.numeric(GRDCcatalogue$long)
+
+  }else{
+
+    message("Using cached data.")
+    load(system.file("data/GRDCcatalogue.rda", package = "hddtools"))
+
+  }
 
   if (!is.null(stationID)) {
-    grdcSelected <- subset(grdcAll, (grdcAll$grdc_no == stationID) )
+    grdcSelected <- subset(GRDCcatalogue, (GRDCcatalogue$grdc_no == stationID))
   }else{
-    grdcSelected <- grdcAll
+    grdcSelected <- GRDCcatalogue
   }
 
   if (!is.null(bbox)){
@@ -160,14 +179,14 @@ tsGRDC <- function(stationID, plotOption = FALSE){
   if ( temp[which(temp$grdc_no == stationID), "statistics"] == 1 ){
 
     # Retrieve look-up table
-    temp <- system.file("extdata/GRDC/GRDC_LTMMD.csv", package = "hddtools")
-    grdcLTMMD <- read.csv(temp, sep = "\t")
+    grdcLTMMD <- NULL
+    load(system.file("data/grdcLTMMD.rda", package = "hddtools"))
 
     # Retrieve WMO region from catalogue
     wmoRegion <- catalogueGRDC(stationID = stationID)$wmo_reg
 
     # Retrieve ftp server location
-    zipFile <- as.character(grdcLTMMD[which(grdcLTMMD$WMO.Region == wmoRegion),
+    zipFile <- as.character(grdcLTMMD[which(grdcLTMMD$WMO_Region == wmoRegion),
                                       "Archive"])
 
     # create a temporary directory

@@ -4,7 +4,8 @@
 \alias{catalogueData60UK}
 \title{Data source: Data60UK catalogue}
 \usage{
-catalogueData60UK(bbox = NULL, columnName = NULL, columnValue = NULL)
+catalogueData60UK(bbox = NULL, columnName = NULL, columnValue = NULL,
+  cached = TRUE)
 }
 \arguments{
 \item{bbox}{bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)}
@@ -12,9 +13,11 @@ catalogueData60UK(bbox = NULL, columnName = NULL, columnValue = NULL)
 \item{columnName}{name of the column to filter}
 
 \item{columnValue}{value to look for in the column named columnName}
+
+\item{cached}{boolean value. Default is TRUE (use cached datasets).}
 }
 \value{
-This function returns a data frame made of 5 columns: "id" (hydrometric reference number), "name", "location", "Latitude", "Longitude" and "area".
+This function returns a data frame made of 61 rows (gauging stations) and 6 columns: "id" (hydrometric reference number), "River", "Location", "gridReference", "Latitude", "Longitude".
 }
 \description{
 This function interfaces the Data60UK database catalogue (available from http://www.nwl.ac.uk/ih/nrfa/pub/index.html) containing 61 datasets. Dataset catalogue is available from \url{http://www.nwl.ac.uk/ih/nrfa/pub/data.html}.
@@ -22,15 +25,15 @@ This function interfaces the Data60UK database catalogue (available from http://
 \examples{
 \dontrun{
   # Retrieve the whole catalogue
-  catalogueData60UK()
+  x <- catalogueData60UK()
 
   # Define a bounding box
   bbox <- list(lonMin = -3.82, latMin = 52.41,
                lonMax = -3.63, latMax = 52.52)
 
   # Filter the catalogue
-  catalogueData60UK(bbox)
-  catalogueData60UK(columnName = "id", columnValue = "62001")
+  x <- catalogueData60UK(bbox)
+  x <- catalogueData60UK(columnName = "id", columnValue = "62001")
 }
 
 }
