@@ -60,6 +60,10 @@ NULL
 #' @keywords datasets
 #'
 #' @source \url{http://pennine.ddns.me.uk/riverlevels/ConciseList.html}
+#'
+#' @examples
+#'
+#'
 "SEPAcatalogue"
 
 #' Data set: The Data60UK Catalogue
@@ -147,7 +151,7 @@ NULL
 #'   \item{\code{country_code}}{country code (ISO 3166)}
 #'   \item{\code{lat}}{latitude in degrees}
 #'   \item{\code{long}}{longitude in degrees}
-#'   \item{\code{area}}{catchment size km2}
+#'   \item{\code{area}}{catchment size Km2}
 #'   \item{\code{altitude}}{height of gauge zero above sea level m}
 #'   \item{\code{ds_stat_no}}{GRDC_No of next downstream GRDC station}
 #'   \item{\code{w_level}}{water level data available in addition to discharge}
@@ -173,16 +177,16 @@ NULL
 #'   \item{\code{l_im_yr}}{year of last change}
 #'   \item{\code{provider_id}}{provider number (to be resolved with address database)}
 #'   \item{\code{acsys}}{1 if station belongs to the subset of the Arctic Runoff Data Base in the WCRP Arctic Climate System Study}
-#'   \item{\code{flux2ocean}}{}
+#'   \item{\code{flux2ocean}}{NA}
 #'   \item{\code{gems}}{1 if station corresponds to a GEMS/Water water quality station}
 #'   \item{\code{gcos_gtn.h}}{1 if station belongs to the subset of the Global Terrestrial Network for River Discharge within GTN-H}
-#'   \item{\code{statistics}}{}
-#'   \item{\code{Pristine.Basins}}{1 if station belongs to the subset "Pristine Basins"}
-#'   \item{\code{GRDC.Reference.Dataset}}{1 if station belongs to the subset "GRDC Reference Data set"}
-#'   \item{\code{AdaptAlp}}{1 if station belongs to the subset "AdaptAlp"}
-#'   \item{\code{ArcHycos}}{1 if station belongs to the subset "ArcticHYCOS"}
-#'   \item{\code{EWA}}{}
-#'   \item{\code{BALTEX}}{}
+#'   \item{\code{statistics}}{NA}
+#'   \item{\code{Pristine.Basins}}{1 if station belongs to the subset Pristine Basins}
+#'   \item{\code{GRDC.Reference.Dataset}}{1 if station belongs to the subset GRDC Reference Data set}
+#'   \item{\code{AdaptAlp}}{1 if station belongs to the subset AdaptAlp}
+#'   \item{\code{ArctHycos}}{1 if station belongs to the subset ArcticHYCOS}
+#'   \item{\code{EWA}}{NA}
+#'   \item{\code{BALTEX}}{NA}
 #' }
 #'
 #' @keywords datasets

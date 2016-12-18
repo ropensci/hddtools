@@ -86,8 +86,21 @@ Catalogue, kml files and the product Long-Term Mean Monthly Discharges are open 
 # GRDC full catalogue
 x <- catalogueGRDC()
 
+# Filter GRDC catalogue based on a country code
+x <- catalogueGRDC(columnName = "country_code", columnValue = "IT")
+
+# Filter GRDC catalogue based on rivername
+x <- catalogueGRDC(columnName = "river", columnValue = "PO")
+# Note that the search is not case sensitive, therefore you get the same result whether the columnValue is "PO", "Po" or "po". Same applies for the metadata column (it can be spelled "RIVER", "river", "River"...)
+
+# Filter GRDC catalogue based on numerical value, for instance select all the stations for which daily data is availa since 2000
+x <- catalogueGRDC(columnName = "d_start", columnValue = "<=2010")
+
 # Filter GRDC catalogue based on a bounding box
-x <- catalogueGRDC(bbox = bbox, metadataColumn = "statistics", entryValue = 1)
+x <- catalogueGRDC(bbox = bbox)
+
+# Filter GRDC catalogue based on a bounding box
+x <- catalogueGRDC(bbox = bbox, columnName = "statistics", columnValue = 1)
 
 # Visualise outlets on an interactive map
 library(leaflet)

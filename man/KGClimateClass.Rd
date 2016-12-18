@@ -9,7 +9,7 @@ KGClimateClass(bbox = NULL, updatedBy = "Peel", verbose = FALSE)
 \arguments{
 \item{bbox}{bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)}
 
-\item{updatedBy}{this can either be Kottek}
+\item{updatedBy}{this can either be "Kottek" or "Peel"}
 
 \item{verbose}{if TRUE more info are printed on the screen}
 }

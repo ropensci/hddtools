@@ -6,8 +6,8 @@
 #'
 #' @param bbox bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)
 #' @param stationID Station ID number, it should be in the range [1104150,6990700]
-#' @param metadataColumn name of the column to filter
-#' @param entryValue value to look for in the column named metadataColumn
+#' @param columnName name of the column to filter
+#' @param columnValue value to look for in the column named columnName
 #' @param mdDescription boolean value. Default is FALSE (no description is printed)
 #' @param cached boolean value. Default is TRUE (use cached datasets).
 #'
@@ -30,12 +30,12 @@
 #'
 
 catalogueGRDC <- function(bbox = NULL, stationID = NULL,
-                          metadataColumn = NULL, entryValue = NULL,
+                          columnName = NULL, columnValue = NULL,
                           mdDescription = FALSE, cached = TRUE){
 
   url <- "http://www.bafg.de/GRDC/EN/02_srvcs/21_tmsrs/211_ctlgs/GRDC_Stations.zip?__blob=publicationFile"
 
-  if (cached == FALSE){
+  if (cached == FALSE & RCurl::url.exists(url)){
 
     message("Downloading data from source")
     # Retrieve the catalogue
@@ -46,6 +46,10 @@ catalogueGRDC <- function(bbox = NULL, stationID = NULL,
                                      sheet = "grdc_metadata")
     unlink(temp)
     GRDCcatalogue[] <- lapply(GRDCcatalogue, as.character)
+    # numericColumns <- which(!(names(GRDCcatalogue) %in%
+    #                             c("id", "river", "name", "country_code")))
+    # GRDCcatalogue[, numericColumns] <- lapply(GRDCcatalogue[, numericColumns],
+    #                                           as.numeric)
     GRDCcatalogue$lat <- as.numeric(GRDCcatalogue$lat)
     GRDCcatalogue$long <- as.numeric(GRDCcatalogue$long)
 
@@ -83,16 +87,25 @@ catalogueGRDC <- function(bbox = NULL, stationID = NULL,
                                             grdcSelected$lon <= lonMax &
                                             grdcSelected$lon >= lonMin) )
 
-  if ( !is.null(metadataColumn) & !is.null(entryValue) ){
+  if ( !is.null(columnName) & !is.null(columnValue) ){
 
-    if (metadataColumn %in% names(grdcSelectedBB)){
+    if (tolower(columnName) %in% tolower(names(grdcSelectedBB))){
 
-      grdcTable <- grdcSelectedBB[which(grdcSelectedBB[,metadataColumn] ==
-                                          entryValue),]
+      col2select <- which(tolower(names(grdcSelectedBB)) ==
+                            tolower(columnName))
+
+      if (class(grdcSelectedBB[,col2select]) == "character"){
+        rows2select <- which(tolower(grdcSelectedBB[,col2select]) ==
+                               tolower(columnValue))
+      }
+      if (class(grdcSelectedBB[,col2select]) == "numeric"){
+        rows2select <- which(grdcSelectedBB[,col2select] == columnValue)
+      }
+      grdcTable <- grdcSelectedBB[rows2select,]
 
     }else{
 
-      message("metadataColumn should be one of the columns of the catalogue")
+      message("columnName should be one of the columns of the catalogue")
 
     }
 

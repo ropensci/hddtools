@@ -21,8 +21,8 @@
 #'
 
 catalogueSEPA <- function(bbox = NULL,
-                           metadataColumn = NULL, entryValue = NULL,
-                           verbose = FALSE){
+                          metadataColumn = NULL, entryValue = NULL,
+                          verbose = FALSE){
 
   theurl <- "http://pennine.ddns.me.uk/riverlevels/ConciseList.html"
 

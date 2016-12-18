@@ -4,17 +4,17 @@
 \alias{catalogueGRDC}
 \title{Data source: Global Runoff Data Centre catalogue}
 \usage{
-catalogueGRDC(bbox = NULL, stationID = NULL, metadataColumn = NULL,
-  entryValue = NULL, mdDescription = FALSE, cached = TRUE)
+catalogueGRDC(bbox = NULL, stationID = NULL, columnName = NULL,
+  columnValue = NULL, mdDescription = FALSE, cached = TRUE)
 }
 \arguments{
 \item{bbox}{bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)}
 
 \item{stationID}{Station ID number, it should be in the range [1104150,6990700]}
 
-\item{metadataColumn}{name of the column to filter}
+\item{columnName}{name of the column to filter}
 
-\item{entryValue}{value to look for in the column named metadataColumn}
+\item{columnValue}{value to look for in the column named columnName}
 
 \item{mdDescription}{boolean value. Default is FALSE (no description is printed)}
 
