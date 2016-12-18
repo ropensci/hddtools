@@ -54,15 +54,12 @@ NULL
 #'   \item{\code{Location}}{String describing the location.}
 #'   \item{\code{GridRef}}{British National Grid Reference.}
 #'   \item{\code{Operator}}{The operator's name.}
-#'   \item{\code{CatchmentArea(km2)}}{Area of the catchment.}
+#'   \item{\code{CatchmentAreaKm2}}{Area of the catchment.}
 #' }
 #'
 #' @keywords datasets
 #'
 #' @source \url{http://pennine.ddns.me.uk/riverlevels/ConciseList.html}
-#'
-#' @examples
-#'
 #'
 "SEPAcatalogue"
 
@@ -96,17 +93,17 @@ NULL
 #' @format A data frame with 431 stations (rows) and 12 metadata fields (columns).
 #' \describe{
 #'   \item{\code{id}}{id number.}
-#'   \item{\code{Longitude}}{}
-#'   \item{\code{Latitude}}{}
-#'   \item{\code{V4}}{}
+#'   \item{\code{longitude}}{}
+#'   \item{\code{latitude}}{}
+#'   \item{\code{elevation}}{}
 #'   \item{\code{V5}}{}
-#'   \item{\code{start}}{}
-#'   \item{\code{stop}}{}
+#'   \item{\code{datestart}}{}
+#'   \item{\code{dateend}}{}
 #'   \item{\code{V8}}{}
 #'   \item{\code{V9}}{}
-#'   \item{\code{STATEcode}}{}
+#'   \item{\code{state}}{}
 #'   \item{\code{V11}}{}
-#'   \item{\code{name}}{String describing the river's name.}
+#'   \item{\code{basin}}{String describing the river's name.}
 #' }
 #'
 #' @keywords datasets

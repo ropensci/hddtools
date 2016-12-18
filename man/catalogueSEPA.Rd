@@ -4,20 +4,17 @@
 \alias{catalogueSEPA}
 \title{Data source: SEPA catalogue}
 \usage{
-catalogueSEPA(bbox = NULL, metadataColumn = NULL, entryValue = NULL,
-  verbose = FALSE)
+catalogueSEPA(columnName = NULL, columnValue = NULL, verbose = FALSE)
 }
 \arguments{
-\item{bbox}{bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)}
+\item{columnName}{name of the column to filter}
 
-\item{metadataColumn}{name of the column to filter}
-
-\item{entryValue}{value to look for in the column named metadataColumn}
+\item{columnValue}{value to look for in the column named columnName}
 
 \item{verbose}{if TRUE it returns whether the data is coming from live or cached data sources}
 }
 \value{
-This function returns a data frame made of 830 rows (stations) and 8 columns: "idNRFA","aspxpage", "stationId", "River", "Location", "GridRef", "Operator" and "CatchmentArea(km2)". Column idNRFA shows the National River Flow Archive station id. Column "aspxpage" returns the Environment Agency gauges id. The column "stationId" is the id number used by SEPA. Use these id numbers to retrieve the time series of water levels.
+This function returns a data frame made of a maximum of 830 rows (stations) and 8 columns: "idNRFA","aspxpage", "stationId", "River", "Location", "GridRef", "Operator" and "CatchmentArea(km2)". Column idNRFA shows the National River Flow Archive station id. Column "aspxpage" returns the Environment Agency gauges id. The column "stationId" is the id number used by SEPA. Use these id numbers to retrieve the time series of water levels.
 }
 \description{
 This function provides an unofficial SEPA database catalogue of river level data (available from http://pennine.ddns.me.uk/riverlevels/ConciseList.html) containing info for 1752 stations. Some are NRFA stations.
@@ -26,6 +23,13 @@ This function provides an unofficial SEPA database catalogue of river level data
 \dontrun{
   # Retrieve the whole catalogue
   x <- catalogueSEPA()
+
+  # Get only catchments with area above 5000 Km2
+  x <- catalogueSEPA(columnName = "CatchmentAreaKm2",
+                     columnValue = ">= 5000")
+
+  # Get only catchments within river Avon
+  x <- catalogueSEPA(columnName = "River", columnValue = "Avon")
 }
 
 }

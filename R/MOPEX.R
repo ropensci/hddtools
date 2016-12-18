@@ -4,6 +4,10 @@
 #'
 #' @description This function interfaces the MOPEX database catalogue (available from \url{ftp://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/}) containing 438 daily datasets.
 #'
+#' @param bbox bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)
+#' @param columnName name of the column to filter
+#' @param columnValue value to look for in the column named columnName
+#'
 #' @return This function returns a data frame made of 431 rows (gauging stations) and 12 columns containing stations metadata.
 #'
 #' @export
@@ -12,10 +16,19 @@
 #' \dontrun{
 #'   # Retrieve the MOPEX catalogue
 #'   x <- catalogueMOPEX()
+#'
+#'   # Define a bounding box
+#'   bbox <- list(lonMin = -95, latMin = 37, lonMax = -92, latMax = 41)
+#'   # Filter the catalogue based on bounding box
+#'   x <- catalogueMOPEX(bbox = bbox)
+#'
+#'   # Get only catchments within NC
+#'   x <- catalogueMOPEX(columnName = "STATEcode", columnValue = "NC")
+#'
 #' }
 #'
 
-catalogueMOPEX <- function(){
+catalogueMOPEX <- function(bbox = NULL, columnName = NULL, columnValue = NULL){
 
   # require(XML)
   # require(RCurl)
@@ -28,11 +41,66 @@ catalogueMOPEX <- function(){
   myTable$V1 <- stringr::str_pad(myTable$V1, width = 8,
                                  side = "left", pad = "0")
 
-  names(myTable) <- c("id", "Longitude", "Latitude", "V4", "V5",
-                      "start", "stop", "V8",
-                      "V9", "STATEcode", "V11", "name")
+  names(myTable) <- c("id", "longitude", "latitude", "elevation", "V5",
+                      "datestart", "dateend", "V8",
+                      "V9", "state", "V11", "basin")
 
-  return(myTable)
+  myTable[] <- lapply(myTable, as.character)
+  myTable$longitude <- as.numeric(myTable$longitude)
+  myTable$latitude <- as.numeric(myTable$latitude)
+
+  if (!is.null(bbox)){
+
+    lonMin <- bbox$lonMin
+    lonMax <- bbox$lonMax
+    latMin <- bbox$latMin
+    latMax <- bbox$latMax
+
+  }else{
+
+    lonMin <- -180
+    lonMax <- +180
+    latMin <- -90
+    latMax <- +90
+
+  }
+
+  mopexSelected <- subset(myTable, (myTable$latitude <= latMax &
+                                      myTable$latitude >= latMin &
+                                      myTable$longitude <= lonMax &
+                                      myTable$longitude >= lonMin))
+
+  if ( !is.null(columnName) & !is.null(columnValue) ){
+
+    if (tolower(columnName) %in% tolower(names(mopexSelected))){
+
+      col2select <- which(tolower(names(mopexSelected)) ==
+                            tolower(columnName))
+
+      if (class(mopexSelected[,col2select]) == "character"){
+        rows2select <- which(tolower(trimws(mopexSelected[,col2select])) ==
+                               tolower(columnValue))
+      }
+      if (class(mopexSelected[,col2select]) == "numeric"){
+        rows2select <- eval(parse(text =
+                                    paste0("which(mopexSelected[,col2select] ",
+                                           columnValue, ")")))
+      }
+      mopexTable <- mopexSelected[rows2select,]
+
+    }else{
+
+      message("columnName should be one of the columns of the catalogue")
+
+    }
+
+  }else{
+
+    mopexTable <- mopexSelected
+
+  }
+
+  return(mopexTable)
 
 }
 

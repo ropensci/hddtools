@@ -13,7 +13,7 @@
   \item{\code{Location}}{String describing the location.}
   \item{\code{GridRef}}{British National Grid Reference.}
   \item{\code{Operator}}{The operator's name.}
-  \item{\code{CatchmentArea(km2)}}{Area of the catchment.}
+  \item{\code{CatchmentAreaKm2}}{Area of the catchment.}
 }}
 \source{
 \url{http://pennine.ddns.me.uk/riverlevels/ConciseList.html}

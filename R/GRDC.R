@@ -23,9 +23,14 @@
 #'   # Define a bounding box
 #'   bbox <- list(lonMin = -3.82, latMin = 52.41,
 #'                lonMax = -3.63, latMax = 52.52)
-#'
-#'   # Filter the catalogue
+#'   # Filter the catalogue based on bounding box
 #'   x <- catalogueGRDC(bbox = bbox)
+#'
+#'   # Get only catchments with area above 5000 Km2
+#'   x <- catalogueGRDC(columnName = "area", columnValue = ">= 5000")
+#'
+#'   # Get only catchments within river Thames
+#'   x <- catalogueGRDC(columnName = "river", columnValue = "Thames")
 #' }
 #'
 
@@ -46,12 +51,26 @@ catalogueGRDC <- function(bbox = NULL, stationID = NULL,
                                      sheet = "grdc_metadata")
     unlink(temp)
     GRDCcatalogue[] <- lapply(GRDCcatalogue, as.character)
-    # numericColumns <- which(!(names(GRDCcatalogue) %in%
-    #                             c("id", "river", "name", "country_code")))
-    # GRDCcatalogue[, numericColumns] <- lapply(GRDCcatalogue[, numericColumns],
-    #                                           as.numeric)
     GRDCcatalogue$lat <- as.numeric(GRDCcatalogue$lat)
     GRDCcatalogue$long <- as.numeric(GRDCcatalogue$long)
+    GRDCcatalogue$area <- as.numeric(GRDCcatalogue$area)
+    GRDCcatalogue$altitude <- as.numeric(GRDCcatalogue$altitude)
+    GRDCcatalogue$d_start <- as.numeric(GRDCcatalogue$d_start)
+    GRDCcatalogue$d_end <- as.numeric(GRDCcatalogue$d_end)
+    GRDCcatalogue$d_yrs <- as.numeric(GRDCcatalogue$d_yrs)
+    GRDCcatalogue$d_miss <- as.numeric(GRDCcatalogue$d_miss)
+    GRDCcatalogue$m_start <- as.numeric(GRDCcatalogue$m_start)
+    GRDCcatalogue$m_end <- as.numeric(GRDCcatalogue$m_end)
+    GRDCcatalogue$m_yrs <- as.numeric(GRDCcatalogue$m_yrs)
+    GRDCcatalogue$m_miss <- as.numeric(GRDCcatalogue$m_miss)
+    GRDCcatalogue$t_start <- as.numeric(GRDCcatalogue$t_start)
+    GRDCcatalogue$t_end <- as.numeric(GRDCcatalogue$t_end)
+    GRDCcatalogue$t_yrs <- as.numeric(GRDCcatalogue$t_yrs)
+    GRDCcatalogue$lta_discharge <- as.numeric(GRDCcatalogue$lta_discharge)
+    GRDCcatalogue$r_volume_yr <- as.numeric(GRDCcatalogue$r_volume_yr)
+    GRDCcatalogue$r_height_yr <- as.numeric(GRDCcatalogue$r_height_yr)
+    GRDCcatalogue$proc_tyrs <- as.numeric(GRDCcatalogue$proc_tyrs)
+    GRDCcatalogue$proc_tmon <- as.numeric(GRDCcatalogue$proc_tmon)
 
   }else{
 
@@ -99,7 +118,10 @@ catalogueGRDC <- function(bbox = NULL, stationID = NULL,
                                tolower(columnValue))
       }
       if (class(grdcSelectedBB[,col2select]) == "numeric"){
-        rows2select <- which(grdcSelectedBB[,col2select] == columnValue)
+        # rows2select <- which(grdcSelectedBB[,col2select] == columnValue)
+        rows2select <- eval(parse(text =
+                                    paste0("which(grdcSelectedBB[,col2select] ",
+                                           columnValue, ")")))
       }
       grdcTable <- grdcSelectedBB[rows2select,]
 

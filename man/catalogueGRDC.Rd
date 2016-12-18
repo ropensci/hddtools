@@ -34,9 +34,14 @@ This function interfaces the Global Runoff Data Centre database which provides r
   # Define a bounding box
   bbox <- list(lonMin = -3.82, latMin = 52.41,
                lonMax = -3.63, latMax = 52.52)
-
-  # Filter the catalogue
+  # Filter the catalogue based on bounding box
   x <- catalogueGRDC(bbox = bbox)
+
+  # Get only catchments with area above 5000 Km2
+  x <- catalogueGRDC(columnName = "area", columnValue = ">= 5000")
+
+  # Get only catchments within river Thames
+  x <- catalogueGRDC(columnName = "river", columnValue = "Thames")
 }
 
 }

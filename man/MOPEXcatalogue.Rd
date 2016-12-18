@@ -7,17 +7,17 @@
 \format{A data frame with 431 stations (rows) and 12 metadata fields (columns).
 \describe{
   \item{\code{id}}{id number.}
-  \item{\code{Longitude}}{}
-  \item{\code{Latitude}}{}
-  \item{\code{V4}}{}
+  \item{\code{longitude}}{}
+  \item{\code{latitude}}{}
+  \item{\code{elevation}}{}
   \item{\code{V5}}{}
-  \item{\code{start}}{}
-  \item{\code{stop}}{}
+  \item{\code{datestart}}{}
+  \item{\code{dateend}}{}
   \item{\code{V8}}{}
   \item{\code{V9}}{}
-  \item{\code{STATEcode}}{}
+  \item{\code{state}}{}
   \item{\code{V11}}{}
-  \item{\code{name}}{String describing the river's name.}
+  \item{\code{basin}}{String describing the river's name.}
 }}
 \source{
 \url{ftp://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/}

@@ -4,7 +4,14 @@
 \alias{catalogueMOPEX}
 \title{Data source: MOPEX catalogue}
 \usage{
-catalogueMOPEX()
+catalogueMOPEX(bbox = NULL, columnName = NULL, columnValue = NULL)
+}
+\arguments{
+\item{bbox}{bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)}
+
+\item{columnName}{name of the column to filter}
+
+\item{columnValue}{value to look for in the column named columnName}
 }
 \value{
 This function returns a data frame made of 431 rows (gauging stations) and 12 columns containing stations metadata.
@@ -16,6 +23,15 @@ This function interfaces the MOPEX database catalogue (available from \url{ftp:/
 \dontrun{
   # Retrieve the MOPEX catalogue
   x <- catalogueMOPEX()
+
+  # Define a bounding box
+  bbox <- list(lonMin = -95, latMin = 37, lonMax = -92, latMax = 41)
+  # Filter the catalogue based on bounding box
+  x <- catalogueMOPEX(bbox = bbox)
+
+  # Get only catchments within NC
+  x <- catalogueMOPEX(columnName = "STATEcode", columnValue = "NC")
+
 }
 
 }

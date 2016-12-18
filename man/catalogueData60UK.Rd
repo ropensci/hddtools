@@ -28,8 +28,7 @@ This function interfaces the Data60UK database catalogue (available from http://
   x <- catalogueData60UK()
 
   # Define a bounding box
-  bbox <- list(lonMin = -3.82, latMin = 52.41,
-               lonMax = -3.63, latMax = 52.52)
+  bbox <- list(lonMin = -4, latMin = 52, lonMax = -2, latMax = 53)
 
   # Filter the catalogue
   x <- catalogueData60UK(bbox)

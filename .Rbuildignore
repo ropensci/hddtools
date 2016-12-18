@@ -14,3 +14,4 @@ vignettes/hddtools_vignette_cache/*
 .travis.yml
 appveyor.yml
 review.md
+docs
