@@ -33,7 +33,7 @@
 #' @importFrom XML readHTMLTable
 #' @importFrom rnrfa catalogue
 #' @importFrom Hmisc monthDays
-#' @importFrom raster raster extract brick flip extent crop writeRaster
+#' @importFrom raster raster extract brick flip extent crop writeRaster extent
 #' @importFrom stringr str_pad
 #' @importFrom gdata read.xls
 #'

@@ -6,7 +6,7 @@
 \usage{
 TRMM(inputLocation = "ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
   product = "3B43", version = 7, type = "precipitation.accum",
-  timeExtent = NULL, bbox = NULL, outputfileLocation = NULL)
+  twindow = NULL, areaBox = NULL, outputfileLocation = NULL)
 }
 \arguments{
 \item{inputLocation}{location where data is stored. By default it points to the TRMM ftp server (\url{ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/}) but it can also be a local directory. If you are using a local directory, this function expects to find inside 'inputLocation' a folder with the name of product and version (e.g. "i3B43_V7") and inside this a folder for each year( e.g. "2012").}
@@ -17,9 +17,9 @@ TRMM(inputLocation = "ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
 
 \item{type}{this is the type of information needed, default is "precipitation.accum". Other types could be "gaugeRelativeWeighting.bin" and "relativeError.bin"}
 
-\item{timeExtent}{is a vector of dates and times for which the data should be retrieve}
+\item{twindow}{is a vector of dates and times for which the data should be retrieve}
 
-\item{bbox}{OPTIONAL bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)}
+\item{areaBox}{OPTIONAL bounding box, a list made of 4 elements: minimum longitude (xmin), minimum latitude (ymin), maximum longitude (xmax), maximum latitude (ymax)}
 
 \item{outputfileLocation}{file path where to save the GeoTiff}
 }
@@ -37,19 +37,19 @@ and on the TRMM FAQ: \url{http://disc.sci.gsfc.nasa.gov/additional/faq/precipita
 \examples{
 \dontrun{
   # Define a bounding box
-  bbox <- list(lonMin = -3.82, latMin = 48, lonMax = -3.63, latMax = 50)
+  areaBox <- raster::extent(c(-3.82, -3.63, 48, 50))
   twindow <- seq(as.Date("2012-01-01"), as.Date("2012-01-31"), by = "months")
 
   TRMM(inputLocation="ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
        product = "3B43",
        version = 7,
        type = "precipitation.accum",
-       timeExtent = twindow,
-       bbox = bbox,
+       twindow = twindow,
+       areaBox = areaBox,
        outputfileLocation = "~/")
 
   # or simply
-  TRMM(timeExtent = twindow, bbox = bbox)#'
+  TRMM(twindow = twindow, areaBox = areaBox)#'
   plot(brick("~/trmm_acc.tif"))
 }
 

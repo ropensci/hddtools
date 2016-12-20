@@ -4,11 +4,11 @@
 \alias{catalogueData60UK}
 \title{Data source: Data60UK catalogue}
 \usage{
-catalogueData60UK(bbox = NULL, columnName = NULL, columnValue = NULL,
+catalogueData60UK(areaBox = NULL, columnName = NULL, columnValue = NULL,
   cached = TRUE)
 }
 \arguments{
-\item{bbox}{bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)}
+\item{areaBox}{bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)}
 
 \item{columnName}{name of the column to filter}
 
@@ -28,10 +28,9 @@ This function interfaces the Data60UK database catalogue (available from http://
   x <- catalogueData60UK()
 
   # Define a bounding box
-  bbox <- list(lonMin = -4, latMin = 52, lonMax = -2, latMax = 53)
-
+  areaBox <- raster::extent(c(-4, -2, +52, +53))
   # Filter the catalogue
-  x <- catalogueData60UK(bbox)
+  x <- catalogueData60UK(areaBox)
   x <- catalogueData60UK(columnName = "id", columnValue = "62001")
 }
 

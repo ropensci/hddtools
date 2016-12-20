@@ -8,8 +8,8 @@
 #' @param product this is the code that identifies a product, default is "3B43"
 #' @param version this is the version number, default is 7
 #' @param type this is the type of information needed, default is "precipitation.accum". Other types could be "gaugeRelativeWeighting.bin" and "relativeError.bin"
-#' @param timeExtent is a vector of dates and times for which the data should be retrieve
-#' @param bbox OPTIONAL bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)
+#' @param twindow is a vector of dates and times for which the data should be retrieve
+#' @param areaBox OPTIONAL bounding box, a list made of 4 elements: minimum longitude (xmin), minimum latitude (ymin), maximum longitude (xmax), maximum latitude (ymax)
 #' @param outputfileLocation file path where to save the GeoTiff
 #'
 #' @return Data is loaded as rasterbrick, then converted to a multilayer Geotiff that can
@@ -24,19 +24,19 @@
 #' @examples
 #' \dontrun{
 #'   # Define a bounding box
-#'   bbox <- list(lonMin = -3.82, latMin = 48, lonMax = -3.63, latMax = 50)
+#'   areaBox <- raster::extent(c(-3.82, -3.63, 48, 50))
 #'   twindow <- seq(as.Date("2012-01-01"), as.Date("2012-01-31"), by = "months")
 #'
 #'   TRMM(inputLocation="ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
 #'        product = "3B43",
 #'        version = 7,
 #'        type = "precipitation.accum",
-#'        timeExtent = twindow,
-#'        bbox = bbox,
+#'        twindow = twindow,
+#'        areaBox = areaBox,
 #'        outputfileLocation = "~/")
 #'
 #'   # or simply
-#'   TRMM(timeExtent = twindow, bbox = bbox)#'
+#'   TRMM(twindow = twindow, areaBox = areaBox)#'
 #'   plot(brick("~/trmm_acc.tif"))
 #' }
 #'
@@ -45,10 +45,9 @@ TRMM <- function(inputLocation="ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
                  product = "3B43",
                  version = 7,
                  type = "precipitation.accum",
-                 timeExtent = NULL,
-                 bbox = NULL,
-                 outputfileLocation = NULL
-                 ){
+                 twindow = NULL,
+                 areaBox = NULL,
+                 outputfileLocation = NULL){
 
   # Check output file location
   originalwd <- getwd()
@@ -56,45 +55,47 @@ TRMM <- function(inputLocation="ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
   setwd(outputfileLocation)
 
   # Check bounding box extent is within original raster extent
-  if (is.null(bbox)){
+  if (is.null(areaBox)){
     # Use TRMM max extent
-    bbox <- list(lonMin = -180, latMin = -50, lonMax = +180, latMax = +50)
+    areaBox <- raster::extent(c(-180, +180, -50, +50))
   }
-  if (bbox$lonMin < -180 | bbox$lonMin > 180) {
-    bbox$lonMin <- -180
-    message(paste("lonMin of bbox is out of the maximum extent [-180,180],",
-                  "new lonMin of bbox is modified as follows:",
-                  "lonMin =", bbox$lonMin))
+
+  if (areaBox@xmin < -180 | areaBox@xmin > 180) {
+    areaBox@xmin <- -180
+    message(paste("xmin of areaBox is out of the maximum extent",
+                  "[-180,180], new xmin of areaBox is modified as follows:",
+                  "xmin =", areaBox@xmin))
   }
-  if (bbox$lonMax < -180 | bbox$lonMax > 180) {
-    bbox$lonMax <- 180
-    message(paste("lonMax of bbox is out of the maximum extent [-180,180],",
-                  "new lonMax of bbox is modified as follows:",
-                  "lonMax =", bbox$lonMax))
+  if (areaBox@xmax < -180 | areaBox@xmax > 180) {
+    areaBox@xmax <- 180
+    message(paste("xmax of areaBox is out of the maximum extent",
+                  "[-180,180], new xmax of areaBox is modified as follows:",
+                  "xmax =", areaBox@xmax))
   }
-  if (bbox$latMin < -50 | bbox$latMin > 50) {
-    bbox$latMin <- -50
-    message(paste("latMin of bbox is out of the maximum extent [-50,50],",
-                  "new latMin of bbox is modified as follows:",
-                  "latMin =", bbox$latMin))
+  if (areaBox@ymin < -50 | areaBox@ymin > 50) {
+    areaBox@ymin <- -50
+    message(paste("ymin of areaBox is out of the maximum extent [-50,50],",
+                  "new ymin of areaBox is modified as follows:",
+                  "ymin =", areaBox@ymin))
   }
-  if (bbox$latMax < -50 | bbox$latMax > 50) {
-    bbox$latMax <- 50
-    message(paste("latMax of bbox is out of the maximum extent [-50,50],",
-                  "new latMax of bbox is modified as follows:",
-                  "latMax =", bbox$latMax))
+  if (areaBox@ymax < -50 | areaBox@ymax > 50) {
+    areaBox@ymax <- 50
+    message(paste("ymax of areaBox is out of the maximum extent [-50,50],",
+                  "new ymax of areaBox is modified as follows:",
+                  "ymax =", areaBox@ymax))
   }
-  bbSP <- bboxSpatialPolygon(bbox)
+  bbSP <- bboxSpatialPolygon(areaBox)
 
   # Check time extent
-  years <- unique(format(timeExtent, "%Y"))
-  months <- format(timeExtent, "%m")
+  if (is.null(twindow)) stop("Please enter valid twindow")
+  years <- unique(format(twindow, "%Y"))
+  months <- format(twindow, "%m")
 
-  if ( any(years == "NULL", months == "NULL") ){
+  if ( any(is.null(years), is.null(months)) ){
 
-    message(paste("This function cannot be executed because your timeExtent",
+    message(paste("This function cannot be executed because your twindow",
                   "is not in the correct format.",
-                  "Please enter a suitable timeExtent, then try again."))
+                  "Please enter a suitable twindow, then try again."))
 
   }else{
 
@@ -105,10 +106,10 @@ TRMM <- function(inputLocation="ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
       myURL <- paste(inputLocation,
                      product, "_V", version, "/", myYear, "/", sep = "")
 
-      filenames <- getURL(myURL,
-                          ftp.use.epsv = FALSE,
-                          ftplistonly=TRUE,
-                          crlf=TRUE)
+      filenames <- RCurl::getURL(myURL,
+                                 ftp.use.epsv = FALSE,
+                                 ftplistonly=TRUE,
+                                 crlf=TRUE)
 
       # the following line allows to download only files with a certain pattern,
       # e.g. only certain months.
@@ -132,7 +133,7 @@ TRMM <- function(inputLocation="ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
     # geo-informations.
     # To automate the process, there is a template script in inst/trmm.sh that
     # generates the VRT-file (TRMM.vrt) for all 2012 data.
-    # Change "3B43.12" according to your timeExtent.
+    # Change "3B43.12" according to your twindow.
 
     # fileConn <- file(paste(outputfileLocation,"myTRMM.sh",sep=""))
     fileConn <- file("myTRMM.sh")
@@ -158,11 +159,11 @@ TRMM <- function(inputLocation="ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
     b <- raster::brick("TRMM.vrt")
     trmm <- raster::flip(b, direction = "y")
 
-    # Crop TRMM raster based on bbox, if necessary
+    # Crop TRMM raster based on areaBox, if necessary
     if ( raster::extent(bbSP) == raster::extent(trmm) ){
       message("Using full spatial extent.")
     }else{
-      message("Cropping raster to bbox extent.")
+      message("Cropping raster to areaBox extent.")
       trmm <- raster::crop(trmm, bbSP)
     }
 
@@ -180,5 +181,7 @@ TRMM <- function(inputLocation="ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
   }
 
   on.exit(expr = {setwd(originalwd)})
+
+  return(paste(outputfileLocation, "/trmm_acc.tif", sep = ""))
 
 }

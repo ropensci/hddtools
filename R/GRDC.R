@@ -4,8 +4,7 @@
 #'
 #' @description This function interfaces the Global Runoff Data Centre database which provides river discharge data for about 9000 sites over 157 countries.
 #'
-#' @param bbox bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)
-#' @param stationID Station ID number, it should be in the range [1104150,6990700]
+#' @param areaBox bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)
 #' @param columnName name of the column to filter
 #' @param columnValue value to look for in the column named columnName
 #' @param mdDescription boolean value. Default is FALSE (no description is printed)
@@ -21,10 +20,9 @@
 #'   x <- catalogueGRDC()
 #'
 #'   # Define a bounding box
-#'   bbox <- list(lonMin = -3.82, latMin = 52.41,
-#'                lonMax = -3.63, latMax = 52.52)
+#'   areaBox <- raster::extent(c(-3.82, -3.63, 52.41, 52.52))
 #'   # Filter the catalogue based on bounding box
-#'   x <- catalogueGRDC(bbox = bbox)
+#'   x <- catalogueGRDC(areaBox = areaBox)
 #'
 #'   # Get only catchments with area above 5000 Km2
 #'   x <- catalogueGRDC(columnName = "area", columnValue = ">= 5000")
@@ -34,7 +32,7 @@
 #' }
 #'
 
-catalogueGRDC <- function(bbox = NULL, stationID = NULL,
+catalogueGRDC <- function(areaBox = NULL,
                           columnName = NULL, columnValue = NULL,
                           mdDescription = FALSE, cached = TRUE){
 
@@ -79,32 +77,22 @@ catalogueGRDC <- function(bbox = NULL, stationID = NULL,
 
   }
 
-  if (!is.null(stationID)) {
-    grdcSelected <- subset(GRDCcatalogue, (GRDCcatalogue$grdc_no == stationID))
+  if (!is.null(areaBox)){
+    lonMin <- areaBox@xmin
+    lonMax <- areaBox@xmax
+    latMin <- areaBox@ymin
+    latMax <- areaBox@ymax
   }else{
-    grdcSelected <- GRDCcatalogue
-  }
-
-  if (!is.null(bbox)){
-
-    lonMin <- bbox$lonMin
-    lonMax <- bbox$lonMax
-    latMin <- bbox$latMin
-    latMax <- bbox$latMax
-
-  }else{
-
     lonMin <- -180
     lonMax <- +180
     latMin <- -90
     latMax <- +90
-
   }
 
-  grdcSelectedBB <- subset(grdcSelected, (grdcSelected$lat <= latMax &
-                                            grdcSelected$lat >= latMin &
-                                            grdcSelected$lon <= lonMax &
-                                            grdcSelected$lon >= lonMin) )
+  grdcSelectedBB <- subset(GRDCcatalogue, (GRDCcatalogue$lat <= latMax &
+                                            GRDCcatalogue$lat >= latMin &
+                                            GRDCcatalogue$lon <= lonMax &
+                                            GRDCcatalogue$lon >= lonMin) )
 
   if ( !is.null(columnName) & !is.null(columnValue) ){
 
@@ -213,12 +201,15 @@ tsGRDC <- function(stationID, plotOption = FALSE){
 
   if ( temp[which(temp$grdc_no == stationID), "statistics"] == 1 ){
 
+    catalogueTmp <- catalogueGRDC(columnName = "grdc_no",
+                                  columnValue = stationID)
+
     # Retrieve look-up table
     grdcLTMMD <- NULL
     load(system.file("data/grdcLTMMD.rda", package = "hddtools"))
 
     # Retrieve WMO region from catalogue
-    wmoRegion <- catalogueGRDC(stationID = stationID)$wmo_reg
+    wmoRegion <- catalogueTmp$wmo_reg
 
     # Retrieve ftp server location
     zipFile <- as.character(grdcLTMMD[which(grdcLTMMD$WMO_Region == wmoRegion),
@@ -297,11 +288,8 @@ tsGRDC <- function(stationID, plotOption = FALSE){
 
       plot(zoo(table3$MQ, order.by = dummyTime),
            main = paste("Monthly statistics: ",
-                        catalogueGRDC(stationID = stationID)$name,
-                        " (",
-                        catalogueGRDC(stationID = stationID)$country_code,
-                        ")",
-                        sep=""),
+                        catalogueTmp$name, " (",
+                        catalogueTmp$country_code, ")", sep=""),
            type = "l", ylim = c(min(table3$LQ), max(table3$HQ)),
            xlab = "", ylab = "m3/s", xaxt = "n")
       axis(1, at = dummyTime, labels = format(dummyTime, "%b"))

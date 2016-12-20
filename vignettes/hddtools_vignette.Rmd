@@ -58,10 +58,10 @@ The functions provided can filter, slice and dice 2 and 3 dimensional informatio
 
 ```{r, eval = TRUE}
 # Define a bounding box
-bbox <- list(lonMin = -10, latMin = 48, lonMax = 5, latMax = 62)
+areaBox <- raster::extent(-10, 5, 48, 62)
 
 # Define a temporal extent
-timeExtent <- seq(as.Date("2012-01-01"), as.Date("2012-03-31"), by = "months")
+twindow <- seq(as.Date("2012-01-01"), as.Date("2012-03-31"), by = "months")
 ```
 
 ### The Koppen Climate Classification map
@@ -71,10 +71,10 @@ The package hddtools contains a function to identify the updated Koppen-Greiger 
 
 ```{r, eval = TRUE}
 # Extract climate zones from Peel's map:
-KGClimateClass(bbox = bbox, updatedBy = "Peel")
+KGClimateClass(areaBox = areaBox, updatedBy = "Peel")
 
 # Extract climate zones from Kottek's map:
-KGClimateClass(bbox = bbox, updatedBy = "Kottek")
+KGClimateClass(areaBox = areaBox, updatedBy = "Kottek")
 ```
 
 ### The Global Runoff Data Centre
@@ -82,7 +82,7 @@ The Global Runoff Data Centre (GRDC) is an international archive hosted by the F
 
 Catalogue, kml files and the product Long-Term Mean Monthly Discharges are open data and accessible via the hddtools.
 
-```{r}
+```{r, eval = FALSE}
 # GRDC full catalogue
 x <- catalogueGRDC()
 
@@ -97,10 +97,10 @@ x <- catalogueGRDC(columnName = "river", columnValue = "PO")
 x <- catalogueGRDC(columnName = "d_start", columnValue = "<=2010")
 
 # Filter GRDC catalogue based on a bounding box
-x <- catalogueGRDC(bbox = bbox)
+x <- catalogueGRDC(areaBox = areaBox)
 
 # Filter GRDC catalogue based on a bounding box
-x <- catalogueGRDC(bbox = bbox, columnName = "statistics", columnValue = 1)
+x <- catalogueGRDC(areaBox = areaBox, columnName = "statistics", columnValue = 1)
 
 # Visualise outlets on an interactive map
 library(leaflet)
@@ -123,9 +123,9 @@ The TRMM satellite records global historical rainfall estimation in a gridded fo
 
 The hddtools provides a function, called TRMM(), to download and convert a selected portion of the TRMM dataset into a raster-brick that can be opened in any GIS software.
 
-```{r}
+```{r, eval = FALSE}
 # Retreive mean monthly precipitations from 3B43_V7 (based on a bounding box and time extent)
-TRMM(timeExtent = timeExtent, bbox = bbox)
+TRMM(twindow = twindow, areaBox = areaBox)
 library(raster)
 b <- brick("trmm_acc.tif")
 plot(b)
@@ -146,8 +146,8 @@ The hddtools contain two functions to interact with this database: one to retrei
 x <- catalogueData60UK()
 
 # Filter Data60UK catalogue based on bounding box
-bbox <- list(lonMin = -4, latMin = 51, lonMax = -3, latMax = 53)
-x <- catalogueData60UK(bbox = bbox)
+areaBox <- raster::extent(-4, -3, 51, 53)
+x <- catalogueData60UK(areaBox = areaBox)
 ```
 
 ```{r}
@@ -166,10 +166,10 @@ hydroRefNumber <- as.numeric(as.character(x$id[1])) # e.g. 55012
 y <- tsData60UK(hydroRefNumber, plotOption = FALSE)
 
 # Extract time series for a specified temporal window
-timeExtent <- seq(as.Date("1988-01-01"), as.Date("1989-12-31"), by = "days")
+twindow <- seq(as.Date("1988-01-01"), as.Date("1989-12-31"), by = "days")
 y <- tsData60UK(hydroRefNumber = hydroRefNumber, 
                 plotOption = TRUE, 
-                timeExtent = timeExtent)
+                twindow = twindow)
 ```
 
 #### MOPEX
@@ -185,7 +185,7 @@ y <- tsMOPEX(hydroRefNumber = "14359000", plotOption = TRUE)
 ### SEPA river level data
 The Scottish Environment Protection Agency (SEPA) manages river level data for hundreds of gauging stations in the UK. The catalogue of stations was derived by an unofficial list (available here: http://pennine.ddns.me.uk/riverlevels/ConciseList.html). 
 
-```{r}
+```{r, eval = FALSE}
 # SEPA unofficial catalogue
 x <- catalogueSEPA()
 ```

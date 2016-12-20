@@ -4,7 +4,7 @@
 #'
 #' @description This function interfaces the Data60UK database catalogue (available from http://www.nwl.ac.uk/ih/nrfa/pub/index.html) containing 61 datasets. Dataset catalogue is available from \url{http://www.nwl.ac.uk/ih/nrfa/pub/data.html}.
 #'
-#' @param bbox bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)
+#' @param areaBox bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)
 #' @param columnName name of the column to filter
 #' @param columnValue value to look for in the column named columnName
 #' @param cached boolean value. Default is TRUE (use cached datasets).
@@ -19,25 +19,24 @@
 #'   x <- catalogueData60UK()
 #'
 #'   # Define a bounding box
-#'   bbox <- list(lonMin = -4, latMin = 52, lonMax = -2, latMax = 53)
-#'
+#'   areaBox <- raster::extent(c(-4, -2, +52, +53))
 #'   # Filter the catalogue
-#'   x <- catalogueData60UK(bbox)
+#'   x <- catalogueData60UK(areaBox)
 #'   x <- catalogueData60UK(columnName = "id", columnValue = "62001")
 #' }
 #'
 
-catalogueData60UK <- function(bbox = NULL, columnName = NULL,
+catalogueData60UK <- function(areaBox = NULL, columnName = NULL,
                               columnValue = NULL, cached = TRUE){
 
   Data60UKcatalogue <- NULL
 
   # Latitude is the Y axis, longitude is the X axis.
-  if (!is.null(bbox)){
-    lonMin <- bbox$lonMin
-    lonMax <- bbox$lonMax
-    latMin <- bbox$latMin
-    latMax <- bbox$latMax
+  if (!is.null(areaBox)){
+    lonMin <- areaBox@xmin
+    lonMax <- areaBox@xmax
+    latMin <- areaBox@ymin
+    latMax <- areaBox@ymax
   }else{
     lonMin <- -180
     lonMax <- +180
@@ -111,7 +110,7 @@ catalogueData60UK <- function(bbox = NULL, columnName = NULL,
 #'
 #' @param hydroRefNumber hydrometric reference number (string)
 #' @param plotOption boolean to define whether to plot the results. By default this is set to TRUE.
-#' @param timeExtent is a vector of dates and times for which the data should be retrieved
+#' @param twindow is a vector of dates and times for which the data should be retrieved
 #'
 #' @return The function returns a data frame containing 2 time series (as zoo objects): "P" (precipitation) and "Q" (discharge).
 #'
@@ -123,7 +122,7 @@ catalogueData60UK <- function(bbox = NULL, columnName = NULL,
 #' }
 #'
 
-tsData60UK <- function(hydroRefNumber, plotOption = FALSE, timeExtent = NULL){
+tsData60UK <- function(hydroRefNumber, plotOption = FALSE, twindow = NULL){
 
   # require(zoo)
   # require(XML)
@@ -147,16 +146,16 @@ tsData60UK <- function(hydroRefNumber, plotOption = FALSE, timeExtent = NULL){
 
     myTS <- merge(P,Q)
 
-    if ( is.null(timeExtent) ){
+    if ( is.null(twindow) ){
 
-      timeExtent <- seq(as.Date("1980-01-01"), as.Date("1990-12-31"),
+      twindow <- seq(as.Date("1980-01-01"), as.Date("1990-12-31"),
                         by = "days")
 
     }
 
     myTS <- window(myTS,
-                   start = as.POSIXct(head(timeExtent, n = 1)[1]),
-                   end = as.POSIXct(tail(timeExtent, n = 1)[1]))
+                   start = as.POSIXct(head(twindow, n = 1)[1]),
+                   end = as.POSIXct(tail(twindow, n = 1)[1]))
 
     if (plotOption == TRUE){
 

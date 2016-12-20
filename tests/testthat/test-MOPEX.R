@@ -1,8 +1,6 @@
 context("MOPEX")
 
-test_that("Test catalogueMOPEX function", {
-
-  skip_on_cran()
+test_that("Test full catalogueMOPEX", {
 
   # Retrieve the MOPEX catalogue
   x <- catalogueMOPEX()
@@ -11,9 +9,27 @@ test_that("Test catalogueMOPEX function", {
 
 })
 
-test_that("Test tsMOPEX function", {
+test_that("Test bounding box with catalogueMOPEX", {
 
-  skip_on_cran()
+  # Define a bounding box
+  areaBox <- raster::extent(c(-95, -92, 37, 41))
+  # Filter the catalogue based on bounding box
+  x <- catalogueMOPEX(areaBox = areaBox)
+
+  expect_that(all(dim(x) == c(8, 12)), equals(TRUE))
+
+})
+
+test_that("Test bounding box with catalogueMOPEX", {
+
+  # Get only catchments within NC
+  x <- catalogueMOPEX(columnName = "state", columnValue = "NC")
+
+  expect_that(all(dim(x) == c(16, 12)), equals(TRUE))
+
+})
+
+test_that("Test tsMOPEX function", {
 
   # Retrieve sample data
   x <- tsMOPEX("14359000")

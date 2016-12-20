@@ -4,10 +4,10 @@
 \alias{catalogueMOPEX}
 \title{Data source: MOPEX catalogue}
 \usage{
-catalogueMOPEX(bbox = NULL, columnName = NULL, columnValue = NULL)
+catalogueMOPEX(areaBox = NULL, columnName = NULL, columnValue = NULL)
 }
 \arguments{
-\item{bbox}{bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)}
+\item{areaBox}{bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)}
 
 \item{columnName}{name of the column to filter}
 
@@ -25,12 +25,12 @@ This function interfaces the MOPEX database catalogue (available from \url{ftp:/
   x <- catalogueMOPEX()
 
   # Define a bounding box
-  bbox <- list(lonMin = -95, latMin = 37, lonMax = -92, latMax = 41)
+  areaBox <- raster::extent(c(-95, -92, 37, 41))
   # Filter the catalogue based on bounding box
-  x <- catalogueMOPEX(bbox = bbox)
+  x <- catalogueMOPEX(areaBox = areaBox)
 
   # Get only catchments within NC
-  x <- catalogueMOPEX(columnName = "STATEcode", columnValue = "NC")
+  x <- catalogueMOPEX(columnName = "state", columnValue = "NC")
 
 }
 

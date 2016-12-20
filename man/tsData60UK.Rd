@@ -4,14 +4,14 @@
 \alias{tsData60UK}
 \title{Interface for the Data60UK database of Daily Time Series}
 \usage{
-tsData60UK(hydroRefNumber, plotOption = FALSE, timeExtent = NULL)
+tsData60UK(hydroRefNumber, plotOption = FALSE, twindow = NULL)
 }
 \arguments{
 \item{hydroRefNumber}{hydrometric reference number (string)}
 
 \item{plotOption}{boolean to define whether to plot the results. By default this is set to TRUE.}
 
-\item{timeExtent}{is a vector of dates and times for which the data should be retrieved}
+\item{twindow}{is a vector of dates and times for which the data should be retrieved}
 }
 \value{
 The function returns a data frame containing 2 time series (as zoo objects): "P" (precipitation) and "Q" (discharge).

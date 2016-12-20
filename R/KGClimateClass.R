@@ -4,7 +4,7 @@
 #'
 #' @description Given a bounding box, the function identifies the overlapping climate zones.
 #'
-#' @param bbox bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)
+#' @param areaBox bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)
 #' @param updatedBy this can either be "Kottek" or "Peel"
 #' @param verbose if TRUE more info are printed on the screen
 #'
@@ -17,20 +17,20 @@
 #' @examples
 #' \dontrun{
 #'   # Define a bounding box
-#'   bbox <- list(lonMin = -3.82, latMin = 52.41,
-#'                lonMax = -3.63, latMax = 52.52)
+#'   areaBox <- raster::extent(c(-3.82, -3.63, 52.41, 52.52))
 #'   # Get climate classes
-#'   KGClimateClass(bbox = bbox)
+#'   KGClimateClass(areaBox = areaBox)
 #' }
 #'
 
-KGClimateClass <- function(bbox = NULL, updatedBy = "Peel", verbose = FALSE){
+KGClimateClass <- function(areaBox = NULL, updatedBy = "Peel", verbose = FALSE){
 
   # crop to bounding box
-  if (is.null(bbox)){
-    bbox <- list(lonMin = -180, latMin = -90, lonMax = +180, latMax = +90)
+
+  if (is.null(areaBox)){
+    areaBox <- raster::extent(c(-180, +180, -90, +90))
   }
-  bbSP <- bboxSpatialPolygon(bbox)
+  bbSP <- bboxSpatialPolygon(areaBox)
 
   if (updatedBy == "Kottek") {
 

@@ -4,7 +4,7 @@
 #'
 #' @description This function interfaces the MOPEX database catalogue (available from \url{ftp://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/}) containing 438 daily datasets.
 #'
-#' @param bbox bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)
+#' @param areaBox bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)
 #' @param columnName name of the column to filter
 #' @param columnValue value to look for in the column named columnName
 #'
@@ -18,20 +18,18 @@
 #'   x <- catalogueMOPEX()
 #'
 #'   # Define a bounding box
-#'   bbox <- list(lonMin = -95, latMin = 37, lonMax = -92, latMax = 41)
+#'   areaBox <- raster::extent(c(-95, -92, 37, 41))
 #'   # Filter the catalogue based on bounding box
-#'   x <- catalogueMOPEX(bbox = bbox)
+#'   x <- catalogueMOPEX(areaBox = areaBox)
 #'
 #'   # Get only catchments within NC
-#'   x <- catalogueMOPEX(columnName = "STATEcode", columnValue = "NC")
+#'   x <- catalogueMOPEX(columnName = "state", columnValue = "NC")
 #'
 #' }
 #'
 
-catalogueMOPEX <- function(bbox = NULL, columnName = NULL, columnValue = NULL){
-
-  # require(XML)
-  # require(RCurl)
+catalogueMOPEX <- function(areaBox = NULL,
+                           columnName = NULL, columnValue = NULL){
 
   myTable <- read.fwf(
     file = url(paste0("ftp://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/",
@@ -49,20 +47,16 @@ catalogueMOPEX <- function(bbox = NULL, columnName = NULL, columnValue = NULL){
   myTable$longitude <- as.numeric(myTable$longitude)
   myTable$latitude <- as.numeric(myTable$latitude)
 
-  if (!is.null(bbox)){
-
-    lonMin <- bbox$lonMin
-    lonMax <- bbox$lonMax
-    latMin <- bbox$latMin
-    latMax <- bbox$latMax
-
+  if (!is.null(areaBox)){
+    lonMin <- areaBox@xmin
+    lonMax <- areaBox@xmax
+    latMin <- areaBox@ymin
+    latMax <- areaBox@ymax
   }else{
-
     lonMin <- -180
     lonMax <- +180
     latMin <- -90
     latMax <- +90
-
   }
 
   mopexSelected <- subset(myTable, (myTable$latitude <= latMax &
@@ -70,7 +64,7 @@ catalogueMOPEX <- function(bbox = NULL, columnName = NULL, columnValue = NULL){
                                       myTable$longitude <= lonMax &
                                       myTable$longitude >= lonMin))
 
-  if ( !is.null(columnName) & !is.null(columnValue) ){
+  if (!is.null(columnName) & !is.null(columnValue)){
 
     if (tolower(columnName) %in% tolower(names(mopexSelected))){
 

@@ -4,13 +4,11 @@
 \alias{catalogueGRDC}
 \title{Data source: Global Runoff Data Centre catalogue}
 \usage{
-catalogueGRDC(bbox = NULL, stationID = NULL, columnName = NULL,
-  columnValue = NULL, mdDescription = FALSE, cached = TRUE)
+catalogueGRDC(areaBox = NULL, columnName = NULL, columnValue = NULL,
+  mdDescription = FALSE, cached = TRUE)
 }
 \arguments{
-\item{bbox}{bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)}
-
-\item{stationID}{Station ID number, it should be in the range [1104150,6990700]}
+\item{areaBox}{bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)}
 
 \item{columnName}{name of the column to filter}
 
@@ -32,10 +30,9 @@ This function interfaces the Global Runoff Data Centre database which provides r
   x <- catalogueGRDC()
 
   # Define a bounding box
-  bbox <- list(lonMin = -3.82, latMin = 52.41,
-               lonMax = -3.63, latMax = 52.52)
+  areaBox <- raster::extent(c(-3.82, -3.63, 52.41, 52.52))
   # Filter the catalogue based on bounding box
-  x <- catalogueGRDC(bbox = bbox)
+  x <- catalogueGRDC(areaBox = areaBox)
 
   # Get only catchments with area above 5000 Km2
   x <- catalogueGRDC(columnName = "area", columnValue = ">= 5000")
