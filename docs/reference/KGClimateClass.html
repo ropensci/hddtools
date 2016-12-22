@@ -84,11 +84,11 @@
     <p>Given a bounding box, the function identifies the overlapping climate zones.</p>
     
 
-    <pre><span class='fu'>KGClimateClass</span>(<span class='kw'>bbox</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>updatedBy</span> <span class='kw'>=</span> <span class='st'>"Peel"</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre><span class='fu'>KGClimateClass</span>(<span class='kw'>areaBox</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>updatedBy</span> <span class='kw'>=</span> <span class='st'>"Peel"</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
-      <dt>bbox</dt>
+      <dt>areaBox</dt>
       <dd>bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)</dd>
       <dt>updatedBy</dt>
       <dd>this can either be &quot;Kottek&quot; or &quot;Peel&quot;</dd>
@@ -108,10 +108,9 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## Not run: ------------------------------------</span>
 <span class='co'>#   # Define a bounding box</span>
-<span class='co'>#   bbox &lt;- list(lonMin = -3.82, latMin = 52.41,</span>
-<span class='co'>#                lonMax = -3.63, latMax = 52.52)</span>
+<span class='co'>#   areaBox &lt;- raster::extent(c(-3.82, -3.63, 52.41, 52.52))</span>
 <span class='co'>#   # Get climate classes</span>
-<span class='co'>#   KGClimateClass(bbox = bbox)</span>
+<span class='co'>#   KGClimateClass(areaBox = areaBox)</span>
 <span class='co'>## ---------------------------------------------</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

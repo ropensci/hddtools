@@ -6,72 +6,92 @@
 #'
 #' @param columnName name of the column to filter
 #' @param columnValue value to look for in the column named columnName
-#' @param verbose if TRUE it returns whether the data is coming from live or cached data sources
+#' @param useCachedData logical, set to TRUE to use cached data, set to FALSE to retrive data from online source. This is TRUE by default.
 #'
-#' @return This function returns a data frame made of a maximum of 830 rows (stations) and 8 columns: "idNRFA","aspxpage", "stationId", "River", "Location", "GridRef", "Operator" and "CatchmentArea(km2)". Column idNRFA shows the National River Flow Archive station id. Column "aspxpage" returns the Environment Agency gauges id. The column "stationId" is the id number used by SEPA. Use these id numbers to retrieve the time series of water levels.
+#' @return This function returns a data frame made of a maximum of 830 rows (stations) and 8 columns: "idNRFA","aspxpage", "stationId", "River", "Location", "GridRef", "Operator" and "CatchmentArea(km2)". Column idNRFA shows the National River Flow Archive station id. Column "aspxpage" returns the Environment Agency gauges id. The column "stationId" is the id number used by SEPA. Use the stationId to retrieve the time series of water levels.
 #'
 #' @export
 #'
 #' @examples
 #' \dontrun{
 #'   # Retrieve the whole catalogue
-#'   x <- catalogueSEPA()
+#'   SEPA_catalogue_all <- catalogueSEPA()
 #'
 #'   # Get only catchments with area above 5000 Km2
-#'   x <- catalogueSEPA(columnName = "CatchmentAreaKm2",
-#'                      columnValue = ">= 5000")
+#'   SEPA_catalogue_area <- catalogueSEPA(columnName = "CatchmentAreaKm2",
+#'                                        columnValue = ">= 5000")
 #'
 #'   # Get only catchments within river Avon
-#'   x <- catalogueSEPA(columnName = "River", columnValue = "Avon")
+#'   SEPA_catalogue_river <- catalogueSEPA(columnName = "River",
+#'                                         columnValue = "Avon")
 #' }
 #'
 
 catalogueSEPA <- function(columnName = NULL, columnValue = NULL,
-                          verbose = FALSE){
+                          useCachedData = TRUE){
 
-  theurl <- "http://pennine.ddns.me.uk/riverlevels/ConciseList.html"
+  if (useCachedData == TRUE){
 
-  if(RCurl::url.exists(theurl)) {
-    if (verbose == TRUE) message("Retrieving data from live web data source.")
-    tables <- XML::readHTMLTable(theurl)
-    n.rows <- unlist(lapply(tables, function(t) dim(t)[1]))
-    SEPAcatalogue <- tables[[which.max(n.rows)]]
-    SEPAcatalogue <- SEPAcatalogue[SEPAcatalogue$stationId!=0,c(1:3,5:9)]
-    row.names(SEPAcatalogue) <- NULL
-    names(SEPAcatalogue) <- c("idNRFA", "aspxpage", "stationId", "River",
-                              "Location",
-                              "GridRef", "Operator", "CatchmentAreaKm2")
+    # message("Using cached data.")
+
+    load(system.file(file.path("data", "SEPAcatalogue.rda"),
+                     package = "hddtools"))
+
+    catTMP <- SEPAcatalogue
+
   }else{
-    if (verbose == TRUE) {
-      message(paste("The connection with the live web data source failed.",
-                    "Cached results are now loaded."))
+
+    theurl <- "http://pennine.ddns.me.uk/riverlevels/ConciseList.html"
+
+    if (RCurl::url.exists(theurl) == FALSE){
+
+      # message("Using cached data.")
+
+      load(system.file(file.path("data", "SEPAcatalogue.rda"),
+                       package = "hddtools"))
+
+      catTMP <- SEPAcatalogue
+
+    }else{
+
+      message("Retrieving data from live web data source.")
+
+      tables <- XML::readHTMLTable(theurl)
+      n.rows <- unlist(lapply(tables, function(t) dim(t)[1]))
+      catTMP <- tables[[which.max(n.rows)]]
+      catTMP <- catTMP[catTMP$stationId!=0,c(1:3,5:9)]
+      row.names(catTMP) <- NULL
+      names(catTMP) <- c("idNRFA", "aspxpage", "stationId", "River",
+                         "Location",
+                         "GridRef", "Operator", "CatchmentAreaKm2")
+
+      catTMP[] <- lapply(catTMP, as.character)
+      catTMP$CatchmentAreaKm2 <- as.numeric(catTMP$CatchmentAreaKm2)
+
     }
-    load(system.file("data/SEPAcatalogue.rda", package = "hddtools"))
+
   }
 
-  SEPAcatalogue[] <- lapply(SEPAcatalogue, as.character)
-  SEPAcatalogue$CatchmentAreaKm2 <- as.numeric(SEPAcatalogue$CatchmentAreaKm2)
+  if (!is.null(columnName) & !is.null(columnValue)){
 
-  if ( !is.null(columnName) & !is.null(columnValue) ){
+    if (tolower(columnName) %in% tolower(names(catTMP))){
 
-    if (tolower(columnName) %in% tolower(names(SEPAcatalogue))){
-
-      col2select <- which(tolower(names(SEPAcatalogue)) ==
+      col2select <- which(tolower(names(catTMP)) ==
                             tolower(columnName))
 
-      if (class(SEPAcatalogue[,col2select]) == "character"){
-        rows2select <- which(tolower(SEPAcatalogue[,col2select]) ==
+      if (class(catTMP[,col2select]) == "character"){
+        rows2select <- which(tolower(catTMP[,col2select]) ==
                                tolower(columnValue))
       }
-      if (class(SEPAcatalogue[,col2select]) == "numeric"){
+      if (class(catTMP[,col2select]) == "numeric"){
 
-        # rows2select <- which(SEPAcatalogue[,col2select] == columnValue)
+        # rows2select <- which(catTMP[,col2select] == columnValue)
         rows2select <- eval(parse(text =
-                                    paste0("which(SEPAcatalogue[,col2select] ",
+                                    paste0("which(catTMP[,col2select] ",
                                            columnValue, ")")))
 
       }
-      SEPAcatalogueFinal <- SEPAcatalogue[rows2select,]
+      SEPAcatalogue <- catTMP[rows2select,]
 
     }else{
 
@@ -81,11 +101,11 @@ catalogueSEPA <- function(columnName = NULL, columnValue = NULL,
 
   }else{
 
-    SEPAcatalogueFinal <- SEPAcatalogue
+    SEPAcatalogue <- catTMP
 
   }
 
-  return(SEPAcatalogueFinal)
+  return(SEPAcatalogue)
 
 }
 
@@ -95,7 +115,7 @@ catalogueSEPA <- function(columnName = NULL, columnValue = NULL,
 #'
 #' @description This function extract the dataset containing daily rainfall and streamflow discharge at one of the MOPEX locations.
 #'
-#' @param hydroRefNumber hydrometric reference number (string)
+#' @param stationID hydrometric reference number (string)
 #' @param plotOption boolean to define whether to plot the results. By default this is set to TRUE.
 #' @param timeExtent is a vector of dates and times for which the data should be retrieved
 #'
@@ -105,17 +125,18 @@ catalogueSEPA <- function(columnName = NULL, columnValue = NULL,
 #'
 #' @examples
 #' \dontrun{
-#'   x <- tsSEPA(hydroRefNumber = "234253")
+#'   sampleID <- catalogueSEPA()$stationId[1]
+#'   sampleTS <- tsSEPA(stationID = sampleID, plotOption = TRUE)
 #' }
 #'
 
-tsSEPA <- function(hydroRefNumber, plotOption = FALSE, timeExtent = NULL){
+tsSEPA <- function(stationID, plotOption = FALSE, timeExtent = NULL){
 
   myTS <- NULL
   myList <- list()
   counter <- 0
 
-  for (id in as.list(hydroRefNumber)){
+  for (id in as.list(stationID)){
     counter <- counter + 1
 
     theurl <- paste("http://apps.sepa.org.uk/database/riverlevels/",
@@ -139,11 +160,10 @@ tsSEPA <- function(hydroRefNumber, plotOption = FALSE, timeExtent = NULL){
 
       if (plotOption == TRUE){
 
-        # temp <- MOPEXCatalogue(columnName="id",columnValue=hydroRefNumber)
-        # stationName <- as.character(temp$name)
-        # plot(myTS, main=stationName, xlab="",ylab=c("P [mm/d]","Q [m3/s]"))
-
-        plot(myTS, main = "", xlab = "", ylab = "River level [m]")
+        locationSEPA <- catalogueSEPA(columnName = "stationID",
+                                      columnValue = id)
+        plot(myTS, main = locationSEPA$Location,
+             xlab = "", ylab = "River level [m]")
 
       }
 

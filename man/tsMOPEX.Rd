@@ -4,10 +4,10 @@
 \alias{tsMOPEX}
 \title{Interface for the MOPEX database of Daily Time Series}
 \usage{
-tsMOPEX(hydroRefNumber, plotOption = FALSE, timeExtent = NULL)
+tsMOPEX(stationID, plotOption = FALSE, timeExtent = NULL)
 }
 \arguments{
-\item{hydroRefNumber}{hydrometric reference number (string)}
+\item{stationID}{hydrometric reference number (string)}
 
 \item{plotOption}{boolean to define whether to plot the results. By default this is set to TRUE.}
 
@@ -21,7 +21,9 @@ This function extract the dataset containing daily rainfall and streamflow disch
 }
 \examples{
 \dontrun{
-  x <- tsMOPEX(hydroRefNumber = "14359000")
+  stationID <- catalogueMOPEX()$stationID[1]
+  BroadRiver <- tsMOPEX(stationID = stationID)
+  BroadRiver <- tsMOPEX(stationID = stationID, plotOption = TRUE)
 }
 
 }

@@ -7,6 +7,7 @@
 #' @param areaBox bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)
 #' @param columnName name of the column to filter
 #' @param columnValue value to look for in the column named columnName
+#' @param useCachedData logical, set to TRUE to use cached data, set to FALSE to retrive data from online source. This is TRUE by default.
 #'
 #' @return This function returns a data frame made of 431 rows (gauging stations) and 12 columns containing stations metadata.
 #'
@@ -15,37 +16,56 @@
 #' @examples
 #' \dontrun{
 #'   # Retrieve the MOPEX catalogue
-#'   x <- catalogueMOPEX()
+#'   MOPEX_catalogue_all <- catalogueMOPEX()
 #'
 #'   # Define a bounding box
-#'   areaBox <- raster::extent(c(-95, -92, 37, 41))
+#'   areaBox <- raster::extent(-95, -92, 37, 41)
 #'   # Filter the catalogue based on bounding box
-#'   x <- catalogueMOPEX(areaBox = areaBox)
+#'   MOPEX_catalogue_bbox <- catalogueMOPEX(areaBox = areaBox)
 #'
 #'   # Get only catchments within NC
-#'   x <- catalogueMOPEX(columnName = "state", columnValue = "NC")
+#'   MOPEX_catalogue_state <- catalogueMOPEX(columnName = "state",
+#'                                           columnValue = "NC")
 #'
 #' }
 #'
 
 catalogueMOPEX <- function(areaBox = NULL,
-                           columnName = NULL, columnValue = NULL){
+                           columnName = NULL, columnValue = NULL,
+                           useCachedData = TRUE){
 
-  myTable <- read.fwf(
-    file = url(paste0("ftp://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/",
-                      "Basin_Characteristics/usgs431.txt")),
-    widths = c(8, 10, 10, 11, 11, 8, 8, 4, 4, 3, 9, 50)
-    )
-  myTable$V1 <- stringr::str_pad(myTable$V1, width = 8,
-                                 side = "left", pad = "0")
+  theurl <- paste0("ftp://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/",
+                   "Basin_Characteristics/usgs431.txt")
 
-  names(myTable) <- c("id", "longitude", "latitude", "elevation", "V5",
-                      "datestart", "dateend", "V8",
-                      "V9", "state", "V11", "basin")
+  MOPEXcatalogue <- NULL
 
-  myTable[] <- lapply(myTable, as.character)
-  myTable$longitude <- as.numeric(myTable$longitude)
-  myTable$latitude <- as.numeric(myTable$latitude)
+  if (useCachedData == TRUE | RCurl::url.exists(theurl) == FALSE){
+
+    # message("Using cached data.")
+
+    load(system.file(file.path("data", "MOPEXcatalogue.rda"),
+                     package = "hddtools"))
+
+    myTable <- MOPEXcatalogue
+
+  }else{
+
+    myTable <- read.fwf(file = url(theurl),
+                        widths = c(8, 10, 10, 11, 11, 8, 8, 4, 4, 3, 9, 50))
+
+    myTable$V1 <- stringr::str_pad(myTable$V1, width = 8,
+                                   side = "left", pad = "0")
+
+    names(myTable) <- c("stationID", "longitude", "latitude", "elevation", "V5",
+                        "datestart", "dateend", "V8",
+                        "V9", "state", "V11", "basin")
+
+    myTable[] <- lapply(myTable, as.character)
+    myTable$longitude <- as.numeric(myTable$longitude)
+    myTable$latitude <- as.numeric(myTable$latitude)
+    myTable$elevation <- as.numeric(myTable$elevation)
+
+  }
 
   if (!is.null(areaBox)){
     lonMin <- areaBox@xmin
@@ -104,7 +124,7 @@ catalogueMOPEX <- function(areaBox = NULL,
 #'
 #' @description This function extract the dataset containing daily rainfall and streamflow discharge at one of the MOPEX locations.
 #'
-#' @param hydroRefNumber hydrometric reference number (string)
+#' @param stationID hydrometric reference number (string)
 #' @param plotOption boolean to define whether to plot the results. By default this is set to TRUE.
 #' @param timeExtent is a vector of dates and times for which the data should be retrieved
 #'
@@ -114,22 +134,19 @@ catalogueMOPEX <- function(areaBox = NULL,
 #'
 #' @examples
 #' \dontrun{
-#'   x <- tsMOPEX(hydroRefNumber = "14359000")
+#'   stationID <- catalogueMOPEX()$stationID[1]
+#'   BroadRiver <- tsMOPEX(stationID = stationID)
+#'   BroadRiver <- tsMOPEX(stationID = stationID, plotOption = TRUE)
 #' }
 #'
 
-tsMOPEX <- function(hydroRefNumber, plotOption = FALSE, timeExtent = NULL){
-
-  # library(zoo)
-  # library(XML)
-  # library(RCurl)
-  # library(stringr)
-  # hydroRefNumber <- "14359000"
+tsMOPEX <- function(stationID, plotOption = FALSE, timeExtent = NULL){
 
   theurl <- paste0("ftp://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/",
-                   "Us_438_Daily/", hydroRefNumber, ".dly")
+                   "Us_438_Daily/", stationID, ".dly")
 
-  if(url.exists(theurl)) {
+  if(RCurl::url.exists(theurl)) {
+
     message("Retrieving data from live web data source.")
 
     myTable <- read.fwf(
@@ -159,9 +176,9 @@ tsMOPEX <- function(hydroRefNumber, plotOption = FALSE, timeExtent = NULL){
   #      5: daily maximum air temperature (Celsius)
   #      6: daily minimum air temperature (Celsius)
 
-  myTS <- zoo(x[,2:6], order.by = as.Date(x$date))
+  myTS <- zoo::zoo(x[,2:6], order.by = as.Date(x$date))
 
-  if ( !is.null(timeExtent) ){
+  if (!is.null(timeExtent)){
 
     myTS <- window(myTS,
                    start=as.POSIXct(head(timeExtent)[1]),
@@ -170,7 +187,9 @@ tsMOPEX <- function(hydroRefNumber, plotOption = FALSE, timeExtent = NULL){
 
   if (plotOption == TRUE){
 
-    plot(myTS, main="", xlab="",
+    locationMOPEX <- catalogueMOPEX(columnName = "stationID",
+                                    columnValue = stationID)
+    plot(myTS, main=locationMOPEX$basin, xlab="",
          ylab = c("P [mm/day]","E [mm/day]",
                   "Q [mm/day]", "Tmax [C]","Tmin [C]"))
 

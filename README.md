@@ -9,7 +9,7 @@ hddtools: Hydrological Data Discovery Tools
 
 [![Travis-CI Build Status](https://travis-ci.org/cvitolo/hddtools.svg?branch=master)](https://travis-ci.org/cvitolo/hddtools) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/cvitolo/hddtools?branch=master&svg=true)](https://ci.appveyor.com/project/cvitolo/hddtools) [![codecov.io](https://codecov.io/github/cvitolo/hddtools/coverage.svg?branch=master)](https://codecov.io/github/cvitolo/hddtools?branch=master)
 
-**hddtools** stands for Hydrological Data Discovery Tools. This R package is an open source project designed to facilitate access to a variety of online open data sources relevant for hydrologists and, more in general, environmental scientists and practitioners.
+**hddtools** stands for Hydrological Data Discovery Tools. This R package is an open source project designed to facilitate access to a variety of online open data sources relevant for hydrologists and, in general, environmental scientists and practitioners.
 
 This typically implies the download of a metadata catalogue, selection of information needed, a formal request for dataset(s), de-compression, conversion, manual filtering and parsing. All those operations are made more efficient by re-usable functions.
 
@@ -22,7 +22,7 @@ The hddtools package depends on other CRAN packages. Check for missing dependenc
 
 ``` r
 packs <- c("zoo", "sp", "RCurl", "XML", "rnrfa", "Hmisc", "raster", 
-           "stringr", "devtools")
+           "stringr", "devtools", "leaflet")
 new_packages <- packs[!(packs %in% installed.packages()[,"Package"])]
 if(length(new_packages)) install.packages(new_packages)
 ```

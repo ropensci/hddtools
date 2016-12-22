@@ -84,15 +84,15 @@
     <p>This function extract the dataset containing daily rainfall and streamflow discharge at one of the Data60UK locations.</p>
     
 
-    <pre><span class='fu'>tsData60UK</span>(<span class='no'>hydroRefNumber</span>, <span class='kw'>plotOption</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>timeExtent</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre><span class='fu'>tsData60UK</span>(<span class='no'>stationID</span>, <span class='kw'>plotOption</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>twindow</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
-      <dt>hydroRefNumber</dt>
+      <dt>stationID</dt>
       <dd>hydrometric reference number (string)</dd>
       <dt>plotOption</dt>
-      <dd>boolean to define whether to plot the results. By default this is set to TRUE.</dd>
-      <dt>timeExtent</dt>
+      <dd>boolean to define whether to plot the results. By default this is set to FALSE.</dd>
+      <dt>twindow</dt>
       <dd>is a vector of dates and times for which the data should be retrieved</dd>
     </dl>
     
@@ -103,7 +103,9 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## Not run: ------------------------------------</span>
-<span class='co'>#   tsData60UK(hydroRefNumber = 39015)</span>
+<span class='co'>#   stationID &lt;- catalogueData60UK()$stationID[1]</span>
+<span class='co'>#   Morwick &lt;- tsData60UK(stationID = stationID)</span>
+<span class='co'>#   Morwick &lt;- tsData60UK(stationID = stationID, plotOption = TRUE)</span>
 <span class='co'>## ---------------------------------------------</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -84,23 +84,21 @@
     <p>This function interfaces the Global Runoff Data Centre database which provides river discharge data for about 9000 sites over 157 countries.</p>
     
 
-    <pre><span class='fu'>catalogueGRDC</span>(<span class='kw'>bbox</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>stationID</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>columnName</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>columnValue</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>mdDescription</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>cached</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre><span class='fu'>catalogueGRDC</span>(<span class='kw'>areaBox</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>columnName</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>columnValue</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>mdDescription</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>useCachedData</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
-      <dt>bbox</dt>
+      <dt>areaBox</dt>
       <dd>bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)</dd>
-      <dt>stationID</dt>
-      <dd>Station ID number, it should be in the range [1104150,6990700]</dd>
       <dt>columnName</dt>
       <dd>name of the column to filter</dd>
       <dt>columnValue</dt>
       <dd>value to look for in the column named columnName</dd>
       <dt>mdDescription</dt>
       <dd>boolean value. Default is FALSE (no description is printed)</dd>
-      <dt>cached</dt>
-      <dd>boolean value. Default is TRUE (use cached datasets).</dd>
+      <dt>useCachedData</dt>
+      <dd>logical, set to TRUE to use cached data, set to FALSE to retrive data from online source. This is TRUE by default.</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -111,19 +109,20 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## Not run: ------------------------------------</span>
 <span class='co'>#   # Retrieve the whole catalogue</span>
-<span class='co'>#   x &lt;- catalogueGRDC()</span>
+<span class='co'>#   GRDC_catalogue_all &lt;- catalogueGRDC()</span>
 <span class='co'># </span>
 <span class='co'>#   # Define a bounding box</span>
-<span class='co'>#   bbox &lt;- list(lonMin = -3.82, latMin = 52.41,</span>
-<span class='co'>#                lonMax = -3.63, latMax = 52.52)</span>
+<span class='co'>#   areaBox &lt;- raster::extent(-3.82, -3.63, 52.41, 52.52)</span>
 <span class='co'>#   # Filter the catalogue based on bounding box</span>
-<span class='co'>#   x &lt;- catalogueGRDC(bbox = bbox)</span>
+<span class='co'>#   GRDC_catalogue_bbox &lt;- catalogueGRDC(areaBox = areaBox)</span>
 <span class='co'># </span>
 <span class='co'>#   # Get only catchments with area above 5000 Km2</span>
-<span class='co'>#   x &lt;- catalogueGRDC(columnName = "area", columnValue = "&gt;= 5000")</span>
+<span class='co'>#   GRDC_catalogue_area &lt;- catalogueGRDC(columnName = "area",</span>
+<span class='co'>#                                        columnValue = "&gt;= 5000")</span>
 <span class='co'># </span>
 <span class='co'>#   # Get only catchments within river Thames</span>
-<span class='co'>#   x &lt;- catalogueGRDC(columnName = "river", columnValue = "Thames")</span>
+<span class='co'>#   GRDC_catalogue_river &lt;- catalogueGRDC(columnName = "river",</span>
+<span class='co'>#                                         columnValue = "Thames")</span>
 <span class='co'>## ---------------------------------------------</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

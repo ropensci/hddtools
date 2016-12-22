@@ -4,7 +4,8 @@
 \alias{catalogueMOPEX}
 \title{Data source: MOPEX catalogue}
 \usage{
-catalogueMOPEX(areaBox = NULL, columnName = NULL, columnValue = NULL)
+catalogueMOPEX(areaBox = NULL, columnName = NULL, columnValue = NULL,
+  useCachedData = TRUE)
 }
 \arguments{
 \item{areaBox}{bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)}
@@ -12,6 +13,8 @@ catalogueMOPEX(areaBox = NULL, columnName = NULL, columnValue = NULL)
 \item{columnName}{name of the column to filter}
 
 \item{columnValue}{value to look for in the column named columnName}
+
+\item{useCachedData}{logical, set to TRUE to use cached data, set to FALSE to retrive data from online source. This is TRUE by default.}
 }
 \value{
 This function returns a data frame made of 431 rows (gauging stations) and 12 columns containing stations metadata.
@@ -22,15 +25,16 @@ This function interfaces the MOPEX database catalogue (available from \url{ftp:/
 \examples{
 \dontrun{
   # Retrieve the MOPEX catalogue
-  x <- catalogueMOPEX()
+  MOPEX_catalogue_all <- catalogueMOPEX()
 
   # Define a bounding box
-  areaBox <- raster::extent(c(-95, -92, 37, 41))
+  areaBox <- raster::extent(-95, -92, 37, 41)
   # Filter the catalogue based on bounding box
-  x <- catalogueMOPEX(areaBox = areaBox)
+  MOPEX_catalogue_bbox <- catalogueMOPEX(areaBox = areaBox)
 
   # Get only catchments within NC
-  x <- catalogueMOPEX(columnName = "state", columnValue = "NC")
+  MOPEX_catalogue_state <- catalogueMOPEX(columnName = "state",
+                                          columnValue = "NC")
 
 }
 

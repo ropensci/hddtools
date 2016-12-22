@@ -12,8 +12,7 @@
 #' @param areaBox OPTIONAL bounding box, a list made of 4 elements: minimum longitude (xmin), minimum latitude (ymin), maximum longitude (xmax), maximum latitude (ymax)
 #' @param outputfileLocation file path where to save the GeoTiff
 #'
-#' @return Data is loaded as rasterbrick, then converted to a multilayer Geotiff that can
-# be opened in any GIS software.
+#' @return Data is loaded as multilayer GeoTIFF and loaded as a RasterBrick.
 #'
 #' @details This code is based upon Martin Brandt's blog post:
 #' \url{http://matinbrandt.wordpress.com/2013/09/04/automatically-downloading-and-processing-trmm-rainfall-data/}
@@ -24,24 +23,18 @@
 #' @examples
 #' \dontrun{
 #'   # Define a bounding box
-#'   areaBox <- raster::extent(c(-3.82, -3.63, 48, 50))
+#'   areaBox <- raster::extent(-10, 5, 48, 62)
 #'   twindow <- seq(as.Date("2012-01-01"), as.Date("2012-01-31"), by = "months")
 #'
-#'   TRMM(inputLocation="ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
-#'        product = "3B43",
-#'        version = 7,
-#'        type = "precipitation.accum",
-#'        twindow = twindow,
-#'        areaBox = areaBox,
-#'        outputfileLocation = "~/")
+#'   TRMMfile <- TRMM(product = "3B43", version = 7,
+#'                    type = "precipitation.accum",
+#'                    twindow = twindow, areaBox = areaBox)
 #'
-#'   # or simply
-#'   TRMM(twindow = twindow, areaBox = areaBox)#'
-#'   plot(brick("~/trmm_acc.tif"))
+#'   raster::plot(TRMMfile)
 #' }
 #'
 
-TRMM <- function(inputLocation="ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
+TRMM <- function(inputLocation = NULL,
                  product = "3B43",
                  version = 7,
                  type = "precipitation.accum",
@@ -49,9 +42,13 @@ TRMM <- function(inputLocation="ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
                  areaBox = NULL,
                  outputfileLocation = NULL){
 
+  if (is.null(inputLocation)) {
+    inputLocation <- "ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/"
+  }
+
   # Check output file location
   originalwd <- getwd()
-  if ( is.null(outputfileLocation) ) outputfileLocation <- getwd()
+  if (is.null(outputfileLocation)) outputfileLocation <- getwd()
   setwd(outputfileLocation)
 
   # Check bounding box extent is within original raster extent
@@ -91,7 +88,7 @@ TRMM <- function(inputLocation="ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
   years <- unique(format(twindow, "%Y"))
   months <- format(twindow, "%m")
 
-  if ( any(is.null(years), is.null(months)) ){
+  if (any(is.null(years), is.null(months))){
 
     message(paste("This function cannot be executed because your twindow",
                   "is not in the correct format.",
@@ -167,21 +164,22 @@ TRMM <- function(inputLocation="ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
       trmm <- raster::crop(trmm, bbSP)
     }
 
-    raster::writeRaster(trmm,
-                        filename = "trmm_acc.tif",
-                        format = "GTiff",
-                        overwrite = TRUE)
+    # raster::writeRaster(trmm,
+    #                     filename = "trmm_acc.tif",
+    #                     format = "GTiff",
+    #                     overwrite = TRUE)
 
     message("Removing temporary files")
     file.remove(c("TRMM.vrt", "myTRMM.sh"))
 
-    message(paste("Done. The raster-brick was saved in",
-                  paste(outputfileLocation, "/trmm_acc.tif", sep = "")))
+    # message(paste("Done. The raster-brick was saved in",
+    #               paste(outputfileLocation, "/trmm_acc.tif", sep = "")))
 
   }
 
   on.exit(expr = {setwd(originalwd)})
 
-  return(paste(outputfileLocation, "/trmm_acc.tif", sep = ""))
+  # return(paste(outputfileLocation, "/trmm_acc.tif", sep = ""))
+  return(trmm)
 
 }

@@ -1,7 +1,7 @@
 ---
 title: "hddtools: Hydrological Data Discovery Tools"
 author: "Claudia Vitolo"
-date: "5 September 2016"
+date: "22 December 2016"
 output: html_document
 ---
 
@@ -11,25 +11,25 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   warning = FALSE,
   message = FALSE,
-  cache = TRUE,
+  cache = FALSE,
   eval = FALSE
 )
 ```
 
 # Introduction
 
-**hddtools** stands for Hydrological Data Discovery Tools. This R package is an open source project designed to facilitate access to a variety of online open data sources relevant for hydrologists and, more in general, environmental scientists and practitioners. 
+**hddtools** stands for Hydrological Data Discovery Tools. This R package is an open source project designed to facilitate access to a variety of online open data sources relevant for hydrologists and, in general, environmental scientists and practitioners. 
 
 This typically implies the download of a metadata catalogue, selection of information needed, formal request for dataset(s), de-compression, conversion, manual filtering and parsing. All those operation are made more efficient by re-usable functions. 
 
 Depending on the data license, functions can provide offline and/or online modes. When redistribution is allowed, for instance, a copy of the dataset is cached within the package and updated twice a year. This is the fastest option and also allows offline use of package's functions. When re-distribution is not allowed, only online mode is provided.
 
 ## Dependencies & Installation
-The hddtools package depends on other CRAN packages. Check for missing dependencies and install them using the commands below:
+The hddtools package and the examples in this vignette depend on other CRAN packages. Check for missing dependencies and install them using the commands below:
 
 ```{r}
 packs <- c("zoo", "sp", "RCurl", "XML", "rnrfa", "Hmisc", "raster", 
-           "stringr", "devtools")
+           "stringr", "devtools", "leaflet")
 new_packages <- packs[!(packs %in% installed.packages()[,"Package"])]
 if(length(new_packages)) install.packages(new_packages)
 ```
@@ -56,20 +56,15 @@ library("hddtools")
 
 The functions provided can filter, slice and dice 2 and 3 dimensional information. 
 
-```{r, eval = TRUE}
-# Define a bounding box
-areaBox <- raster::extent(-10, 5, 48, 62)
-
-# Define a temporal extent
-twindow <- seq(as.Date("2012-01-01"), as.Date("2012-03-31"), by = "months")
-```
-
 ### The Koppen Climate Classification map
 The Koppen Climate Classification is the most widely used system for classifying the world's climates. Its categories are based on the annual and monthly averages of temperature and precipitation. It was first updated by Rudolf Geiger in 1961, then by Kottek et al. (2006), Peel et al. (2007) and then by Rubel et al. (2010). 
 
 The package hddtools contains a function to identify the updated Koppen-Greiger climate zone, given a bounding box.
 
 ```{r, eval = TRUE}
+# Define a bounding box
+areaBox <- raster::extent(-10, 5, 48, 62)
+
 # Extract climate zones from Peel's map:
 KGClimateClass(areaBox = areaBox, updatedBy = "Peel")
 
@@ -78,42 +73,72 @@ KGClimateClass(areaBox = areaBox, updatedBy = "Kottek")
 ```
 
 ### The Global Runoff Data Centre
-The Global Runoff Data Centre (GRDC) is an international archive hosted by the Federal Institute of Hydrology (Bundesanstalt für Gewässerkunde or BfG) in Koblenz, Germany. The Centre operates under the auspices of the World Meteorological Organisation and retains services and datasets for all the major rivers in the world.
+The Global Runoff Data Centre (GRDC) is an international archive hosted by the Federal Institute of Hydrology (Bundesanstalt für Gewässerkunde or BfG) in Koblenz, Germany. The Centre operates under the auspices of the World Meteorological Organisation and retains services and datasets for all the major rivers in the world. Catalogue, kml files and the product Long-Term Mean Monthly Discharges are open data and accessible via the hddtools.
 
-Catalogue, kml files and the product Long-Term Mean Monthly Discharges are open data and accessible via the hddtools.
-
+Information on all the GRDC stations can be retrieved using the function `catalogueGRDC` with no input arguments, as in the examle below:  
 ```{r, eval = FALSE}
 # GRDC full catalogue
-x <- catalogueGRDC()
+GRDC_catalogue_all <- catalogueGRDC()
+```
 
+However, there are a number of options to filter the catalogue and return only the a subset of stations. For instance, we might be interested in subsetting only stations in Italy. As the 8th column in the catalogue lists the country codes, we can filter the catalogue passing two input arguments to the `catalogueGRDC` function: `columnName = "country_code"` and `columnValue  = "IT"`, as in the example below.
+```{r}
 # Filter GRDC catalogue based on a country code
-x <- catalogueGRDC(columnName = "country_code", columnValue = "IT")
+GRDC_catalogue_countrycode <- catalogueGRDC(columnName = "country_code",
+                                            columnValue = "IT")
+```
 
+The arguments `columnName` and `columnValue` can be used to filter over other columns. For instance, in the example below we show how to subset stations along the Po River.
+```{r}
 # Filter GRDC catalogue based on rivername
-x <- catalogueGRDC(columnName = "river", columnValue = "PO")
-# Note that the search is not case sensitive, therefore you get the same result whether the columnValue is "PO", "Po" or "po". Same applies for the metadata column (it can be spelled "RIVER", "river", "River"...)
+GRDC_catalogue_river <- catalogueGRDC(columnName = "river", columnValue = "PO")
+```
 
-# Filter GRDC catalogue based on numerical value, for instance select all the stations for which daily data is availa since 2000
-x <- catalogueGRDC(columnName = "d_start", columnValue = "<=2010")
+Note in the example above that the search is not case sensitive, therefore you get the same result whether the columnValue is spelled "PO", "Po" or "po". Same applies for the metadata column (it can be spelled "RIVER", "river", "River"...).
+
+If `columnName` refers to a numeric field, in the `columnValue` we can specify other terms of comparison. For example we can select all the stations for which daily data is available since 2000.
+```{r}
+# Filter GRDC catalogue based on numerical value, for instance select all the stations for which daily data is available since 2000
+GRDC_catalogue_dstart <- catalogueGRDC(columnName = "d_start", 
+                                       columnValue = ">=2000")
+```
+
+Another option is to filter the catalogue based on a geographical bounding box.
+```{r}
+# Define a bounding box
+areaBox <- raster::extent(-10, 5, 48, 62)
 
 # Filter GRDC catalogue based on a bounding box
-x <- catalogueGRDC(areaBox = areaBox)
+GRDC_catalogue_bbox <- catalogueGRDC(areaBox = areaBox)
+```
 
-# Filter GRDC catalogue based on a bounding box
-x <- catalogueGRDC(areaBox = areaBox, columnName = "statistics", columnValue = 1)
+The filters can be also combined, as in the examples below.
+```{r}
+# Define a bounding box
+areaBox <- raster::extent(-10, 5, 48, 62)
 
+# Filter GRDC catalogue based on a bounding box plus keep only those stations where "statistics" value is 1
+GRDC_catalogue_bbox_stats <- catalogueGRDC(areaBox = areaBox, 
+                                           columnName = "statistics",
+                                           columnValue = 1)
+```
+
+The filtered stations can be used to create a map.
+```{r}
 # Visualise outlets on an interactive map
 library(leaflet)
-leaflet(data = x) %>%
+leaflet(data = GRDC_catalogue_bbox_stats) %>%
   addTiles() %>%  # Add default OpenStreetMap map tiles
-  addMarkers(~Longitude, ~Latitude, popup = ~name)
+  addMarkers(~long, ~lat, popup = ~station)
 ```
 
 ![](../assets/figures/leaflet.png)
 
+Lastly, given a station ID number (this is stored in the column grdc_no of the catalogue) we can check whether monthly data is available and eventually plot it.
 ```{r, eval = TRUE}
 # Monthly data extraction
-y <- tsGRDC(stationID = "6122300", plotOption = TRUE)
+WolfeToneBridge <- tsGRDC(stationID = catalogueGRDC()$grdc_no[7126],
+                          plotOption = TRUE)
 ```
 
 ### NASA's Tropical Rainfall Measuring Mission (TRMM, only available for github version)
@@ -124,11 +149,17 @@ The TRMM satellite records global historical rainfall estimation in a gridded fo
 The hddtools provides a function, called TRMM(), to download and convert a selected portion of the TRMM dataset into a raster-brick that can be opened in any GIS software.
 
 ```{r, eval = FALSE}
+# Define a bounding box
+areaBox <- raster::extent(-10, 5, 48, 62)
+
+# Define a temporal extent
+twindow <- seq(as.Date("2012-01-01"), as.Date("2012-03-31"), by = "months")
+
 # Retreive mean monthly precipitations from 3B43_V7 (based on a bounding box and time extent)
-TRMM(twindow = twindow, areaBox = areaBox)
+TRMMfile <- TRMM(twindow = twindow, areaBox = areaBox)
+
 library(raster)
-b <- brick("trmm_acc.tif")
-plot(b)
+plot(TRMMfile)
 ```
 
 ![](../assets/figures/TRMM.png)
@@ -143,17 +174,17 @@ The hddtools contain two functions to interact with this database: one to retrei
 
 ```{r, eval = TRUE}
 # Data60UK full catalogue
-x <- catalogueData60UK()
+Data60UK_catalogue_all <- catalogueData60UK()
 
 # Filter Data60UK catalogue based on bounding box
 areaBox <- raster::extent(-4, -3, 51, 53)
-x <- catalogueData60UK(areaBox = areaBox)
+Data60UK_catalogue_bbox <- catalogueData60UK(areaBox = areaBox)
 ```
 
 ```{r}
 # Visualise outlets on an interactive map
 library(leaflet)
-leaflet(data = x) %>%
+leaflet(data = Data60UK_catalogue_bbox) %>%
   addTiles() %>%  # Add default OpenStreetMap map tiles
   addMarkers(~Longitude, ~Latitude, popup = ~Location)
 ```
@@ -162,24 +193,28 @@ leaflet(data = x) %>%
 
 ```{r, eval = TRUE}
 # Extract time series 
-hydroRefNumber <- as.numeric(as.character(x$id[1])) # e.g. 55012
-y <- tsData60UK(hydroRefNumber, plotOption = FALSE)
+stationID <- catalogueData60UK()$stationID[1]
+
+# Extract only the time series
+MorwickTS <- tsData60UK(stationID, plotOption = FALSE)
+plot(MorwickTS)
 
 # Extract time series for a specified temporal window
 twindow <- seq(as.Date("1988-01-01"), as.Date("1989-12-31"), by = "days")
-y <- tsData60UK(hydroRefNumber = hydroRefNumber, 
-                plotOption = TRUE, 
-                twindow = twindow)
+MorwickTSplot <- tsData60UK(stationID = stationID, 
+                            plotOption = TRUE,
+                            twindow = twindow)
 ```
 
 #### MOPEX
 Dataset containing historical hydrometeorological data and river basin characteristics for hundreds of river basins from a range of climates in the US. 
 ```{r, eval = TRUE}
 # MOPEX full catalogue
-x <- catalogueMOPEX()
+MOPEX_catalogue_all <- catalogueMOPEX()
 
 # Extract time series 
-y <- tsMOPEX(hydroRefNumber = "14359000", plotOption = TRUE)
+BroadRiver <- tsMOPEX(stationID = MOPEX_catalogue_all$stationID[1], 
+                      plotOption = TRUE)
 ```
 
 ### SEPA river level data
@@ -187,21 +222,20 @@ The Scottish Environment Protection Agency (SEPA) manages river level data for h
 
 ```{r, eval = FALSE}
 # SEPA unofficial catalogue
-x <- catalogueSEPA()
+SEPA_catalogue_all <- catalogueSEPA()
 ```
 
-The time series of the last few days is available from SEPA website and downloadable using the following function:
-
+The time series of the last few days is available from SEPA website and can be downloaded using the following function:
 ```{r}
 # Single time series extraction
-y <- tsSEPA(hydroRefNumber = "234253", plotOption = FALSE)
+Kilphedir <- tsSEPA(stationID = catalogueSEPA()$stationId[1], 
+                    plotOption = TRUE)
 ```
 
 Plese note that this data is updated every 15 minutes and the code will always generate different plots. 
-
 ```{r, eval = TRUE}
 # Multiple time series extraction
-y <- tsSEPA(hydroRefNumber = c("234253", "234174", "234305"))
+y <- tsSEPA(stationID = c("234253", "234174", "234305"))
 plot(y[[1]], ylim = c(0, max(y[[1]], y[[2]], y[[3]])), 
      xlab = "", ylab = "Water level [m]")
 lines(y[[2]], col = "red")
@@ -213,7 +247,7 @@ The Met Office Hadley Centre provides daily precipitation time series averaged o
 
 ```{r, eval = TRUE}
 # Get the list of time series (11)
-x <- HadDAILY()
+precipitation <- HadDAILY()
 ```
 
 Below is the list of names used to extract time series for regions/subregions:
@@ -231,7 +265,6 @@ Below is the list of names used to extract time series for regions/subregions:
 - Northern Ireland: NIP
 
 For example, here is how to plot the time series for England and Wales:
-
 ```{r, eval = TRUE}
-plot(x$EWP)
+plot(precipitation$EWP)
 ```

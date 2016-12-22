@@ -3,19 +3,17 @@ context("TRMM")
 test_that("Test TRMM function", {
 
   # Define a bounding box
-  areaBox <- raster::extent(c(-3.82, -3.63, 48, 50))
+  areaBox <- raster::extent(-4, -3.75, 48, 50)
   twindow <- seq(as.Date("2012-01-01"), as.Date("2012-01-31"), by = "months")
 
-  x <- try(expr = TRMM(
-    inputLocation="ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
-    product = "3B43",
-    version = 7,
-    type = "precipitation.accum",
-    twindow = twindow,
-    areaBox = areaBox,
-    outputfileLocation = "."), silent = TRUE)
+  x <- TRMM(product = "3B43",
+            version = 7,
+            type = "precipitation.accum",
+            twindow = twindow,
+            areaBox = areaBox,
+            outputfileLocation = ".")
 
-  rasterExtent <- raster::extent(raster::raster(x))
+  rasterExtent <- raster::extent(x)
 
   expect_that(class(x) == "try-error", equals(FALSE))
 

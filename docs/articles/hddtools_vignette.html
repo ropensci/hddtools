@@ -41,7 +41,7 @@
       <h1>hddtools: Hydrological Data Discovery Tools</h1>
                         <h4 class="author">Claudia Vitolo</h4>
             
-            <h4 class="date">5 September 2016</h4>
+            <h4 class="date">22 December 2016</h4>
           </div>
 
     
@@ -49,14 +49,14 @@
 <div class="contents">
 <div id="introduction" class="section level1">
 <h1 class="hasAnchor"><html><body><a href="#introduction" class="anchor"> </a></body></html>Introduction</h1>
-<p><strong>hddtools</strong> stands for Hydrological Data Discovery Tools. This R package is an open source project designed to facilitate access to a variety of online open data sources relevant for hydrologists and, more in general, environmental scientists and practitioners.</p>
+<p><strong>hddtools</strong> stands for Hydrological Data Discovery Tools. This R package is an open source project designed to facilitate access to a variety of online open data sources relevant for hydrologists and, in general, environmental scientists and practitioners.</p>
 <p>This typically implies the download of a metadata catalogue, selection of information needed, formal request for dataset(s), de-compression, conversion, manual filtering and parsing. All those operation are made more efficient by re-usable functions.</p>
 <p>Depending on the data license, functions can provide offline and/or online modes. When redistribution is allowed, for instance, a copy of the dataset is cached within the package and updated twice a year. This is the fastest option and also allows offline use of package&rsquo;s functions. When re-distribution is not allowed, only online mode is provided.</p>
 <div id="dependencies-installation" class="section level2">
 <h2 class="hasAnchor"><html><body><a href="#dependencies-installation" class="anchor"> </a></body></html>Dependencies &amp; Installation</h2>
-<p>The hddtools package depends on other CRAN packages. Check for missing dependencies and install them using the commands below:</p>
+<p>The hddtools package and the examples in this vignette depend on other CRAN packages. Check for missing dependencies and install them using the commands below:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">packs &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"zoo"</span>, <span class="st">"sp"</span>, <span class="st">"RCurl"</span>, <span class="st">"XML"</span>, <span class="st">"rnrfa"</span>, <span class="st">"Hmisc"</span>, <span class="st">"raster"</span>, 
-           <span class="st">"stringr"</span>, <span class="st">"devtools"</span>)
+           <span class="st">"stringr"</span>, <span class="st">"devtools"</span>, <span class="st">"leaflet"</span>)
 new_packages &lt;-<span class="st"> </span>packs[!(packs %in%<span class="st"> </span><span class="kw">installed.packages</span>()[,<span class="st">"Package"</span>])]
 if(<span class="kw">length</span>(new_packages)) <span class="kw">install.packages</span>(new_packages)</code></pre></div>
 <p>Get the released version from CRAN:</p>
@@ -69,17 +69,15 @@ if(<span class="kw">length</span>(new_packages)) <span class="kw">install.packag
 <div id="data-sources-and-functions" class="section level2">
 <h2 class="hasAnchor"><html><body><a href="#data-sources-and-functions" class="anchor"> </a></body></html>Data sources and Functions</h2>
 <p>The functions provided can filter, slice and dice 2 and 3 dimensional information.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define a bounding box</span>
-bbox &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">lonMin =</span> -<span class="dv">10</span>, <span class="dt">latMin =</span> <span class="dv">48</span>, <span class="dt">lonMax =</span> <span class="dv">5</span>, <span class="dt">latMax =</span> <span class="dv">62</span>)
-
-<span class="co"># Define a temporal extent</span>
-timeExtent &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="kw">as.Date</span>(<span class="st">"2012-01-01"</span>), <span class="kw">as.Date</span>(<span class="st">"2012-03-31"</span>), <span class="dt">by =</span> <span class="st">"months"</span>)</code></pre></div>
 <div id="the-koppen-climate-classification-map" class="section level3">
 <h3 class="hasAnchor"><html><body><a href="#the-koppen-climate-classification-map" class="anchor"> </a></body></html>The Koppen Climate Classification map</h3>
 <p>The Koppen Climate Classification is the most widely used system for classifying the world&rsquo;s climates. Its categories are based on the annual and monthly averages of temperature and precipitation. It was first updated by Rudolf Geiger in 1961, then by Kottek et al. (2006), Peel et al. (2007) and then by Rubel et al. (2010).</p>
 <p>The package hddtools contains a function to identify the updated Koppen-Greiger climate zone, given a bounding box.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Extract climate zones from Peel's map:</span>
-<span class="kw"><a href="../reference/KGClimateClass.html">KGClimateClass</a></span>(<span class="dt">bbox =</span> bbox, <span class="dt">updatedBy =</span> <span class="st">"Peel"</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define a bounding box</span>
+areaBox &lt;-<span class="st"> </span>raster::<span class="kw">extent</span>(-<span class="dv">10</span>, <span class="dv">5</span>, <span class="dv">48</span>, <span class="dv">62</span>)
+
+<span class="co"># Extract climate zones from Peel's map:</span>
+<span class="kw"><a href="../reference/KGClimateClass.html">KGClimateClass</a></span>(<span class="dt">areaBox =</span> areaBox, <span class="dt">updatedBy =</span> <span class="st">"Peel"</span>)
 <span class="co">#&gt;   ID Class Frequency</span>
 <span class="co">#&gt; 1  9   Csb         1</span>
 <span class="co">#&gt; 2 15   Cfb      6199</span>
@@ -88,55 +86,73 @@ timeExtent &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class
 <span class="co">#&gt; 5 29    ET         1</span>
 
 <span class="co"># Extract climate zones from Kottek's map:</span>
-<span class="kw"><a href="../reference/KGClimateClass.html">KGClimateClass</a></span>(<span class="dt">bbox =</span> bbox, <span class="dt">updatedBy =</span> <span class="st">"Kottek"</span>)
+<span class="kw"><a href="../reference/KGClimateClass.html">KGClimateClass</a></span>(<span class="dt">areaBox =</span> areaBox, <span class="dt">updatedBy =</span> <span class="st">"Kottek"</span>)
 <span class="co">#&gt;   ID Class Frequency</span>
 <span class="co">#&gt; 1 32   Cfb     12301</span>
 <span class="co">#&gt; 2 33   Cfc       507</span></code></pre></div>
 </div>
 <div id="the-global-runoff-data-centre" class="section level3">
 <h3 class="hasAnchor"><html><body><a href="#the-global-runoff-data-centre" class="anchor"> </a></body></html>The Global Runoff Data Centre</h3>
-<p>The Global Runoff Data Centre (GRDC) is an international archive hosted by the Federal Institute of Hydrology (Bundesanstalt f&uuml;r Gew&auml;sserkunde or BfG) in Koblenz, Germany. The Centre operates under the auspices of the World Meteorological Organisation and retains services and datasets for all the major rivers in the world.</p>
-<p>Catalogue, kml files and the product Long-Term Mean Monthly Discharges are open data and accessible via the hddtools.</p>
+<p>The Global Runoff Data Centre (GRDC) is an international archive hosted by the Federal Institute of Hydrology (Bundesanstalt f&uuml;r Gew&auml;sserkunde or BfG) in Koblenz, Germany. The Centre operates under the auspices of the World Meteorological Organisation and retains services and datasets for all the major rivers in the world. Catalogue, kml files and the product Long-Term Mean Monthly Discharges are open data and accessible via the hddtools.</p>
+<p>Information on all the GRDC stations can be retrieved using the function <code>catalogueGRDC</code> with no input arguments, as in the examle below:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># GRDC full catalogue</span>
-x &lt;-<span class="st"> </span><span class="kw"><a href="../reference/catalogueGRDC.html">catalogueGRDC</a></span>()
-
-<span class="co"># Filter GRDC catalogue based on a country code</span>
-x &lt;-<span class="st"> </span><span class="kw"><a href="../reference/catalogueGRDC.html">catalogueGRDC</a></span>(<span class="dt">columnName =</span> <span class="st">"country_code"</span>, <span class="dt">columnValue =</span> <span class="st">"IT"</span>)
-
-<span class="co"># Filter GRDC catalogue based on rivername</span>
-x &lt;-<span class="st"> </span><span class="kw"><a href="../reference/catalogueGRDC.html">catalogueGRDC</a></span>(<span class="dt">columnName =</span> <span class="st">"river"</span>, <span class="dt">columnValue =</span> <span class="st">"PO"</span>)
-<span class="co"># Note that the search is not case sensitive, therefore you get the same result whether the columnValue is "PO", "Po" or "po". Same applies for the metadata column (it can be spelled "RIVER", "river", "River"...)</span>
-
-<span class="co"># Filter GRDC catalogue based on numerical value, for instance select all the stations for which daily data is availa since 2000</span>
-x &lt;-<span class="st"> </span><span class="kw"><a href="../reference/catalogueGRDC.html">catalogueGRDC</a></span>(<span class="dt">columnName =</span> <span class="st">"d_start"</span>, <span class="dt">columnValue =</span> <span class="st">"&lt;=2010"</span>)
+GRDC_catalogue_all &lt;-<span class="st"> </span><span class="kw"><a href="../reference/catalogueGRDC.html">catalogueGRDC</a></span>()</code></pre></div>
+<p>However, there are a number of options to filter the catalogue and return only the a subset of stations. For instance, we might be interested in subsetting only stations in Italy. As the 8th column in the catalogue lists the country codes, we can filter the catalogue passing two input arguments to the <code>catalogueGRDC</code> function: <code>columnName = "country_code"</code> and <code>columnValue  = "IT"</code>, as in the example below.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Filter GRDC catalogue based on a country code</span>
+GRDC_catalogue_countrycode &lt;-<span class="st"> </span><span class="kw"><a href="../reference/catalogueGRDC.html">catalogueGRDC</a></span>(<span class="dt">columnName =</span> <span class="st">"country_code"</span>,
+                                            <span class="dt">columnValue =</span> <span class="st">"IT"</span>)</code></pre></div>
+<p>The arguments <code>columnName</code> and <code>columnValue</code> can be used to filter over other columns. For instance, in the example below we show how to subset stations along the Po River.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Filter GRDC catalogue based on rivername</span>
+GRDC_catalogue_river &lt;-<span class="st"> </span><span class="kw"><a href="../reference/catalogueGRDC.html">catalogueGRDC</a></span>(<span class="dt">columnName =</span> <span class="st">"river"</span>, <span class="dt">columnValue =</span> <span class="st">"PO"</span>)</code></pre></div>
+<p>Note in the example above that the search is not case sensitive, therefore you get the same result whether the columnValue is spelled &ldquo;PO&rdquo;, &ldquo;Po&rdquo; or &ldquo;po&rdquo;. Same applies for the metadata column (it can be spelled &ldquo;RIVER&rdquo;, &ldquo;river&rdquo;, &ldquo;River&rdquo;&hellip;).</p>
+<p>If <code>columnName</code> refers to a numeric field, in the <code>columnValue</code> we can specify other terms of comparison. For example we can select all the stations for which daily data is available since 2000.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Filter GRDC catalogue based on numerical value, for instance select all the stations for which daily data is available since 2000</span>
+GRDC_catalogue_dstart &lt;-<span class="st"> </span><span class="kw"><a href="../reference/catalogueGRDC.html">catalogueGRDC</a></span>(<span class="dt">columnName =</span> <span class="st">"d_start"</span>, 
+                                       <span class="dt">columnValue =</span> <span class="st">"&gt;=2000"</span>)</code></pre></div>
+<p>Another option is to filter the catalogue based on a geographical bounding box.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define a bounding box</span>
+areaBox &lt;-<span class="st"> </span>raster::<span class="kw">extent</span>(-<span class="dv">10</span>, <span class="dv">5</span>, <span class="dv">48</span>, <span class="dv">62</span>)
 
 <span class="co"># Filter GRDC catalogue based on a bounding box</span>
-x &lt;-<span class="st"> </span><span class="kw"><a href="../reference/catalogueGRDC.html">catalogueGRDC</a></span>(<span class="dt">bbox =</span> bbox)
+GRDC_catalogue_bbox &lt;-<span class="st"> </span><span class="kw"><a href="../reference/catalogueGRDC.html">catalogueGRDC</a></span>(<span class="dt">areaBox =</span> areaBox)</code></pre></div>
+<p>The filters can be also combined, as in the examples below.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define a bounding box</span>
+areaBox &lt;-<span class="st"> </span>raster::<span class="kw">extent</span>(-<span class="dv">10</span>, <span class="dv">5</span>, <span class="dv">48</span>, <span class="dv">62</span>)
 
-<span class="co"># Filter GRDC catalogue based on a bounding box</span>
-x &lt;-<span class="st"> </span><span class="kw"><a href="../reference/catalogueGRDC.html">catalogueGRDC</a></span>(<span class="dt">bbox =</span> bbox, <span class="dt">columnName =</span> <span class="st">"statistics"</span>, <span class="dt">columnValue =</span> <span class="dv">1</span>)
-
-<span class="co"># Visualise outlets on an interactive map</span>
+<span class="co"># Filter GRDC catalogue based on a bounding box plus keep only those stations where "statistics" value is 1</span>
+GRDC_catalogue_bbox_stats &lt;-<span class="st"> </span><span class="kw"><a href="../reference/catalogueGRDC.html">catalogueGRDC</a></span>(<span class="dt">areaBox =</span> areaBox, 
+                                           <span class="dt">columnName =</span> <span class="st">"statistics"</span>,
+                                           <span class="dt">columnValue =</span> <span class="dv">1</span>)</code></pre></div>
+<p>The filtered stations can be used to create a map.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Visualise outlets on an interactive map</span>
 <span class="kw">library</span>(leaflet)
-<span class="kw">leaflet</span>(<span class="dt">data =</span> x) %&gt;%
+<span class="kw">leaflet</span>(<span class="dt">data =</span> GRDC_catalogue_bbox_stats) %&gt;%
 <span class="st">  </span><span class="kw">addTiles</span>() %&gt;%<span class="st">  </span><span class="co"># Add default OpenStreetMap map tiles</span>
-<span class="st">  </span><span class="kw">addMarkers</span>(~Longitude, ~Latitude, <span class="dt">popup =</span> ~name)</code></pre></div>
+<span class="st">  </span><span class="kw">addMarkers</span>(~long, ~lat, <span class="dt">popup =</span> ~station)</code></pre></div>
 <div class="figure">
 <img src="../assets/figures/leaflet.png"></div>
+<p>Lastly, given a station ID number (this is stored in the column grdc_no of the catalogue) we can check whether monthly data is available and eventually plot it.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Monthly data extraction</span>
-y &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tsGRDC.html">tsGRDC</a></span>(<span class="dt">stationID =</span> <span class="st">"6122300"</span>, <span class="dt">plotOption =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<p><img src="hddtools_vignette_files/figure-html/unnamed-chunk-9-1.png" width="672"></p>
+WolfeToneBridge &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tsGRDC.html">tsGRDC</a></span>(<span class="dt">stationID =</span> <span class="kw"><a href="../reference/catalogueGRDC.html">catalogueGRDC</a></span>()$grdc_no[<span class="dv">7126</span>],
+                          <span class="dt">plotOption =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p><img src="hddtools_vignette_files/figure-html/unnamed-chunk-14-1.png" width="672"></p>
 </div>
 <div id="nasas-tropical-rainfall-measuring-mission-trmm-only-available-for-github-version" class="section level3">
 <h3 class="hasAnchor"><html><body><a href="#nasas-tropical-rainfall-measuring-mission-trmm-only-available-for-github-version" class="anchor"> </a></body></html>NASA&rsquo;s Tropical Rainfall Measuring Mission (TRMM, only available for github version)</h3>
 <p>The Tropical Rainfall Measuring Mission (TRMM) is a joint mission between NASA and the Japan Aerospace Exploration Agency (JAXA) that uses a research satellite to measure precipitation within the tropics in order to improve our understanding of climate and its variability.</p>
 <p>The TRMM satellite records global historical rainfall estimation in a gridded format since 1998 with a daily temporal resolution and a spatial resolution of 0.25 degrees. This information is openly available for educational purposes and downloadable from an FTP server.</p>
 <p>The hddtools provides a function, called TRMM(), to download and convert a selected portion of the TRMM dataset into a raster-brick that can be opened in any GIS software.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Retreive mean monthly precipitations from 3B43_V7 (based on a bounding box and time extent)</span>
-<span class="kw"><a href="../reference/TRMM.html">TRMM</a></span>(<span class="dt">timeExtent =</span> timeExtent, <span class="dt">bbox =</span> bbox)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define a bounding box</span>
+areaBox &lt;-<span class="st"> </span>raster::<span class="kw">extent</span>(-<span class="dv">10</span>, <span class="dv">5</span>, <span class="dv">48</span>, <span class="dv">62</span>)
+
+<span class="co"># Define a temporal extent</span>
+twindow &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="kw">as.Date</span>(<span class="st">"2012-01-01"</span>), <span class="kw">as.Date</span>(<span class="st">"2012-03-31"</span>), <span class="dt">by =</span> <span class="st">"months"</span>)
+
+<span class="co"># Retreive mean monthly precipitations from 3B43_V7 (based on a bounding box and time extent)</span>
+TRMMfile &lt;-<span class="st"> </span><span class="kw"><a href="../reference/TRMM.html">TRMM</a></span>(<span class="dt">twindow =</span> twindow, <span class="dt">areaBox =</span> areaBox)
+
 <span class="kw">library</span>(raster)
-b &lt;-<span class="st"> </span><span class="kw">brick</span>(<span class="st">"trmm_acc.tif"</span>)
-<span class="kw">plot</span>(b)</code></pre></div>
+<span class="kw">plot</span>(TRMMfile)</code></pre></div>
 <div class="figure">
 <img src="../assets/figures/TRMM.png"></div>
 </div>
@@ -148,62 +164,68 @@ b &lt;-<span class="st"> </span><span class="kw">brick</span>(<span class="st">"
 <p>The Data60UK initiative collated datasets of areal precipitation and streamflow discharge across 61 gauging sites in England and Wales (UK). The database was prepared from source databases for research purposes, with the intention to make it re-usable. This is now available in the public domain free of charge.</p>
 <p>The hddtools contain two functions to interact with this database: one to retreive the catalogue and another to retreive time series of areal precipitation and streamflow discharge.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Data60UK full catalogue</span>
-x &lt;-<span class="st"> </span><span class="kw"><a href="../reference/catalogueData60UK.html">catalogueData60UK</a></span>()
+Data60UK_catalogue_all &lt;-<span class="st"> </span><span class="kw"><a href="../reference/catalogueData60UK.html">catalogueData60UK</a></span>()
 
 <span class="co"># Filter Data60UK catalogue based on bounding box</span>
-bbox &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">lonMin =</span> -<span class="dv">4</span>, <span class="dt">latMin =</span> <span class="dv">51</span>, <span class="dt">lonMax =</span> -<span class="dv">3</span>, <span class="dt">latMax =</span> <span class="dv">53</span>)
-x &lt;-<span class="st"> </span><span class="kw"><a href="../reference/catalogueData60UK.html">catalogueData60UK</a></span>(<span class="dt">bbox =</span> bbox)</code></pre></div>
+areaBox &lt;-<span class="st"> </span>raster::<span class="kw">extent</span>(-<span class="dv">4</span>, -<span class="dv">3</span>, <span class="dv">51</span>, <span class="dv">53</span>)
+Data60UK_catalogue_bbox &lt;-<span class="st"> </span><span class="kw"><a href="../reference/catalogueData60UK.html">catalogueData60UK</a></span>(<span class="dt">areaBox =</span> areaBox)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Visualise outlets on an interactive map</span>
 <span class="kw">library</span>(leaflet)
-<span class="kw">leaflet</span>(<span class="dt">data =</span> x) %&gt;%
+<span class="kw">leaflet</span>(<span class="dt">data =</span> Data60UK_catalogue_bbox) %&gt;%
 <span class="st">  </span><span class="kw">addTiles</span>() %&gt;%<span class="st">  </span><span class="co"># Add default OpenStreetMap map tiles</span>
 <span class="st">  </span><span class="kw">addMarkers</span>(~Longitude, ~Latitude, <span class="dt">popup =</span> ~Location)</code></pre></div>
 <div class="figure">
 <img src="../assets/figures/leaflet2.png"></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Extract time series </span>
-hydroRefNumber &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">as.character</span>(x$id[<span class="dv">1</span>])) <span class="co"># e.g. 55012</span>
-y &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tsData60UK.html">tsData60UK</a></span>(hydroRefNumber, <span class="dt">plotOption =</span> <span class="ot">FALSE</span>)
+stationID &lt;-<span class="st"> </span><span class="kw"><a href="../reference/catalogueData60UK.html">catalogueData60UK</a></span>()$stationID[<span class="dv">1</span>]
 
+<span class="co"># Extract only the time series</span>
+MorwickTS &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tsData60UK.html">tsData60UK</a></span>(stationID, <span class="dt">plotOption =</span> <span class="ot">FALSE</span>)
+<span class="kw">plot</span>(MorwickTS)</code></pre></div>
+<p><img src="hddtools_vignette_files/figure-html/unnamed-chunk-18-1.png" width="672"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="co"># Extract time series for a specified temporal window</span>
-timeExtent &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="kw">as.Date</span>(<span class="st">"1988-01-01"</span>), <span class="kw">as.Date</span>(<span class="st">"1989-12-31"</span>), <span class="dt">by =</span> <span class="st">"days"</span>)
-y &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tsData60UK.html">tsData60UK</a></span>(<span class="dt">hydroRefNumber =</span> hydroRefNumber, 
-                <span class="dt">plotOption =</span> <span class="ot">TRUE</span>, 
-                <span class="dt">timeExtent =</span> timeExtent)</code></pre></div>
-<p><img src="hddtools_vignette_files/figure-html/unnamed-chunk-13-1.png" width="672"></p>
+twindow &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="kw">as.Date</span>(<span class="st">"1988-01-01"</span>), <span class="kw">as.Date</span>(<span class="st">"1989-12-31"</span>), <span class="dt">by =</span> <span class="st">"days"</span>)
+MorwickTSplot &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tsData60UK.html">tsData60UK</a></span>(<span class="dt">stationID =</span> stationID, 
+                            <span class="dt">plotOption =</span> <span class="ot">TRUE</span>,
+                            <span class="dt">twindow =</span> twindow)</code></pre></div>
+<p><img src="hddtools_vignette_files/figure-html/unnamed-chunk-18-2.png" width="672"></p>
 </div>
 <div id="mopex" class="section level4">
 <h4 class="hasAnchor"><html><body><a href="#mopex" class="anchor"> </a></body></html>MOPEX</h4>
 <p>Dataset containing historical hydrometeorological data and river basin characteristics for hundreds of river basins from a range of climates in the US.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># MOPEX full catalogue</span>
-x &lt;-<span class="st"> </span><span class="kw"><a href="../reference/catalogueMOPEX.html">catalogueMOPEX</a></span>()
+MOPEX_catalogue_all &lt;-<span class="st"> </span><span class="kw"><a href="../reference/catalogueMOPEX.html">catalogueMOPEX</a></span>()
 
 <span class="co"># Extract time series </span>
-y &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tsMOPEX.html">tsMOPEX</a></span>(<span class="dt">hydroRefNumber =</span> <span class="st">"14359000"</span>, <span class="dt">plotOption =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<p><img src="hddtools_vignette_files/figure-html/unnamed-chunk-14-1.png" width="672"></p>
+BroadRiver &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tsMOPEX.html">tsMOPEX</a></span>(<span class="dt">stationID =</span> MOPEX_catalogue_all$stationID[<span class="dv">1</span>], 
+                      <span class="dt">plotOption =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p><img src="hddtools_vignette_files/figure-html/unnamed-chunk-19-1.png" width="672"></p>
 </div>
 </div>
 <div id="sepa-river-level-data" class="section level3">
 <h3 class="hasAnchor"><html><body><a href="#sepa-river-level-data" class="anchor"> </a></body></html>SEPA river level data</h3>
 <p>The Scottish Environment Protection Agency (SEPA) manages river level data for hundreds of gauging stations in the UK. The catalogue of stations was derived by an unofficial list (available here: <a href="http://pennine.ddns.me.uk/riverlevels/ConciseList.html" class="uri">http://pennine.ddns.me.uk/riverlevels/ConciseList.html</a>).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># SEPA unofficial catalogue</span>
-x &lt;-<span class="st"> </span><span class="kw"><a href="../reference/catalogueSEPA.html">catalogueSEPA</a></span>()</code></pre></div>
-<p>The time series of the last few days is available from SEPA website and downloadable using the following function:</p>
+SEPA_catalogue_all &lt;-<span class="st"> </span><span class="kw"><a href="../reference/catalogueSEPA.html">catalogueSEPA</a></span>()</code></pre></div>
+<p>The time series of the last few days is available from SEPA website and can be downloaded using the following function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Single time series extraction</span>
-y &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tsSEPA.html">tsSEPA</a></span>(<span class="dt">hydroRefNumber =</span> <span class="st">"234253"</span>, <span class="dt">plotOption =</span> <span class="ot">FALSE</span>)</code></pre></div>
+Kilphedir &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tsSEPA.html">tsSEPA</a></span>(<span class="dt">stationID =</span> <span class="kw"><a href="../reference/catalogueSEPA.html">catalogueSEPA</a></span>()$stationId[<span class="dv">1</span>], 
+                    <span class="dt">plotOption =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p>Plese note that this data is updated every 15 minutes and the code will always generate different plots.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Multiple time series extraction</span>
-y &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tsSEPA.html">tsSEPA</a></span>(<span class="dt">hydroRefNumber =</span> <span class="kw">c</span>(<span class="st">"234253"</span>, <span class="st">"234174"</span>, <span class="st">"234305"</span>))
+y &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tsSEPA.html">tsSEPA</a></span>(<span class="dt">stationID =</span> <span class="kw">c</span>(<span class="st">"234253"</span>, <span class="st">"234174"</span>, <span class="st">"234305"</span>))
 <span class="kw">plot</span>(y[[<span class="dv">1</span>]], <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">max</span>(y[[<span class="dv">1</span>]], y[[<span class="dv">2</span>]], y[[<span class="dv">3</span>]])), 
      <span class="dt">xlab =</span> <span class="st">""</span>, <span class="dt">ylab =</span> <span class="st">"Water level [m]"</span>)
 <span class="kw">lines</span>(y[[<span class="dv">2</span>]], <span class="dt">col =</span> <span class="st">"red"</span>)
 <span class="kw">lines</span>(y[[<span class="dv">3</span>]], <span class="dt">col =</span> <span class="st">"blue"</span>)</code></pre></div>
-<p><img src="hddtools_vignette_files/figure-html/unnamed-chunk-17-1.png" width="672"></p>
+<p><img src="hddtools_vignette_files/figure-html/unnamed-chunk-22-1.png" width="672"></p>
 </div>
 <div id="met-office-hadley-centre-observation-data-hadukp-data" class="section level3">
 <h3 class="hasAnchor"><html><body><a href="#met-office-hadley-centre-observation-data-hadukp-data" class="anchor"> </a></body></html>Met Office Hadley Centre Observation Data: HadUKP Data</h3>
 <p>The Met Office Hadley Centre provides daily precipitation time series averaged over UK regions and subregions.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Get the list of time series (11)</span>
-x &lt;-<span class="st"> </span><span class="kw"><a href="../reference/HadDAILY.html">HadDAILY</a></span>()</code></pre></div>
+precipitation &lt;-<span class="st"> </span><span class="kw"><a href="../reference/HadDAILY.html">HadDAILY</a></span>()</code></pre></div>
 <p>Below is the list of names used to extract time series for regions/subregions:</p>
 <ul><li>England &amp; Wales: EWP</li>
 <li>South East England: SEEP</li>
@@ -217,8 +239,8 @@ x &lt;-<span class="st"> </span><span class="kw"><a href="../reference/HadDAILY.
 <li>East Scotland: ESP</li>
 <li>Northern Ireland: NIP</li>
 </ul><p>For example, here is how to plot the time series for England and Wales:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(x$EWP)</code></pre></div>
-<p><img src="hddtools_vignette_files/figure-html/unnamed-chunk-19-1.png" width="672"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(precipitation$EWP)</code></pre></div>
+<p><img src="hddtools_vignette_files/figure-html/unnamed-chunk-24-1.png" width="672"></p>
 </div>
 </div>
 </div>

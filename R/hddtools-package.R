@@ -23,11 +23,11 @@
 #' Vitolo C, Buytaert W, 2014, HDDTOOLS: an R package serving Hydrological Data
 #' Discovery Tools, AGU Fall Meeting, 15-19 December 2014, San Francisco, USA.
 #'
+#' @import rgdal
 #' @importFrom graphics axis legend lines plot polygon
 #' @importFrom stats window
 #' @importFrom utils download.file head read.csv read.fwf read.table tail untar unzip
-#' @importFrom zoo zoo
-#' @import rgdal
+#' @importFrom zoo zoo merge.zoo
 #' @importFrom sp CRS SpatialPolygons Polygon Polygons
 #' @importFrom RCurl url.exists getURL
 #' @importFrom XML readHTMLTable
@@ -36,6 +36,7 @@
 #' @importFrom raster raster extract brick flip extent crop writeRaster extent
 #' @importFrom stringr str_pad
 #' @importFrom gdata read.xls
+#' @importFrom utils read.table
 #'
 NULL
 
@@ -71,7 +72,7 @@ NULL
 #'
 #' @format A data frame with 61 stations (rows) and 6 metadata fields (columns).
 #' \describe{
-#'   \item{\code{id}}{id number.}
+#'   \item{\code{stationID}}{Station id number.}
 #'   \item{\code{River}}{String describing the river's name.}
 #'   \item{\code{Location}}{String describing the location.}
 #'   \item{\code{gridReference}}{British National Grid Reference.}
@@ -92,7 +93,7 @@ NULL
 #'
 #' @format A data frame with 431 stations (rows) and 12 metadata fields (columns).
 #' \describe{
-#'   \item{\code{id}}{id number.}
+#'   \item{\code{stationID}}{Station id number.}
 #'   \item{\code{longitude}}{}
 #'   \item{\code{latitude}}{}
 #'   \item{\code{elevation}}{}

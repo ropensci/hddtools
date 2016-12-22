@@ -5,7 +5,7 @@
 \title{Data source: Data60UK catalogue}
 \usage{
 catalogueData60UK(areaBox = NULL, columnName = NULL, columnValue = NULL,
-  cached = TRUE)
+  useCachedData = TRUE)
 }
 \arguments{
 \item{areaBox}{bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)}
@@ -14,7 +14,7 @@ catalogueData60UK(areaBox = NULL, columnName = NULL, columnValue = NULL,
 
 \item{columnValue}{value to look for in the column named columnName}
 
-\item{cached}{boolean value. Default is TRUE (use cached datasets).}
+\item{useCachedData}{logical, set to TRUE to use cached data, set to FALSE to retrive data from online source. This is TRUE by default.}
 }
 \value{
 This function returns a data frame made of 61 rows (gauging stations) and 6 columns: "id" (hydrometric reference number), "River", "Location", "gridReference", "Latitude", "Longitude".
@@ -25,13 +25,15 @@ This function interfaces the Data60UK database catalogue (available from http://
 \examples{
 \dontrun{
   # Retrieve the whole catalogue
-  x <- catalogueData60UK()
+  Data60UK_catalogue_all <- catalogueData60UK()
 
-  # Define a bounding box
+  # Filter the catalogue based on a bounding box
   areaBox <- raster::extent(c(-4, -2, +52, +53))
-  # Filter the catalogue
-  x <- catalogueData60UK(areaBox)
-  x <- catalogueData60UK(columnName = "id", columnValue = "62001")
+  Data60UK_catalogue_bbox <- catalogueData60UK(areaBox)
+
+  # Filter the catalogue based on an ID
+  Data60UK_catalogue_ID <- catalogueData60UK(columnName = "stationID",
+                                             columnValue = "62001")
 }
 
 }

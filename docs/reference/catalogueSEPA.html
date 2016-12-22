@@ -84,7 +84,7 @@
     <p>This function provides an unofficial SEPA database catalogue of river level data (available from http://pennine.ddns.me.uk/riverlevels/ConciseList.html) containing info for 1752 stations. Some are NRFA stations.</p>
     
 
-    <pre><span class='fu'>catalogueSEPA</span>(<span class='kw'>columnName</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>columnValue</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre><span class='fu'>catalogueSEPA</span>(<span class='kw'>columnName</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>columnValue</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>useCachedData</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
@@ -92,26 +92,27 @@
       <dd>name of the column to filter</dd>
       <dt>columnValue</dt>
       <dd>value to look for in the column named columnName</dd>
-      <dt>verbose</dt>
-      <dd>if TRUE it returns whether the data is coming from live or cached data sources</dd>
+      <dt>useCachedData</dt>
+      <dd>logical, set to TRUE to use cached data, set to FALSE to retrive data from online source. This is TRUE by default.</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>This function returns a data frame made of a maximum of 830 rows (stations) and 8 columns: &quot;idNRFA&quot;,&quot;aspxpage&quot;, &quot;stationId&quot;, &quot;River&quot;, &quot;Location&quot;, &quot;GridRef&quot;, &quot;Operator&quot; and &quot;CatchmentArea(km2)&quot;. Column idNRFA shows the National River Flow Archive station id. Column &quot;aspxpage&quot; returns the Environment Agency gauges id. The column &quot;stationId&quot; is the id number used by SEPA. Use these id numbers to retrieve the time series of water levels.</p>
+    <p>This function returns a data frame made of a maximum of 830 rows (stations) and 8 columns: &quot;idNRFA&quot;,&quot;aspxpage&quot;, &quot;stationId&quot;, &quot;River&quot;, &quot;Location&quot;, &quot;GridRef&quot;, &quot;Operator&quot; and &quot;CatchmentArea(km2)&quot;. Column idNRFA shows the National River Flow Archive station id. Column &quot;aspxpage&quot; returns the Environment Agency gauges id. The column &quot;stationId&quot; is the id number used by SEPA. Use the stationId to retrieve the time series of water levels.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## Not run: ------------------------------------</span>
 <span class='co'>#   # Retrieve the whole catalogue</span>
-<span class='co'>#   x &lt;- catalogueSEPA()</span>
+<span class='co'>#   SEPA_catalogue_all &lt;- catalogueSEPA()</span>
 <span class='co'># </span>
 <span class='co'>#   # Get only catchments with area above 5000 Km2</span>
-<span class='co'>#   x &lt;- catalogueSEPA(columnName = "CatchmentAreaKm2",</span>
-<span class='co'>#                      columnValue = "&gt;= 5000")</span>
+<span class='co'>#   SEPA_catalogue_area &lt;- catalogueSEPA(columnName = "CatchmentAreaKm2",</span>
+<span class='co'>#                                        columnValue = "&gt;= 5000")</span>
 <span class='co'># </span>
 <span class='co'>#   # Get only catchments within river Avon</span>
-<span class='co'>#   x &lt;- catalogueSEPA(columnName = "River", columnValue = "Avon")</span>
+<span class='co'>#   SEPA_catalogue_river &lt;- catalogueSEPA(columnName = "River",</span>
+<span class='co'>#                                         columnValue = "Avon")</span>
 <span class='co'>## ---------------------------------------------</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

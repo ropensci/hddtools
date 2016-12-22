@@ -15,7 +15,7 @@ This function interfaces the Met Office Hadley Centre observations datasets: Had
 \examples{
 \dontrun{
   # Retrieve the full dataset (list of 11 time series)
-  x <- HadDAILY()
+  HadDAILY_all <- HadDAILY()
   plot(x$EWP) # time series for England and Wales
 }
 

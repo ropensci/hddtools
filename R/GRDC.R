@@ -8,7 +8,7 @@
 #' @param columnName name of the column to filter
 #' @param columnValue value to look for in the column named columnName
 #' @param mdDescription boolean value. Default is FALSE (no description is printed)
-#' @param cached boolean value. Default is TRUE (use cached datasets).
+#' @param useCachedData logical, set to TRUE to use cached data, set to FALSE to retrive data from online source. This is TRUE by default.
 #'
 #' @return This function returns a data frame made of 8966 rows (gauging stations, as per October 2016) and 44 columns containing metadata.
 #'
@@ -17,36 +17,45 @@
 #' @examples
 #' \dontrun{
 #'   # Retrieve the whole catalogue
-#'   x <- catalogueGRDC()
+#'   GRDC_catalogue_all <- catalogueGRDC()
 #'
 #'   # Define a bounding box
-#'   areaBox <- raster::extent(c(-3.82, -3.63, 52.41, 52.52))
+#'   areaBox <- raster::extent(-3.82, -3.63, 52.41, 52.52)
 #'   # Filter the catalogue based on bounding box
-#'   x <- catalogueGRDC(areaBox = areaBox)
+#'   GRDC_catalogue_bbox <- catalogueGRDC(areaBox = areaBox)
 #'
 #'   # Get only catchments with area above 5000 Km2
-#'   x <- catalogueGRDC(columnName = "area", columnValue = ">= 5000")
+#'   GRDC_catalogue_area <- catalogueGRDC(columnName = "area",
+#'                                        columnValue = ">= 5000")
 #'
 #'   # Get only catchments within river Thames
-#'   x <- catalogueGRDC(columnName = "river", columnValue = "Thames")
+#'   GRDC_catalogue_river <- catalogueGRDC(columnName = "river",
+#'                                         columnValue = "Thames")
 #' }
 #'
 
 catalogueGRDC <- function(areaBox = NULL,
                           columnName = NULL, columnValue = NULL,
-                          mdDescription = FALSE, cached = TRUE){
+                          mdDescription = FALSE, useCachedData = TRUE){
 
-  url <- "http://www.bafg.de/GRDC/EN/02_srvcs/21_tmsrs/211_ctlgs/GRDC_Stations.zip?__blob=publicationFile"
+  theurl <- "http://www.bafg.de/GRDC/EN/02_srvcs/21_tmsrs/211_ctlgs/GRDC_Stations.zip?__blob=publicationFile"
 
-  if (cached == FALSE & RCurl::url.exists(url)){
+  if (useCachedData == TRUE | RCurl::url.exists(theurl) == FALSE){
 
-    message("Downloading data from source")
+    # message("Using cached data.")
+
+    load(system.file(file.path("data", "GRDCcatalogue.rda"),
+                     package = "hddtools"))
+
+  }else{
+
+    message("Retrieving data from live web data source.")
+
     # Retrieve the catalogue
     temp <- tempfile()
-    download.file(url,temp)
-    GRDCcatalogue <- gdata::read.xls(utils::unzip(zipfile = temp,
-                                                  exdir = dirname(temp)),
-                                     sheet = "grdc_metadata")
+    download.file(theurl,temp)
+    fileLocation <- utils::unzip(zipfile = temp, exdir = dirname(temp))
+    GRDCcatalogue <- gdata::read.xls(fileLocation, sheet = "grdc_metadata")
     unlink(temp)
     GRDCcatalogue[] <- lapply(GRDCcatalogue, as.character)
     GRDCcatalogue$lat <- as.numeric(GRDCcatalogue$lat)
@@ -69,11 +78,6 @@ catalogueGRDC <- function(areaBox = NULL,
     GRDCcatalogue$r_height_yr <- as.numeric(GRDCcatalogue$r_height_yr)
     GRDCcatalogue$proc_tyrs <- as.numeric(GRDCcatalogue$proc_tyrs)
     GRDCcatalogue$proc_tmon <- as.numeric(GRDCcatalogue$proc_tmon)
-
-  }else{
-
-    message("Using cached data.")
-    load(system.file("data/GRDCcatalogue.rda", package = "hddtools"))
 
   }
 
@@ -126,10 +130,6 @@ catalogueGRDC <- function(areaBox = NULL,
   }
 
   row.names(grdcTable) <- NULL
-  names(grdcTable)[5] <- "id"
-  names(grdcTable)[7] <- "name"
-  names(grdcTable)[9]  <- "Latitude"
-  names(grdcTable)[10] <- "Longitude"
 
   if (mdDescription == TRUE){
 
@@ -189,7 +189,9 @@ catalogueGRDC <- function(areaBox = NULL,
 #'
 #' @examples
 #' \dontrun{
-#'   x <- tsGRDC(stationID = "1107700")
+#'   Adaitu <- tsGRDC(stationID = "1577602")
+#'   Adaitu <- tsGRDC(stationID = catalogueGRDC()$grdc_no[1000],
+#'                    plotOption = TRUE)
 #' }
 #'
 
@@ -288,7 +290,7 @@ tsGRDC <- function(stationID, plotOption = FALSE){
 
       plot(zoo(table3$MQ, order.by = dummyTime),
            main = paste("Monthly statistics: ",
-                        catalogueTmp$name, " (",
+                        catalogueTmp$station, " (",
                         catalogueTmp$country_code, ")", sep=""),
            type = "l", ylim = c(min(table3$LQ), max(table3$HQ)),
            xlab = "", ylab = "m3/s", xaxt = "n")

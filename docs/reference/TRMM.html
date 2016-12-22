@@ -84,9 +84,9 @@
     <p>The TRMM dataset provide global historical rainfall estimation in a gridded format.</p>
     
 
-    <pre><span class='fu'>TRMM</span>(<span class='kw'>inputLocation</span> <span class='kw'>=</span> <span class='st'>"ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/"</span>,
-  <span class='kw'>product</span> <span class='kw'>=</span> <span class='st'>"3B43"</span>, <span class='kw'>version</span> <span class='kw'>=</span> <span class='fl'>7</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"precipitation.accum"</span>,
-  <span class='kw'>timeExtent</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>bbox</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>outputfileLocation</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre><span class='fu'>TRMM</span>(<span class='kw'>inputLocation</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>product</span> <span class='kw'>=</span> <span class='st'>"3B43"</span>, <span class='kw'>version</span> <span class='kw'>=</span> <span class='fl'>7</span>,
+  <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"precipitation.accum"</span>, <span class='kw'>twindow</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>areaBox</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>outputfileLocation</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
@@ -98,17 +98,17 @@
       <dd>this is the version number, default is 7</dd>
       <dt>type</dt>
       <dd>this is the type of information needed, default is &quot;precipitation.accum&quot;. Other types could be &quot;gaugeRelativeWeighting.bin&quot; and &quot;relativeError.bin&quot;</dd>
-      <dt>timeExtent</dt>
+      <dt>twindow</dt>
       <dd>is a vector of dates and times for which the data should be retrieve</dd>
-      <dt>bbox</dt>
-      <dd>OPTIONAL bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)</dd>
+      <dt>areaBox</dt>
+      <dd>OPTIONAL bounding box, a list made of 4 elements: minimum longitude (xmin), minimum latitude (ymin), maximum longitude (xmax), maximum latitude (ymax)</dd>
       <dt>outputfileLocation</dt>
       <dd>file path where to save the GeoTiff</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Data is loaded as rasterbrick, then converted to a multilayer Geotiff that can</p>
+    <p>Data is loaded as multilayer GeoTIFF and loaded as a RasterBrick.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
@@ -120,20 +120,14 @@ and on the TRMM FAQ: <a href = 'http://disc.sci.gsfc.nasa.gov/additional/faq/pre
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## Not run: ------------------------------------</span>
 <span class='co'>#   # Define a bounding box</span>
-<span class='co'>#   bbox &lt;- list(lonMin = -3.82, latMin = 48, lonMax = -3.63, latMax = 50)</span>
+<span class='co'>#   areaBox &lt;- raster::extent(-10, 5, 48, 62)</span>
 <span class='co'>#   twindow &lt;- seq(as.Date("2012-01-01"), as.Date("2012-01-31"), by = "months")</span>
 <span class='co'># </span>
-<span class='co'>#   TRMM(inputLocation="ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",</span>
-<span class='co'>#        product = "3B43",</span>
-<span class='co'>#        version = 7,</span>
-<span class='co'>#        type = "precipitation.accum",</span>
-<span class='co'>#        timeExtent = twindow,</span>
-<span class='co'>#        bbox = bbox,</span>
-<span class='co'>#        outputfileLocation = "~/")</span>
+<span class='co'>#   TRMMfile &lt;- TRMM(product = "3B43", version = 7,</span>
+<span class='co'>#                    type = "precipitation.accum",</span>
+<span class='co'>#                    twindow = twindow, areaBox = areaBox)</span>
 <span class='co'># </span>
-<span class='co'>#   # or simply</span>
-<span class='co'>#   TRMM(timeExtent = twindow, bbox = bbox)#'</span>
-<span class='co'>#   plot(brick("~/trmm_acc.tif"))</span>
+<span class='co'>#   raster::plot(TRMMfile)</span>
 <span class='co'>## ---------------------------------------------</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

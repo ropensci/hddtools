@@ -4,9 +4,9 @@
 \alias{TRMM}
 \title{Download and convert TRMM data}
 \usage{
-TRMM(inputLocation = "ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
-  product = "3B43", version = 7, type = "precipitation.accum",
-  twindow = NULL, areaBox = NULL, outputfileLocation = NULL)
+TRMM(inputLocation = NULL, product = "3B43", version = 7,
+  type = "precipitation.accum", twindow = NULL, areaBox = NULL,
+  outputfileLocation = NULL)
 }
 \arguments{
 \item{inputLocation}{location where data is stored. By default it points to the TRMM ftp server (\url{ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/}) but it can also be a local directory. If you are using a local directory, this function expects to find inside 'inputLocation' a folder with the name of product and version (e.g. "i3B43_V7") and inside this a folder for each year( e.g. "2012").}
@@ -24,7 +24,7 @@ TRMM(inputLocation = "ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
 \item{outputfileLocation}{file path where to save the GeoTiff}
 }
 \value{
-Data is loaded as rasterbrick, then converted to a multilayer Geotiff that can
+Data is loaded as multilayer GeoTIFF and loaded as a RasterBrick.
 }
 \description{
 The TRMM dataset provide global historical rainfall estimation in a gridded format.
@@ -37,20 +37,14 @@ and on the TRMM FAQ: \url{http://disc.sci.gsfc.nasa.gov/additional/faq/precipita
 \examples{
 \dontrun{
   # Define a bounding box
-  areaBox <- raster::extent(c(-3.82, -3.63, 48, 50))
+  areaBox <- raster::extent(-10, 5, 48, 62)
   twindow <- seq(as.Date("2012-01-01"), as.Date("2012-01-31"), by = "months")
 
-  TRMM(inputLocation="ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/",
-       product = "3B43",
-       version = 7,
-       type = "precipitation.accum",
-       twindow = twindow,
-       areaBox = areaBox,
-       outputfileLocation = "~/")
+  TRMMfile <- TRMM(product = "3B43", version = 7,
+                   type = "precipitation.accum",
+                   twindow = twindow, areaBox = areaBox)
 
-  # or simply
-  TRMM(twindow = twindow, areaBox = areaBox)#'
-  plot(brick("~/trmm_acc.tif"))
+  raster::plot(TRMMfile)
 }
 
 }

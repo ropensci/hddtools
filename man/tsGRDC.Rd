@@ -48,7 +48,9 @@ Please note that not all the GRDC stations listed in the catalogue have monthly 
 }
 \examples{
 \dontrun{
-  x <- tsGRDC(stationID = "1107700")
+  Adaitu <- tsGRDC(stationID = "1577602")
+  Adaitu <- tsGRDC(stationID = catalogueGRDC()$grdc_no[1000],
+                   plotOption = TRUE)
 }
 
 }

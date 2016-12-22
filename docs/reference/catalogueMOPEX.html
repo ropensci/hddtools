@@ -84,16 +84,19 @@
     <p>This function interfaces the MOPEX database catalogue (available from <a href = 'ftp://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/'>ftp://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/</a>) containing 438 daily datasets.</p>
     
 
-    <pre><span class='fu'>catalogueMOPEX</span>(<span class='kw'>bbox</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>columnName</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>columnValue</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre><span class='fu'>catalogueMOPEX</span>(<span class='kw'>areaBox</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>columnName</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>columnValue</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>useCachedData</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
-      <dt>bbox</dt>
+      <dt>areaBox</dt>
       <dd>bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)</dd>
       <dt>columnName</dt>
       <dd>name of the column to filter</dd>
       <dt>columnValue</dt>
       <dd>value to look for in the column named columnName</dd>
+      <dt>useCachedData</dt>
+      <dd>logical, set to TRUE to use cached data, set to FALSE to retrive data from online source. This is TRUE by default.</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -104,15 +107,16 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## Not run: ------------------------------------</span>
 <span class='co'>#   # Retrieve the MOPEX catalogue</span>
-<span class='co'>#   x &lt;- catalogueMOPEX()</span>
+<span class='co'>#   MOPEX_catalogue_all &lt;- catalogueMOPEX()</span>
 <span class='co'># </span>
 <span class='co'>#   # Define a bounding box</span>
-<span class='co'>#   bbox &lt;- list(lonMin = -95, latMin = 37, lonMax = -92, latMax = 41)</span>
+<span class='co'>#   areaBox &lt;- raster::extent(-95, -92, 37, 41)</span>
 <span class='co'>#   # Filter the catalogue based on bounding box</span>
-<span class='co'>#   x &lt;- catalogueMOPEX(bbox = bbox)</span>
+<span class='co'>#   MOPEX_catalogue_bbox &lt;- catalogueMOPEX(areaBox = areaBox)</span>
 <span class='co'># </span>
 <span class='co'>#   # Get only catchments within NC</span>
-<span class='co'>#   x &lt;- catalogueMOPEX(columnName = "STATEcode", columnValue = "NC")</span>
+<span class='co'>#   MOPEX_catalogue_state &lt;- catalogueMOPEX(columnName = "state",</span>
+<span class='co'>#                                           columnValue = "NC")</span>
 <span class='co'># </span>
 <span class='co'>## ---------------------------------------------</span></div></pre>
   </div>

@@ -6,7 +6,7 @@
 \title{Data set: The Data60UK Catalogue}
 \format{A data frame with 61 stations (rows) and 6 metadata fields (columns).
 \describe{
-  \item{\code{id}}{id number.}
+  \item{\code{stationID}}{Station id number.}
   \item{\code{River}}{String describing the river's name.}
   \item{\code{Location}}{String describing the location.}
   \item{\code{gridReference}}{British National Grid Reference.}

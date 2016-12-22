@@ -84,11 +84,11 @@
     <p>This function extract the dataset containing daily rainfall and streamflow discharge at one of the MOPEX locations.</p>
     
 
-    <pre><span class='fu'>tsMOPEX</span>(<span class='no'>hydroRefNumber</span>, <span class='kw'>plotOption</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>timeExtent</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre><span class='fu'>tsMOPEX</span>(<span class='no'>stationID</span>, <span class='kw'>plotOption</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>timeExtent</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
-      <dt>hydroRefNumber</dt>
+      <dt>stationID</dt>
       <dd>hydrometric reference number (string)</dd>
       <dt>plotOption</dt>
       <dd>boolean to define whether to plot the results. By default this is set to TRUE.</dd>
@@ -103,7 +103,9 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## Not run: ------------------------------------</span>
-<span class='co'>#   x &lt;- tsMOPEX(hydroRefNumber = "14359000")</span>
+<span class='co'>#   stationID &lt;- catalogueMOPEX()$stationID[1]</span>
+<span class='co'>#   BroadRiver &lt;- tsMOPEX(stationID = stationID)</span>
+<span class='co'>#   BroadRiver &lt;- tsMOPEX(stationID = stationID, plotOption = TRUE)</span>
 <span class='co'>## ---------------------------------------------</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

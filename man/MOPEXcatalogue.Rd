@@ -6,7 +6,7 @@
 \title{Data set: The MOPEX Catalogue}
 \format{A data frame with 431 stations (rows) and 12 metadata fields (columns).
 \describe{
-  \item{\code{id}}{id number.}
+  \item{\code{stationID}}{Station id number.}
   \item{\code{longitude}}{}
   \item{\code{latitude}}{}
   \item{\code{elevation}}{}

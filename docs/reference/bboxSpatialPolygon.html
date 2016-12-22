@@ -87,14 +87,15 @@
 Bounding box is first created (in lat/lon) then projected if specified</p>
     
 
-    <pre><span class='fu'>bboxSpatialPolygon</span>(<span class='no'>bbox</span>, <span class='kw'>proj4stringFrom</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>proj4stringTo</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre><span class='fu'>bboxSpatialPolygon</span>(<span class='no'>boundingbox</span>, <span class='kw'>proj4stringFrom</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>proj4stringTo</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
-      <dt>bbox</dt>
+      <dt>boundingbox</dt>
       <dd>Bounding box: a 2x2 numerical matrix of lat/lon coordinates</dd>
       <dt>proj4stringFrom</dt>
-      <dd>Projection string for the current bbox coordinates (defaults to lat/lon, WGS84)</dd>
+      <dd>Projection string for the current boundingbox coordinates (defaults to lat/lon, WGS84)</dd>
       <dt>proj4stringTo</dt>
       <dd>Projection string, or NULL to not project</dd>
     </dl>
@@ -110,8 +111,8 @@ Bounding box is first created (in lat/lon) then projected if specified</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## Not run: ------------------------------------</span>
-<span class='co'>#   bbox &lt;- list(lonMin = -180, latMin = -50, lonMax = +180, latMax = +50)</span>
-<span class='co'>#   bbSP &lt;- bboxSpatialPolygon(bbox = bbox)</span>
+<span class='co'>#   boundingbox &lt;- raster::extent(c(-180, +180, -50, +50))</span>
+<span class='co'>#   bbSP &lt;- bboxSpatialPolygon(boundingbox = boundingbox)</span>
 <span class='co'>## ---------------------------------------------</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
