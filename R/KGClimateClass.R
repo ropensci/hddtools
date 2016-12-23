@@ -35,7 +35,8 @@ KGClimateClass <- function(areaBox = NULL, updatedBy = "Peel", verbose = FALSE){
   if (updatedBy == "Kottek") {
 
     # MAP UPDATED BY KOTTEK
-    kgLegend <- read.table(system.file("extdata/KOTTEK_Legend.txt",
+    kgLegend <- read.table(system.file(file.path("extdata",
+                                                 "KOTTEK_Legend.txt"),
                                        package = "hddtools"))
 
     # message("OFFLINE results")
@@ -46,7 +47,7 @@ KGClimateClass <- function(areaBox = NULL, updatedBy = "Peel", verbose = FALSE){
     # create the placeholder file
     tf <- tempfile(tmpdir = td, fileext = ".tar.gz")
 
-    untar(system.file("extdata/KOTTEK_KG.tar.gz",
+    untar(system.file(file.path("extdata", "KOTTEK_KG.tar.gz"),
                       package = "hddtools"), exdir = td)
 
     kgRaster <- raster::raster(paste(td, "/KOTTEK_koeppen-geiger.tiff",
@@ -72,7 +73,7 @@ KGClimateClass <- function(areaBox = NULL, updatedBy = "Peel", verbose = FALSE){
   if (updatedBy == "Peel") {
 
     # MAP UPDATED BY PEEL
-    kgLegend <- read.table(system.file("extdata/PEEL_Legend.txt",
+    kgLegend <- read.table(system.file(file.path("extdata", "PEEL_Legend.txt"),
                                        package = "hddtools"),
                            header=TRUE)
 
@@ -84,7 +85,7 @@ KGClimateClass <- function(areaBox = NULL, updatedBy = "Peel", verbose = FALSE){
     # create the placeholder file
     tf <- tempfile(tmpdir = td, fileext = ".tar.gz")
 
-    untar(system.file("extdata/PEEL_KG.tar.gz",
+    untar(system.file(file.path("extdata", "PEEL_KG.tar.gz"),
                       package = "hddtools"), exdir = td)
 
     kgRaster <- raster::raster(paste(td, "/PEEL_koppen_ascii.txt", sep = ""))

@@ -133,7 +133,8 @@ catalogueGRDC <- function(areaBox = NULL,
 
   if (mdDescription == TRUE){
 
-    temp <- system.file("extdata/GRDC/GRDC_legend.csv", package = "hddtools")
+    temp <- system.file(file.path("extdata", "GRDC", "GRDC_legend.csv"),
+                        package = "hddtools")
     grdcLegend <- read.csv(temp, header = FALSE)
 
     grdcTable <- cbind(grdcLegend,t(grdcTable))
@@ -208,7 +209,7 @@ tsGRDC <- function(stationID, plotOption = FALSE){
 
     # Retrieve look-up table
     grdcLTMMD <- NULL
-    load(system.file("data/grdcLTMMD.rda", package = "hddtools"))
+    load(system.file(file.path("data", "grdcLTMMD.rda"), package = "hddtools"))
 
     # Retrieve WMO region from catalogue
     wmoRegion <- catalogueTmp$wmo_reg

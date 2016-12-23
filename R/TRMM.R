@@ -134,7 +134,8 @@ TRMM <- function(inputLocation = NULL,
 
     # fileConn <- file(paste(outputfileLocation,"myTRMM.sh",sep=""))
     fileConn <- file("myTRMM.sh")
-    shOut <- readLines(system.file("extdata/trmm.sh", package = "hddtools"), -1)
+    shOut <- readLines(system.file(file.path("extdata", "trmm.sh"),
+                                   package = "hddtools"), -1)
     shOut[4] <- paste("for i in ", product, ".*", sep = "")
     writeLines(shOut, fileConn)
     close(fileConn)
