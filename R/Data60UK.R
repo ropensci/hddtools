@@ -19,7 +19,7 @@
 #'   Data60UK_catalogue_all <- catalogueData60UK()
 #'
 #'   # Filter the catalogue based on a bounding box
-#'   areaBox <- raster::extent(c(-4, -2, +52, +53))
+#'   areaBox <- raster::extent(-4, -2, +52, +53)
 #'   Data60UK_catalogue_bbox <- catalogueData60UK(areaBox)
 #'
 #'   # Filter the catalogue based on an ID

@@ -17,7 +17,7 @@
 #' @examples
 #' \dontrun{
 #'   # Define a bounding box
-#'   areaBox <- raster::extent(c(-3.82, -3.63, 52.41, 52.52))
+#'   areaBox <- raster::extent(-3.82, -3.63, 52.41, 52.52)
 #'   # Get climate classes
 #'   KGClimateClass(areaBox = areaBox)
 #' }

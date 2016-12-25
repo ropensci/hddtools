@@ -15,3 +15,4 @@ vignettes/hddtools_vignette_cache/*
 appveyor.yml
 review.md
 docs
+_pkgdown.yml

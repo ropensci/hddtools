@@ -51,8 +51,23 @@
         <li>
   <a href="../reference/index.html">Reference</a>
 </li>
-<li>
-  <a href="../articles/index.html">Articles</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="http://dx.doi.org/10.21105/joss.00052">JOSS paper</a>
+    </li>
+    <li>
+      <a href="http://adsabs.harvard.edu/abs/2014AGUFM.H13H1209V">Abstract/Poster presented at AGU 2014</a>
+    </li>
+    <li>
+      <a href="../articles/index.html">Vignette</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../news/index.html">News</a>
@@ -82,15 +97,9 @@
     </div>
 
     <div class="contents">
-      <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-      <p class="section-desc"></p>
+      <h2 id="section-get-catalogues" class="hasAnchor"><a href="#section-get-catalogues" class="anchor"></a>Get catalogues</h2>
+      <p class="section-desc"><p>Get information about available monitoring stations from various providers</p></p>
 
-      
-      <p><a href="bboxSpatialPolygon.html">Convert a bounding box to a SpatialPolygons object
-</a></p>
-      <ul>
-        <li><code><a href="bboxSpatialPolygon.html">bboxSpatialPolygon</a></code></li>
-      </ul>
       
       <p><a href="catalogueData60UK.html">Data source: Data60UK catalogue</a></p>
       <ul>
@@ -112,20 +121,13 @@
         <li><code><a href="catalogueSEPA.html">catalogueSEPA</a></code></li>
       </ul>
       
-      <p><a href="Data60UKcatalogue.html">Data set: The Data60UK Catalogue</a></p>
+      <p><a href="hddtools.html">hddtools: Hydrological Data Discovery Tools</a></p>
       <ul>
-        <li><code><a href="Data60UKcatalogue.html">Data60UKcatalogue</a></code></li>
+        <li><code><a href="hddtools.html">hddtools</a></code></li><li><code><a href="hddtools.html">hddtools-package</a></code></li>
       </ul>
-      
-      <p><a href="getContent.html">Extracts links from ftp page</a></p>
-      <ul>
-        <li><code><a href="getContent.html">getContent</a></code></li>
-      </ul>
-      
-      <p><a href="GRDCcatalogue.html">Data set: The GRDC Catalogue</a></p>
-      <ul>
-        <li><code><a href="GRDCcatalogue.html">GRDCcatalogue</a></code></li>
-      </ul>
+          <h2 id="section-get-datasets" class="hasAnchor"><a href="#section-get-datasets" class="anchor"></a>Get datasets</h2>
+      <p class="section-desc"><p>Get data from various providers</p></p>
+
       
       <p><a href="grdcLTMMD.html">Data set: The grdcLTMMD look-up table</a></p>
       <ul>
@@ -137,24 +139,9 @@
         <li><code><a href="HadDAILY.html">HadDAILY</a></code></li>
       </ul>
       
-      <p><a href="hddtools.html">hddtools: Hydrological Data Discovery Tools</a></p>
-      <ul>
-        <li><code><a href="hddtools.html">hddtools</a></code></li><li><code><a href="hddtools.html">hddtools-package</a></code></li>
-      </ul>
-      
       <p><a href="KGClimateClass.html">Function to identify the updated Koppen-Greiger climate zone (on a 0.1 x 0.1 degrees resolution map).</a></p>
       <ul>
         <li><code><a href="KGClimateClass.html">KGClimateClass</a></code></li>
-      </ul>
-      
-      <p><a href="MOPEXcatalogue.html">Data set: The MOPEX Catalogue</a></p>
-      <ul>
-        <li><code><a href="MOPEXcatalogue.html">MOPEXcatalogue</a></code></li>
-      </ul>
-      
-      <p><a href="SEPAcatalogue.html">Data set: The SEPA Catalogue</a></p>
-      <ul>
-        <li><code><a href="SEPAcatalogue.html">SEPAcatalogue</a></code></li>
       </ul>
       
       <p><a href="TRMM.html">Download and convert TRMM data</a></p>
@@ -181,6 +168,43 @@
       <ul>
         <li><code><a href="tsSEPA.html">tsSEPA</a></code></li>
       </ul>
+          <h2 id="section-utility-functions" class="hasAnchor"><a href="#section-utility-functions" class="anchor"></a>Utility functions</h2>
+      <p class="section-desc"><p>Utility functions, mainly used internally</p></p>
+
+      
+      <p><a href="bboxSpatialPolygon.html">Convert a bounding box to a SpatialPolygons object
+</a></p>
+      <ul>
+        <li><code><a href="bboxSpatialPolygon.html">bboxSpatialPolygon</a></code></li>
+      </ul>
+      
+      <p><a href="getContent.html">Extracts links from ftp page</a></p>
+      <ul>
+        <li><code><a href="getContent.html">getContent</a></code></li>
+      </ul>
+          <h2 id="section-cached-catalogues" class="hasAnchor"><a href="#section-cached-catalogues" class="anchor"></a>Cached catalogues</h2>
+      <p class="section-desc"><p>Cached version of the output of the catalogue*() functions</p></p>
+
+      
+      <p><a href="Data60UKcatalogue.html">Data set: The Data60UK Catalogue</a></p>
+      <ul>
+        <li><code><a href="Data60UKcatalogue.html">Data60UKcatalogue</a></code></li>
+      </ul>
+      
+      <p><a href="GRDCcatalogue.html">Data set: The GRDC Catalogue</a></p>
+      <ul>
+        <li><code><a href="GRDCcatalogue.html">GRDCcatalogue</a></code></li>
+      </ul>
+      
+      <p><a href="MOPEXcatalogue.html">Data set: The MOPEX Catalogue</a></p>
+      <ul>
+        <li><code><a href="MOPEXcatalogue.html">MOPEXcatalogue</a></code></li>
+      </ul>
+      
+      <p><a href="SEPAcatalogue.html">Data set: The SEPA Catalogue</a></p>
+      <ul>
+        <li><code><a href="SEPAcatalogue.html">SEPAcatalogue</a></code></li>
+      </ul>
     
     </div>
   </div>
@@ -188,7 +212,10 @@
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#section-get-catalogues">Get catalogues</a></li>
+      <li><a href="#section-get-datasets">Get datasets</a></li>
+      <li><a href="#section-utility-functions">Utility functions</a></li>
+      <li><a href="#section-cached-catalogues">Cached catalogues</a></li>
     </ul>
   </div>
 </div>

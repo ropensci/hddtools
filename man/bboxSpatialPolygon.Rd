@@ -24,7 +24,7 @@ Bounding box is first created (in lat/lon) then projected if specified
 }
 \examples{
 \dontrun{
-  boundingbox <- raster::extent(c(-180, +180, -50, +50))
+  boundingbox <- raster::extent(-180, +180, -50, +50)
   bbSP <- bboxSpatialPolygon(boundingbox = boundingbox)
 }
 

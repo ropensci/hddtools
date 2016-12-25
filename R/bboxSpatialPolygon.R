@@ -13,7 +13,7 @@
 #'
 #' @examples
 #' \dontrun{
-#'   boundingbox <- raster::extent(c(-180, +180, -50, +50))
+#'   boundingbox <- raster::extent(-180, +180, -50, +50)
 #'   bbSP <- bboxSpatialPolygon(boundingbox = boundingbox)
 #' }
 #'
