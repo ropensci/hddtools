@@ -20,9 +20,6 @@ The package facilitate access to various online data sources such as:
 }.
 This package complements R's growing functionality in environmental web technologies by bridging the gap between data providers and data consumers. It is designed to be an initial building block of scientific workflows for linking data and models in a seamless fashion.
 }
-\details{
-Facilitates discovery and handling of hydrological data via programmatic access to catalogues and databases."
-}
 \references{
 Vitolo C, Buytaert W, 2014, HDDTOOLS: an R package serving Hydrological Data
 Discovery Tools, AGU Fall Meeting, 15-19 December 2014, San Francisco, USA.

@@ -1,7 +1,5 @@
 #' hddtools: Hydrological Data Discovery Tools
 #'
-#' Facilitates discovery and handling of hydrological data via programmatic access to catalogues and databases."
-#'
 #' @name hddtools
 #' @docType package
 #'
