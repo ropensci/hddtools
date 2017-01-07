@@ -35,6 +35,8 @@ This typically implies the download of a metadata catalogue, selection of inform
 
 Depending on the data license, functions can provide offline and/or online modes. When redistribution is allowed, for instance, a copy of the dataset is cached within the package and updated twice a year. This is the fastest option and also allows offline use of package's functions. When re-distribution is not allowed, only online mode is provided.
 
+__NOTE__: This package is currently under review for submission to ROpenSci, see review status [here](https://github.com/ropensci/onboarding/issues/73). A short paper was also submitted to the Journal of Open Source Software, see review status [here](https://github.com/openjournals/joss-reviews/issues/56).
+
 ## Dependencies & Installation
 The hddtools package depends on other CRAN packages. Check for missing dependencies and install them using the commands below:
 
