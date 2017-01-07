@@ -15,8 +15,6 @@ This typically implies the download of a metadata catalogue, selection of inform
 
 Depending on the data license, functions can provide offline and/or online modes. When redistribution is allowed, for instance, a copy of the dataset is cached within the package and updated twice a year. This is the fastest option and also allows offline use of package's functions. When re-distribution is not allowed, only online mode is provided.
 
-**NOTE**: This package is currently under review for submission to ROpenSci, see review status [here](https://github.com/ropensci/onboarding/issues/73). A short paper was also submitted to the Journal of Open Source Software, see review status [here](https://github.com/openjournals/joss-reviews/issues/56).
-
 Dependencies & Installation
 ---------------------------
 
@@ -73,6 +71,7 @@ Meta
 -   Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
 -   Please [report any issues or bugs](https://github.com/cvitolo/hddtools/issues).
 -   License: [GPL-3](https://opensource.org/licenses/GPL-3.0)
+-   This package is currently under review for submission to ROpenSci (see review status [here](https://github.com/ropensci/onboarding/issues/73)) and the Journal of Open Source Software (see review status [here](https://github.com/openjournals/joss-reviews/issues/56)).
 -   Get citation information for `hddtools` in R doing `citation(package = "hddtools")`
 
 <br/>
