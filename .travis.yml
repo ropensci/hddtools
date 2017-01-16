@@ -22,7 +22,7 @@ before_install:
   - make
   - sudo make install
   - cd /home/travis/build/ropensci/hddtools
-  - Rscript -e 'update.packages(ask = FALSE)'
+  - Rscript -e 'update.packages(ask = FALSE)' 
 
 r_github_packages:
   - jimhester/covr
