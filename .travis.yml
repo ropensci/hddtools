@@ -22,7 +22,6 @@ before_install:
   - ./configure --prefix=/usr
   - make
   - sudo make install
-  - cd /home/travis/build/cvitolo/hddtools
 
 r_github_packages:
   - jimhester/covr

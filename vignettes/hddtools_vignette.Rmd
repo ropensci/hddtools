@@ -43,7 +43,7 @@ install.packages("hddtools")
 Or the development version from github using [devtools](https://github.com/hadley/devtools):
 
 ```{r}
-devtools::install_github("cvitolo/hddtools")
+devtools::install_github("ropensci/hddtools")
 ```
 
 Load the hddtools package:

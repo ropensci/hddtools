@@ -18,16 +18,16 @@ knitr::opts_chunk$set(
 hddtools: Hydrological Data Discovery Tools
 ===========================================
 
-[![DOI](https://zenodo.org/badge/9118/cvitolo/hddtools.svg)](https://zenodo.org/badge/latestdoi/9118/cvitolo/hddtools)
+[![DOI](https://zenodo.org/badge/9118/ropensci/hddtools.svg)](https://zenodo.org/badge/latestdoi/9118/ropensci/hddtools)
 [![status](http://joss.theoj.org/papers/3287a12e7ce5d7e89938a6b4f56fc225/status.svg)](http://joss.theoj.org/papers/3287a12e7ce5d7e89938a6b4f56fc225)
 
 [![CRAN Status Badge](http://www.r-pkg.org/badges/version/hddtools)](https://cran.r-project.org/package=hddtools)
 [![CRAN Total Downloads](http://cranlogs.r-pkg.org/badges/grand-total/hddtools)](https://cran.r-project.org/package=hddtools)
 [![CRAN Monthly Downloads](http://cranlogs.r-pkg.org/badges/hddtools)](https://cran.r-project.org/package=hddtools)
 
-[![Travis-CI Build Status](https://travis-ci.org/cvitolo/hddtools.svg?branch=master)](https://travis-ci.org/cvitolo/hddtools)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/cvitolo/hddtools?branch=master&svg=true)](https://ci.appveyor.com/project/cvitolo/hddtools)
-[![codecov.io](https://codecov.io/github/cvitolo/hddtools/coverage.svg?branch=master)](https://codecov.io/github/cvitolo/hddtools?branch=master)
+[![Travis-CI Build Status](https://travis-ci.org/ropensci/hddtools.svg?branch=master)](https://travis-ci.org/ropensci/hddtools)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/ropensci/hddtools?branch=master&svg=true)](https://ci.appveyor.com/project/ropensci/hddtools)
+[![codecov.io](https://codecov.io/github/ropensci/hddtools/coverage.svg?branch=master)](https://codecov.io/github/ropensci/hddtools?branch=master)
 
 **hddtools** stands for Hydrological Data Discovery Tools. This R package is an open source project designed to facilitate access to a variety of online open data sources relevant for hydrologists and, in general, environmental scientists and practitioners. 
 
@@ -54,7 +54,7 @@ install.packages("hddtools")
 Or the development version from github using [devtools](https://github.com/hadley/devtools):
 
 ```{r}
-devtools::install_github("cvitolo/hddtools")
+devtools::install_github("ropensci/hddtools")
 ```
 
 Load the hddtools package:
@@ -85,7 +85,7 @@ The package contains functions to interact with the data providers listed below.
 
 * This package and functions herein are part of an experimental open-source project. They are provided as is, without any guarantee.
 * Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
-* Please [report any issues or bugs](https://github.com/cvitolo/hddtools/issues).
+* Please [report any issues or bugs](https://github.com/ropensci/hddtools/issues).
 * License: [GPL-3](https://opensource.org/licenses/GPL-3.0)
 * This package is currently under review for submission to ROpenSci (see review status [here](https://github.com/ropensci/onboarding/issues/73)) and the Journal of Open Source Software (see review status [here](https://github.com/openjournals/joss-reviews/issues/56)).
 * Get citation information for `hddtools` in R doing `citation(package = "hddtools")`
