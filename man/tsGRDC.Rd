@@ -31,10 +31,10 @@ The function returns a list of 3 tables: \describe{
 }
 \item{\strong{mddPerMonth}}{This is a table containing mean daily discharges for each month over the entire period (12 records covering max. n years. Calculated only for months with less then or equal to 10 missing days). It is made of 7 columns which description is as follows:}\itemize{
   \item LQ:    lowest monthly discharge of the given month in the entire period
-  \item year:  associated year of occurrence (only the first occurence is listed)
+  \item year:  associated year of occurrence (only the first occurrence is listed)
   \item MQ:    mean discharge from all monthly discharges of the given month in the entire period
   \item HQ:    highest monthly discharge of the given month in the entire period
-  \item year:  associated year of occurrence (only the first occurence is listed)
+  \item year:  associated year of occurrence (only the first occurrence is listed)
   \item std:   standard deviation of all monthly discharges of the given month in the entire period
   \item n:     number of available daily values used for computation
 }

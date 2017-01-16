@@ -87,7 +87,7 @@ The package contains functions to interact with the data providers listed below.
 * Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
 * Please [report any issues or bugs](https://github.com/ropensci/hddtools/issues).
 * License: [GPL-3](https://opensource.org/licenses/GPL-3.0)
-* This package is currently under review for submission to ROpenSci (see review status [here](https://github.com/ropensci/onboarding/issues/73)) and the Journal of Open Source Software (see review status [here](https://github.com/openjournals/joss-reviews/issues/56)).
+* This package was reviewed by [Erin Le Dell](https://github.com/ledell) and [Michael Sumner](https://github.com/mdsumner) for submission to ROpenSci (see review [here](https://github.com/ropensci/onboarding/issues/73)) and the Journal of Open Source Software (see review status [here](https://github.com/openjournals/joss-reviews/issues/56)).
 * Get citation information for `hddtools` in R doing `citation(package = "hddtools")`
 
 <br/>

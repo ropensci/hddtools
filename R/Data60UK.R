@@ -7,7 +7,7 @@
 #' @param areaBox bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)
 #' @param columnName name of the column to filter
 #' @param columnValue value to look for in the column named columnName
-#' @param useCachedData logical, set to TRUE to use cached data, set to FALSE to retrive data from online source. This is TRUE by default.
+#' @param useCachedData logical, set to TRUE to use cached data, set to FALSE to retrieve data from online source. This is TRUE by default.
 #'
 #' @return This function returns a data frame made of 61 rows (gauging stations) and 6 columns: "id" (hydrometric reference number), "River", "Location", "gridReference", "Latitude", "Longitude".
 #'

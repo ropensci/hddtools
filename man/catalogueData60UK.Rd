@@ -14,7 +14,7 @@ catalogueData60UK(areaBox = NULL, columnName = NULL, columnValue = NULL,
 
 \item{columnValue}{value to look for in the column named columnName}
 
-\item{useCachedData}{logical, set to TRUE to use cached data, set to FALSE to retrive data from online source. This is TRUE by default.}
+\item{useCachedData}{logical, set to TRUE to use cached data, set to FALSE to retrieve data from online source. This is TRUE by default.}
 }
 \value{
 This function returns a data frame made of 61 rows (gauging stations) and 6 columns: "id" (hydrometric reference number), "River", "Location", "gridReference", "Latitude", "Longitude".
