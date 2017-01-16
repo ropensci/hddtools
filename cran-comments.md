@@ -1,4 +1,4 @@
-This is a resubmission after adapting the package to make it suitable for inclusion in the ropensci framework.
+This is a resubmission after the rOpenSci review.
 
 ---------------------------------
 
@@ -7,8 +7,7 @@ This is a resubmission after adapting the package to make it suitable for inclus
 In this new release, we added the following:
 
 * a vignette
-* paper for submission to JOSS
-* documented the submission to the ropensci project
+* Fixed bug with the TRMM function (for Windows users)
 
 ## Test environment
 * Ubuntu 14.04, R 3.3.1

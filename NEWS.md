@@ -2,7 +2,7 @@
 
 * Added a vignette
 * Added paper for submission to JOSS
-* Added a document to review the package under the ropensci project
+* Fixed bug with the TRMM function (for Windows users)
 
 # hddtools 0.3
 
