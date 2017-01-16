@@ -8,6 +8,7 @@ In this new release, we added the following:
 
 * a vignette
 * Fixed bug with the TRMM function (for Windows users)
+* Updated all the links to show the new repository (rOpenSci)
 
 ## Test environment
 * Ubuntu 14.04, R 3.3.1

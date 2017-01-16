@@ -1,3 +1,7 @@
+# hddtools 0.5
+
+Updated all the links to show the new repository (rOpenSci)
+
 # hddtools 0.4
 
 * Added a vignette
