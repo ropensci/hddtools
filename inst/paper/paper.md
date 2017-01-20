@@ -7,9 +7,12 @@ tags:
 - hydrology
 - R
 authors:
-- affiliation: European Centre for Medium-range Weather Forecasts
+- affiliation: 1
   name: Claudia Vitolo
   orcid: 0000-0002-4252-1176
+affiliations:
+- name: European Centre for Medium-range Weather Forecasts
+  index: 1
 ---
 
 # Summary
