@@ -1,19 +1,20 @@
 ---
 title: 'hddtools: Hydrological Data Discovery Tools'
-bibliography: paper.bib
-date: "27 December 2016"
-tags:
-- open data
-- hydrology
-- R
 authors:
 - affiliation: 1
   name: Claudia Vitolo
   orcid: 0000-0002-4252-1176
-affiliations:
-- name: European Centre for Medium-range Weather Forecasts
-  index: 1
+date: "27 December 2016"
+output: pdf_document
+bibliography: paper.bib
 csl: hydrology-and-earth-system-sciences.csl
+tags:
+- open data
+- hydrology
+- R
+affiliations:
+- index: 1
+  name: European Centre for Medium-range Weather Forecasts
 ---
 
 # Summary

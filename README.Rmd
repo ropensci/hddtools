@@ -92,4 +92,4 @@ The package contains functions to interact with the data providers listed below.
 
 <br/>
 
-[![ropensci_footer](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
+[![ropensci_footer](https://ropensci.org/public_images/github_footer.png)](https://ropensci.org)
