@@ -147,7 +147,7 @@ tsMOPEX <- function(stationID, plotOption = FALSE, timeExtent = NULL){
 
   if(RCurl::url.exists(theurl)) {
 
-    message("Retrieving data from live web data source.")
+    message("Retrieving data from data provider.")
 
     myTable <- read.fwf(
       file = url(theurl),
@@ -163,7 +163,7 @@ tsMOPEX <- function(stationID, plotOption = FALSE, timeExtent = NULL){
     names(x) <- c("date", "P", "E", "Q", "Tmax", "Tmin")
 
   }else{
-    message(paste("The connection with the live web data source failed.",
+    message(paste("The connection with the data provider failed.",
                   "No cached results available."))
   }
 

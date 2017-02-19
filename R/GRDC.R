@@ -50,7 +50,7 @@ catalogueGRDC <- function(areaBox = NULL,
 
   }else{
 
-    message("Retrieving data from live web data source.")
+    message("Retrieving data from data provider.")
 
     # Retrieve the catalogue
     temp <- tempfile()

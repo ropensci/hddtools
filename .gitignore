@@ -17,3 +17,7 @@ hddtools.Rproj
 README_cache/
 vignettes/hddtools_vignette_cache/
 review.md
+
+inst/doc/
+inst/tmp/
+inst/paper/paper.pdf

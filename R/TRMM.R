@@ -4,13 +4,12 @@
 #'
 #' @description The TRMM dataset provide global historical rainfall estimation in a gridded format.
 #'
-#' @param inputLocation location where data is stored. By default it points to the TRMM ftp server (\url{ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/}) but it can also be a local directory. If you are using a local directory, this function expects to find inside 'inputLocation' a folder with the name of product and version (e.g. "i3B43_V7") and inside this a folder for each year( e.g. "2012").
 #' @param product this is the code that identifies a product, default is "3B43"
 #' @param version this is the version number, default is 7
 #' @param type this is the type of information needed, default is "precipitation.accum". Other types could be "gaugeRelativeWeighting.bin" and "relativeError.bin"
 #' @param twindow is a vector of dates and times for which the data should be retrieve
 #' @param areaBox OPTIONAL bounding box, a list made of 4 elements: minimum longitude (xmin), minimum latitude (ymin), maximum longitude (xmax), maximum latitude (ymax)
-#' @param outputfileLocation file path where to save the GeoTiff
+#' @param method method to download, see \code{?download.file} for more info.
 #'
 #' @return Data is loaded as multilayer GeoTIFF and loaded as a RasterBrick.
 #'
@@ -24,106 +23,91 @@
 #' \dontrun{
 #'   # Define a bounding box
 #'   areaBox <- raster::extent(-10, 5, 48, 62)
-#'   twindow <- seq(as.Date("2012-01-01"), as.Date("2012-01-31"), by = "months")
 #'
+#'   # Get 3-hourly data
+#'   twindow <- seq(from = as.POSIXct("2012-1-1 0","%Y-%m-%d %H", tz="UTC"),
+#'                  to = as.POSIXct("2012-1-1 23", "%Y-%m-%d %H", tz="UTC"),
+#'                  by = 3*60*60)
+#'   TRMMfile <- TRMM(product = "3B42", version = 7,
+#'                    type = "precipitation.bin",
+#'                    twindow = twindow, areaBox = areaBox)
+#'   raster::plot(TRMMfile)
+#'
+#'   # Get monthly data
+#'   twindow <- seq(from=as.Date("2012-01-01"),
+#'                  to=as.Date("2012-02-28"),
+#'                  by = "months")
 #'   TRMMfile <- TRMM(product = "3B43", version = 7,
 #'                    type = "precipitation.accum",
 #'                    twindow = twindow, areaBox = areaBox)
-#'
 #'   raster::plot(TRMMfile)
 #' }
 #'
 
-TRMM <- function(inputLocation = NULL,
-                 product = "3B43",
+TRMM <- function(product = "3B43",
                  version = 7,
                  type = "precipitation.accum",
                  twindow = NULL,
                  areaBox = NULL,
-                 outputfileLocation = NULL){
+                 method = "auto"){
 
-  if (is.null(inputLocation)) {
-    inputLocation <- "ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/"
-  }
-
-  # Check output file location
-  originalwd <- getwd()
-  if (is.null(outputfileLocation)) outputfileLocation <- getwd()
-  setwd(outputfileLocation)
-
-  # Check bounding box extent is within original raster extent
-  if (is.null(areaBox)){
-    # Use TRMM max extent
-    areaBox <- raster::extent(c(-180, +180, -50, +50))
-  }
-
-  if (areaBox@xmin < -180 | areaBox@xmin > 180) {
-    areaBox@xmin <- -180
-    message(paste("xmin of areaBox is out of the maximum extent",
-                  "[-180,180], new xmin of areaBox is modified as follows:",
-                  "xmin =", areaBox@xmin))
-  }
-  if (areaBox@xmax < -180 | areaBox@xmax > 180) {
-    areaBox@xmax <- 180
-    message(paste("xmax of areaBox is out of the maximum extent",
-                  "[-180,180], new xmax of areaBox is modified as follows:",
-                  "xmax =", areaBox@xmax))
-  }
-  if (areaBox@ymin < -50 | areaBox@ymin > 50) {
-    areaBox@ymin <- -50
-    message(paste("ymin of areaBox is out of the maximum extent [-50,50],",
-                  "new ymin of areaBox is modified as follows:",
-                  "ymin =", areaBox@ymin))
-  }
-  if (areaBox@ymax < -50 | areaBox@ymax > 50) {
-    areaBox@ymax <- 50
-    message(paste("ymax of areaBox is out of the maximum extent [-50,50],",
-                  "new ymax of areaBox is modified as follows:",
-                  "ymax =", areaBox@ymax))
-  }
-  bbSP <- bboxSpatialPolygon(areaBox)
-
-  # Check time extent
-  if (is.null(twindow)) stop("Please enter valid twindow")
-  years <- unique(format(twindow, "%Y"))
-  months <- format(twindow, "%m")
-
-  if (any(is.null(years), is.null(months))){
-
-    message(paste("This function cannot be executed because your twindow",
-                  "is not in the correct format.",
-                  "Please enter a suitable twindow, then try again."))
-
+  # twindow contains dates and it can be used to identify the files to download
+  rootURL <- "ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/"
+  if (is.null(twindow)){
+    stop("Please enter valid twindow")
   }else{
-
-    selectedfilePaths <- c()
-
-    for (myYear in years){
-
-      myURL <- paste(inputLocation,
-                     product, "_V", version, "/", myYear, "/", sep = "")
-
-      filenames <- RCurl::getURL(myURL,
-                                 ftp.use.epsv = FALSE,
-                                 ftplistonly=TRUE,
-                                 crlf=TRUE)
-
-      # the following line allows to download only files with a certain pattern,
-      # e.g. only certain months.
-      # "*precipitation.accum" means monthly accumulated rainfall here.
-      for (myMonth in months){
-        filePaths <- paste(myURL, product, ".", substr(myYear, 3, 4),
-                           myMonth, "01", ".", version, ".", type, sep = "")
-
-        selectedfilePaths <- c(selectedfilePaths, filePaths)
+    filesURLs <- c()
+    for (i in seq_along(twindow)){
+      mydate <- twindow[i]
+      if (product == "3B42"){
+        myyear <- unique(format(mydate, "%Y"))
+        mymonth <- format(mydate, "%m")
+        myday <- format(mydate, "%d")
+        myhour <- format(mydate, "%H")
+        filePaths <- paste0(rootURL, product, "_V", version, "/",
+                            myyear, mymonth, "/",
+                            product, ".",
+                            substr(x = myyear, start = 3, stop = 4),
+                            mymonth, myday, ".", myhour, "z", ".", version, ".",
+                            type)
       }
-
+      if (product == "3B43"){
+        myyear <- unique(format(mydate, "%Y"))
+        mymonth <- format(mydate, "%m")
+        filePaths <- paste0(rootURL, product, "_V", version, "/", myyear, "/",
+                            product, ".",
+                            substr(x = myyear, start = 3, stop = 4),
+                            mymonth, "01.", version, ".", type)
+      }
+      filesURLs <- c(filesURLs, filePaths)
     }
+  }
 
-    # download files
-    # Thanks to Fabien Wagner this also works for windows' users!
-    mapply(download.file, selectedfilePaths,
-           basename(selectedfilePaths), method = "wget")
+  # create a temporary directory
+  td = tempdir()
+  originalwd <- getwd()
+  setwd(td)
+
+  failedFiles <- c()
+  for (j in seq_along(filesURLs)){
+
+    x <- try(expr = download.file(url = filesURLs[j],
+                                  destfile = file.path(td,
+                                                       basename(filesURLs[j])),
+                                  method = method, mode = "wb"),
+             silent = TRUE)
+
+    if (class(x) == "try-error") {
+      failedFiles <- c(failedFiles, filesURLs[j])
+    }
+  }
+
+  if (length(failedFiles) > 0) {
+    message("The following files are currently not available for download: \n")
+    print(failedFiles)
+  }
+
+  if (length(failedFiles) < length(filesURLs)){
 
     # Now I create a virtual file as the downloaded TRMM data come as binaries.
     # The VRT-file contains all the downloaded binary files with the appropriate
@@ -131,8 +115,6 @@ TRMM <- function(inputLocation = NULL,
     # To automate the process, there is a template script in inst/trmm.sh that
     # generates the VRT-file (TRMM.vrt) for all 2012 data.
     # Change "3B43.12" according to your twindow.
-
-    # fileConn <- file(paste(outputfileLocation,"myTRMM.sh",sep=""))
     fileConn <- file("myTRMM.sh")
     shOut <- readLines(system.file(file.path("extdata", "trmm.sh"),
                                    package = "hddtools"), -1)
@@ -147,15 +129,25 @@ TRMM <- function(inputLocation = NULL,
     # be opened in any GIS software.
 
     if (.Platform$OS.type != "unix"){
-      message(paste("Beware this function was tested on a unix machine.",
-                    "If you are not using a unix machine your results could be",
-                    "wrong. Please report any problem to cvitolodev@gmail.com,",
-                    "thanks!"))
+      message(paste0("Beware this function was tested on a unix machine. ",
+                     "Please report any issues here: \n",
+                     "https://github.com/ropensci/hddtools/issues"))
     }
     system(paste("sh","myTRMM.sh"))
 
     b <- raster::brick("TRMM.vrt")
     trmm <- raster::flip(b, direction = "y")
+    # raster::plot(trmm)
+
+    # Check bounding box extent is within original raster extent,
+    # if not return intersect of the two extents
+    if (is.null(areaBox)){
+      # Use TRMM max extent
+      areaBox <- raster::extent(-180, +180, -50, +50)
+    }
+
+    areaBox <- raster::intersect(areaBox, raster::extent(-180, +180, -50, +50))
+    bbSP <- bboxSpatialPolygon(areaBox)
 
     # Crop TRMM raster based on areaBox, if necessary
     if ( raster::extent(bbSP) == raster::extent(trmm) ){
@@ -165,22 +157,15 @@ TRMM <- function(inputLocation = NULL,
       trmm <- raster::crop(trmm, bbSP)
     }
 
-    # raster::writeRaster(trmm,
-    #                     filename = "trmm_acc.tif",
-    #                     format = "GTiff",
-    #                     overwrite = TRUE)
-
     message("Removing temporary files")
     file.remove(c("TRMM.vrt", "myTRMM.sh"))
 
-    # message(paste("Done. The raster-brick was saved in",
-    #               paste(outputfileLocation, "/trmm_acc.tif", sep = "")))
+    return(trmm)
 
+  }else{
+    message("There are no files available, try a different temporal window.")
   }
 
   on.exit(expr = {setwd(originalwd)})
-
-  # return(paste(outputfileLocation, "/trmm_acc.tif", sep = ""))
-  return(trmm)
 
 }

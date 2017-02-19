@@ -2,7 +2,7 @@
 #'
 #' @author Claudia Vitolo
 #'
-#' @description This function interfaces the Data60UK database catalogue (available from http://www.nwl.ac.uk/ih/nrfa/pub/index.html) containing 61 datasets. Dataset catalogue is available from \url{http://www.nwl.ac.uk/ih/nrfa/pub/data.html}.
+#' @description This function interfaces the Data60UK database catalogue (available from http://nrfaapps.ceh.ac.uk/datauk60/data.html) containing 61 datasets. Dataset catalogue is available from \url{http://nrfaapps.ceh.ac.uk/datauk60/data.html}.
 #'
 #' @param areaBox bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)
 #' @param columnName name of the column to filter
@@ -44,7 +44,7 @@ catalogueData60UK <- function(areaBox = NULL, columnName = NULL,
 
   }else{
 
-    message("Retrieving data from live web data source.")
+    message("Retrieving data from data provider.")
 
     tables <- XML::readHTMLTable(theurl)
     n.rows <- unlist(lapply(tables, function(t) dim(t)[1]))
@@ -134,7 +134,7 @@ tsData60UK <- function(stationID, plotOption = FALSE, twindow = NULL){
 
   if(RCurl::url.exists(theurl)) {
 
-    message("Retrieving data from live web data source.")
+    message("Retrieving data from data provider.")
     temp <- utils::read.table(theurl)
     names(temp) <- c("P", "Q", "DayNumber", "Year", "nStations")
 
@@ -173,7 +173,7 @@ tsData60UK <- function(stationID, plotOption = FALSE, twindow = NULL){
 
   }else{
 
-    message("The connection with the live web data source failed.")
+    message("The connection with the data provider failed.")
 
   }
 

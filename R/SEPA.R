@@ -54,7 +54,7 @@ catalogueSEPA <- function(columnName = NULL, columnValue = NULL,
 
     }else{
 
-      message("Retrieving data from live web data source.")
+      message("Retrieving data from data provider.")
 
       tables <- XML::readHTMLTable(theurl)
       n.rows <- unlist(lapply(tables, function(t) dim(t)[1]))
@@ -143,7 +143,7 @@ tsSEPA <- function(stationID, plotOption = FALSE, timeExtent = NULL){
                     id, "-SG.csv", sep = "")
 
     if(RCurl::url.exists(theurl)) {
-      message("Retrieving data from live web data source.")
+      message("Retrieving data from data provider.")
       sepaTS <- read.csv(theurl, skip = 6)
 
       # Coerse first column into a date
@@ -171,7 +171,7 @@ tsSEPA <- function(stationID, plotOption = FALSE, timeExtent = NULL){
 
     }else{
       message(paste("For station id", id,
-                    "the connection with the live web data source failed.",
+                    "the connection with the data provider failed.",
                     "No cached results available."))
     }
 

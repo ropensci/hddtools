@@ -16,3 +16,5 @@ appveyor.yml
 review.md
 docs
 _pkgdown.yml
+figure$
+cache$

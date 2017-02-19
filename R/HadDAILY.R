@@ -6,8 +6,6 @@
 #'
 #' @return list of 11 time series (1 per region/subregion)
 #'
-#' @export
-#'
 #' @examples
 #' \dontrun{
 #'   # Retrieve the full dataset (list of 11 time series)

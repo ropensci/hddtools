@@ -20,7 +20,7 @@ catalogueData60UK(areaBox = NULL, columnName = NULL, columnValue = NULL,
 This function returns a data frame made of 61 rows (gauging stations) and 6 columns: "id" (hydrometric reference number), "River", "Location", "gridReference", "Latitude", "Longitude".
 }
 \description{
-This function interfaces the Data60UK database catalogue (available from http://www.nwl.ac.uk/ih/nrfa/pub/index.html) containing 61 datasets. Dataset catalogue is available from \url{http://www.nwl.ac.uk/ih/nrfa/pub/data.html}.
+This function interfaces the Data60UK database catalogue (available from http://nrfaapps.ceh.ac.uk/datauk60/data.html) containing 61 datasets. Dataset catalogue is available from \url{http://nrfaapps.ceh.ac.uk/datauk60/data.html}.
 }
 \examples{
 \dontrun{

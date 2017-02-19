@@ -1,6 +1,14 @@
+# hddtools 0.6
+
+* TRMM function: set method for download.file to "auto" and added to arguments
+* TRMM function: downloaded files are in temporary folder
+* TRMM function: removed inputfileLocation
+* TRMM function: added support for 3B42
+* HadDAILY function removed as the service is no longer available
+
 # hddtools 0.5
 
-Updated all the links to show the new repository (rOpenSci)
+* Updated all the links to show the new repository (rOpenSci)
 
 # hddtools 0.4
 

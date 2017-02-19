@@ -4,13 +4,10 @@
 \alias{TRMM}
 \title{Download and convert TRMM data}
 \usage{
-TRMM(inputLocation = NULL, product = "3B43", version = 7,
-  type = "precipitation.accum", twindow = NULL, areaBox = NULL,
-  outputfileLocation = NULL)
+TRMM(product = "3B43", version = 7, type = "precipitation.accum",
+  twindow = NULL, areaBox = NULL, method = "auto")
 }
 \arguments{
-\item{inputLocation}{location where data is stored. By default it points to the TRMM ftp server (\url{ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/}) but it can also be a local directory. If you are using a local directory, this function expects to find inside 'inputLocation' a folder with the name of product and version (e.g. "i3B43_V7") and inside this a folder for each year( e.g. "2012").}
-
 \item{product}{this is the code that identifies a product, default is "3B43"}
 
 \item{version}{this is the version number, default is 7}
@@ -21,7 +18,7 @@ TRMM(inputLocation = NULL, product = "3B43", version = 7,
 
 \item{areaBox}{OPTIONAL bounding box, a list made of 4 elements: minimum longitude (xmin), minimum latitude (ymin), maximum longitude (xmax), maximum latitude (ymax)}
 
-\item{outputfileLocation}{file path where to save the GeoTiff}
+\item{method}{method to download, see \code{?download.file} for more info.}
 }
 \value{
 Data is loaded as multilayer GeoTIFF and loaded as a RasterBrick.
@@ -38,12 +35,23 @@ and on the TRMM FAQ: \url{http://disc.sci.gsfc.nasa.gov/additional/faq/precipita
 \dontrun{
   # Define a bounding box
   areaBox <- raster::extent(-10, 5, 48, 62)
-  twindow <- seq(as.Date("2012-01-01"), as.Date("2012-01-31"), by = "months")
 
+  # Get 3-hourly data
+  twindow <- seq(from = as.POSIXct("2012-1-1 0","\%Y-\%m-\%d \%H", tz="UTC"),
+                 to = as.POSIXct("2012-1-1 23", "\%Y-\%m-\%d \%H", tz="UTC"),
+                 by = 3*60*60)
+  TRMMfile <- TRMM(product = "3B42", version = 7,
+                   type = "precipitation.bin",
+                   twindow = twindow, areaBox = areaBox)
+  raster::plot(TRMMfile)
+
+  # Get monthly data
+  twindow <- seq(from=as.Date("2012-01-01"),
+                 to=as.Date("2012-02-28"),
+                 by = "months")
   TRMMfile <- TRMM(product = "3B43", version = 7,
                    type = "precipitation.accum",
                    twindow = twindow, areaBox = areaBox)
-
   raster::plot(TRMMfile)
 }
 
