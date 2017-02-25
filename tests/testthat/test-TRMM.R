@@ -25,6 +25,8 @@ test_that("Test TRMM function using dates in the past", {
 
 test_that("Test TRMM function using monthly dates in the future", {
 
+  skip_on_cran()
+
   # Define a bounding box
   areaBox <- raster::extent(-4, -3.75, 48, 50)
   twindow <- seq(Sys.Date(), Sys.Date() + 32, by = "months")
