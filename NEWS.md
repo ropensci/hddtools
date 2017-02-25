@@ -5,6 +5,7 @@
 * TRMM function: removed inputfileLocation
 * TRMM function: added support for 3B42
 * HadDAILY function removed as the service is no longer available
+* The output of catalogueGRDC() is now a tibble table 
 
 # hddtools 0.5
 

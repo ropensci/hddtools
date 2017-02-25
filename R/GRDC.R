@@ -144,7 +144,7 @@ catalogueGRDC <- function(areaBox = NULL,
 
   }
 
-  return(grdcTable)
+  return(tibble::as_tibble(grdcTable))
 
 }
 

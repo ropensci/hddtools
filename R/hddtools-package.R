@@ -35,6 +35,7 @@
 #' @importFrom stringr str_pad
 #' @importFrom gdata read.xls
 #' @importFrom utils read.table
+#' @importFrom tibble as_tibble
 #'
 NULL
 
