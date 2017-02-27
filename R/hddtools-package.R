@@ -12,9 +12,7 @@
 #'  \item{\strong{TRMM} (\url{http://trmm.gsfc.nasa.gov/}): The NASA's Tropical Rainfall Measuring Mission records global historical rainfall estimation in a gridded format since 1998 with a daily temporal resolution and a spatial resolution of 0.25 degrees.}
 #'  \item{\strong{Data60UK} (\url{http://tdwg.catchment.org/datasets.html}): The Data60UK initiative collated datasets of areal precipitation and streamflow discharge across 61 gauging sites in England and Wales (UK).}
 #'  \item{\strong{MOPEX} (\url{http://tdwg.catchment.org/datasets.html}): This dataset contains historical hydrometeorological data and river basin characteristics for hundreds of river basins in the US.}
-#'  \item{\strong{SEPA} (\url{http://apps.sepa.org.uk/waterlevels/}): The Scottish Environment Protection Agency (SEPA) provides river level data for hundreds of gauging stations in the UK.}
-#'  \item{\strong{HadUKP} (\url{http://www.metoffice.gov.uk/hadobs/hadukp/}): The Met Office Hadley Centre Observation Data Centre provides daily precipitation time series averaged over UK regions and subregions.}
-#' }.
+#'  \item{\strong{SEPA} (\url{http://apps.sepa.org.uk/waterlevels/}): The Scottish Environment Protection Agency (SEPA) provides river level data for hundreds of gauging stations in the UK.}}
 #' This package complements R's growing functionality in environmental web technologies by bridging the gap between data providers and data consumers. It is designed to be an initial building block of scientific workflows for linking data and models in a seamless fashion.
 #'
 #' @references
