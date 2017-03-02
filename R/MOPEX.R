@@ -177,6 +177,7 @@ tsMOPEX <- function(stationID, plotOption = FALSE, timeExtent = NULL){
   #      6: daily minimum air temperature (Celsius)
 
   myTS <- zoo::zoo(x[,2:6], order.by = as.Date(x$date))
+  myTS$Q[myTS$Q == -99] <- NA
 
   if (!is.null(timeExtent)){
 

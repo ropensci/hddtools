@@ -1,6 +1,6 @@
 ---
 author: "Claudia Vitolo"
-date: "2017-02-19"
+date: "2017-03-02"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteEngine{knitr::knitr}
@@ -147,7 +147,7 @@ leaflet(data = GRDC_catalogue_bbox_stats) %>%
   addMarkers(~long, ~lat, popup = ~station)
 ```
 
-![](../assets/figures/leaflet.png)
+![](leaflet.png)
 
 Lastly, given a station ID number (this is stored in the column grdc_no of the catalogue) we can check whether monthly data is available and eventually plot it.
 
@@ -157,7 +157,7 @@ WolfeToneBridge <- tsGRDC(stationID = catalogueGRDC()$grdc_no[7126],
                           plotOption = TRUE)
 ```
 
-![plot of chunk unnamed-chunk-14](figure/unnamed-chunk-14-1.png)
+![](tsGRDC.png)
 
 ### NASA's Tropical Rainfall Measuring Mission (TRMM, only available for github version)
 The Tropical Rainfall Measuring Mission (TRMM) is a joint mission between NASA and the Japan Aerospace Exploration Agency (JAXA) that uses a research satellite to measure precipitation within the tropics in order to improve our understanding of climate and its variability.
@@ -181,7 +181,7 @@ library(raster)
 plot(TRMMfile)
 ```
 
-![](../assets/figures/TRMM.png)
+![](TRMM.png)
 
 ### Top-Down modelling Working Group (Data60UK and MOPEX)
 The Top-Down modelling Working Group (TDWG) for the Prediction in Ungauged Basins (PUB) Decade (2003-2012) is an initiative of the International Association of Hydrological Sciences (IAHS) which collected datasets for hydrological modelling free-of-charge, available [here](http://tdwg.catchment.org/datasets.html). This package provides a common interface to retrieve, browse and filter information.
@@ -210,7 +210,7 @@ leaflet(data = Data60UK_catalogue_bbox) %>%
   addMarkers(~Longitude, ~Latitude, popup = ~Location)
 ```
 
-![](../assets/figures/leaflet2.png)
+![](leaflet2.png)
 
 
 ```r
@@ -220,11 +220,6 @@ stationID <- catalogueData60UK()$stationID[1]
 # Extract only the time series
 MorwickTS <- tsData60UK(stationID, plotOption = FALSE)
 plot(MorwickTS)
-```
-
-![plot of chunk unnamed-chunk-18](figure/unnamed-chunk-18-1.png)
-
-```r
 
 # Extract time series for a specified temporal window
 twindow <- seq(as.Date("1988-01-01"), as.Date("1989-12-31"), by = "days")
@@ -233,7 +228,7 @@ MorwickTSplot <- tsData60UK(stationID = stationID,
                             twindow = twindow)
 ```
 
-![plot of chunk unnamed-chunk-18](figure/unnamed-chunk-18-2.png)
+![](morwick.png)
 
 #### MOPEX
 Dataset containing historical hydrometeorological data and river basin characteristics for hundreds of river basins from a range of climates in the US. 
@@ -247,7 +242,7 @@ BroadRiver <- tsMOPEX(stationID = MOPEX_catalogue_all$stationID[1],
                       plotOption = TRUE)
 ```
 
-![plot of chunk unnamed-chunk-19](figure/unnamed-chunk-19-1.png)
+![](mopex.png)
 
 ### SEPA river level data
 The Scottish Environment Protection Agency (SEPA) manages river level data for hundreds of gauging stations in the UK. The catalogue of stations was derived by an unofficial list (available here: http://pennine.ddns.me.uk/riverlevels/ConciseList.html). 
@@ -266,6 +261,8 @@ Kilphedir <- tsSEPA(stationID = catalogueSEPA()$stationId[1],
                     plotOption = TRUE)
 ```
 
+![](kilphedir.png)
+
 Plese note that this data is updated every 15 minutes and the code will always generate different plots. 
 
 ```r
@@ -276,5 +273,4 @@ plot(y[[1]], ylim = c(0, max(y[[1]], y[[2]], y[[3]])),
 lines(y[[2]], col = "red")
 lines(y[[3]], col = "blue")
 ```
-
-![plot of chunk unnamed-chunk-22](figure/unnamed-chunk-22-1.png)
+![](sepa.png)
