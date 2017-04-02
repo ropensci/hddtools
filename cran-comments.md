@@ -1,14 +1,14 @@
-This is a resubmission after the rOpenSci review.
+This is a new release (hddtools v0.7).
 
 ---------------------------------
 
 ## Release Summary
 
-In this new release, we added the following:
+In this new release, we removed the follwoing function because the ftp at NASA containing the data has been migrated:
 
-* a vignette
-* Fixed bug with the TRMM function (for Windows users)
-* Updated all the links to show the new repository (rOpenSci)
+* TRMM()
+
+A new function is under development and will be avalable at the next release (v0.8).
 
 ## Test environment
 * Ubuntu 14.04, R 3.3.1

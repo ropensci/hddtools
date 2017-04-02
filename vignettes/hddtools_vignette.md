@@ -1,6 +1,6 @@
 ---
 author: "Claudia Vitolo"
-date: "2017-03-02"
+date: "2017-04-02"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteEngine{knitr::knitr}
@@ -159,7 +159,10 @@ WolfeToneBridge <- tsGRDC(stationID = catalogueGRDC()$grdc_no[7126],
 
 ![](tsGRDC.png)
 
-### NASA's Tropical Rainfall Measuring Mission (TRMM, only available for github version)
+### NASA's Tropical Rainfall Measuring Mission
+
+__IMPORTANT NOTE: The TRMM function has been temporarily removed from hddtools v0.7 as the ftp at NASA containing the data has been migrated. A new function is under development and will be avalable at the next release (v0.8).__
+
 The Tropical Rainfall Measuring Mission (TRMM) is a joint mission between NASA and the Japan Aerospace Exploration Agency (JAXA) that uses a research satellite to measure precipitation within the tropics in order to improve our understanding of climate and its variability.
 
 The TRMM satellite records global historical rainfall estimation in a gridded format since 1998 with a daily temporal resolution and a spatial resolution of 0.25 degrees. This information is openly available for educational purposes and downloadable from an FTP server.

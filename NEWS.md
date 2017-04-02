@@ -1,3 +1,7 @@
+# hddtools 0.7
+
+* TRMM function: this function has been temporarily removed from hddtools v0.7 as the ftp at NASA containing the data has been migrated. A new function is under development and will be avalable at the next release (v0.8).
+
 # hddtools 0.6
 
 * TRMM function: set method for download.file to "auto" and added to arguments
