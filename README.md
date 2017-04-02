@@ -62,8 +62,6 @@ The package contains functions to interact with the data providers listed below.
 
 -   [SEPA](http://apps.sepa.org.uk/waterlevels/): The Scottish Environment Protection Agency (SEPA) provides river level data for hundreds of gauging stations in the UK.
 
--   [HadUKP](http://www.metoffice.gov.uk/hadobs/hadukp/): The Met Office Hadley Centre Observation Data Centre provides daily precipitation time series averaged over UK regions and subregions.
-
 Meta
 ----
 
