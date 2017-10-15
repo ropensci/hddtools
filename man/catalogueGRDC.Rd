@@ -5,7 +5,7 @@
 \title{Data source: Global Runoff Data Centre catalogue}
 \usage{
 catalogueGRDC(areaBox = NULL, columnName = NULL, columnValue = NULL,
-  mdDescription = FALSE, useCachedData = TRUE)
+  useCachedData = TRUE)
 }
 \arguments{
 \item{areaBox}{bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)}
@@ -14,12 +14,38 @@ catalogueGRDC(areaBox = NULL, columnName = NULL, columnValue = NULL,
 
 \item{columnValue}{value to look for in the column named columnName}
 
-\item{mdDescription}{boolean value. Default is FALSE (no description is printed)}
-
 \item{useCachedData}{logical, set to TRUE to use cached data, set to FALSE to retrive data from online source. This is TRUE by default.}
 }
 \value{
-This function returns a data frame made of 8966 rows (gauging stations, as per October 2016) and 44 columns containing metadata.
+This function returns a data frame made of 9481 rows (gauging stations, as per October 2017) and 26 columns:
+\itemize{
+  \item{\code{grdc_no}}{: GRDC station number}
+  \item{\code{wmo_reg}}{: WMO region}
+  \item{\code{sub_reg}}{: WMO subregion}
+  \item{\code{nat_id}}{: national station ID}
+  \item{\code{river}}{: river name}
+  \item{\code{station}}{: station name}
+  \item{\code{country_code}}{: country code (ISO 3166)}
+  \item{\code{lat}}{: latitude, decimal degree}
+  \item{\code{long}}{: longitude, decimal degree}
+  \item{\code{area}}{: catchment size, km2}
+  \item{\code{altitude}}{: height of gauge zero, m above sea level}
+  \item{\code{ds_stat_no}}{: GRDC station number of next downstream GRDC station}
+  \item{\code{d_start}}{: daily data available from year}
+  \item{\code{d_end}}{: daily data available until year}
+  \item{\code{d_yrs}}{: length of time series, daily data}
+  \item{\code{d_miss}}{: percentage of missing values (daily data)}
+  \item{\code{m_start}}{: monthly data available from}
+  \item{\code{m_end}}{: monthly data available until}
+  \item{\code{m_yrs}}{: length of time series, monthly data}
+  \item{\code{m_miss}}{: percentage of missing values (monthly data)}
+  \item{\code{t_start}}{: earliest data available}
+  \item{\code{t_end}}{: latest data available}
+  \item{\code{t_yrs}}{: maximum length of time series, daily and monthly data}
+  \item{\code{lta_discharge}}{: mean annual streamflow, m3/s}
+  \item{\code{r_volume_yr}}{: mean annual volume, km3}
+  \item{\code{r_height_yr}}{: mean annual runoff depth, mm}
+}
 }
 \description{
 This function interfaces the Global Runoff Data Centre database which provides river discharge data for about 9000 sites over 157 countries.

@@ -2,7 +2,7 @@ Package: hddtools
 Title: Hydrological Data Discovery Tools
 Version: 0.7
 Authors@R: c(person(given = "Claudia", family = "Vitolo", role = c("aut", "cre"),
-                    email = "claudia.vitolo@ecmwf.int",
+                    email = "cvitolodev@gmail.com",
                     comment = c(ORCID = "0000-0002-4252-1176")),
              person(given = "Wouter", family = "Buytaert", role = c("ctb"),
                     comment = "This package was developed during Claudia's PhD at Imperial College London and Wouter was the PhD supervisor."),

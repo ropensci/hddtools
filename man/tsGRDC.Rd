@@ -12,31 +12,65 @@ tsGRDC(stationID, plotOption = FALSE)
 \item{plotOption}{boolean to define whether to plot the results. By default this is set to TRUE.}
 }
 \value{
-The function returns a list of 3 tables: \describe{
-  \item{\strong{mddPerYear}}{This is a table containing mean daily discharges for each single year (n records, one per year). It is made of 7 columns which description is as follows:}\itemize{
-  \item LQ:    lowest monthly discharge of the given year
-  \item month: associated month of occurrence
-  \item MQ:    mean discharge of all monthly discharges in the given year
-  \item HQ:    highest monthly discharge of the given year
-  \item month: associated month of occurrence
-  \item n:    number of available values used for MQ calculationFirst item
+The function returns a list of 6 tables: \describe{
+  \item{\strong{LTVD}}{This is a table containing seasonal variability of river discharge based on original daily data. It is made of 8 columns:}\itemize{
+  \item{LTV_LMM_Monthly__MM}{: calendar month}
+  \item{LTV_LDM_Day__Value}{: lowest daily discharge value in each calendar month in the given time series, calculated from lowest values of each calendar month in consecutive calendar years.}
+  \item{LTV_LDM_Day__YYYY_MM_DD}{: Date of occurrence of lowest daily discharge}
+  \item{LTV_MDM_Day__MM}{: calendar month}
+  \item{LTV_MDM_Day__Value}{: mean of daily discharge values in each calendar month in the given time series, calculated from monthly means of each calendar month in consecutive calendar years.}
+  \item{LTV_HDM_Day__MM}{: calendar month}
+  \item{LTV_HDM_Day__Value}{: highest daily discharge value in each calendar month in the given time series, calculated from highest values of each calendar month in consecutive calendar years.}
+  \item{LTV_HDM_Day__YYYY_MM_DD}{: Date of occurrence of highest daily discharge}
+  }
+  \item{\strong{LTVM}}{This is a table containing seasonal variability of river discharge based on monthly data. It is made of 8 columns:}\itemize{
+  \item{LTV_LMM_Monthly__MM}{: calendar month}
+  \item{LTV_LMM_Monthly__Value}{: lowest monthly discharge value in each calendar month in the given time series, calculated from lowest values of each calendar month in consecutive calendar years.}
+  \item{LTV_LMM_Monthly__YYYY_MM_DD}{: Date of occurrence of lowest monthly discharge}
+  \item{LTV_MMM_Month__MM}{: calendar month}
+  \item{LTV_MMM_Month__Value}{: mean of monthly discharge values in each calendar month in the given time series, calculated from values of each calendar month in consecutive calendar years..}
+  \item{LTV_HMM_Month__MM}{: calendar month}
+  \item{LTV_HMM_Month__Value}{: highest monthly discharge value in each calendar month in the given time series, calculated from highest values of each calendar month in consecutive calendar years.}
+  \item{LTV_HMM_Month__YYYY_MM_DD}{: Date of occurrence of highest monthly discharge}
 }
-  \item{\strong{mddAllPeriod}}{This is a table containing mean daily discharges for the entire period (Calculated only from years with less than 2 months missing). It is made of 6 columns which description is as follows:}\itemize{
-  \item LQ:   lowest monthly discharge from the entire period
-  \item MQ_1: mean discharge of all monthly discharges in the period [m3/s]
-  \item MQ_2: mean discharge volume per year of all monthly discharges in the period [km3/a]
-  \item MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
-  \item HQ:   highest monthly discharge from the entire periode
-  \item n:    number of available months used for MQ calculation
+\item{\strong{PVD}}{This is a table containing ... It is made of 7 columns:}\itemize{
+  \item{LQ_Day__Value}{: lowest daily discharge value in the given time series, calculated from lowest values of consecutive calendar years.}
+  \item{LQ_Day__YYYY_MM_DD}{: Date of occurrence of lowest daily discharge}
+  \item{MLQ_Day__Value}{: mean of lowest daily discharge values in the given time series, calculated from lowest values of consecutive calendar years.}
+  \item{MQ_Day__Value}{: mean of daily discharge values in the given time series, calculated from yearly means of consecutive calendar years.}
+  \item{MHQ_Day__Value}{: mean of highest daily discharge values in the given time series, calculated from highest values of consecutive calendar years.}
+  \item{HQ_Day__Value}{: highest daily discharge value in the given time series, calculated from highest values of consecutive calendar years.}
+  \item{HQ_Day__YYYY_MM_DD}{: Date of occurrence of highest daily discharge}
 }
-\item{\strong{mddPerMonth}}{This is a table containing mean daily discharges for each month over the entire period (12 records covering max. n years. Calculated only for months with less then or equal to 10 missing days). It is made of 7 columns which description is as follows:}\itemize{
-  \item LQ:    lowest monthly discharge of the given month in the entire period
-  \item year:  associated year of occurrence (only the first occurrence is listed)
-  \item MQ:    mean discharge from all monthly discharges of the given month in the entire period
-  \item HQ:    highest monthly discharge of the given month in the entire period
-  \item year:  associated year of occurrence (only the first occurrence is listed)
-  \item std:   standard deviation of all monthly discharges of the given month in the entire period
-  \item n:     number of available daily values used for computation
+\item{\strong{PVM}}{This is a table containing ... It is made of 5 columns:}\itemize{
+  \item{LQ_Month__Value}{: lowest monthly discharge value in the given time series, calculated from lowest yearly values of consecutive calendar years.}
+  \item{LQ_Month__YYYY_MM}{: month of first occurence of lowest monthly discharge}
+  \item{MQ_Month__Value}{: mean of monthly discharge values in the given time series, calculated from yearly means of consecutive calendar years.}
+  \item{HQ_Month__Value}{: highest monthly discharge value in the given time series, calculated from highest yearly values of consecutive calendar years.}
+  \item{HQ_Month__YYYY_MM}{: month of first occurence of highest monthly discharge}
+}
+\item{\strong{YVD}}{This is a table containing ... It is made of 12 columns:}\itemize{
+  \item{Year_Min_Day__YYYY}{: calender year}
+  \item{Year_Min_Day__Value}{: Lowest daily discharge value in the given calendar year, calculated from 12 lowest monthly values in the year in question.}
+  \item{Year_Min_Day__YYYY_MM_DD}{:  date of first occurence}
+  \item{Year_Mean_Min_Day__YYYY}{: calender year}
+  \item{Year_Mean_Min_Day__Value}{: mean of lowest daily discharge values in the given calendar year, calculated from 12 lowest monthly values in the year in question.}
+  \item{Year_Mean_Day__YYYY}{: calender year}
+  \item{Year_Mean_Day__Value}{: Mean of daily discharge values in the given calendar year, calculated from 12 monthly means in the year in question.}
+  \item{Year_Mean_Max_Day__YYYY}{: calender year}
+  \item{Year_Mean_Max_Day__Value}{: mean of highest daily discharge values in the given calendar year, calculated from 12 highest monthly values in the year in question.}
+  \item{Year_Max_Day__YYYY}{: calender year}
+  \item{Year_Max_Day__Value}{: highest daily discharge value in the given calendar year, calculated from 12 highest monthly values in the year in question.}
+  \item{Year_Max_Day__YYYY_MM_DD}{: date of first occurence}
+}
+\item{\strong{YVM}}{This is a table containing ... It is made of 8 columns:}\itemize{
+  \item{Year_Min_Month__YYYY}{: calender year}
+  \item{Year_Min_Month__Value}{: lowest monthly discharge value in the given calendar year, calculated from 12 monthly values in the year in question.}
+  \item{Year_Min_Month__YYYY_MM}{: month of first occurence}
+  \item{Year_Mean_Month__Value}{: mean of monthly discharge values in the given calendar year, calculated from 12 monthly values in the year in question.}
+  \item{Year_Max_Month__YYYY}{: calender year}
+  \item{Year_Max_Month__Value}{: highest monthly discharge value in the given calendar year, calculated from 12 monthly values in the year in question.}
+  \item{Year_Max_Month__YYYY_MM}{: month of first occurence}
 }
 }
 }

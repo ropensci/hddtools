@@ -136,53 +136,34 @@ NULL
 #'
 #' @format A data frame with 9252 stations (rows) and 46 metadata fields.
 #' \describe{
-#'   \item{\code{grdc_no}}{GRDC station number}
-#'   \item{\code{wmo_reg}}{WMO region}
-#'   \item{\code{sub_reg}}{WMO subregion}
-#'   \item{\code{mix_reg}}{Combination of row 2+3}
-#'   \item{\code{nat_id}}{national station ID}
-#'   \item{\code{river}}{river name}
-#'   \item{\code{station}}{station name}
-#'   \item{\code{country_code}}{country code (ISO 3166)}
-#'   \item{\code{lat}}{latitude in degrees}
-#'   \item{\code{long}}{longitude in degrees}
-#'   \item{\code{area}}{catchment size Km2}
-#'   \item{\code{altitude}}{height of gauge zero above sea level m}
-#'   \item{\code{ds_stat_no}}{GRDC_No of next downstream GRDC station}
-#'   \item{\code{w_level}}{water level data available in addition to discharge}
-#'   \item{\code{d_start}}{daily data available from}
-#'   \item{\code{d_end}}{daily data available until}
-#'   \item{\code{d_yrs}}{# years of daily data}
-#'   \item{\code{d_miss}}{percentage of missing values (daily data)}
-#'   \item{\code{m_start}}{monthly data available from}
-#'   \item{\code{m_end}}{monthly data available until}
-#'   \item{\code{m_yrs}}{# years of monthly data}
-#'   \item{\code{m_miss}}{percentage of missing values (monthly data)}
-#'   \item{\code{t_start}}{totally earliest data available}
-#'   \item{\code{t_end}}{totally latest data available}
-#'   \item{\code{t_yrs}}{# years (maximum using daily and monthly data)}
-#'   \item{\code{lta_discharge}}{mean annual streamflow m3/s}
-#'   \item{\code{r_volume_yr}}{mean annual volume km3}
-#'   \item{\code{r_height_yr}}{mean annual depth mm}
-#'   \item{\code{proc_tyrs}}{percentage of t_yrs used for calculation of lta_discharge, r_vol_yr and r_height_yr (only years with > 9 month i.e. > 75 \% of monthly data are considered)}
-#'   \item{\code{proc_tmon}}{percentage of # of month in proc_tyrs * t_yrs years used for calculation of lta_discharge, r_vol_yr and r_height_yr (minimum 75 \% are considered)}
-#'   \item{\code{f_import}}{date of first import}
-#'   \item{\code{f_im_yr}}{year of first import}
-#'   \item{\code{l_import}}{date of last change}
-#'   \item{\code{l_im_yr}}{year of last change}
-#'   \item{\code{provider_id}}{provider number (to be resolved with address database)}
-#'   \item{\code{acsys}}{1 if station belongs to the subset of the Arctic Runoff Data Base in the WCRP Arctic Climate System Study}
-#'   \item{\code{flux2ocean}}{NA}
-#'   \item{\code{gems}}{1 if station corresponds to a GEMS/Water water quality station}
-#'   \item{\code{gcos_gtn.h}}{1 if station belongs to the subset of the Global Terrestrial Network for River Discharge within GTN-H}
-#'   \item{\code{statistics}}{NA}
-#'   \item{\code{Pristine.Basins}}{1 if station belongs to the subset Pristine Basins}
-#'   \item{\code{GRDC.Reference.Dataset}}{1 if station belongs to the subset GRDC Reference Data set}
-#'   \item{\code{AdaptAlp}}{1 if station belongs to the subset AdaptAlp}
-#'   \item{\code{ArctHycos}}{1 if station belongs to the subset ArcticHYCOS}
-#'   \item{\code{EWA}}{NA}
-#'   \item{\code{BALTEX}}{NA}
-#' }
+#'   \itemize{
+#'   \item{\code{grdc_no}}{: GRDC station number}
+#'   \item{\code{wmo_reg}}{: WMO region}
+#'   \item{\code{sub_reg}}{: WMO subregion}
+#'   \item{\code{nat_id}}{: national station ID}
+#'   \item{\code{river}}{: river name}
+#'   \item{\code{station}}{: station name}
+#'   \item{\code{country_code}}{: country code (ISO 3166)}
+#'   \item{\code{lat}}{: latitude, decimal degree}
+#'   \item{\code{long}}{: longitude, decimal degree}
+#'   \item{\code{area}}{: catchment size, km2}
+#'   \item{\code{altitude}}{: height of gauge zero, m above sea level}
+#'   \item{\code{ds_stat_no}}{: GRDC station number of next downstream GRDC station}
+#'   \item{\code{d_start}}{: daily data available from year}
+#'   \item{\code{d_end}}{: daily data available until year}
+#'   \item{\code{d_yrs}}{: length of time series, daily data}
+#'   \item{\code{d_miss}}{: percentage of missing values (daily data)}
+#'   \item{\code{m_start}}{: monthly data available from}
+#'   \item{\code{m_end}}{: monthly data available until}
+#'   \item{\code{m_yrs}}{: length of time series, monthly data}
+#'   \item{\code{m_miss}}{: percentage of missing values (monthly data)}
+#'   \item{\code{t_start}}{: earliest data available}
+#'   \item{\code{t_end}}{: latest data available}
+#'   \item{\code{t_yrs}}{: maximum length of time series, daily and monthly data}
+#'   \item{\code{lta_discharge}}{: mean annual streamflow, m3/s}
+#'   \item{\code{r_volume_yr}}{: mean annual volume, km3}
+#'   \item{\code{r_height_yr}}{: mean annual runoff depth, mm}
+#' }}
 #'
 #' @keywords datasets
 #'
