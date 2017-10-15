@@ -47,4 +47,3 @@ This function interfaces the Global Runoff Data Centre database which provides r
 \author{
 Claudia Vitolo
 }
-

@@ -40,4 +40,3 @@ This function interfaces the Data60UK database catalogue (available from http://
 \author{
 Claudia Vitolo
 }
-

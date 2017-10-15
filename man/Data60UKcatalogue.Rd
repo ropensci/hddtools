@@ -23,4 +23,3 @@ data("Data60UKcatalogue")
 The Data60UK catalogue
 }
 \keyword{datasets}
-

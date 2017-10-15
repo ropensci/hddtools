@@ -26,4 +26,3 @@ This function extracts all the links in a ftp page
 \author{
 Claudia Vitolo
 }
-

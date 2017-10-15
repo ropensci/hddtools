@@ -22,4 +22,3 @@ This package complements R's growing functionality in environmental web technolo
 Vitolo C, Buytaert W, 2014, HDDTOOLS: an R package serving Hydrological Data
 Discovery Tools, AGU Fall Meeting, 15-19 December 2014, San Francisco, USA.
 }
-

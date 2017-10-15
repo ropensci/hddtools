@@ -37,4 +37,3 @@ This function provides an unofficial SEPA database catalogue of river level data
 \author{
 Claudia Vitolo
 }
-

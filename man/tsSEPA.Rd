@@ -29,4 +29,3 @@ This function extract the dataset containing daily rainfall and streamflow disch
 \author{
 Claudia Vitolo
 }
-

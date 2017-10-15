@@ -57,4 +57,3 @@ Please note that not all the GRDC stations listed in the catalogue have monthly 
 \author{
 Claudia Vitolo
 }
-

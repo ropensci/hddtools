@@ -25,4 +25,3 @@ data("SEPAcatalogue")
 The SEPA catalogue
 }
 \keyword{datasets}
-

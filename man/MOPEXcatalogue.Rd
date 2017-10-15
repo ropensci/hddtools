@@ -29,4 +29,3 @@ data("MOPEXcatalogue")
 The MOPEX catalogue
 }
 \keyword{datasets}
-

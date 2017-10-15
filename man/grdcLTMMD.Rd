@@ -21,4 +21,3 @@ data("grdcLTMMD")
 The grdcLTMMD look-up table
 }
 \keyword{datasets}
-

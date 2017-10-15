@@ -42,4 +42,3 @@ This function interfaces the MOPEX database catalogue (available from \url{ftp:/
 \author{
 Claudia Vitolo
 }
-

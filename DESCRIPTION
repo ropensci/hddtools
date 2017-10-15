@@ -1,10 +1,15 @@
 Package: hddtools
 Title: Hydrological Data Discovery Tools
 Version: 0.7
-Authors@R: c(person("Claudia", "Vitolo", email = "cvitolodev@gmail.com", role = c("aut", "cre")),
-             person("Wouter", "Buytaert", role = c("ctb"), comment = "This package was developed during Claudia's PhD at Imperial College London and Wouter was the PhD supervisor."),
-             person("Erin", "Le Dell", role = c("ctb"), comment = "Erin reviewed the package for rOpenSci, see https://github.com/ropensci/onboarding/issues/73"),
-             person("Michael", "Sumner", role = c("ctb"), comment = "Michael reviewed the package for rOpenSci, see https://github.com/ropensci/onboarding/issues/73"))
+Authors@R: c(person(given = "Claudia", family = "Vitolo", role = c("aut", "cre"),
+                    email = "claudia.vitolo@ecmwf.int",
+                    comment = c(ORCID = "0000-0002-4252-1176")),
+             person(given = "Wouter", family = "Buytaert", role = c("ctb"),
+                    comment = "This package was developed during Claudia's PhD at Imperial College London and Wouter was the PhD supervisor."),
+             person(given = "Erin", family = "Le Dell", role = c("ctb"),
+                    comment = "Erin reviewed the package for rOpenSci, see https://github.com/ropensci/onboarding/issues/73"),
+             person(given = "Michael", family = "Sumner", role = c("ctb"),
+                    comment = "Michael reviewed the package for rOpenSci, see https://github.com/ropensci/onboarding/issues/73"))
 Maintainer: Claudia Vitolo <cvitolodev@gmail.com>
 URL: https://github.com/ropensci/hddtools
 BugReports: https://github.com/ropensci/hddtools/issues
@@ -15,4 +20,4 @@ Suggests: testthat, leaflet, rmarkdown, knitr
 VignetteBuilder: knitr
 License: GPL-3
 Repository: CRAN
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
