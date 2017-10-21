@@ -268,7 +268,7 @@ catalogueGRDC <- function(areaBox = NULL,
 
 tsGRDC <- function(stationID, plotOption = FALSE){
 
-  # was options(warn = -1)
+  options(warn = -1)
   grdcLTMMD <- NULL
   
   catalogueTmp <- catalogueGRDC(columnName = "grdc_no", columnValue = stationID)
