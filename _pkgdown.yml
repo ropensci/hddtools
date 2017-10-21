@@ -37,10 +37,8 @@ reference:
   - tsGRDC
   - tsMOPEX
   - tsSEPA
-  - TRMM
   - grdcLTMMD
   - KGClimateClass
-  - HadDAILY
 
 - title: Utility functions
   desc: >

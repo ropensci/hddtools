@@ -1,6 +1,11 @@
+# hddtools 0.8
+
+* tsGRDC function: this function now returns 6 tables (see documentation) according to latest updates on the GRDC side.
+* GRDC data catalogue was updated in October 2017.
+
 # hddtools 0.7
 
-* TRMM function: this function has been temporarily removed from hddtools v0.7 as the ftp at NASA containing the data has been migrated. A new function is under development and will be avalable at the next release (v0.8).
+* TRMM function: this function has been temporarily removed from hddtools v0.7 as the ftp at NASA containing the data has been migrated. A new function is under development.
 
 # hddtools 0.6
 

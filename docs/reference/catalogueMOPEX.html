@@ -23,14 +23,17 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -96,23 +99,32 @@
     </div>
 
     
-    <p>This function interfaces the MOPEX database catalogue (available from <a href = 'ftp://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/'>ftp://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/</a>) containing 438 daily datasets.</p>
+    <p>This function interfaces the MOPEX database catalogue (available from <a href='ftp://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/'>ftp://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/</a>) containing 438 daily datasets.</p>
     
 
-    <pre><span class='fu'>catalogueMOPEX</span>(<span class='kw'>areaBox</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>columnName</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>columnValue</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+    <pre class="usage"><span class='fu'>catalogueMOPEX</span>(<span class='kw'>areaBox</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>columnName</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>columnValue</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>useCachedData</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>areaBox</dt>
-      <dd>bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)</dd>
-      <dt>columnName</dt>
-      <dd>name of the column to filter</dd>
-      <dt>columnValue</dt>
-      <dd>value to look for in the column named columnName</dd>
-      <dt>useCachedData</dt>
-      <dd>logical, set to TRUE to use cached data, set to FALSE to retrive data from online source. This is TRUE by default.</dd>
-    </dl>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>areaBox</th>
+      <td><p>bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)</p></td>
+    </tr>
+    <tr>
+      <th>columnName</th>
+      <td><p>name of the column to filter</p></td>
+    </tr>
+    <tr>
+      <th>columnValue</th>
+      <td><p>value to look for in the column named columnName</p></td>
+    </tr>
+    <tr>
+      <th>useCachedData</th>
+      <td><p>logical, set to TRUE to use cached data, set to FALSE to retrive data from online source. This is TRUE by default.</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
@@ -120,20 +132,21 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## Not run: ------------------------------------</span>
-<span class='co'>#   # Retrieve the MOPEX catalogue</span>
-<span class='co'>#   MOPEX_catalogue_all &lt;- catalogueMOPEX()</span>
-<span class='co'># </span>
-<span class='co'>#   # Define a bounding box</span>
-<span class='co'>#   areaBox &lt;- raster::extent(-95, -92, 37, 41)</span>
-<span class='co'>#   # Filter the catalogue based on bounding box</span>
-<span class='co'>#   MOPEX_catalogue_bbox &lt;- catalogueMOPEX(areaBox = areaBox)</span>
-<span class='co'># </span>
-<span class='co'>#   # Get only catchments within NC</span>
-<span class='co'>#   MOPEX_catalogue_state &lt;- catalogueMOPEX(columnName = "state",</span>
-<span class='co'>#                                           columnValue = "NC")</span>
-<span class='co'># </span>
-<span class='co'>## ---------------------------------------------</span></div></pre>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+  <span class='co'># Retrieve the MOPEX catalogue</span>
+  <span class='no'>MOPEX_catalogue_all</span> <span class='kw'>&lt;-</span> <span class='fu'>catalogueMOPEX</span>()
+
+  <span class='co'># Define a bounding box</span>
+  <span class='no'>areaBox</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>raster</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/raster/topics/extent'>extent</a></span>(-<span class='fl'>95</span>, -<span class='fl'>92</span>, <span class='fl'>37</span>, <span class='fl'>41</span>)
+  <span class='co'># Filter the catalogue based on bounding box</span>
+  <span class='no'>MOPEX_catalogue_bbox</span> <span class='kw'>&lt;-</span> <span class='fu'>catalogueMOPEX</span>(<span class='kw'>areaBox</span> <span class='kw'>=</span> <span class='no'>areaBox</span>)
+
+  <span class='co'># Get only catchments within NC</span>
+  <span class='no'>MOPEX_catalogue_state</span> <span class='kw'>&lt;-</span> <span class='fu'>catalogueMOPEX</span>(<span class='kw'>columnName</span> <span class='kw'>=</span> <span class='st'>"state"</span>,
+                                          <span class='kw'>columnValue</span> <span class='kw'>=</span> <span class='st'>"NC"</span>)
+
+<span class='co'># }</span><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

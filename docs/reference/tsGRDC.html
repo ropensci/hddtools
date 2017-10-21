@@ -23,14 +23,17 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -99,42 +102,85 @@
     <p>This function interfaces the Global Runoff Data Centre monthly mean daily discharges database.</p>
     
 
-    <pre><span class='fu'>tsGRDC</span>(<span class='no'>stationID</span>, <span class='kw'>plotOption</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>tsGRDC</span>(<span class='no'>stationID</span>, <span class='kw'>plotOption</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>stationID</dt>
-      <dd>7 string that identifies a station, GRDC station number is called &quot;grdc no&quot; in the catalogue.</dd>
-      <dt>plotOption</dt>
-      <dd>boolean to define whether to plot the results. By default this is set to TRUE.</dd>
-    </dl>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>stationID</th>
+      <td><p>7 string that identifies a station, GRDC station number is called "grdc no" in the catalogue.</p></td>
+    </tr>
+    <tr>
+      <th>plotOption</th>
+      <td><p>boolean to define whether to plot the results. By default this is set to TRUE.</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The function returns a list of 3 tables: <dl class='dl-horizontal'>
-  <dt><strong>mddPerYear</strong></dt><dd>This is a table containing mean daily discharges for each single year (n records, one per year). It is made of 7 columns which description is as follows:</dd>
-   LQ:    lowest monthly discharge of the given year
-   month: associated month of occurrence
-   MQ:    mean discharge of all monthly discharges in the given year
-   HQ:    highest monthly discharge of the given year
-   month: associated month of occurrence
-   n:    number of available values used for MQ calculationFirst item</p>
-    <p><dt><strong>mddAllPeriod</strong></dt><dd>This is a table containing mean daily discharges for the entire period (Calculated only from years with less than 2 months missing). It is made of 6 columns which description is as follows:</dd>
-   LQ:   lowest monthly discharge from the entire period
-   MQ_1: mean discharge of all monthly discharges in the period [m3/s]
-   MQ_2: mean discharge volume per year of all monthly discharges in the period [km3/a]
-   MQ_3: mean runoff per year of all monthly discharges in the period [mm/a]
-   HQ:   highest monthly discharge from the entire periode
-   n:    number of available months used for MQ calculation</p>
-    <p><dt><strong>mddPerMonth</strong></dt><dd>This is a table containing mean daily discharges for each month over the entire period (12 records covering max. n years. Calculated only for months with less then or equal to 10 missing days). It is made of 7 columns which description is as follows:</dd>
-   LQ:    lowest monthly discharge of the given month in the entire period
-   year:  associated year of occurrence (only the first occurrence is listed)
-   MQ:    mean discharge from all monthly discharges of the given month in the entire period
-   HQ:    highest monthly discharge of the given month in the entire period
-   year:  associated year of occurrence (only the first occurrence is listed)
-   std:   standard deviation of all monthly discharges of the given month in the entire period
-   n:     number of available daily values used for computation</p>
-    <p></dl></p>
+    <p>The function returns a list of 6 tables:</p><ul>
+<li><p><strong>LTVD</strong>This is a table containing seasonal variability of river discharge based on original daily data. It is made of 8 columns:</p><ul>
+<li><p>LTV_LMM_Monthly__MM: calendar month</p></li>
+<li><p>LTV_LDM_Day__Value: lowest daily discharge value in each calendar month in the given time series, calculated from lowest values of each calendar month in consecutive calendar years.</p></li>
+<li><p>LTV_LDM_Day__YYYY_MM_DD: Date of occurrence of lowest daily discharge</p></li>
+<li><p>LTV_MDM_Day__MM: calendar month</p></li>
+<li><p>LTV_MDM_Day__Value: mean of daily discharge values in each calendar month in the given time series, calculated from monthly means of each calendar month in consecutive calendar years.</p></li>
+<li><p>LTV_HDM_Day__MM: calendar month</p></li>
+<li><p>LTV_HDM_Day__Value: highest daily discharge value in each calendar month in the given time series, calculated from highest values of each calendar month in consecutive calendar years.</p></li>
+<li><p>LTV_HDM_Day__YYYY_MM_DD: Date of occurrence of highest daily discharge</p></li>
+</ul></li>
+<li><p><strong>LTVM</strong>This is a table containing seasonal variability of river discharge based on monthly data. It is made of 8 columns:</p><ul>
+<li><p>LTV_LMM_Monthly__MM: calendar month</p></li>
+<li><p>LTV_LMM_Monthly__Value: lowest monthly discharge value in each calendar month in the given time series, calculated from lowest values of each calendar month in consecutive calendar years.</p></li>
+<li><p>LTV_LMM_Monthly__YYYY_MM_DD: Date of occurrence of lowest monthly discharge</p></li>
+<li><p>LTV_MMM_Month__MM: calendar month</p></li>
+<li><p>LTV_MMM_Month__Value: mean of monthly discharge values in each calendar month in the given time series, calculated from values of each calendar month in consecutive calendar years..</p></li>
+<li><p>LTV_HMM_Month__MM: calendar month</p></li>
+<li><p>LTV_HMM_Month__Value: highest monthly discharge value in each calendar month in the given time series, calculated from highest values of each calendar month in consecutive calendar years.</p></li>
+<li><p>LTV_HMM_Month__YYYY_MM_DD: Date of occurrence of highest monthly discharge</p></li>
+</ul></li>
+<li><p><strong>PVD</strong>This is a table containing ... It is made of 7 columns:</p><ul>
+<li><p>LQ_Day__Value: lowest daily discharge value in the given time series, calculated from lowest values of consecutive calendar years.</p></li>
+<li><p>LQ_Day__YYYY_MM_DD: Date of occurrence of lowest daily discharge</p></li>
+<li><p>MLQ_Day__Value: mean of lowest daily discharge values in the given time series, calculated from lowest values of consecutive calendar years.</p></li>
+<li><p>MQ_Day__Value: mean of daily discharge values in the given time series, calculated from yearly means of consecutive calendar years.</p></li>
+<li><p>MHQ_Day__Value: mean of highest daily discharge values in the given time series, calculated from highest values of consecutive calendar years.</p></li>
+<li><p>HQ_Day__Value: highest daily discharge value in the given time series, calculated from highest values of consecutive calendar years.</p></li>
+<li><p>HQ_Day__YYYY_MM_DD: Date of occurrence of highest daily discharge</p></li>
+</ul></li>
+<li><p><strong>PVM</strong>This is a table containing ... It is made of 5 columns:</p><ul>
+<li><p>LQ_Month__Value: lowest monthly discharge value in the given time series, calculated from lowest yearly values of consecutive calendar years.</p></li>
+<li><p>LQ_Month__YYYY_MM: month of first occurence of lowest monthly discharge</p></li>
+<li><p>MQ_Month__Value: mean of monthly discharge values in the given time series, calculated from yearly means of consecutive calendar years.</p></li>
+<li><p>HQ_Month__Value: highest monthly discharge value in the given time series, calculated from highest yearly values of consecutive calendar years.</p></li>
+<li><p>HQ_Month__YYYY_MM: month of first occurence of highest monthly discharge</p></li>
+</ul></li>
+<li><p><strong>YVD</strong>This is a table containing ... It is made of 12 columns:</p><ul>
+<li><p>Year_Min_Day__YYYY: calender year</p></li>
+<li><p>Year_Min_Day__Value: Lowest daily discharge value in the given calendar year, calculated from 12 lowest monthly values in the year in question.</p></li>
+<li><p>Year_Min_Day__YYYY_MM_DD:  date of first occurence</p></li>
+<li><p>Year_Mean_Min_Day__YYYY: calender year</p></li>
+<li><p>Year_Mean_Min_Day__Value: mean of lowest daily discharge values in the given calendar year, calculated from 12 lowest monthly values in the year in question.</p></li>
+<li><p>Year_Mean_Day__YYYY: calender year</p></li>
+<li><p>Year_Mean_Day__Value: Mean of daily discharge values in the given calendar year, calculated from 12 monthly means in the year in question.</p></li>
+<li><p>Year_Mean_Max_Day__YYYY: calender year</p></li>
+<li><p>Year_Mean_Max_Day__Value: mean of highest daily discharge values in the given calendar year, calculated from 12 highest monthly values in the year in question.</p></li>
+<li><p>Year_Max_Day__YYYY: calender year</p></li>
+<li><p>Year_Max_Day__Value: highest daily discharge value in the given calendar year, calculated from 12 highest monthly values in the year in question.</p></li>
+<li><p>Year_Max_Day__YYYY_MM_DD: date of first occurence</p></li>
+</ul></li>
+<li><p><strong>YVM</strong>This is a table containing ... It is made of 8 columns:</p><ul>
+<li><p>Year_Min_Month__YYYY: calender year</p></li>
+<li><p>Year_Min_Month__Value: lowest monthly discharge value in the given calendar year, calculated from 12 monthly values in the year in question.</p></li>
+<li><p>Year_Min_Month__YYYY_MM: month of first occurence</p></li>
+<li><p>Year_Mean_Month__Value: mean of monthly discharge values in the given calendar year, calculated from 12 monthly values in the year in question.</p></li>
+<li><p>Year_Max_Month__YYYY: calender year</p></li>
+<li><p>Year_Max_Month__Value: highest monthly discharge value in the given calendar year, calculated from 12 monthly values in the year in question.</p></li>
+<li><p>Year_Max_Month__YYYY_MM: month of first occurence</p></li>
+</ul></li>
+</ul>
+
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
@@ -142,11 +188,12 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## Not run: ------------------------------------</span>
-<span class='co'>#   Adaitu &lt;- tsGRDC(stationID = "1577602")</span>
-<span class='co'>#   Adaitu &lt;- tsGRDC(stationID = catalogueGRDC()$grdc_no[1000],</span>
-<span class='co'>#                    plotOption = TRUE)</span>
-<span class='co'>## ---------------------------------------------</span></div></pre>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+  <span class='no'>Adaitu</span> <span class='kw'>&lt;-</span> <span class='fu'>tsGRDC</span>(<span class='kw'>stationID</span> <span class='kw'>=</span> <span class='st'>"1577602"</span>)
+  <span class='no'>Adaitu</span> <span class='kw'>&lt;-</span> <span class='fu'>tsGRDC</span>(<span class='kw'>stationID</span> <span class='kw'>=</span> <span class='fu'><a href='catalogueGRDC.html'>catalogueGRDC</a></span>()$<span class='no'>grdc_no</span>[<span class='fl'>1000</span>],
+                   <span class='kw'>plotOption</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='co'># }</span><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

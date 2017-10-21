@@ -23,14 +23,17 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -99,46 +102,82 @@
     <p>This function interfaces the Global Runoff Data Centre database which provides river discharge data for about 9000 sites over 157 countries.</p>
     
 
-    <pre><span class='fu'>catalogueGRDC</span>(<span class='kw'>areaBox</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>columnName</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>columnValue</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>mdDescription</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>useCachedData</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>catalogueGRDC</span>(<span class='kw'>areaBox</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>columnName</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>columnValue</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>useCachedData</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>areaBox</dt>
-      <dd>bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)</dd>
-      <dt>columnName</dt>
-      <dd>name of the column to filter</dd>
-      <dt>columnValue</dt>
-      <dd>value to look for in the column named columnName</dd>
-      <dt>mdDescription</dt>
-      <dd>boolean value. Default is FALSE (no description is printed)</dd>
-      <dt>useCachedData</dt>
-      <dd>logical, set to TRUE to use cached data, set to FALSE to retrive data from online source. This is TRUE by default.</dd>
-    </dl>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>areaBox</th>
+      <td><p>bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)</p></td>
+    </tr>
+    <tr>
+      <th>columnName</th>
+      <td><p>name of the column to filter</p></td>
+    </tr>
+    <tr>
+      <th>columnValue</th>
+      <td><p>value to look for in the column named columnName</p></td>
+    </tr>
+    <tr>
+      <th>useCachedData</th>
+      <td><p>logical, set to TRUE to use cached data, set to FALSE to retrive data from online source. This is TRUE by default.</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>This function returns a data frame made of 8966 rows (gauging stations, as per October 2016) and 44 columns containing metadata.</p>
+    <p>This function returns a data frame made of 9481 rows (gauging stations, as per October 2017) and 26 columns:</p><ul>
+<li><p><code>grdc_no</code>: GRDC station number</p></li>
+<li><p><code>wmo_reg</code>: WMO region</p></li>
+<li><p><code>sub_reg</code>: WMO subregion</p></li>
+<li><p><code>nat_id</code>: national station ID</p></li>
+<li><p><code>river</code>: river name</p></li>
+<li><p><code>station</code>: station name</p></li>
+<li><p><code>country_code</code>: country code (ISO 3166)</p></li>
+<li><p><code>lat</code>: latitude, decimal degree</p></li>
+<li><p><code>long</code>: longitude, decimal degree</p></li>
+<li><p><code>area</code>: catchment size, km2</p></li>
+<li><p><code>altitude</code>: height of gauge zero, m above sea level</p></li>
+<li><p><code>ds_stat_no</code>: GRDC station number of next downstream GRDC station</p></li>
+<li><p><code>d_start</code>: daily data available from year</p></li>
+<li><p><code>d_end</code>: daily data available until year</p></li>
+<li><p><code>d_yrs</code>: length of time series, daily data</p></li>
+<li><p><code>d_miss</code>: percentage of missing values (daily data)</p></li>
+<li><p><code>m_start</code>: monthly data available from</p></li>
+<li><p><code>m_end</code>: monthly data available until</p></li>
+<li><p><code>m_yrs</code>: length of time series, monthly data</p></li>
+<li><p><code>m_miss</code>: percentage of missing values (monthly data)</p></li>
+<li><p><code>t_start</code>: earliest data available</p></li>
+<li><p><code>t_end</code>: latest data available</p></li>
+<li><p><code>t_yrs</code>: maximum length of time series, daily and monthly data</p></li>
+<li><p><code>lta_discharge</code>: mean annual streamflow, m3/s</p></li>
+<li><p><code>r_volume_yr</code>: mean annual volume, km3</p></li>
+<li><p><code>r_height_yr</code>: mean annual runoff depth, mm</p></li>
+</ul>
+
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## Not run: ------------------------------------</span>
-<span class='co'>#   # Retrieve the whole catalogue</span>
-<span class='co'>#   GRDC_catalogue_all &lt;- catalogueGRDC()</span>
-<span class='co'># </span>
-<span class='co'>#   # Define a bounding box</span>
-<span class='co'>#   areaBox &lt;- raster::extent(-3.82, -3.63, 52.41, 52.52)</span>
-<span class='co'>#   # Filter the catalogue based on bounding box</span>
-<span class='co'>#   GRDC_catalogue_bbox &lt;- catalogueGRDC(areaBox = areaBox)</span>
-<span class='co'># </span>
-<span class='co'>#   # Get only catchments with area above 5000 Km2</span>
-<span class='co'>#   GRDC_catalogue_area &lt;- catalogueGRDC(columnName = "area",</span>
-<span class='co'>#                                        columnValue = "&gt;= 5000")</span>
-<span class='co'># </span>
-<span class='co'>#   # Get only catchments within river Thames</span>
-<span class='co'>#   GRDC_catalogue_river &lt;- catalogueGRDC(columnName = "river",</span>
-<span class='co'>#                                         columnValue = "Thames")</span>
-<span class='co'>## ---------------------------------------------</span></div></pre>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+  <span class='co'># Retrieve the whole catalogue</span>
+  <span class='no'>GRDC_catalogue_all</span> <span class='kw'>&lt;-</span> <span class='fu'>catalogueGRDC</span>()
+
+  <span class='co'># Define a bounding box</span>
+  <span class='no'>areaBox</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>raster</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/raster/topics/extent'>extent</a></span>(-<span class='fl'>3.82</span>, -<span class='fl'>3.63</span>, <span class='fl'>52.41</span>, <span class='fl'>52.52</span>)
+  <span class='co'># Filter the catalogue based on bounding box</span>
+  <span class='no'>GRDC_catalogue_bbox</span> <span class='kw'>&lt;-</span> <span class='fu'>catalogueGRDC</span>(<span class='kw'>areaBox</span> <span class='kw'>=</span> <span class='no'>areaBox</span>)
+
+  <span class='co'># Get only catchments with area above 5000 Km2</span>
+  <span class='no'>GRDC_catalogue_area</span> <span class='kw'>&lt;-</span> <span class='fu'>catalogueGRDC</span>(<span class='kw'>columnName</span> <span class='kw'>=</span> <span class='st'>"area"</span>,
+                                       <span class='kw'>columnValue</span> <span class='kw'>=</span> <span class='st'>"&gt;= 5000"</span>)
+
+  <span class='co'># Get only catchments within river Thames</span>
+  <span class='no'>GRDC_catalogue_river</span> <span class='kw'>&lt;-</span> <span class='fu'>catalogueGRDC</span>(<span class='kw'>columnName</span> <span class='kw'>=</span> <span class='st'>"river"</span>,
+                                        <span class='kw'>columnValue</span> <span class='kw'>=</span> <span class='st'>"Thames"</span>)
+<span class='co'># }</span><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

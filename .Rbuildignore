@@ -20,3 +20,4 @@ figure$
 cache$
 inst/blog
 inst/tmp
+^_pkgdown\.yml$

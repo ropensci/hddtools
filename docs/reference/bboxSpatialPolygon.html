@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Convert a bounding box to a SpatialPolygons object
- — bboxSpatialPolygon • hddtools</title>
+Bounding box is first created (in lat/lon) then projected if specified — bboxSpatialPolygon • hddtools</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -24,14 +24,17 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -94,7 +97,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Convert a bounding box to a SpatialPolygons object
-</h1>
+Bounding box is first created (in lat/lon) then projected if specified</h1>
     </div>
 
     
@@ -102,18 +105,25 @@
 Bounding box is first created (in lat/lon) then projected if specified</p>
     
 
-    <pre><span class='fu'>bboxSpatialPolygon</span>(<span class='no'>boundingbox</span>, <span class='kw'>proj4stringFrom</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+    <pre class="usage"><span class='fu'>bboxSpatialPolygon</span>(<span class='no'>boundingbox</span>, <span class='kw'>proj4stringFrom</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>proj4stringTo</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>boundingbox</dt>
-      <dd>Bounding box: a 2x2 numerical matrix of lat/lon coordinates</dd>
-      <dt>proj4stringFrom</dt>
-      <dd>Projection string for the current boundingbox coordinates (defaults to lat/lon, WGS84)</dd>
-      <dt>proj4stringTo</dt>
-      <dd>Projection string, or NULL to not project</dd>
-    </dl>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>boundingbox</th>
+      <td><p>Bounding box: a 2x2 numerical matrix of lat/lon coordinates</p></td>
+    </tr>
+    <tr>
+      <th>proj4stringFrom</th>
+      <td><p>Projection string for the current boundingbox coordinates (defaults to lat/lon, WGS84)</p></td>
+    </tr>
+    <tr>
+      <th>proj4stringTo</th>
+      <td><p>Projection string, or NULL to not project</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
@@ -121,14 +131,15 @@ Bounding box is first created (in lat/lon) then projected if specified</p>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p><a href = 'http://gis.stackexchange.com/questions/46954/clip-spatial-object-to-bounding-box-in-r'>http://gis.stackexchange.com/questions/46954/clip-spatial-object-to-bounding-box-in-r</a></p>
+    <p><a href='http://gis.stackexchange.com/questions/46954/clip-spatial-object-to-bounding-box-in-r'>http://gis.stackexchange.com/questions/46954/clip-spatial-object-to-bounding-box-in-r</a></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## Not run: ------------------------------------</span>
-<span class='co'>#   boundingbox &lt;- raster::extent(-180, +180, -50, +50)</span>
-<span class='co'>#   bbSP &lt;- bboxSpatialPolygon(boundingbox = boundingbox)</span>
-<span class='co'>## ---------------------------------------------</span></div></pre>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+  <span class='no'>boundingbox</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>raster</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/raster/topics/extent'>extent</a></span>(-<span class='fl'>180</span>, +<span class='fl'>180</span>, -<span class='fl'>50</span>, +<span class='fl'>50</span>)
+  <span class='no'>bbSP</span> <span class='kw'>&lt;-</span> <span class='fu'>bboxSpatialPolygon</span>(<span class='kw'>boundingbox</span> <span class='kw'>=</span> <span class='no'>boundingbox</span>)
+<span class='co'># }</span><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

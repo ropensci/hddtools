@@ -23,14 +23,17 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -92,110 +95,157 @@
       <div class="row">
   <div class="col-md-9">
     <div class="page-header">
-      <h1>Function reference</h1>
-      <h4>version&nbsp;0.7</h4>
+      <h1>
+        Reference
+        <small>version&nbsp;0.8</small>
+      </h1>
     </div>
 
     <div class="contents">
-      <h2 id="section-get-catalogues" class="hasAnchor"><a href="#section-get-catalogues" class="anchor"></a>Get catalogues</h2>
-      <p class="section-desc"><p>Get information about available monitoring stations from various providers</p></p>
+      <table class="ref-index">
 
-      
-      <p><a href="catalogueData60UK.html">Data source: Data60UK catalogue</a></p>
-      <ul>
-        <li><code><a href="catalogueData60UK.html">catalogueData60UK</a></code></li>
-      </ul>
-      
-      <p><a href="catalogueGRDC.html">Data source: Global Runoff Data Centre catalogue</a></p>
-      <ul>
-        <li><code><a href="catalogueGRDC.html">catalogueGRDC</a></code></li>
-      </ul>
-      
-      <p><a href="catalogueMOPEX.html">Data source: MOPEX catalogue</a></p>
-      <ul>
-        <li><code><a href="catalogueMOPEX.html">catalogueMOPEX</a></code></li>
-      </ul>
-      
-      <p><a href="catalogueSEPA.html">Data source: SEPA catalogue</a></p>
-      <ul>
-        <li><code><a href="catalogueSEPA.html">catalogueSEPA</a></code></li>
-      </ul>
-      
-      <p><a href="hddtools.html">hddtools: Hydrological Data Discovery Tools</a></p>
-      <ul>
-        <li><code><a href="hddtools.html">hddtools</a></code></li><li><code><a href="hddtools.html">hddtools-package</a></code></li>
-      </ul>
-          <h2 id="section-get-datasets" class="hasAnchor"><a href="#section-get-datasets" class="anchor"></a>Get datasets</h2>
-      <p class="section-desc"><p>Get data from various providers</p></p>
+      <colgroup>
+        <col class="alias" />
+        <col class="title" />
+      </colgroup>
 
-      
-      <p><a href="grdcLTMMD.html">Data set: The grdcLTMMD look-up table</a></p>
-      <ul>
-        <li><code><a href="grdcLTMMD.html">grdcLTMMD</a></code></li>
-      </ul>
-      
-      <p><a href="KGClimateClass.html">Function to identify the updated Koppen-Greiger climate zone (on a 0.1 x 0.1 degrees resolution map).</a></p>
-      <ul>
-        <li><code><a href="KGClimateClass.html">KGClimateClass</a></code></li>
-      </ul>
-      
-      <p><a href="tsData60UK.html">Interface for the Data60UK database of Daily Time Series</a></p>
-      <ul>
-        <li><code><a href="tsData60UK.html">tsData60UK</a></code></li>
-      </ul>
-      
-      <p><a href="tsGRDC.html">Interface for the Global Runoff Data Centre database of Monthly Time Series</a></p>
-      <ul>
-        <li><code><a href="tsGRDC.html">tsGRDC</a></code></li>
-      </ul>
-      
-      <p><a href="tsMOPEX.html">Interface for the MOPEX database of Daily Time Series</a></p>
-      <ul>
-        <li><code><a href="tsMOPEX.html">tsMOPEX</a></code></li>
-      </ul>
-      
-      <p><a href="tsSEPA.html">Interface for the MOPEX database of Daily Time Series</a></p>
-      <ul>
-        <li><code><a href="tsSEPA.html">tsSEPA</a></code></li>
-      </ul>
-          <h2 id="section-utility-functions" class="hasAnchor"><a href="#section-utility-functions" class="anchor"></a>Utility functions</h2>
-      <p class="section-desc"><p>Utility functions, mainly used internally</p></p>
-
-      
-      <p><a href="bboxSpatialPolygon.html">Convert a bounding box to a SpatialPolygons object
-</a></p>
-      <ul>
-        <li><code><a href="bboxSpatialPolygon.html">bboxSpatialPolygon</a></code></li>
-      </ul>
-      
-      <p><a href="getContent.html">Extracts links from ftp page</a></p>
-      <ul>
-        <li><code><a href="getContent.html">getContent</a></code></li>
-      </ul>
-          <h2 id="section-cached-catalogues" class="hasAnchor"><a href="#section-cached-catalogues" class="anchor"></a>Cached catalogues</h2>
-      <p class="section-desc"><p>Cached version of the output of the catalogue*() functions</p></p>
-
-      
-      <p><a href="Data60UKcatalogue.html">Data set: The Data60UK Catalogue</a></p>
-      <ul>
-        <li><code><a href="Data60UKcatalogue.html">Data60UKcatalogue</a></code></li>
-      </ul>
-      
-      <p><a href="GRDCcatalogue.html">Data set: The GRDC Catalogue</a></p>
-      <ul>
-        <li><code><a href="GRDCcatalogue.html">GRDCcatalogue</a></code></li>
-      </ul>
-      
-      <p><a href="MOPEXcatalogue.html">Data set: The MOPEX Catalogue</a></p>
-      <ul>
-        <li><code><a href="MOPEXcatalogue.html">MOPEXcatalogue</a></code></li>
-      </ul>
-      
-      <p><a href="SEPAcatalogue.html">Data set: The SEPA Catalogue</a></p>
-      <ul>
-        <li><code><a href="SEPAcatalogue.html">SEPAcatalogue</a></code></li>
-      </ul>
-    
+      <tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-get-catalogues" class="hasAnchor"><a href="#section-get-catalogues" class="anchor"></a>Get catalogues</h2>
+            <p class="section-desc"><p>Get information about available monitoring stations from various providers</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="hddtools.html">hddtools</a></code> </p>
+          </td>
+          <td><p>hddtools: Hydrological Data Discovery Tools</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="catalogueData60UK.html">catalogueData60UK</a></code> </p>
+          </td>
+          <td><p>Data source: Data60UK catalogue</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="catalogueGRDC.html">catalogueGRDC</a></code> </p>
+          </td>
+          <td><p>Data source: Global Runoff Data Centre catalogue</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="catalogueMOPEX.html">catalogueMOPEX</a></code> </p>
+          </td>
+          <td><p>Data source: MOPEX catalogue</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="catalogueSEPA.html">catalogueSEPA</a></code> </p>
+          </td>
+          <td><p>Data source: SEPA catalogue</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-get-datasets" class="hasAnchor"><a href="#section-get-datasets" class="anchor"></a>Get datasets</h2>
+            <p class="section-desc"><p>Get data from various providers</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="tsData60UK.html">tsData60UK</a></code> </p>
+          </td>
+          <td><p>Interface for the Data60UK database of Daily Time Series</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="tsGRDC.html">tsGRDC</a></code> </p>
+          </td>
+          <td><p>Interface for the Global Runoff Data Centre database of Monthly Time Series</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="tsMOPEX.html">tsMOPEX</a></code> </p>
+          </td>
+          <td><p>Interface for the MOPEX database of Daily Time Series</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="tsSEPA.html">tsSEPA</a></code> </p>
+          </td>
+          <td><p>Interface for the MOPEX database of Daily Time Series</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="grdcLTMMD.html">data</a></code> </p>
+          </td>
+          <td><p>Data set: The grdcLTMMD look-up table</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="KGClimateClass.html">KGClimateClass</a></code> </p>
+          </td>
+          <td><p>Function to identify the updated Koppen-Greiger climate zone (on a 0.1 x 0.1 degrees resolution map).</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-utility-functions" class="hasAnchor"><a href="#section-utility-functions" class="anchor"></a>Utility functions</h2>
+            <p class="section-desc"><p>Utility functions, mainly used internally</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="bboxSpatialPolygon.html">bboxSpatialPolygon</a></code> </p>
+          </td>
+          <td><p>Convert a bounding box to a SpatialPolygons object
+Bounding box is first created (in lat/lon) then projected if specified</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="getContent.html">getContent</a></code> </p>
+          </td>
+          <td><p>Extracts links from ftp page</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-cached-catalogues" class="hasAnchor"><a href="#section-cached-catalogues" class="anchor"></a>Cached catalogues</h2>
+            <p class="section-desc"><p>Cached version of the output of the catalogue*() functions</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="Data60UKcatalogue.html">data</a></code> </p>
+          </td>
+          <td><p>Data set: The Data60UK Catalogue</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="GRDCcatalogue.html">data</a></code> </p>
+          </td>
+          <td><p>Data set: The GRDC Catalogue</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="MOPEXcatalogue.html">data</a></code> </p>
+          </td>
+          <td><p>Data set: The MOPEX Catalogue</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="SEPAcatalogue.html">data</a></code> </p>
+          </td>
+          <td><p>Data set: The SEPA Catalogue</p></td>
+        </tr>
+      </tbody>
+      </table>
     </div>
   </div>
 

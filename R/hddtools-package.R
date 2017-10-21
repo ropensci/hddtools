@@ -125,7 +125,7 @@ NULL
 #'
 #' @keywords datasets
 #'
-#' @source \url{http://www.bafg.de/GRDC/EN/03_dtprdcts/32_LTMM/longtermmonthly_node.html}
+#' @source \url{http://www.bafg.de/GRDC}
 "grdcLTMMD"
 
 #' Data set: The GRDC Catalogue
