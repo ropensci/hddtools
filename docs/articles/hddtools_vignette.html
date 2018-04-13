@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title> • hddtools</title>
+<title>Hydrological Data Discovery Tools - vignette • hddtools</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
@@ -39,7 +39,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="https://github.com/openjournals/joss-reviews/issues/56">JOSS paper (under review)</a>
+      <a href="http://joss.theoj.org/papers/3287a12e7ce5d7e89938a6b4f56fc225">JOSS paper</a>
     </li>
     <li>
       <a href="http://adsabs.harvard.edu/abs/2014AGUFM.H13H1209V">Abstract/Poster presented at AGU 2014</a>
@@ -72,10 +72,10 @@
       </header><div class="row">
   <div class="col-md-9">
     <div class="page-header toc-ignore">
-      <h1></h1>
+      <h1>Hydrological Data Discovery Tools - vignette</h1>
                         <h4 class="author">Claudia Vitolo</h4>
             
-            <h4 class="date">2017-10-21</h4>
+            <h4 class="date">2018-04-13</h4>
           </div>
 
     
@@ -165,9 +165,9 @@ GRDC_catalogue_bbox_stats &lt;-<span class="st"> </span><span class="kw"><a href
 <p>The filtered stations can be used to create a map.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Visualise outlets on an interactive map</span>
 <span class="kw">library</span>(leaflet)
-<span class="kw">leaflet</span>(<span class="dt">data =</span> GRDC_catalogue_bbox_stats) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">addTiles</span>() <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># Add default OpenStreetMap map tiles</span>
-<span class="st">  </span><span class="kw">addMarkers</span>(<span class="op">~</span>long, <span class="op">~</span>lat, <span class="dt">popup =</span> <span class="op">~</span>station)</code></pre></div>
+<span class="kw"><a href="http://www.rdocumentation.org/packages/leaflet/topics/leaflet">leaflet</a></span>(<span class="dt">data =</span> GRDC_catalogue_bbox_stats) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/leaflet/topics/map-layers">addTiles</a></span>() <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># Add default OpenStreetMap map tiles</span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/leaflet/topics/map-layers">addMarkers</a></span>(<span class="op">~</span>long, <span class="op">~</span>lat, <span class="dt">popup =</span> <span class="op">~</span>station)</code></pre></div>
 <div class="figure">
 <img src="leaflet.png">
 </div>
@@ -177,28 +177,6 @@ WolfeToneBridge &lt;-<span class="st"> </span><span class="kw"><a href="../refer
                           <span class="dt">plotOption =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <div class="figure">
 <img src="tsGRDC.png">
-</div>
-</div>
-<div id="nasas-tropical-rainfall-measuring-mission" class="section level3">
-<h3 class="hasAnchor">
-<a href="#nasas-tropical-rainfall-measuring-mission" class="anchor"></a>NASA’s Tropical Rainfall Measuring Mission</h3>
-<p><strong>IMPORTANT NOTE: The TRMM function has been temporarily removed from hddtools v0.7 as the ftp at NASA containing the data has been migrated. A new function is under development and will be avalable at the next release (v0.8).</strong></p>
-<p>The Tropical Rainfall Measuring Mission (TRMM) is a joint mission between NASA and the Japan Aerospace Exploration Agency (JAXA) that uses a research satellite to measure precipitation within the tropics in order to improve our understanding of climate and its variability.</p>
-<p>The TRMM satellite records global historical rainfall estimation in a gridded format since 1998 with a daily temporal resolution and a spatial resolution of 0.25 degrees. This information is openly available for educational purposes and downloadable from an FTP server.</p>
-<p>The hddtools provides a function, called TRMM(), to download and convert a selected portion of the TRMM dataset into a raster-brick that can be opened in any GIS software.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define a bounding box</span>
-areaBox &lt;-<span class="st"> </span>raster<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/extent">extent</a></span>(<span class="op">-</span><span class="dv">10</span>, <span class="dv">5</span>, <span class="dv">48</span>, <span class="dv">62</span>)
-
-<span class="co"># Define a temporal extent</span>
-twindow &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="kw">as.Date</span>(<span class="st">"2012-01-01"</span>), <span class="kw">as.Date</span>(<span class="st">"2012-03-31"</span>), <span class="dt">by =</span> <span class="st">"months"</span>)
-
-<span class="co"># Retreive mean monthly precipitations from 3B43_V7 (based on a bounding box and time extent)</span>
-TRMMfile &lt;-<span class="st"> </span><span class="kw">TRMM</span>(<span class="dt">twindow =</span> twindow, <span class="dt">areaBox =</span> areaBox)
-
-<span class="kw">library</span>(raster)
-<span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/plot">plot</a></span>(TRMMfile)</code></pre></div>
-<div class="figure">
-<img src="TRMM.png">
 </div>
 </div>
 <div id="top-down-modelling-working-group-data60uk-and-mopex" class="section level3">
@@ -218,9 +196,9 @@ areaBox &lt;-<span class="st"> </span>raster<span class="op">::</span><span clas
 Data60UK_catalogue_bbox &lt;-<span class="st"> </span><span class="kw"><a href="../reference/catalogueData60UK.html">catalogueData60UK</a></span>(<span class="dt">areaBox =</span> areaBox)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Visualise outlets on an interactive map</span>
 <span class="kw">library</span>(leaflet)
-<span class="kw">leaflet</span>(<span class="dt">data =</span> Data60UK_catalogue_bbox) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">addTiles</span>() <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># Add default OpenStreetMap map tiles</span>
-<span class="st">  </span><span class="kw">addMarkers</span>(<span class="op">~</span>Longitude, <span class="op">~</span>Latitude, <span class="dt">popup =</span> <span class="op">~</span>Location)</code></pre></div>
+<span class="kw"><a href="http://www.rdocumentation.org/packages/leaflet/topics/leaflet">leaflet</a></span>(<span class="dt">data =</span> Data60UK_catalogue_bbox) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/leaflet/topics/map-layers">addTiles</a></span>() <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># Add default OpenStreetMap map tiles</span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/leaflet/topics/map-layers">addMarkers</a></span>(<span class="op">~</span>Longitude, <span class="op">~</span>Latitude, <span class="dt">popup =</span> <span class="op">~</span>Location)</code></pre></div>
 <div class="figure">
 <img src="leaflet2.png">
 </div>
@@ -229,7 +207,7 @@ stationID &lt;-<span class="st"> </span><span class="kw"><a href="../reference/c
 
 <span class="co"># Extract only the time series</span>
 MorwickTS &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tsData60UK.html">tsData60UK</a></span>(stationID, <span class="dt">plotOption =</span> <span class="ot">FALSE</span>)
-<span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/plot">plot</a></span>(MorwickTS)
+<span class="kw">plot</span>(MorwickTS)
 
 <span class="co"># Extract time series for a specified temporal window</span>
 twindow &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="kw">as.Date</span>(<span class="st">"1988-01-01"</span>), <span class="kw">as.Date</span>(<span class="st">"1989-12-31"</span>), <span class="dt">by =</span> <span class="st">"days"</span>)
@@ -271,7 +249,7 @@ Kilphedir &lt;-<span class="st"> </span><span class="kw"><a href="../reference/t
 <p>Plese note that this data is updated every 15 minutes and the code will always generate different plots.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Multiple time series extraction</span>
 y &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tsSEPA.html">tsSEPA</a></span>(<span class="dt">stationID =</span> <span class="kw">c</span>(<span class="st">"234253"</span>, <span class="st">"234174"</span>, <span class="st">"234305"</span>))
-<span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/plot">plot</a></span>(y[[<span class="dv">1</span>]], <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">max</span>(y[[<span class="dv">1</span>]], y[[<span class="dv">2</span>]], y[[<span class="dv">3</span>]])), 
+<span class="kw">plot</span>(y[[<span class="dv">1</span>]], <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">max</span>(y[[<span class="dv">1</span>]], y[[<span class="dv">2</span>]], y[[<span class="dv">3</span>]])), 
      <span class="dt">xlab =</span> <span class="st">""</span>, <span class="dt">ylab =</span> <span class="st">"Water level [m]"</span>)
 <span class="kw">lines</span>(y[[<span class="dv">2</span>]], <span class="dt">col =</span> <span class="st">"red"</span>)
 <span class="kw">lines</span>(y[[<span class="dv">3</span>]], <span class="dt">col =</span> <span class="st">"blue"</span>)</code></pre></div>

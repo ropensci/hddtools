@@ -9,25 +9,16 @@ hddtools: Hydrological Data Discovery Tools
 
 [![Travis-CI Build Status](https://travis-ci.org/ropensci/hddtools.svg?branch=master)](https://travis-ci.org/ropensci/hddtools) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/ropensci/hddtools?branch=master&svg=true)](https://ci.appveyor.com/project/ropensci/hddtools) [![codecov.io](https://codecov.io/github/ropensci/hddtools/coverage.svg?branch=master)](https://codecov.io/github/ropensci/hddtools?branch=master) [![](https://badges.ropensci.org/73_status.svg)](https://github.com/ropensci/onboarding/issues/73)
 
-**hddtools** stands for Hydrological Data Discovery Tools. This R package is an open source project designed to facilitate access to a variety of online open data sources relevant for hydrologists and, in general, environmental scientists and practitioners.
+`hddtools` stands for Hydrological Data Discovery Tools. This R package is an open source project designed to facilitate access to a variety of online open data sources relevant for hydrologists and, in general, environmental scientists and practitioners.
 
 This typically implies the download of a metadata catalogue, selection of information needed, a formal request for dataset(s), de-compression, conversion, manual filtering and parsing. All those operations are made more efficient by re-usable functions.
 
 Depending on the data license, functions can provide offline and/or online modes. When redistribution is allowed, for instance, a copy of the dataset is cached within the package and updated twice a year. This is the fastest option and also allows offline use of package's functions. When re-distribution is not allowed, only online mode is provided.
 
-Dependencies & Installation
----------------------------
+Installation
+------------
 
-The hddtools package depends on other CRAN packages. Check for missing dependencies and install them using the commands below:
-
-``` r
-packs <- c("zoo", "sp", "RCurl", "XML", "rnrfa", "Hmisc", "raster", 
-           "stringr", "devtools", "leaflet")
-new_packages <- packs[!(packs %in% installed.packages()[,"Package"])]
-if(length(new_packages)) install.packages(new_packages)
-```
-
-Get the released version from CRAN:
+Get the stable version from CRAN:
 
 ``` r
 install.packages("hddtools")
@@ -39,7 +30,7 @@ Or the development version from github using [devtools](https://github.com/hadle
 devtools::install_github("ropensci/hddtools")
 ```
 
-Load the hddtools package:
+Load the `hddtools` package:
 
 ``` r
 library("hddtools")
@@ -52,9 +43,7 @@ The package contains functions to interact with the data providers listed below.
 
 -   [KGClimateClass](http://koeppen-geiger.vu-wien.ac.at/): The Koppen Climate Classification map is used for classifying the world's climates based on the annual and monthly averages of temperature and precipitation.
 
--   [GRDC](http://www.bafg.de/GRDC/EN/Home/homepage_node.html): The Global Runoff Data Centre (GRDC) provides datasets for all the major rivers in the world.
-
--   [TRMM](http://trmm.gsfc.nasa.gov/): The NASA's Tropical Rainfall Measuring Mission records global historical rainfall estimation in a gridded format since 1998 with a daily temporal resolution and a spatial resolution of 0.25 degrees. **Please note the TRMM function has been temporarily removed from hddtools v0.7 as the ftp at NASA containing the data has been migrated. A new function is under development and will be avalable at the next release (v0.8).**
+-   [GRDC](http://www.bafg.de/GRDC/): The Global Runoff Data Centre (GRDC) provides datasets for all the major rivers in the world.
 
 -   [Data60UK](http://tdwg.catchment.org/datasets.html): The Data60UK initiative collated datasets of areal precipitation and streamflow discharge across 61 gauging sites in England and Wales (UK).
 

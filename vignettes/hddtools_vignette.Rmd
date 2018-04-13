@@ -1,4 +1,5 @@
 ---
+title: "Hydrological Data Discovery Tools - vignette"
 author: "Claudia Vitolo"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -145,32 +146,6 @@ WolfeToneBridge <- tsGRDC(stationID = catalogueGRDC()$grdc_no[7126],
 ```
 
 ![](tsGRDC.png)
-
-### NASA's Tropical Rainfall Measuring Mission
-
-__IMPORTANT NOTE: The TRMM function has been temporarily removed from hddtools v0.7 as the ftp at NASA containing the data has been migrated. A new function is under development and will be avalable at the next release (v0.8).__
-
-The Tropical Rainfall Measuring Mission (TRMM) is a joint mission between NASA and the Japan Aerospace Exploration Agency (JAXA) that uses a research satellite to measure precipitation within the tropics in order to improve our understanding of climate and its variability.
-
-The TRMM satellite records global historical rainfall estimation in a gridded format since 1998 with a daily temporal resolution and a spatial resolution of 0.25 degrees. This information is openly available for educational purposes and downloadable from an FTP server.
-
-The hddtools provides a function, called TRMM(), to download and convert a selected portion of the TRMM dataset into a raster-brick that can be opened in any GIS software.
-
-```{r TRMM}
-# Define a bounding box
-areaBox <- raster::extent(-10, 5, 48, 62)
-
-# Define a temporal extent
-twindow <- seq(as.Date("2012-01-01"), as.Date("2012-03-31"), by = "months")
-
-# Retreive mean monthly precipitations from 3B43_V7 (based on a bounding box and time extent)
-TRMMfile <- TRMM(twindow = twindow, areaBox = areaBox)
-
-library(raster)
-plot(TRMMfile)
-```
-
-![](TRMM.png)
 
 ### Top-Down modelling Working Group (Data60UK and MOPEX)
 The Top-Down modelling Working Group (TDWG) for the Prediction in Ungauged Basins (PUB) Decade (2003-2012) is an initiative of the International Association of Hydrological Sciences (IAHS) which collected datasets for hydrological modelling free-of-charge, available [here](http://tdwg.catchment.org/datasets.html). This package provides a common interface to retrieve, browse and filter information.

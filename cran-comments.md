@@ -1,17 +1,13 @@
-This is a new release (hddtools v0.7).
+This is a new release (hddtools v0.8.1).
 
 ---------------------------------
 
 ## Release Summary
 
-In this new release, we removed the follwoing function because the ftp at NASA containing the data has been migrated:
-
-* TRMM()
-
-A new function is under development and will be avalable at the next release (v0.8).
+Connection to TRMM database removed as the web service is no longer available.
 
 ## Test environment
-* Ubuntu 14.04, R 3.3.1
+* Ubuntu 16.04, R 3.4.3
 
 ## R CMD check results
 

@@ -1,3 +1,7 @@
+# hddtools 0.8.1
+
+* Any reference to TRMM database was removed as the web service is no longer available.
+
 # hddtools 0.8
 
 * tsGRDC function: this function now returns 6 tables (see documentation) according to latest updates on the GRDC side.

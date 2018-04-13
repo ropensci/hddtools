@@ -6,8 +6,8 @@ navbar:
     href: reference/index.html
   - text: Articles
     menu:
-    - text: JOSS paper (under review)
-      href: https://github.com/openjournals/joss-reviews/issues/56
+    - text: JOSS paper
+      href: http://joss.theoj.org/papers/3287a12e7ce5d7e89938a6b4f56fc225
     - text: Abstract/Poster presented at AGU 2014
       href: http://adsabs.harvard.edu/abs/2014AGUFM.H13H1209V
     - text: Vignette
