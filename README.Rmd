@@ -70,9 +70,9 @@ The package contains functions to interact with the data providers listed below.
 
 * [KGClimateClass](http://koeppen-geiger.vu-wien.ac.at/): The Koppen Climate Classification map is used for classifying the world's climates based on the annual and monthly averages of temperature and precipitation.
 
-* [GRDC](http://www.bafg.de/GRDC/EN/Home/homepage_node.html): The Global Runoff Data Centre (GRDC) provides datasets for all the major rivers in the world.
+* [GRDC](http://www.bafg.de/GRDC/): The Global Runoff Data Centre (GRDC) provides datasets for all the major rivers in the world.
 
-* [TRMM](http://trmm.gsfc.nasa.gov/): The NASA's Tropical Rainfall Measuring Mission records global historical rainfall estimation in a gridded format since 1998 with a daily temporal resolution and a spatial resolution of 0.25 degrees. __Please note the TRMM function has been temporarily removed from hddtools v0.7 as the ftp at NASA containing the data has been migrated. A new function is under development and will be avalable at the next release (v0.8).__ 
+* [TRMM](http://trmm.gsfc.nasa.gov/): The NASA's Tropical Rainfall Measuring Mission records global historical rainfall estimation in a gridded format since 1998 with a daily temporal resolution and a spatial resolution of 0.25 degrees. __Please note the TRMM function has been temporarily removed from hddtools v0.7 as the ftp at NASA containing the data has been migrated.__ 
 
 * [Data60UK](http://tdwg.catchment.org/datasets.html): The Data60UK initiative collated datasets of areal precipitation and streamflow discharge across 61 gauging sites in England and Wales (UK). 
 
