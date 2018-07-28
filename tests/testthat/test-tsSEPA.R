@@ -2,9 +2,18 @@ context("tsSEPA")
 
 test_that("Test tsSEPA function", {
 
-  # Retrieve sample data
-  x <- tsSEPA("234253")
+  if (FALSE) {
 
-  expect_that("zoo" %in% class(x), equals(TRUE))
+    skip("No internet connection")
+
+    # Run this test only if there is internet connection
+    if (FALSE) skip("No internet connection")
+
+    # Retrieve sample data
+    x <- tsSEPA("234253")
+
+    expect_that("zoo" %in% class(x), equals(TRUE))
+
+  }
 
 })

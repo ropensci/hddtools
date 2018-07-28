@@ -2,14 +2,19 @@
 #'
 #' @author Claudia Vitolo
 #'
-#' @description This function interfaces the Global Runoff Data Centre database which provides river discharge data for about 9000 sites over 157 countries.
+#' @description This function interfaces the Global Runoff Data Centre database
+#' which provides river discharge data for about 9000 sites over 157 countries.
 #'
-#' @param areaBox bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)
+#' @param areaBox bounding box, a list made of 4 elements: minimum longitude
+#' (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum
+#' latitude (latMax)
 #' @param columnName name of the column to filter
 #' @param columnValue value to look for in the column named columnName
-#' @param useCachedData logical, set to TRUE to use cached data, set to FALSE to retrive data from online source. This is TRUE by default.
+#' @param useCachedData logical, set to TRUE to use cached data, set to FALSE to
+#' retrive data from online source. This is TRUE by default.
 #'
-#' @return This function returns a data frame made of 9481 rows (gauging stations, as per October 2017) and 26 columns:
+#' @return This function returns a data frame made of 9481 rows (gauging
+#' stations, as per October 2017) and 26 columns:
 #' \itemize{
 #'   \item{\code{grdc_no}}{: GRDC station number}
 #'   \item{\code{wmo_reg}}{: WMO region}
@@ -22,7 +27,8 @@
 #'   \item{\code{long}}{: longitude, decimal degree}
 #'   \item{\code{area}}{: catchment size, km2}
 #'   \item{\code{altitude}}{: height of gauge zero, m above sea level}
-#'   \item{\code{ds_stat_no}}{: GRDC station number of next downstream GRDC station}
+#'   \item{\code{ds_stat_no}}{: GRDC station number of next downstream GRDC
+#'   station}
 #'   \item{\code{d_start}}{: daily data available from year}
 #'   \item{\code{d_end}}{: daily data available until year}
 #'   \item{\code{d_yrs}}{: length of time series, daily data}
@@ -33,7 +39,8 @@
 #'   \item{\code{m_miss}}{: percentage of missing values (monthly data)}
 #'   \item{\code{t_start}}{: earliest data available}
 #'   \item{\code{t_end}}{: latest data available}
-#'   \item{\code{t_yrs}}{: maximum length of time series, daily and monthly data}
+#'   \item{\code{t_yrs}}{: maximum length of time series, daily and monthly
+#'   data}
 #'   \item{\code{lta_discharge}}{: mean annual streamflow, m3/s}
 #'   \item{\code{r_volume_yr}}{: mean annual volume, km3}
 #'   \item{\code{r_height_yr}}{: mean annual runoff depth, mm}
@@ -66,7 +73,7 @@ catalogueGRDC <- function(areaBox = NULL,
                           columnValue = NULL,
                           useCachedData = TRUE){
 
-  theurl <- "ftp://ftp.bafg.de/pub/REFERATE/GRDC/website/GRDC_Stations.zip"
+  theurl <- "ftp://ftp.bafg.de/pub/REFERATE/GRDC/catalogue/grdc_stations.zip"
 
   if (useCachedData == TRUE | RCurl::url.exists(theurl) == FALSE){
 
@@ -74,7 +81,6 @@ catalogueGRDC <- function(areaBox = NULL,
 
     load(system.file(file.path("data", "GRDCcatalogue.rda"),
                      package = "hddtools"))
-    GRDCcatalogue <- data.frame(GRDCcatalogue, stringsAsFactors = FALSE)
 
   }else{
 
@@ -82,77 +88,63 @@ catalogueGRDC <- function(areaBox = NULL,
 
     # Retrieve the catalogue
     temp <- tempfile()
-    download.file(theurl,temp)
+    download.file(theurl, temp, quiet = TRUE)
     fileLocation <- utils::unzip(zipfile = temp, exdir = dirname(temp))
     
     GRDCcatalogue <- gdata::read.xls(fileLocation, sheet = "station_catalogue")
     
     unlink(temp)
     
-    # Transform everything to characters
-    GRDCcatalogue[] <- lapply(GRDCcatalogue, as.character)
+    # Transform 'n.a.' and '-' to NA
+    GRDCcatalogue[GRDCcatalogue == "n.a."] <- NA
+    GRDCcatalogue[GRDCcatalogue == "-"] <- NA
     
-    # Convert to numeric some of the columns
-    GRDCcatalogue$lat <- as.numeric(GRDCcatalogue$lat)
-    GRDCcatalogue$long <- as.numeric(GRDCcatalogue$long)
-    GRDCcatalogue$area <- as.numeric(GRDCcatalogue$area)
-    GRDCcatalogue$altitude <- as.numeric(GRDCcatalogue$altitude)
-    GRDCcatalogue$d_start <- as.numeric(GRDCcatalogue$d_start)
-    GRDCcatalogue$d_end <- as.numeric(GRDCcatalogue$d_end)
-    GRDCcatalogue$d_yrs <- as.numeric(GRDCcatalogue$d_yrs)
-    GRDCcatalogue$d_miss <- as.numeric(GRDCcatalogue$d_miss)
-    GRDCcatalogue$m_start <- as.numeric(GRDCcatalogue$m_start)
-    GRDCcatalogue$m_end <- as.numeric(GRDCcatalogue$m_end)
-    GRDCcatalogue$m_yrs <- as.numeric(GRDCcatalogue$m_yrs)
-    GRDCcatalogue$m_miss <- as.numeric(GRDCcatalogue$m_miss)
-    GRDCcatalogue$t_start <- as.numeric(GRDCcatalogue$t_start)
-    GRDCcatalogue$t_end <- as.numeric(GRDCcatalogue$t_end)
-    GRDCcatalogue$t_yrs <- as.numeric(GRDCcatalogue$t_yrs)
-    GRDCcatalogue$lta_discharge <- as.numeric(GRDCcatalogue$lta_discharge)
-    GRDCcatalogue$r_volume_yr <- as.numeric(GRDCcatalogue$r_volume_yr)
-    GRDCcatalogue$r_height_yr <- as.numeric(GRDCcatalogue$r_height_yr)
+    # Transform factors into characters
+    factor_col <- which(lapply(GRDCcatalogue, class) == "factor")
+    GRDCcatalogue[, factor_col] <- lapply(GRDCcatalogue[, factor_col],
+                                          as.character)
     
     # Cleanup non ascii characters
-    GRDCcatalogue$river <- iconv(GRDCcatalogue$river, "latin1", "ASCII", sub="")
-    GRDCcatalogue$station <- iconv(GRDCcatalogue$station, "latin1", "ASCII", sub="")
+    for (i in seq_along(names(GRDCcatalogue))){
+      GRDCcatalogue[, i] <- iconv(GRDCcatalogue[, i], "latin1", "ASCII", sub="")
+    }
+    
+    # Convert to numeric some of the columns
+    for (i in 8:26){
+      GRDCcatalogue[, i] <- as.numeric(as.character(GRDCcatalogue[, i]))
+    }
 
   }
 
   if (!is.null(areaBox)){
-    lonMin <- areaBox@xmin
-    lonMax <- areaBox@xmax
-    latMin <- areaBox@ymin
-    latMax <- areaBox@ymax
-  }else{
-    lonMin <- -180
-    lonMax <- +180
-    latMin <- -90
-    latMax <- +90
-  }
 
-  grdcSelectedBB <- subset(GRDCcatalogue, (GRDCcatalogue$lat <= latMax &
-                                            GRDCcatalogue$lat >= latMin &
-                                            GRDCcatalogue$long <= lonMax &
-                                            GRDCcatalogue$long >= lonMin))
+    grdcSelectedBB <- subset(GRDCcatalogue,
+                             (GRDCcatalogue$lat <= areaBox@ymax & 
+                                GRDCcatalogue$lat >= areaBox@ymin &
+                                GRDCcatalogue$long <= areaBox@xmax &
+                                GRDCcatalogue$long >= areaBox@xmin))
+
+  }else{
+
+    grdcSelectedBB <- GRDCcatalogue
+
+  }
 
   if (!is.null(columnName) & !is.null(columnValue)){
 
     if (tolower(columnName) %in% tolower(names(grdcSelectedBB))){
 
-      col2select <- which(tolower(names(grdcSelectedBB)) ==
-                            tolower(columnName))
-
-      if (sapply(grdcSelectedBB, typeof)[col2select] == "character"){
+      if (class(grdcSelectedBB[, columnName]) == "character"){
         
-        rows2select <- grep(columnValue, grdcSelectedBB[, col2select],
+        rows2select <- grep(columnValue,
+                            as.vector(grdcSelectedBB[, columnName]),
                             ignore.case=TRUE)
         
-      }
-      if (sapply(grdcSelectedBB, typeof)[col2select] == "double"){
+      } else {
         
         rows2select <- eval(parse(text =
-                                    paste0("which(grdcSelectedBB[,col2select] ",
-                                           columnValue, ")")))
+                                    paste0("which(grdcSelectedBB$",
+                                           columnName, " ", columnValue, ")")))
         
       }
       
@@ -180,81 +172,132 @@ catalogueGRDC <- function(areaBox = NULL,
 #'
 #' @author Claudia Vitolo
 #'
-#' @description This function interfaces the Global Runoff Data Centre monthly mean daily discharges database.
+#' @description This function interfaces the Global Runoff Data Centre monthly
+#' mean daily discharges database.
 #'
-#' @param stationID 7 string that identifies a station, GRDC station number is called "grdc no" in the catalogue.
-#' @param plotOption boolean to define whether to plot the results. By default this is set to TRUE.
+#' @param stationID 7 string that identifies a station, GRDC station number is
+#' called "grdc no" in the catalogue.
+#' @param plotOption boolean to define whether to plot the results. By default
+#' this is set to TRUE.
 #'
 #' @return The function returns a list of 6 tables: 
 #' \itemize{
-#'   \item{\strong{LTVD}}{This is a table containing seasonal variability of river discharge based on original daily data. It is made of 8 columns:}
+#'   \item{\strong{LTVD}}{This is a table containing seasonal variability of
+#'   river discharge based on original daily data. It is made of 8 columns:}
 #'     \itemize{
 #'       \item{LTV_LMM_Monthly__MM}{: calendar month}
-#'       \item{LTV_LDM_Day__Value}{: lowest daily discharge value in each calendar month in the given time series, calculated from lowest values of each calendar month in consecutive calendar years.}
-#'       \item{LTV_LDM_Day__YYYY_MM_DD}{: Date of occurrence of lowest daily discharge}
+#'       \item{LTV_LDM_Day__Value}{: lowest daily discharge value in each
+#'       calendar month in the given time series, calculated from lowest values
+#'       of each calendar month in consecutive calendar years.}
+#'       \item{LTV_LDM_Day__YYYY_MM_DD}{: Date of occurrence of lowest daily
+#'       discharge}
 #'       \item{LTV_MDM_Day__MM}{: calendar month}
-#'       \item{LTV_MDM_Day__Value}{: mean of daily discharge values in each calendar month in the given time series, calculated from monthly means of each calendar month in consecutive calendar years.}
+#'       \item{LTV_MDM_Day__Value}{: mean of daily discharge values in each
+#'       calendar month in the given time series, calculated from monthly means
+#'       of each calendar month in consecutive calendar years.}
 #'       \item{LTV_HDM_Day__MM}{: calendar month}
-#'       \item{LTV_HDM_Day__Value}{: highest daily discharge value in each calendar month in the given time series, calculated from highest values of each calendar month in consecutive calendar years.}
-#'       \item{LTV_HDM_Day__YYYY_MM_DD}{: Date of occurrence of highest daily discharge}
+#'       \item{LTV_HDM_Day__Value}{: highest daily discharge value in each
+#'       calendar month in the given time series, calculated from highest values
+#'       of each calendar month in consecutive calendar years.}
+#'       \item{LTV_HDM_Day__YYYY_MM_DD}{: Date of occurrence of highest daily
+#'       discharge}
 #'     }
-#'   \item{\strong{LTVM}}{This is a table containing seasonal variability of river discharge based on monthly data. It is made of 8 columns:}
+#'   \item{\strong{LTVM}}{This is a table containing seasonal variability of
+#'   river discharge based on monthly data. It is made of 8 columns:}
 #'     \itemize{
 #'       \item{LTV_LMM_Monthly__MM}{: calendar month}
-#'       \item{LTV_LMM_Monthly__Value}{: lowest monthly discharge value in each calendar month in the given time series, calculated from lowest values of each calendar month in consecutive calendar years.}
-#'       \item{LTV_LMM_Monthly__YYYY_MM_DD}{: Date of occurrence of lowest monthly discharge}
+#'       \item{LTV_LMM_Monthly__Value}{: lowest monthly discharge value in each
+#'       calendar month in the given time series, calculated from lowest values
+#'       of each calendar month in consecutive calendar years.}
+#'       \item{LTV_LMM_Monthly__YYYY_MM_DD}{: Date of occurrence of lowest
+#'       monthly discharge}
 #'       \item{LTV_MMM_Month__MM}{: calendar month}
-#'       \item{LTV_MMM_Month__Value}{: mean of monthly discharge values in each calendar month in the given time series, calculated from values of each calendar month in consecutive calendar years..}
+#'       \item{LTV_MMM_Month__Value}{: mean of monthly discharge values in each
+#'       calendar month in the given time series, calculated from values of each
+#'       calendar month in consecutive calendar years..}
 #'       \item{LTV_HMM_Month__MM}{: calendar month}
-#'       \item{LTV_HMM_Month__Value}{: highest monthly discharge value in each calendar month in the given time series, calculated from highest values of each calendar month in consecutive calendar years.}
-#'       \item{LTV_HMM_Month__YYYY_MM_DD}{: Date of occurrence of highest monthly discharge}
+#'       \item{LTV_HMM_Month__Value}{: highest monthly discharge value in each
+#'       calendar month in the given time series, calculated from highest values
+#'       of each calendar month in consecutive calendar years.}
+#'       \item{LTV_HMM_Month__YYYY_MM_DD}{: Date of occurrence of highest
+#'       monthly discharge}
 #'     }
 #' \item{\strong{PVD}}{This is a table containing ... It is made of 7 columns:}
 #'   \itemize{
-#'     \item{LQ_Day__Value}{: lowest daily discharge value in the given time series, calculated from lowest values of consecutive calendar years.}
+#'     \item{LQ_Day__Value}{: lowest daily discharge value in the given time
+#'     series, calculated from lowest values of consecutive calendar years.}
 #'     \item{LQ_Day__YYYY_MM_DD}{: Date of occurrence of lowest daily discharge}
-#'     \item{MLQ_Day__Value}{: mean of lowest daily discharge values in the given time series, calculated from lowest values of consecutive calendar years.}
-#'     \item{MQ_Day__Value}{: mean of daily discharge values in the given time series, calculated from yearly means of consecutive calendar years.}
-#'     \item{MHQ_Day__Value}{: mean of highest daily discharge values in the given time series, calculated from highest values of consecutive calendar years.}
-#'     \item{HQ_Day__Value}{: highest daily discharge value in the given time series, calculated from highest values of consecutive calendar years.}
+#'     \item{MLQ_Day__Value}{: mean of lowest daily discharge values in the
+#'     given time series, calculated from lowest values of consecutive calendar
+#'     years.}
+#'     \item{MQ_Day__Value}{: mean of daily discharge values in the given time
+#'     series, calculated from yearly means of consecutive calendar years.}
+#'     \item{MHQ_Day__Value}{: mean of highest daily discharge values in the
+#'     given time series, calculated from highest values of consecutive calendar
+#'     years.}
+#'     \item{HQ_Day__Value}{: highest daily discharge value in the given time
+#'     series, calculated from highest values of consecutive calendar years.}
 #'     \item{HQ_Day__YYYY_MM_DD}{: Date of occurrence of highest daily discharge}
 #'   }
 #' \item{\strong{PVM}}{This is a table containing ... It is made of 5 columns:}
 #'   \itemize{
-#'     \item{LQ_Month__Value}{: lowest monthly discharge value in the given time series, calculated from lowest yearly values of consecutive calendar years.}
-#'     \item{LQ_Month__YYYY_MM}{: month of first occurence of lowest monthly discharge}
-#'     \item{MQ_Month__Value}{: mean of monthly discharge values in the given time series, calculated from yearly means of consecutive calendar years.}
-#'     \item{HQ_Month__Value}{: highest monthly discharge value in the given time series, calculated from highest yearly values of consecutive calendar years.}
-#'     \item{HQ_Month__YYYY_MM}{: month of first occurence of highest monthly discharge}
+#'     \item{LQ_Month__Value}{: lowest monthly discharge value in the given time
+#'     series, calculated from lowest yearly values of consecutive calendar
+#'     years.}
+#'     \item{LQ_Month__YYYY_MM}{: month of first occurence of lowest monthly
+#'     discharge}
+#'     \item{MQ_Month__Value}{: mean of monthly discharge values in the given
+#'     time series, calculated from yearly means of consecutive calendar years.}
+#'     \item{HQ_Month__Value}{: highest monthly discharge value in the given
+#'     time series, calculated from highest yearly values of consecutive
+#'     calendar years.}
+#'     \item{HQ_Month__YYYY_MM}{: month of first occurence of highest monthly
+#'     discharge}
 #'   } 
 #' \item{\strong{YVD}}{This is a table containing ... It is made of 12 columns:}
 #'   \itemize{
 #'     \item{Year_Min_Day__YYYY}{: calender year}
-#'     \item{Year_Min_Day__Value}{: Lowest daily discharge value in the given calendar year, calculated from 12 lowest monthly values in the year in question.}
+#'     \item{Year_Min_Day__Value}{: Lowest daily discharge value in the given
+#'     calendar year, calculated from 12 lowest monthly values in the year in
+#'     question.}
 #'     \item{Year_Min_Day__YYYY_MM_DD}{:  date of first occurence}
 #'     \item{Year_Mean_Min_Day__YYYY}{: calender year}
-#'     \item{Year_Mean_Min_Day__Value}{: mean of lowest daily discharge values in the given calendar year, calculated from 12 lowest monthly values in the year in question.}
+#'     \item{Year_Mean_Min_Day__Value}{: mean of lowest daily discharge values
+#'     in the given calendar year, calculated from 12 lowest monthly values in
+#'     the year in question.}
 #'     \item{Year_Mean_Day__YYYY}{: calender year}
-#'     \item{Year_Mean_Day__Value}{: Mean of daily discharge values in the given calendar year, calculated from 12 monthly means in the year in question.}
+#'     \item{Year_Mean_Day__Value}{: Mean of daily discharge values in the given
+#'     calendar year, calculated from 12 monthly means in the year in question.}
 #'     \item{Year_Mean_Max_Day__YYYY}{: calender year}
-#'     \item{Year_Mean_Max_Day__Value}{: mean of highest daily discharge values in the given calendar year, calculated from 12 highest monthly values in the year in question.}
+#'     \item{Year_Mean_Max_Day__Value}{: mean of highest daily discharge values
+#'     in the given calendar year, calculated from 12 highest monthly values in
+#'     the year in question.}
 #'     \item{Year_Max_Day__YYYY}{: calender year}
-#'     \item{Year_Max_Day__Value}{: highest daily discharge value in the given calendar year, calculated from 12 highest monthly values in the year in question.}
+#'     \item{Year_Max_Day__Value}{: highest daily discharge value in the given
+#'     calendar year, calculated from 12 highest monthly values in the year in
+#'     question.}
 #'     \item{Year_Max_Day__YYYY_MM_DD}{: date of first occurence}
 #'   }
 #' \item{\strong{YVM}}{This is a table containing ... It is made of 8 columns:}
 #'   \itemize{
 #'     \item{Year_Min_Month__YYYY}{: calender year}
-#'     \item{Year_Min_Month__Value}{: lowest monthly discharge value in the given calendar year, calculated from 12 monthly values in the year in question.}
+#'     \item{Year_Min_Month__Value}{: lowest monthly discharge value in the
+#'     given calendar year, calculated from 12 monthly values in the year in
+#'     question.}
 #'     \item{Year_Min_Month__YYYY_MM}{: month of first occurence}
-#'     \item{Year_Mean_Month__Value}{: mean of monthly discharge values in the given calendar year, calculated from 12 monthly values in the year in question.}
+#'     \item{Year_Mean_Month__Value}{: mean of monthly discharge values in the
+#'     given calendar year, calculated from 12 monthly values in the year in
+#'     question.}
 #'     \item{Year_Max_Month__YYYY}{: calender year}
-#'     \item{Year_Max_Month__Value}{: highest monthly discharge value in the given calendar year, calculated from 12 monthly values in the year in question.}
+#'     \item{Year_Max_Month__Value}{: highest monthly discharge value in the
+#'     given calendar year, calculated from 12 monthly values in the year in
+#'     question.}
 #'     \item{Year_Max_Month__YYYY_MM}{: month of first occurence}
 #'   }
 #' }
 #'
-#' @details Please note that not all the GRDC stations listed in the catalogue have monthly data available.
+#' @details Please note that not all the GRDC stations listed in the catalogue
+#' have monthly data available.
 #'
 #' @export
 #'
@@ -271,7 +314,8 @@ tsGRDC <- function(stationID, plotOption = FALSE){
   options(warn = -1)
   grdcLTMMD <- NULL
   
-  catalogueTmp <- catalogueGRDC(columnName = "grdc_no", columnValue = stationID)
+  catalogueTmp <- catalogueGRDC(columnName = "grdc_no",
+                                columnValue = paste0(" == ", stationID))
   
   # Retrieve look-up table
   load(system.file(file.path("data", "grdcLTMMD.rda"), package = "hddtools"))
@@ -290,7 +334,7 @@ tsGRDC <- function(stationID, plotOption = FALSE){
   tf <- tempfile(tmpdir = td, fileext = ".zip")
   
   # download into the placeholder file
-  download.file(zipFile, tf)
+  download.file(zipFile, tf, quiet = TRUE)
   
   # Type of tables
   tablenames <- c("LTVD", "LTVM", "PVD", "PVM", "YVD", "YVM")
@@ -322,7 +366,8 @@ tsGRDC <- function(stationID, plotOption = FALSE){
     
     # find dataset content
     row_data <- grep(pattern = "# Data Set Content:", x = TS)
-    data_names <- trimws(x = unlist(strsplit(TS[row_data], ":")), which = "both")
+    data_names <- trimws(x = unlist(strsplit(TS[row_data], ":")),
+                         which = "both")
     data_names <- data_names[seq(2, length(data_names), 2)]
     data_names <- gsub(pattern = " ", replacement = "", x = data_names)
     data_names <- gsub(pattern = ")", replacement = "", x = data_names)
