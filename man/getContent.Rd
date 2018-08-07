@@ -18,7 +18,7 @@ This function extracts all the links in a ftp page
 \examples{
 \dontrun{
   # Retrieve mopex daily catalogue
-  url <- "ftp://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/Us_438_Daily"
+  url <- "ftp://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/Us_438_Daily/"
   getContent(dirs = url)
 }
 

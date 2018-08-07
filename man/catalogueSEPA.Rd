@@ -4,7 +4,8 @@
 \alias{catalogueSEPA}
 \title{Data source: SEPA catalogue}
 \usage{
-catalogueSEPA(columnName = NULL, columnValue = NULL, useCachedData = TRUE)
+catalogueSEPA(columnName = NULL, columnValue = NULL,
+  useCachedData = TRUE)
 }
 \arguments{
 \item{columnName}{name of the column to filter}

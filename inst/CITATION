@@ -1,11 +1,15 @@
 citHeader("To cite 'hddtools' in publications, please use:")
 
-citEntry(entry = "manual",
-  author = "Claudia Vitolo",
+citEntry(entry = "article",
+  doi = "10.21105/joss.00056",
+  url = "https://doi.org/10.21105/joss.00056",
+  year  = "2017",
+  month = "01",
+  publisher = "The Open Journal",
+  volume = "2",
+  number = "9",
+  author = "Vitolo, Claudia",
   title = "hddtools: Hydrological Data Discovery Tools",
-  year = "2016",
-  note = "R package version 0.3.0",
-  url = "https://CRAN.R-project.org/package=hddtools",
-  doi = "10.5281/zenodo.61570",
-  textVersion = "Claudia Vitolo. hddtools: Hydrological Data Discovery Tools. R package version 0.3.0, https://CRAN.R-project.org/package=hddtools, DOI: 10.5281/zenodo.61570"
+  journal = "The Journal of Open Source Software",
+  textVersion = "Vitolo, C. (2017, January). Hddtools: hydrological data discovery tools. The Journal of Open Source Software, 2(9). doi:10.21105/joss.00056"
 )

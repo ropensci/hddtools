@@ -20,4 +20,5 @@ Suggests: testthat, leaflet, rmarkdown, knitr
 VignetteBuilder: knitr
 License: GPL-3
 Repository: CRAN
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
+Encoding: UTF-8
