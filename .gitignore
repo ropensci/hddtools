@@ -14,6 +14,9 @@ hddtools.Rproj
 
 # Text files
 vignettes/hddtools_vignette_cache/
+vignettes/hddtools_vignette.R
+vignettes/hddtools_vignette.html
+vignettes/hddtools_vignette.md
 review.md
 
 inst/tmp/

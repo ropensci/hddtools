@@ -16,7 +16,7 @@ BugReports: https://github.com/ropensci/hddtools/issues
 Description: Facilitates discovery and handling of hydrological data, access to catalogues and databases.
 Depends: R (>= 3.2.1), rgdal
 Imports: zoo, sp, RCurl, XML, rnrfa, Hmisc, raster, stringr, gdata, tibble
-Suggests: testthat, leaflet, rmarkdown, knitr
+Suggests: testthat, leaflet, rmarkdown, knitr, pkgdown
 VignetteBuilder: knitr
 License: GPL-3
 Repository: CRAN
