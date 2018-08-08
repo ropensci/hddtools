@@ -11,7 +11,7 @@ addons:
 r_github_packages:
   - jimhester/lintr
   - jimhester/covr
-  - hadley/pkgdown
+  - r-lib/pkgdown
 
 after_success:
   - Rscript -e 'covr::codecov()'

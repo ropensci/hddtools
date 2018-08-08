@@ -5,19 +5,20 @@
 \alias{GRDCcatalogue}
 \title{Data set: The GRDC Catalogue}
 \format{A data frame with 9252 stations (rows) and 46 metadata fields.
+\describe{
   \itemize{
-    \item{\code{grdc_no}}{: GRDC station number}
-    \item{\code{wmo_reg}}{: WMO region}
-    \item{\code{sub_reg}}{: WMO subregion}
-    \item{\code{nat_id}}{: national station ID}
-    \item{\code{river}}{: river name}
-    \item{\code{station}}{: station name}
-    \item{\code{country_code}}{: country code (ISO 3166)}
-    \item{\code{lat}}{: latitude, decimal degree}
-    \item{\code{long}}{: longitude, decimal degree}
-    \item{\code{area}}{: catchment size, km2}
-    \item{\code{altitude}}{: height of gauge zero, m above sea level}
-    \item{\code{ds_stat_no}}{: GRDC station number of next downstream GRDC station}
+  \item{\code{grdc_no}}{: GRDC station number}
+  \item{\code{wmo_reg}}{: WMO region}
+  \item{\code{sub_reg}}{: WMO subregion}
+  \item{\code{nat_id}}{: national station ID}
+  \item{\code{river}}{: river name}
+  \item{\code{station}}{: station name}
+  \item{\code{country_code}}{: country code (ISO 3166)}
+  \item{\code{lat}}{: latitude, decimal degree}
+  \item{\code{long}}{: longitude, decimal degree}
+  \item{\code{area}}{: catchment size, km2}
+  \item{\code{altitude}}{: height of gauge zero, m above sea level}
+  \item{\code{ds_stat_no}}{: GRDC station number of next downstream GRDC station}
   \item{\code{d_start}}{: daily data available from year}
   \item{\code{d_end}}{: daily data available until year}
   \item{\code{d_yrs}}{: length of time series, daily data}
@@ -32,8 +33,14 @@
   \item{\code{lta_discharge}}{: mean annual streamflow, m3/s}
   \item{\code{r_volume_yr}}{: mean annual volume, km3}
   \item{\code{r_height_yr}}{: mean annual runoff depth, mm}
-        }}
-\source{\url{http://www.bafg.de/GRDC/EN/02_srvcs/21_tmsrs/211_ctlgs/catalogues_node.html}}
-\usage{data("GRDCcatalogue")}
-\description{The GRDC catalogue}
+}}}
+\source{
+\url{http://www.bafg.de/GRDC/EN/02_srvcs/21_tmsrs/211_ctlgs/catalogues_node.html}
+}
+\usage{
+data("GRDCcatalogue")
+}
+\description{
+The GRDC catalogue
+}
 \keyword{datasets}
