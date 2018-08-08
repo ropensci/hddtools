@@ -1,0 +1,62 @@
+navbar:
+  title: ~
+  type: default
+  left:
+  - text: Reference
+    href: reference/index.html
+  - text: Articles
+    menu:
+    - text: JOSS paper
+      href: http://joss.theoj.org/papers/3287a12e7ce5d7e89938a6b4f56fc225
+    - text: Abstract/Poster presented at AGU 2014
+      href: http://adsabs.harvard.edu/abs/2014AGUFM.H13H1209V
+    - text: Vignette
+      href: articles/index.html
+  - text: News
+    href: news/index.html
+  right:
+  - icon: fa-github fa-lg
+    href: https://github.com/ropensci/hddtools/
+
+reference:
+- title: Get catalogues
+  desc: >
+    Get information about available monitoring stations from various providers
+  contents:
+  - hddtools
+  - catalogueData60UK
+  - catalogueGRDC
+  - catalogueMOPEX
+  - catalogueSEPA
+
+- title: Get datasets
+  desc: >
+    Get data from various providers
+  contents:
+  - tsData60UK
+  - tsGRDC
+  - tsMOPEX
+  - tsSEPA
+  - grdcLTMMD
+  - KGClimateClass
+
+- title: Utility functions
+  desc: >
+    Utility functions, mainly used internally
+  contents:
+  - bboxSpatialPolygon
+  - getContent
+
+- title: Cached catalogues
+  desc: >
+    Cached version of the output of the catalogue*() functions
+  contents:
+  - Data60UKcatalogue
+  - GRDCcatalogue
+  - MOPEXcatalogue
+  - SEPAcatalogue
+
+articles:
+- title: All articles
+  desc: ~
+  contents: hddtools_vignette
