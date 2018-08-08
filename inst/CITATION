@@ -2,7 +2,6 @@ citHeader("To cite 'hddtools' in publications, please use:")
 
 citEntry(entry = "article",
   doi = "10.21105/joss.00056",
-  url = "https://doi.org/10.21105/joss.00056",
   year  = "2017",
   month = "01",
   publisher = "The Open Journal",
