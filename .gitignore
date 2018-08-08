@@ -22,3 +22,6 @@ review.md
 inst/tmp/
 inst/paper/paper.pdf
 inst/blog
+
+# Remove docs folder (site builds automatically)
+docs/*
