@@ -141,7 +141,7 @@ NULL
 #'   \item{\code{nat_id}}{: national station ID}
 #'   \item{\code{river}}{: river name}
 #'   \item{\code{station}}{: station name}
-#'   \item{\code{country_code}}{: country code (ISO 3166)}
+#'   \item{\code{country}}{: country code (ISO 3166)}
 #'   \item{\code{lat}}{: latitude, decimal degree}
 #'   \item{\code{long}}{: longitude, decimal degree}
 #'   \item{\code{area}}{: catchment size, km2}
