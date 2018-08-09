@@ -135,7 +135,6 @@ NULL
 #'
 #' @format A data frame with 9252 stations (rows) and 46 metadata fields.
 #' \describe{
-#'   \itemize{
 #'   \item{\code{grdc_no}}{: GRDC station number}
 #'   \item{\code{wmo_reg}}{: WMO region}
 #'   \item{\code{sub_reg}}{: WMO subregion}
@@ -162,7 +161,7 @@ NULL
 #'   \item{\code{lta_discharge}}{: mean annual streamflow, m3/s}
 #'   \item{\code{r_volume_yr}}{: mean annual volume, km3}
 #'   \item{\code{r_height_yr}}{: mean annual runoff depth, mm}
-#' }}
+#' }
 #'
 #' @keywords datasets
 #'
