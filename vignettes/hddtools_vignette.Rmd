@@ -1,11 +1,11 @@
 ---
-title: "Hydrological Data Discovery Tools - vignette"
+title: "hddtools: Hydrological Data Discovery Tools"
 author: "Claudia Vitolo"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
+  %\VignetteIndexEntry{hddtools}
   %\VignetteEngine{knitr::knitr}
-  %\VignetteIndexEntry{hddtools: Hydrological Data Discovery Tools}
   %\usepackage[UTF-8]{inputenc}
 ---
 

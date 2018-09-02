@@ -1,3 +1,9 @@
+# hddtools 0.8.2
+
+* Connection to TRMM database removed as the web service is no longer available.
+* Fixed problem with Rd file which prevented the manual to be created.
+* Fixed problem with URL in DESCRIPTION file
+
 # hddtools 0.8.1
 
 * Any reference to TRMM database was removed as the web service is no longer available.

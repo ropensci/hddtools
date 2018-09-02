@@ -9,7 +9,6 @@ README_cache
 README_files
 assets
 cran-comments.md
-NEWS.md
 vignettes/hddtools_vignette_cache/*
 .travis.yml
 appveyor.yml
