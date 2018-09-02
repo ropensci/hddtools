@@ -78,6 +78,14 @@ catalogueGRDC <- function(areaBox = NULL,
   if (useCachedData == TRUE | RCurl::url.exists(theurl) == FALSE){
 
     message("Using cached data.")
+    
+    if (RCurl::url.exists(theurl) == FALSE){
+
+      message(paste("There was a problem when trying to access the server,",
+                    "either the server is down or",
+                    "you have no internet connection."))
+
+    }
 
     load(system.file(file.path("data", "GRDCcatalogue.rda"),
                      package = "hddtools"))
