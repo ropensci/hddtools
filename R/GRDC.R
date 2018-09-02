@@ -322,141 +322,149 @@ tsGRDC <- function(stationID, plotOption = FALSE){
   options(warn = -1)
   grdcLTMMD <- NULL
   
-  catalogueTmp <- catalogueGRDC(columnName = "grdc_no",
-                                columnValue = paste0(" == ", stationID))
-  
-  # Retrieve look-up table
-  load(system.file(file.path("data", "grdcLTMMD.rda"), package = "hddtools"))
-  
-  # Retrieve WMO region from catalogue
-  wmoRegion <- catalogueTmp$wmo_reg
-  
-  # Retrieve ftp server location
-  zipFile <- as.character(grdcLTMMD[which(grdcLTMMD$WMO_Region == wmoRegion),
-                                    "Archive"])
-  
-  # create a temporary directory
-  td <- tempdir()
-  
-  # create the placeholder file
-  tf <- tempfile(tmpdir = td, fileext = ".zip")
-  
-  # download into the placeholder file
-  download.file(zipFile, tf, quiet = TRUE)
-  
-  # Type of tables
-  tablenames <- c("LTVD", "LTVM", "PVD", "PVM", "YVD", "YVM")
-  
-  # get the name of the file to unzip
-  fname <- paste0(stationID, "_Q_", tablenames, ".csv")
-  
-  # unzip the file to the temporary directory
-  unzip(tf, files = fname, exdir = td, overwrite = TRUE)
-  
-  # fpath is the full path to the extracted file
-  fpath <- file.path(td, fname)
-  
-  if (!all(file.exists(fpath))) {
+  catalogueTmp <- catalogueGRDC()
+  catalogueTmp <- catalogueTmp[which(catalogueTmp$grdc_no == stationID), ]
+
+  if (nrow(catalogueTmp) > 0){
+
+    # Retrieve look-up table
+    load(system.file(file.path("data", "grdcLTMMD.rda"), package = "hddtools"))
     
-    stop("Station does not have monthly records")
+    # Retrieve WMO region from catalogue
+    wmoRegion <- catalogueTmp$wmo_reg
     
-  }
-  
-  message("Station has monthly records")
-  
-  # Initialise empty list of tables
-  ltables <- list()
-  
-  # Populate tables
-  for (j in seq_along(fpath)) {
+    # Retrieve ftp server location
+    zipFile <- as.character(grdcLTMMD[which(grdcLTMMD$WMO_Region == wmoRegion),
+                                      "Archive"])
     
-    TS <- readLines(fpath[j])
+    # create a temporary directory
+    td <- tempdir()
     
-    # find dataset content
-    row_data <- grep(pattern = "# Data Set Content:", x = TS)
-    data_names <- trimws(x = unlist(strsplit(TS[row_data], ":")),
-                         which = "both")
-    data_names <- data_names[seq(2, length(data_names), 2)]
-    data_names <- gsub(pattern = " ", replacement = "", x = data_names)
-    data_names <- gsub(pattern = ")", replacement = "", x = data_names)
-    data_names <- gsub(pattern = "\\(", replacement = "_", x = data_names)
-    data_names <- gsub(pattern = "\\.", replacement = "_", x = data_names)
+    # create the placeholder file
+    tf <- tempfile(tmpdir = td, fileext = ".zip")
     
-    ## find data lines
-    row_data_lines <- grep(pattern = "# Data lines:", x = TS)[1]
-    chr_positions <- gregexpr(pattern = "[0-9]", text = TS[row_data_lines])[[1]]
-    lchr_positions <- length(chr_positions)
-    rows_to_read <- as.numeric(substr(x = TS[row_data_lines],
-                                      start = chr_positions[1],
-                                      stop = chr_positions[lchr_positions]))
+    # download into the placeholder file
+    download.file(zipFile, tf, quiet = TRUE)
     
-    # find tables
-    row_data <- grep(pattern = "# DATA", x = TS, ignore.case = FALSE)
-    row_start <- row_data + 2
-    row_end <- row_start + rows_to_read - 1
+    # Type of tables
+    tablenames <- c("LTVD", "LTVM", "PVD", "PVM", "YVD", "YVM")
     
-    # Read columns and assign names
-    column_names <- c()
-    for (k in seq_along(data_names)) {
-      tempcolnames <- unlist(strsplit(TS[row_data[k] + 1], ";"))
-      tempcolnames <- trimws(tempcolnames, which = "both")
-      tempcolnames <- gsub(pattern = "-", replacement = "_", x = tempcolnames)
-      column_names <- c(column_names, paste0(data_names[k], "__", tempcolnames))
+    # get the name of the file to unzip
+    fname <- paste0(stationID, "_Q_", tablenames, ".csv")
+    
+    # unzip the file to the temporary directory
+    unzip(tf, files = fname, exdir = td, overwrite = TRUE)
+    
+    # fpath is the full path to the extracted file
+    fpath <- file.path(td, fname)
+    
+    if (!all(file.exists(fpath))) {
+      
+      stop("Station does not have monthly records")
+      
     }
     
-    for (w in seq_along(row_start)) {
-      # Assemble data frame
-      row_split <- unlist(strsplit(TS[row_start[w]:row_end[w]], ";"))
-      no_spaces <- trimws(row_split, which = c("both"))
-      if (w == 1) {
-        tmp <- matrix(no_spaces, nrow = rows_to_read, byrow = TRUE)
-      } else {
-        tmp <- cbind(tmp, matrix(no_spaces, nrow = rows_to_read, byrow = TRUE))
+    message("Station has monthly records")
+    
+    # Initialise empty list of tables
+    ltables <- list()
+    
+    # Populate tables
+    for (j in seq_along(fpath)) {
+      
+      TS <- readLines(fpath[j])
+      
+      # find dataset content
+      row_data <- grep(pattern = "# Data Set Content:", x = TS)
+      data_names <- trimws(x = unlist(strsplit(TS[row_data], ":")),
+                           which = "both")
+      data_names <- data_names[seq(2, length(data_names), 2)]
+      data_names <- gsub(pattern = " ", replacement = "", x = data_names)
+      data_names <- gsub(pattern = ")", replacement = "", x = data_names)
+      data_names <- gsub(pattern = "\\(", replacement = "_", x = data_names)
+      data_names <- gsub(pattern = "\\.", replacement = "_", x = data_names)
+      
+      ## find data lines
+      row_data_lines <- grep(pattern = "# Data lines:", x = TS)[1]
+      chr_positions <- gregexpr(pattern = "[0-9]", text = TS[row_data_lines])[[1]]
+      lchr_positions <- length(chr_positions)
+      rows_to_read <- as.numeric(substr(x = TS[row_data_lines],
+                                        start = chr_positions[1],
+                                        stop = chr_positions[lchr_positions]))
+      
+      # find tables
+      row_data <- grep(pattern = "# DATA", x = TS, ignore.case = FALSE)
+      row_start <- row_data + 2
+      row_end <- row_start + rows_to_read - 1
+      
+      # Read columns and assign names
+      column_names <- c()
+      for (k in seq_along(data_names)) {
+        tempcolnames <- unlist(strsplit(TS[row_data[k] + 1], ";"))
+        tempcolnames <- trimws(tempcolnames, which = "both")
+        tempcolnames <- gsub(pattern = "-", replacement = "_", x = tempcolnames)
+        column_names <- c(column_names, paste0(data_names[k], "__", tempcolnames))
       }
+      
+      for (w in seq_along(row_start)) {
+        # Assemble data frame
+        row_split <- unlist(strsplit(TS[row_start[w]:row_end[w]], ";"))
+        no_spaces <- trimws(row_split, which = c("both"))
+        if (w == 1) {
+          tmp <- matrix(no_spaces, nrow = rows_to_read, byrow = TRUE)
+        } else {
+          tmp <- cbind(tmp, matrix(no_spaces, nrow = rows_to_read, byrow = TRUE))
+        }
+      }
+      
+      df <- data.frame(tmp, stringsAsFactors = FALSE)
+      names(df) <- column_names
+      
+      ltables[[j]] <- df
+      
     }
     
-    df <- data.frame(tmp, stringsAsFactors = FALSE)
-    names(df) <- column_names
+    names(ltables) <- tablenames
     
-    ltables[[j]] <- df
+    if ( plotOption == TRUE ){
+      
+      ltable <- ltables$LTVM
+      
+      dummyTime <- seq(as.Date("2012-01-01"),
+                       as.Date("2012-12-31"),
+                       by = "months")
+      
+      plot(zoo::zoo(ltable$LTV_MMM_Month__Value, order.by = dummyTime),
+           main = paste("Monthly statistics: ",
+                        catalogueTmp$station, " (",
+                        catalogueTmp$country_code, ")", sep=""),
+           type = "l", ylim = c(min(as.numeric(ltable$LTV_LMM_Monthly__Value)),
+                                max(as.numeric(ltable$LTV_HMM_Month__Value))),
+           xlab = "", ylab = "m3/s", xaxt = "n")
+      axis(1, at = dummyTime, labels = format(dummyTime, "%b"))
+      polygon(c(dummyTime,rev(dummyTime)), c(ltable$LTV_LMM_Monthly__Value,
+                                             rev(ltable$LTV_HMM_Month__Value)),
+              col = "orange",
+              lty = 0,
+              lwd = 2)
+      lines(zoo::zoo(ltable$LTV_MMM_Month__Value, order.by = dummyTime),
+            lty = 2, lwd = 3, col = "red")
+      
+      legend("top", legend = c("Min-Max range", "Mean"),
+             bty = "n",
+             col = c("orange", "red"),
+             lty = c(0, 2), lwd = c(0, 3),
+             pch = c(22, NA),
+             pt.bg = c("orange", NA),
+             pt.cex = 2)
+    }
     
+    return(ltables)
+
+  }else{
+
+    message("No data is available for this station!")
+
   }
-  
-  names(ltables) <- tablenames
-  
-  if ( plotOption == TRUE ){
-    
-    ltable <- ltables$LTVM
-    
-    dummyTime <- seq(as.Date("2012-01-01"),
-                     as.Date("2012-12-31"),
-                     by = "months")
-    
-    plot(zoo::zoo(ltable$LTV_MMM_Month__Value, order.by = dummyTime),
-         main = paste("Monthly statistics: ",
-                      catalogueTmp$station, " (",
-                      catalogueTmp$country_code, ")", sep=""),
-         type = "l", ylim = c(min(as.numeric(ltable$LTV_LMM_Monthly__Value)),
-                              max(as.numeric(ltable$LTV_HMM_Month__Value))),
-         xlab = "", ylab = "m3/s", xaxt = "n")
-    axis(1, at = dummyTime, labels = format(dummyTime, "%b"))
-    polygon(c(dummyTime,rev(dummyTime)), c(ltable$LTV_LMM_Monthly__Value,
-                                           rev(ltable$LTV_HMM_Month__Value)),
-            col = "orange",
-            lty = 0,
-            lwd = 2)
-    lines(zoo::zoo(ltable$LTV_MMM_Month__Value, order.by = dummyTime),
-          lty = 2, lwd = 3, col = "red")
-    
-    legend("top", legend = c("Min-Max range", "Mean"),
-           bty = "n",
-           col = c("orange", "red"),
-           lty = c(0, 2), lwd = c(0, 3),
-           pch = c(22, NA),
-           pt.bg = c("orange", NA),
-           pt.cex = 2)
-  }
-  
-  return(ltables)
 
 }
