@@ -360,11 +360,9 @@ tsGRDC <- function(stationID, plotOption = FALSE){
     
     if (!all(file.exists(fpath))) {
       
-      stop("Station does not have monthly records")
+      stop("Data are not available at this station")
       
     }
-    
-    message("Station has monthly records")
     
     # Initialise empty list of tables
     ltables <- list()
@@ -391,6 +389,12 @@ tsGRDC <- function(stationID, plotOption = FALSE){
       rows_to_read <- as.numeric(substr(x = TS[row_data_lines],
                                         start = chr_positions[1],
                                         stop = chr_positions[lchr_positions]))
+
+      if (rows_to_read > 0){
+
+        stop("Data are not available at this station")
+
+      }
       
       # find tables
       row_data <- grep(pattern = "# DATA", x = TS, ignore.case = FALSE)
