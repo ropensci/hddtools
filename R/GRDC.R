@@ -99,26 +99,19 @@ catalogueGRDC <- function(areaBox = NULL,
     download.file(theurl, temp, quiet = TRUE)
     fileLocation <- utils::unzip(zipfile = temp, exdir = dirname(temp))
     
-    GRDCcatalogue <- gdata::read.xls(fileLocation, sheet = "station_catalogue")
-    
-    unlink(temp)
-    
-    # Transform 'n.a.' and '-' to NA
-    GRDCcatalogue[GRDCcatalogue == "n.a."] <- NA
-    GRDCcatalogue[GRDCcatalogue == "-"] <- NA
-    
-    # Transform factors into characters
-    factor_col <- which(lapply(GRDCcatalogue, class) == "factor")
-    GRDCcatalogue[, factor_col] <- lapply(GRDCcatalogue[, factor_col],
-                                          as.character)
-    
+    GRDCcatalogue <- gdata::read.xls(xls = fileLocation,
+                                     sheet = "station_catalogue",
+                                     na.strings = c("n.a.", "-", ""),
+                                     stringsAsFactors = FALSE)
+
     # Cleanup non ascii characters
     for (i in seq_along(names(GRDCcatalogue))){
       GRDCcatalogue[, i] <- iconv(GRDCcatalogue[, i], "latin1", "ASCII", sub="")
     }
     
     # Convert to numeric some of the columns
-    for (i in 8:26){
+    idx <- which(!(names(GRDCcatalogue) %in% c("river", "station", "country")))
+    for (i in idx){
       GRDCcatalogue[, i] <- as.numeric(as.character(GRDCcatalogue[, i]))
     }
 
@@ -187,6 +180,7 @@ catalogueGRDC <- function(areaBox = NULL,
 #' called "grdc no" in the catalogue.
 #' @param plotOption boolean to define whether to plot the results. By default
 #' this is set to TRUE.
+#' @param ... additional argument to pass to \code{catalogueGRDC()}.
 #'
 #' @return The function returns a list of 6 tables: 
 #' \itemize{
@@ -317,12 +311,12 @@ catalogueGRDC <- function(areaBox = NULL,
 #' }
 #'
 
-tsGRDC <- function(stationID, plotOption = FALSE){
+tsGRDC <- function(stationID, plotOption = FALSE, ...){
 
   options(warn = -1)
   grdcLTMMD <- NULL
   
-  catalogueTmp <- catalogueGRDC()
+  catalogueTmp <- catalogueGRDC(...)
   catalogueTmp <- catalogueTmp[which(catalogueTmp$grdc_no == stationID), ]
 
   if (nrow(catalogueTmp) > 0){

@@ -4,7 +4,7 @@
 \alias{tsGRDC}
 \title{Interface for the Global Runoff Data Centre database of Monthly Time Series}
 \usage{
-tsGRDC(stationID, plotOption = FALSE)
+tsGRDC(stationID, plotOption = FALSE, ...)
 }
 \arguments{
 \item{stationID}{7 string that identifies a station, GRDC station number is
@@ -12,6 +12,8 @@ called "grdc no" in the catalogue.}
 
 \item{plotOption}{boolean to define whether to plot the results. By default
 this is set to TRUE.}
+
+\item{...}{additional argument to pass to \code{catalogueGRDC()}.}
 }
 \value{
 The function returns a list of 6 tables: 
