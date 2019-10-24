@@ -71,21 +71,21 @@
 catalogueGRDC <- function(areaBox = NULL,
                           columnName = NULL,
                           columnValue = NULL,
-                          useCachedData = TRUE){
+                          useCachedData = TRUE) {
 
   theurl <- "ftp://ftp.bafg.de/pub/REFERATE/GRDC/catalogue/grdc_stations.zip"
 
-  if (useCachedData == TRUE | RCurl::url.exists(theurl) == FALSE){
+  if (useCachedData == TRUE | RCurl::url.exists(theurl) == FALSE) {
 
-    message("Using cached data.")
-    
-    if (RCurl::url.exists(theurl) == FALSE){
+    if (RCurl::url.exists(theurl) == FALSE) {
 
       message(paste("There was a problem when trying to access the server,",
                     "either the server is down or",
-                    "you have no internet connection."))
+                    "you have no internet connection.\n"))
 
     }
+
+    message("Using cached data.")
 
     load(system.file(file.path("data", "GRDCcatalogue.rda"),
                      package = "hddtools"))
@@ -98,29 +98,30 @@ catalogueGRDC <- function(areaBox = NULL,
     temp <- tempfile()
     download.file(theurl, temp, quiet = TRUE)
     fileLocation <- utils::unzip(zipfile = temp, exdir = dirname(temp))
-    
+
     GRDCcatalogue <- gdata::read.xls(xls = fileLocation,
-                                     sheet = "station_catalogue",
+                                     sheet = "stationCatalogue",
                                      na.strings = c("n.a.", "-", ""),
                                      stringsAsFactors = FALSE)
 
     # Cleanup non ascii characters
-    for (i in seq_along(names(GRDCcatalogue))){
-      GRDCcatalogue[, i] <- iconv(GRDCcatalogue[, i], "latin1", "ASCII", sub="")
+    for (i in seq_along(names(GRDCcatalogue))) {
+      GRDCcatalogue[, i] <- iconv(GRDCcatalogue[, i], "latin1", "ASCII",
+                                  sub = "")
     }
-    
+
     # Convert to numeric some of the columns
     idx <- which(!(names(GRDCcatalogue) %in% c("river", "station", "country")))
-    for (i in idx){
+    for (i in idx) {
       GRDCcatalogue[, i] <- as.numeric(as.character(GRDCcatalogue[, i]))
     }
 
   }
 
-  if (!is.null(areaBox)){
+  if (!is.null(areaBox)) {
 
     grdcSelectedBB <- subset(GRDCcatalogue,
-                             (GRDCcatalogue$lat <= areaBox@ymax & 
+                             (GRDCcatalogue$lat <= areaBox@ymax &
                                 GRDCcatalogue$lat >= areaBox@ymin &
                                 GRDCcatalogue$long <= areaBox@xmax &
                                 GRDCcatalogue$long >= areaBox@xmin))
@@ -131,25 +132,25 @@ catalogueGRDC <- function(areaBox = NULL,
 
   }
 
-  if (!is.null(columnName) & !is.null(columnValue)){
+  if (!is.null(columnName) & !is.null(columnValue)) {
 
-    if (tolower(columnName) %in% tolower(names(grdcSelectedBB))){
+    if (tolower(columnName) %in% tolower(names(grdcSelectedBB))) {
 
-      if (class(grdcSelectedBB[, columnName]) == "character"){
-        
+      if (class(grdcSelectedBB[, columnName]) == "character") {
+
         rows2select <- grep(columnValue,
                             as.vector(grdcSelectedBB[, columnName]),
-                            ignore.case=TRUE)
-        
+                            ignore.case = TRUE)
+
       } else {
-        
-        rows2select <- eval(parse(text =
-                                    paste0("which(grdcSelectedBB$",
-                                           columnName, " ", columnValue, ")")))
-        
+
+        rows2select <- eval(parse(text = paste0("which(grdcSelectedBB$",
+                                                columnName, " ",
+                                                columnValue, ")")))
+
       }
-      
-      grdcTable <- grdcSelectedBB[rows2select,]
+
+      grdcTable <- grdcSelectedBB[rows2select, ]
 
     }else{
 
@@ -180,9 +181,10 @@ catalogueGRDC <- function(areaBox = NULL,
 #' called "grdc no" in the catalogue.
 #' @param plotOption boolean to define whether to plot the results. By default
 #' this is set to TRUE.
+#' @param catalogue station catalogue obstained from \code{catalogueGRDC()}
 #' @param ... additional argument to pass to \code{catalogueGRDC()}.
 #'
-#' @return The function returns a list of 6 tables: 
+#' @return The function returns a list of 6 tables:
 #' \itemize{
 #'   \item{\strong{LTVD}}{This is a table containing seasonal variability of
 #'   river discharge based on original daily data. It is made of 8 columns:}
@@ -239,7 +241,7 @@ catalogueGRDC <- function(areaBox = NULL,
 #'     years.}
 #'     \item{HQ_Day__Value}{: highest daily discharge value in the given time
 #'     series, calculated from highest values of consecutive calendar years.}
-#'     \item{HQ_Day__YYYY_MM_DD}{: Date of occurrence of highest daily discharge}
+#'     \item{HQ_Day__YYYY_MM_DD}{: Occurrence date of highest daily discharge}
 #'   }
 #' \item{\strong{PVM}}{This is a table containing ... It is made of 5 columns:}
 #'   \itemize{
@@ -255,7 +257,7 @@ catalogueGRDC <- function(areaBox = NULL,
 #'     calendar years.}
 #'     \item{HQ_Month__YYYY_MM}{: month of first occurence of highest monthly
 #'     discharge}
-#'   } 
+#'   }
 #' \item{\strong{YVD}}{This is a table containing ... It is made of 12 columns:}
 #'   \itemize{
 #'     \item{Year_Min_Day__YYYY}{: calender year}
@@ -311,61 +313,64 @@ catalogueGRDC <- function(areaBox = NULL,
 #' }
 #'
 
-tsGRDC <- function(stationID, plotOption = FALSE, ...){
+tsGRDC <- function(stationID, plotOption = FALSE, catalogue = NULL, ...) {
 
   options(warn = -1)
   grdcLTMMD <- NULL
-  
-  catalogueTmp <- catalogueGRDC(...)
+
+  if (is.null(catalogue)) {
+    catalogueTmp <- catalogueGRDC(...)
+  }else{
+    catalogueTmp <- catalogue
+  }
   catalogueTmp <- catalogueTmp[which(catalogueTmp$grdc_no == stationID), ]
 
-  if (nrow(catalogueTmp) > 0){
+  if (nrow(catalogueTmp) > 0) {
 
     # Retrieve look-up table
     load(system.file(file.path("data", "grdcLTMMD.rda"), package = "hddtools"))
-    
+
     # Retrieve WMO region from catalogue
     wmoRegion <- catalogueTmp$wmo_reg
-    
+
     # Retrieve ftp server location
     zipFile <- as.character(grdcLTMMD[which(grdcLTMMD$WMO_Region == wmoRegion),
                                       "Archive"])
-    
+
     # create a temporary directory
     td <- tempdir()
-    
+
     # create the placeholder file
     tf <- tempfile(tmpdir = td, fileext = ".zip")
-    
+
     # download into the placeholder file
     download.file(zipFile, tf, quiet = TRUE)
-    
+
     # Type of tables
     tablenames <- c("LTVD", "LTVM", "PVD", "PVM", "YVD", "YVM")
-    
+
     # get the name of the file to unzip
     fname <- paste0(stationID, "_Q_", tablenames, ".csv")
-    
+
     # unzip the file to the temporary directory
     unzip(tf, files = fname, exdir = td, overwrite = TRUE)
-    
+
     # fpath is the full path to the extracted file
     fpath <- file.path(td, fname)
-    
+
     if (!all(file.exists(fpath))) {
-      
+
       stop("Data are not available at this station")
-      
+
     }
-    
+
     # Initialise empty list of tables
     ltables <- list()
-    
+
     # Populate tables
     for (j in seq_along(fpath)) {
-      
+
       TS <- readLines(fpath[j])
-      
       # find dataset content
       row_data <- grep(pattern = "# Data Set Content:", x = TS)
       data_names <- trimws(x = unlist(strsplit(TS[row_data], ":")),
@@ -375,79 +380,84 @@ tsGRDC <- function(stationID, plotOption = FALSE, ...){
       data_names <- gsub(pattern = ")", replacement = "", x = data_names)
       data_names <- gsub(pattern = "\\(", replacement = "_", x = data_names)
       data_names <- gsub(pattern = "\\.", replacement = "_", x = data_names)
-      
+
       ## find data lines
       row_data_lines <- grep(pattern = "# Data lines:", x = TS)[1]
-      chr_positions <- gregexpr(pattern = "[0-9]", text = TS[row_data_lines])[[1]]
+      chr_positions <- gregexpr(pattern = "[0-9]",
+                                text = TS[row_data_lines])[[1]]
       lchr_positions <- length(chr_positions)
       rows_to_read <- as.numeric(substr(x = TS[row_data_lines],
                                         start = chr_positions[1],
                                         stop = chr_positions[lchr_positions]))
 
-      if (rows_to_read > 0){
+      if (rows_to_read > 0) {
 
-        stop("Data are not available at this station")
+        # find tables
+        row_data <- grep(pattern = "# DATA", x = TS, ignore.case = FALSE)
+        row_start <- row_data + 2
+        row_end <- row_start + rows_to_read - 1
 
-      }
-      
-      # find tables
-      row_data <- grep(pattern = "# DATA", x = TS, ignore.case = FALSE)
-      row_start <- row_data + 2
-      row_end <- row_start + rows_to_read - 1
-      
-      # Read columns and assign names
-      column_names <- c()
-      for (k in seq_along(data_names)) {
-        tempcolnames <- unlist(strsplit(TS[row_data[k] + 1], ";"))
-        tempcolnames <- trimws(tempcolnames, which = "both")
-        tempcolnames <- gsub(pattern = "-", replacement = "_", x = tempcolnames)
-        column_names <- c(column_names, paste0(data_names[k], "__", tempcolnames))
-      }
-      
-      for (w in seq_along(row_start)) {
-        # Assemble data frame
-        row_split <- unlist(strsplit(TS[row_start[w]:row_end[w]], ";"))
-        no_spaces <- trimws(row_split, which = c("both"))
-        if (w == 1) {
-          tmp <- matrix(no_spaces, nrow = rows_to_read, byrow = TRUE)
-        } else {
-          tmp <- cbind(tmp, matrix(no_spaces, nrow = rows_to_read, byrow = TRUE))
+        # Read columns and assign names
+        column_names <- c()
+        for (k in seq_along(data_names)) {
+          tempcolnames <- unlist(strsplit(TS[row_data[k] + 1], ";"))
+          tempcolnames <- trimws(tempcolnames, which = "both")
+          tempcolnames <- gsub(pattern = "-", replacement = "_",
+                               x = tempcolnames)
+          column_names <- c(column_names, paste0(data_names[k], "__",
+                                                 tempcolnames))
         }
+
+        for (w in seq_along(row_start)) {
+          # Assemble data frame
+          row_split <- unlist(strsplit(TS[row_start[w]:row_end[w]], ";"))
+          no_spaces <- trimws(row_split, which = c("both"))
+          if (w == 1) {
+            tmp <- matrix(no_spaces, nrow = rows_to_read, byrow = TRUE)
+          } else {
+            tmp <- cbind(tmp, matrix(no_spaces, nrow = rows_to_read,
+                                     byrow = TRUE))
+          }
+        }
+
+        df <- data.frame(tmp, stringsAsFactors = FALSE)
+        names(df) <- column_names
+
+        ltables[[j]] <- df
+      }else{
+        message(paste(tablenames[j],
+                      "data are not available at this station"))
+        ltables[[j]] <- NULL
       }
-      
-      df <- data.frame(tmp, stringsAsFactors = FALSE)
-      names(df) <- column_names
-      
-      ltables[[j]] <- df
-      
+
     }
-    
+
     names(ltables) <- tablenames
-    
-    if ( plotOption == TRUE ){
-      
+
+    if (plotOption == TRUE) {
+
       ltable <- ltables$LTVM
-      
+
       dummyTime <- seq(as.Date("2012-01-01"),
                        as.Date("2012-12-31"),
                        by = "months")
-      
+
       plot(zoo::zoo(ltable$LTV_MMM_Month__Value, order.by = dummyTime),
            main = paste("Monthly statistics: ",
                         catalogueTmp$station, " (",
-                        catalogueTmp$country_code, ")", sep=""),
+                        catalogueTmp$country_code, ")", sep = ""),
            type = "l", ylim = c(min(as.numeric(ltable$LTV_LMM_Monthly__Value)),
                                 max(as.numeric(ltable$LTV_HMM_Month__Value))),
            xlab = "", ylab = "m3/s", xaxt = "n")
       axis(1, at = dummyTime, labels = format(dummyTime, "%b"))
-      polygon(c(dummyTime,rev(dummyTime)), c(ltable$LTV_LMM_Monthly__Value,
-                                             rev(ltable$LTV_HMM_Month__Value)),
+      polygon(c(dummyTime, rev(dummyTime)), c(ltable$LTV_LMM_Monthly__Value,
+                                              rev(ltable$LTV_HMM_Month__Value)),
               col = "orange",
               lty = 0,
               lwd = 2)
       lines(zoo::zoo(ltable$LTV_MMM_Month__Value, order.by = dummyTime),
             lty = 2, lwd = 3, col = "red")
-      
+
       legend("top", legend = c("Min-Max range", "Mean"),
              bty = "n",
              col = c("orange", "red"),
@@ -456,7 +466,7 @@ tsGRDC <- function(stationID, plotOption = FALSE, ...){
              pt.bg = c("orange", NA),
              pt.cex = 2)
     }
-    
+
     return(ltables)
 
   }else{

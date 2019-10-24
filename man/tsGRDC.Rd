@@ -4,7 +4,7 @@
 \alias{tsGRDC}
 \title{Interface for the Global Runoff Data Centre database of Monthly Time Series}
 \usage{
-tsGRDC(stationID, plotOption = FALSE, ...)
+tsGRDC(stationID, plotOption = FALSE, catalogue = NULL, ...)
 }
 \arguments{
 \item{stationID}{7 string that identifies a station, GRDC station number is
@@ -13,10 +13,12 @@ called "grdc no" in the catalogue.}
 \item{plotOption}{boolean to define whether to plot the results. By default
 this is set to TRUE.}
 
+\item{catalogue}{station catalogue obstained from \code{catalogueGRDC()}}
+
 \item{...}{additional argument to pass to \code{catalogueGRDC()}.}
 }
 \value{
-The function returns a list of 6 tables: 
+The function returns a list of 6 tables:
 \itemize{
   \item{\strong{LTVD}}{This is a table containing seasonal variability of
   river discharge based on original daily data. It is made of 8 columns:}
@@ -73,7 +75,7 @@ The function returns a list of 6 tables:
     years.}
     \item{HQ_Day__Value}{: highest daily discharge value in the given time
     series, calculated from highest values of consecutive calendar years.}
-    \item{HQ_Day__YYYY_MM_DD}{: Date of occurrence of highest daily discharge}
+    \item{HQ_Day__YYYY_MM_DD}{: Occurrence date of highest daily discharge}
   }
 \item{\strong{PVM}}{This is a table containing ... It is made of 5 columns:}
   \itemize{
@@ -89,7 +91,7 @@ The function returns a list of 6 tables:
     calendar years.}
     \item{HQ_Month__YYYY_MM}{: month of first occurence of highest monthly
     discharge}
-  } 
+  }
 \item{\strong{YVD}}{This is a table containing ... It is made of 12 columns:}
   \itemize{
     \item{Year_Min_Day__YYYY}{: calender year}

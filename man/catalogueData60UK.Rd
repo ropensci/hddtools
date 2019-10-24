@@ -8,19 +8,27 @@ catalogueData60UK(areaBox = NULL, columnName = NULL,
   columnValue = NULL, useCachedData = TRUE)
 }
 \arguments{
-\item{areaBox}{bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)}
+\item{areaBox}{bounding box, a list made of 4 elements: minimum longitude
+(lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum
+latitude (latMax)}
 
 \item{columnName}{name of the column to filter}
 
 \item{columnValue}{value to look for in the column named columnName}
 
-\item{useCachedData}{logical, set to TRUE to use cached data, set to FALSE to retrieve data from online source. This is TRUE by default.}
+\item{useCachedData}{logical, set to TRUE to use cached data, set to FALSE to
+retrieve data from online source. This is TRUE by default.}
 }
 \value{
-This function returns a data frame made of 61 rows (gauging stations) and 6 columns: "id" (hydrometric reference number), "River", "Location", "gridReference", "Latitude", "Longitude".
+This function returns a data frame made of 61 rows (gauging stations)
+and 6 columns: "id" (hydrometric reference number), "River", "Location",
+"gridReference", "Latitude", "Longitude".
 }
 \description{
-This function interfaces the Data60UK database catalogue (available from http://nrfaapps.ceh.ac.uk/datauk60/data.html) containing 61 datasets. Dataset catalogue is available from \url{http://nrfaapps.ceh.ac.uk/datauk60/data.html}.
+This function interfaces the Data60UK database catalogue
+(available from http://nrfaapps.ceh.ac.uk/datauk60/data.html) containing 61
+datasets. Dataset catalogue is available from
+\url{http://nrfaapps.ceh.ac.uk/datauk60/data.html}.
 }
 \examples{
 \dontrun{
