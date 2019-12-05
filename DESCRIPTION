@@ -13,7 +13,7 @@ Authors@R: c(person(given = "Claudia",
              person(given = "Michael", family = "Sumner", role = c("ctb"),
                     comment = "Michael reviewed the package for rOpenSci, see https://github.com/ropensci/onboarding/issues/73"))
 Maintainer: Claudia Vitolo <cvitolodev@gmail.com>
-URL: http://ropensci.github.io/hddtools, https://github.com/ropensci/hddtools
+URL: http://docs.ropensci.org/hddtools, https://github.com/ropensci/hddtools
 BugReports: https://github.com/ropensci/hddtools/issues
 Description: Facilitates discovery and handling of hydrological data, access to catalogues and databases.
 Depends: R (>= 3.2.1), rgdal
