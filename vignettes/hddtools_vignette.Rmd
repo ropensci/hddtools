@@ -205,7 +205,8 @@ BroadRiver <- tsMOPEX(stationID = MOPEX_catalogue_all$stationID[1],
 ![](mopex.png)
 
 ### SEPA river level data
-The Scottish Environment Protection Agency (SEPA) manages river level data for hundreds of gauging stations in the UK. The catalogue of stations was derived by an unofficial list (available here: http://pennine.ddns.me.uk/riverlevels/ConciseList.html). 
+The Scottish Environment Protection Agency (SEPA) manages river level data for hundreds of gauging stations in the UK. The catalogue of stations is derived from the list here:
+http://apps.sepa.org.uk/database/riverlevels/SEPA_River_Levels_Web.csv.
 
 ```{r SEPA1, eval = FALSE}
 # SEPA unofficial catalogue
@@ -213,16 +214,13 @@ SEPA_catalogue_all <- catalogueSEPA()
 ```
 
 The time series of the last few days is available from SEPA website and can be downloaded using the following function:
-```{r SEPA2, eval = FALSE}
+```{r SEPA2, eval = TRUE, message = FALSE, fig.width = 7}
 # Single time series extraction
-Kilphedir <- tsSEPA(stationID = catalogueSEPA()$stationId[1], 
-                    plotOption = TRUE)
+Perth <- tsSEPA(stationID = catalogueSEPA()$LOCATION_CODE[1], plotOption = TRUE)
 ```
 
-![](kilphedir.png)
-
-Plese note that this data is updated every 15 minutes and the code will always generate different plots. 
-```{r SEPA3}
+Plese note that these data are updated every 15 minutes and the code will always generate different plots. 
+```{r SEPA3, eval=TRUE, message = FALSE, fig.width = 7}
 # Multiple time series extraction
 y <- tsSEPA(stationID = c("234253", "234174", "234305"))
 plot(y[[1]], ylim = c(0, max(y[[1]], y[[2]], y[[3]])), 
@@ -230,4 +228,3 @@ plot(y[[1]], ylim = c(0, max(y[[1]], y[[2]], y[[3]])),
 lines(y[[2]], col = "red")
 lines(y[[3]], col = "blue")
 ```
-![](sepa.png)

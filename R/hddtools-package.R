@@ -36,30 +36,6 @@
 #'
 NULL
 
-#' Data set: The SEPA Catalogue
-#'
-#' @description The SEPA catalogue
-#'
-#' @usage data("SEPAcatalogue")
-#'
-#' @format A data frame with 830 observations on the following 8 variables.
-#' \describe{
-#'   \item{\code{idNRFA}}{National River Flow Archive id number.}
-#'   \item{\code{aspxpage}}{Environment Agency gauges id.}
-#'   \item{\code{stationId}}{SEPA station id.}
-#'   \item{\code{River}}{String describing the river's name.}
-#'   \item{\code{Location}}{String describing the location.}
-#'   \item{\code{GridRef}}{British National Grid Reference.}
-#'   \item{\code{Operator}}{The operator's name.}
-#'   \item{\code{CatchmentAreaKm2}}{Area of the catchment.}
-#' }
-#'
-#' @keywords datasets
-#'
-#' @source \url{http://pennine.ddns.me.uk/riverlevels/ConciseList.html}
-#'
-"SEPAcatalogue"
-
 #' Data set: The Data60UK Catalogue
 #'
 #' @description The Data60UK catalogue
@@ -167,3 +143,40 @@ NULL
 #'
 #' @source \url{http://www.bafg.de/GRDC/EN/02_srvcs/21_tmsrs/211_ctlgs/catalogues_node.html}
 "GRDCcatalogue"
+
+#' Data set: The SEPA Catalogue
+#'
+#' @description The SEPA catalogue
+#'
+#' @usage data("SEPAcatalogue")
+#'
+#' @format A data frame with 830 observations on the following 8 variables.
+#' \itemize{
+#'   \item{\code{SEPA_HYDROLOGY_OFFICE}}
+#'   \item{\code{STATION_NAME}}
+#'   \item{\code{LOCATION_CODE}}
+#'   \item{\code{NATIONAL_GRID_REFERENCE}}
+#'   \item{\code{CATCHMENT_NAME}}
+#'   \item{\code{RIVER_NAME}}
+#'   \item{\code{GAUGE_DATUM}}
+#'   \item{\code{CATCHMENT_AREA}} in Km2
+#'   \item{\code{START_DATE}}
+#'   \item{\code{END_DATE}}
+#'   \item{\code{SYSTEM_ID}}
+#'   \item{\code{LOWEST_VALUE}}
+#'   \item{\code{LOW}}
+#'   \item{\code{MAX_VALUE}}
+#'   \item{\code{HIGH}}
+#'   \item{\code{MAX_DISPLAY}}
+#'   \item{\code{MEAN}}
+#'   \item{\code{UNITS}}
+#'   \item{\code{WEB_MESSAGE}}
+#'   \item{\code{NRFA_LINK}}
+#' }
+#'
+#' @keywords datasets
+#'
+#' @source
+#' \url{http://apps.sepa.org.uk/database/riverlevels/SEPA_River_Levels_Web.csv}
+#'
+"SEPAcatalogue"

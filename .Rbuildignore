@@ -22,3 +22,4 @@ inst/tmp
 ^_pkgdown\.yml$
 ^docs$
 inst/extdata/grdc
+toignore/*

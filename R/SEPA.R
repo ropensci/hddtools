@@ -30,9 +30,12 @@
 catalogueSEPA <- function(columnName = NULL, columnValue = NULL,
                           useCachedData = TRUE){
 
-  if (useCachedData == TRUE){
+  theurl <- paste0("http://apps.sepa.org.uk/database/riverlevels/",
+                   "SEPA_River_Levels_Web.csv")
 
-    # message("Using cached data.")
+  if (RCurl::url.exists(theurl) == FALSE | useCachedData == TRUE){
+
+    message("Using cached data.")
 
     load(system.file(file.path("data", "SEPAcatalogue.rda"),
                      package = "hddtools"))
@@ -41,34 +44,10 @@ catalogueSEPA <- function(columnName = NULL, columnValue = NULL,
 
   }else{
 
-    theurl <- "http://pennine.ddns.me.uk/riverlevels/ConciseList.html"
+    message("Retrieving data from data provider.")
 
-    if (RCurl::url.exists(theurl) == FALSE){
-
-      # message("Using cached data.")
-
-      load(system.file(file.path("data", "SEPAcatalogue.rda"),
-                       package = "hddtools"))
-
-      catTMP <- SEPAcatalogue
-
-    }else{
-
-      message("Retrieving data from data provider.")
-
-      tables <- XML::readHTMLTable(theurl)
-      n.rows <- unlist(lapply(tables, function(t) dim(t)[1]))
-      catTMP <- tables[[which.max(n.rows)]]
-      catTMP <- catTMP[catTMP$stationId!=0,c(1:3,5:9)]
-      row.names(catTMP) <- NULL
-      names(catTMP) <- c("idNRFA", "aspxpage", "stationId", "River",
-                         "Location",
-                         "GridRef", "Operator", "CatchmentAreaKm2")
-
-      catTMP[] <- lapply(catTMP, as.character)
-      catTMP$CatchmentAreaKm2 <- as.numeric(catTMP$CatchmentAreaKm2)
-
-    }
+    catTMP <- read.csv(theurl, stringsAsFactors = FALSE)
+    catTMP$WEB_MESSAGE <- as.character(catTMP$WEB_MESSAGE)
 
   }
 
@@ -76,16 +55,15 @@ catalogueSEPA <- function(columnName = NULL, columnValue = NULL,
 
     if (tolower(columnName) %in% tolower(names(catTMP))){
 
-      col2select <- which(tolower(names(catTMP)) ==
-                            tolower(columnName))
+      col2select <- which(tolower(names(catTMP)) == tolower(columnName))
 
-      if (class(catTMP[,col2select]) == "character"){
-        rows2select <- which(tolower(catTMP[,col2select]) ==
+      if (class(catTMP[, col2select]) == "character"){
+        rows2select <- which(tolower(catTMP[, col2select]) ==
                                tolower(columnValue))
       }
-      if (class(catTMP[,col2select]) == "numeric"){
+      if (class(catTMP[,col2select]) == "numeric" |
+          class(catTMP[, col2select]) == "integer"){
 
-        # rows2select <- which(catTMP[,col2select] == columnValue)
         rows2select <- eval(parse(text =
                                     paste0("which(catTMP[,col2select] ",
                                            columnValue, ")")))
@@ -160,9 +138,9 @@ tsSEPA <- function(stationID, plotOption = FALSE, timeExtent = NULL){
 
       if (plotOption == TRUE){
 
-        locationSEPA <- catalogueSEPA(columnName = "stationID",
-                                      columnValue = id)
-        plot(myTS, main = locationSEPA$Location,
+        locationSEPA <- catalogueSEPA(columnName = "LOCATION_CODE",
+                                      columnValue = paste("==", id))
+        plot(myTS, main = locationSEPA$STATION_NAME,
              xlab = "", ylab = "River level [m]")
 
       }
