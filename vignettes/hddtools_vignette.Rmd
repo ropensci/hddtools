@@ -5,8 +5,8 @@ date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{hddtools}
-  %\VignetteEngine{knitr::knitr}
-  %\usepackage[UTF-8]{inputenc}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r init, echo=FALSE}
@@ -65,13 +65,15 @@ The Koppen Climate Classification is the most widely used system for classifying
 
 The package hddtools contains a function to identify the updated Koppen-Greiger climate zone, given a bounding box.
 
-```{r KGClimateClass, eval = TRUE}
+```{r KGClimateClass1, eval = TRUE}
 # Define a bounding box
 areaBox <- raster::extent(-10, 5, 48, 62)
 
 # Extract climate zones from Peel's map:
 KGClimateClass(areaBox = areaBox, updatedBy = "Peel")
+```
 
+```{r KGClimateClass2, eval = TRUE}
 # Extract climate zones from Kottek's map:
 KGClimateClass(areaBox = areaBox, updatedBy = "Kottek")
 ```
@@ -174,13 +176,12 @@ leaflet(data = Data60UK_catalogue_bbox) %>%
 
 ![](leaflet2.png)
 
-```{r catalogueData60UK3}
+```{r catalogueData60UK3, eval = TRUE, message = FALSE, fig.width = 7, fig.height = 7}
 # Extract time series 
 stationID <- catalogueData60UK()$stationID[1]
 
 # Extract only the time series
 MorwickTS <- tsData60UK(stationID, plotOption = FALSE)
-plot(MorwickTS)
 
 # Extract time series for a specified temporal window
 twindow <- seq(as.Date("1988-01-01"), as.Date("1989-12-31"), by = "days")
@@ -189,11 +190,9 @@ MorwickTSplot <- tsData60UK(stationID = stationID,
                             twindow = twindow)
 ```
 
-![](morwick.png)
-
 #### MOPEX
 Dataset containing historical hydrometeorological data and river basin characteristics for hundreds of river basins from a range of climates in the US. 
-```{r MOPEX}
+```{r MOPEX, eval = TRUE, message = FALSE, fig.width = 7, fig.height = 7}
 # MOPEX full catalogue
 MOPEX_catalogue_all <- catalogueMOPEX()
 
@@ -201,8 +200,6 @@ MOPEX_catalogue_all <- catalogueMOPEX()
 BroadRiver <- tsMOPEX(stationID = MOPEX_catalogue_all$stationID[1], 
                       plotOption = TRUE)
 ```
-
-![](mopex.png)
 
 ### SEPA river level data
 The Scottish Environment Protection Agency (SEPA) manages river level data for hundreds of gauging stations in the UK. The catalogue of stations is derived from the list here:

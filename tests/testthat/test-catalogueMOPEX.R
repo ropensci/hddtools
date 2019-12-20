@@ -3,7 +3,7 @@ context("catalogueMOPEX")
 test_that("Test full catalogueMOPEX", {
 
   # Retrieve the MOPEX catalogue
-  x1 <- catalogueMOPEX()
+  x1 <- catalogueMOPEX(useCachedData = FALSE)
 
   expect_that("data.frame" %in% class(x1), equals(TRUE))
   expect_that(all(dim(x1) == c(431, 12)), equals(TRUE))

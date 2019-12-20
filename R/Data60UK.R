@@ -58,19 +58,15 @@ catalogueData60UK <- function(areaBox = NULL, columnName = NULL,
     n.rows <- unlist(lapply(tables, function(t) dim(t)[1]))
     Data60UKcatalogue <- tables[[which.max(n.rows)]]
     names(Data60UKcatalogue) <- c("stationID", "River", "Location")
-    IDs <- unlist(as.numeric(as.character(Data60UKcatalogue$stationID)))
-
-    # Find grid reference browsing the NRFA catalogue
-    temp <- rnrfa::catalogue(columnName = "id", columnValue = IDs)
-    refs <- temp$gridReference
-    Data60UKcatalogue$gridReference <- unlist(refs)
-
-    Data60UKcatalogue$Latitude <- temp$lat
-    Data60UKcatalogue$Longitude <- temp$lon
-
     Data60UKcatalogue[] <- lapply(Data60UKcatalogue, as.character)
-    Data60UKcatalogue$Latitude <- as.numeric(Data60UKcatalogue$Latitude)
-    Data60UKcatalogue$Longitude <- as.numeric(Data60UKcatalogue$Longitude)
+    
+    # Find grid reference browsing the NRFA catalogue
+    temp <- rnrfa::catalogue()
+    temp <- temp[which(temp$id %in% Data60UKcatalogue$stationID), ]
+    
+    Data60UKcatalogue$gridReference <- temp$`grid-reference`$ngr
+    Data60UKcatalogue$Latitude <- temp$latitude
+    Data60UKcatalogue$Longitude <- temp$longitude
 
   }
 

@@ -1,10 +1,6 @@
 context("tsMOPEX")
 
 test_that("Test tsMOPEX function", {
-  
-  if (FALSE) {
-
-    skip("No internet connection")
 
     # Retrieve sample data
     x <- tsMOPEX("14359000")
@@ -12,7 +8,5 @@ test_that("Test tsMOPEX function", {
     expect_that("zoo" %in% class(x), equals(TRUE))
     expect_that(all(names(x) == c("P", "E", "Q", "Tmax", "Tmin")),
                 equals(TRUE))
-
-  }
 
 })
