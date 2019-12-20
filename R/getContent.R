@@ -1,8 +1,8 @@
-#' Extracts links from ftp page
+#' Extracts links from web page
 #'
 #' @author Claudia Vitolo
 #'
-#' @description This function extracts all the links in a ftp page
+#' @description This function extracts all the links in a web page
 #'
 #' @param dirs is the url from which links should be extracted
 #'
@@ -13,7 +13,7 @@
 #' @examples
 #' \dontrun{
 #'   # Retrieve mopex daily catalogue
-#'   url <- "ftp://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/Us_438_Daily/"
+#'   url <- "https://hydrology.nws.noaa.gov/gcip/mopex/US_Data/Us_438_Daily/"
 #'   getContent(dirs = url)
 #' }
 #'

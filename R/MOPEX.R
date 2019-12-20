@@ -2,7 +2,9 @@
 #'
 #' @author Claudia Vitolo
 #'
-#' @description This function interfaces the MOPEX database catalogue (available from \url{ftp://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/}) containing 438 daily datasets.
+#' @description This function interfaces the MOPEX database catalogue (available
+#' from \url{https://hydrology.nws.noaa.gov/gcip/mopex/US_Data/Basin_Characteristics/usgs431.txt})
+#' containing 431 daily datasets.
 #'
 #' @param areaBox bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)
 #' @param columnName name of the column to filter
@@ -122,13 +124,17 @@ catalogueMOPEX <- function(areaBox = NULL,
 #'
 #' @author Claudia Vitolo
 #'
-#' @description This function extract the dataset containing daily rainfall and streamflow discharge at one of the MOPEX locations.
+#' @description This function extract the dataset containing daily rainfall and
+#' streamflow discharge at one of the MOPEX locations.
 #'
 #' @param stationID hydrometric reference number (string)
-#' @param plotOption boolean to define whether to plot the results. By default this is set to TRUE.
-#' @param timeExtent is a vector of dates and times for which the data should be retrieved
+#' @param plotOption boolean to define whether to plot the results. By default
+#' this is set to TRUE.
+#' @param timeExtent is a vector of dates and times for which the data should be
+#' retrieved
 #'
-#' @return The function returns a data frame containing 2 time series (as zoo objects): "P" (precipitation) and "Q" (discharge).
+#' @return The function returns a data frame containing 2 time series (as zoo
+#' objects): "P" (precipitation) and "Q" (discharge).
 #'
 #' @export
 #'

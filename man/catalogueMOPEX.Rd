@@ -20,7 +20,9 @@ catalogueMOPEX(areaBox = NULL, columnName = NULL, columnValue = NULL,
 This function returns a data frame made of 431 rows (gauging stations) and 12 columns containing stations metadata.
 }
 \description{
-This function interfaces the MOPEX database catalogue (available from \url{ftp://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/}) containing 438 daily datasets.
+This function interfaces the MOPEX database catalogue (available
+from \url{https://hydrology.nws.noaa.gov/gcip/mopex/US_Data/Basin_Characteristics/usgs431.txt})
+containing 431 daily datasets.
 }
 \examples{
 \dontrun{

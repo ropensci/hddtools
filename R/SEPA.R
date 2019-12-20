@@ -2,7 +2,10 @@
 #'
 #' @author Claudia Vitolo
 #'
-#' @description This function provides an unofficial SEPA database catalogue of river level data (available from http://pennine.ddns.me.uk/riverlevels/ConciseList.html) containing info for 1752 stations. Some are NRFA stations.
+#' @description This function provides the official SEPA database catalogue of
+#' river level data
+#' (from http://apps.sepa.org.uk/database/riverlevels/SEPA_River_Levels_Web.csv)
+#' containing info for hundreds of stations. Some are NRFA stations.
 #'
 #' @param columnName name of the column to filter
 #' @param columnValue value to look for in the column named columnName

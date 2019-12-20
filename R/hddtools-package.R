@@ -81,7 +81,7 @@ NULL
 #'
 #' @keywords datasets
 #'
-#' @source \url{ftp://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/}
+#' @source \url{https://hydrology.nws.noaa.gov/gcip/mopex/US_Data/Basin_Characteristics/usgs431.txt}
 "MOPEXcatalogue"
 
 #' Data set: The grdcLTMMD look-up table

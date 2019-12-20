@@ -2,7 +2,7 @@
 % Please edit documentation in R/getContent.R
 \name{getContent}
 \alias{getContent}
-\title{Extracts links from ftp page}
+\title{Extracts links from web page}
 \usage{
 getContent(dirs)
 }
@@ -13,12 +13,12 @@ getContent(dirs)
 vector containing all the links in the page
 }
 \description{
-This function extracts all the links in a ftp page
+This function extracts all the links in a web page
 }
 \examples{
 \dontrun{
   # Retrieve mopex daily catalogue
-  url <- "ftp://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/Us_438_Daily/"
+  url <- "https://hydrology.nws.noaa.gov/gcip/mopex/US_Data/Us_438_Daily/"
   getContent(dirs = url)
 }
 

@@ -20,7 +20,7 @@
   \item{\code{basin}}{String describing the river's name.}
 }}
 \source{
-\url{ftp://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/}
+\url{https://hydrology.nws.noaa.gov/gcip/mopex/US_Data/Basin_Characteristics/usgs431.txt}
 }
 \usage{
 data("MOPEXcatalogue")

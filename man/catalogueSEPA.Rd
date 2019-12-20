@@ -18,7 +18,10 @@ catalogueSEPA(columnName = NULL, columnValue = NULL,
 This function returns a data frame made of a maximum of 830 rows (stations) and 8 columns: "idNRFA","aspxpage", "stationId", "River", "Location", "GridRef", "Operator" and "CatchmentArea(km2)". Column idNRFA shows the National River Flow Archive station id. Column "aspxpage" returns the Environment Agency gauges id. The column "stationId" is the id number used by SEPA. Use the stationId to retrieve the time series of water levels.
 }
 \description{
-This function provides an unofficial SEPA database catalogue of river level data (available from http://pennine.ddns.me.uk/riverlevels/ConciseList.html) containing info for 1752 stations. Some are NRFA stations.
+This function provides the official SEPA database catalogue of
+river level data
+(from http://apps.sepa.org.uk/database/riverlevels/SEPA_River_Levels_Web.csv)
+containing info for hundreds of stations. Some are NRFA stations.
 }
 \examples{
 \dontrun{
