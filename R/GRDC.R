@@ -71,13 +71,15 @@
 catalogueGRDC <- function(areaBox = NULL,
                           columnName = NULL,
                           columnValue = NULL,
-                          useCachedData = TRUE) {
+                          useCachedData = FALSE) {
 
-  theurl <- "ftp://ftp.bafg.de/pub/REFERATE/GRDC/catalogue/grdc_stations.zip"
+  options(warn = -1)                                     # do not print warnings
 
-  if (useCachedData == TRUE | RCurl::url.exists(theurl) == FALSE) {
+  the_url <- "ftp://ftp.bafg.de/pub/REFERATE/GRDC/catalogue/"
 
-    if (RCurl::url.exists(theurl) == FALSE) {
+  if (useCachedData | RCurl::url.exists(the_url) == FALSE) {
+
+    if (RCurl::url.exists(the_url) == FALSE) {
 
       message(paste("There was a problem when trying to access the server,",
                     "either the server is down or",
@@ -95,27 +97,35 @@ catalogueGRDC <- function(areaBox = NULL,
     message("Retrieving data from data provider.")
 
     # Retrieve the catalogue
-    temp <- tempfile()
-    download.file(theurl, temp, quiet = TRUE)
-    fileLocation <- utils::unzip(zipfile = temp, exdir = dirname(temp))
-
-    GRDCcatalogue <- gdata::read.xls(xls = fileLocation,
-                                     sheet = "stationCatalogue",
-                                     na.strings = c("n.a.", "-", ""),
-                                     stringsAsFactors = FALSE)
+    result <- RCurl::getURL(the_url, ftp.use.epsv=TRUE, dirlistonly = TRUE)
+    list_of_files <- strsplit(result, "\r*\n")[[1]]
+    yesterday <- gsub(pattern = "-", replacement = "_", Sys.Date() - 1)
+    today <- gsub(pattern = "-", replacement = "_", Sys.Date())
+    latest_file <- 
+      ifelse(test = length(list_of_files[grep(pattern = today,
+                                              x = list_of_files)]),
+             yes = list_of_files[grep(pattern = today, x = list_of_files)],
+             no = list_of_files[grep(pattern = yesterday, x = list_of_files)])
+    latest_file <- paste0(the_url, latest_file)
+    
+    my_tmp_file <- tempfile()
+    x <- RCurl::getBinaryURL(latest_file, ftp.use.epsv = FALSE,crlf = TRUE)
+    writeBin(object = x, con = my_tmp_file)
+    GRDCcatalogue <- readxl::read_xlsx(my_tmp_file, sheet = "Catalogue")
 
     # Cleanup non ascii characters
     for (i in seq_along(names(GRDCcatalogue))) {
-      GRDCcatalogue[, i] <- iconv(GRDCcatalogue[, i], "latin1", "ASCII",
-                                  sub = "")
+      # Substitute n.a. with NA
+      idx <- which(GRDCcatalogue[, i] == "n.a." | GRDCcatalogue[, i] == "-" |
+                     GRDCcatalogue[, i] == "-999")
+      if (length(idx) > 0) {GRDCcatalogue[idx, i] <- NA}
     }
-
+    
     # Convert to numeric some of the columns
-    idx <- which(!(names(GRDCcatalogue) %in% c("river", "station", "country")))
-    for (i in idx) {
-      GRDCcatalogue[, i] <- as.numeric(as.character(GRDCcatalogue[, i]))
-    }
-
+    colx <- which(!(names(GRDCcatalogue) %in% c("grdc_no", "wmo_reg", "sub_reg",
+                                             "nat_id", "river", "station",
+                                             "country", "provider_id")))
+    GRDCcatalogue[, colx] <- sapply(GRDCcatalogue[, colx], as.numeric)
   }
 
   if (!is.null(areaBox)) {

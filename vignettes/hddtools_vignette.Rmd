@@ -28,16 +28,7 @@ This typically implies the download of a metadata catalogue, selection of inform
 
 Depending on the data license, functions can provide offline and/or online modes. When redistribution is allowed, for instance, a copy of the dataset is cached within the package and updated twice a year. This is the fastest option and also allows offline use of package's functions. When re-distribution is not allowed, only online mode is provided.
 
-## Dependencies & Installation
-The hddtools package and the examples in this vignette depend on other CRAN packages. Check for missing dependencies and install them using the commands below:
-
-```{r dependencies}
-packs <- c("zoo", "sp", "RCurl", "XML", "rnrfa", "Hmisc", "raster", 
-           "stringr", "devtools", "leaflet")
-new_packages <- packs[!(packs %in% installed.packages()[,"Package"])]
-if(length(new_packages)) install.packages(new_packages)
-```
-
+## Installation
 Get the released version from CRAN:
 
 ```{r installation1}

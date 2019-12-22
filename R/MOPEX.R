@@ -168,40 +168,42 @@ tsMOPEX <- function(stationID, plotOption = FALSE, timeExtent = NULL){
     x <- data.frame(date, myTable[,4:8])
     names(x) <- c("date", "P", "E", "Q", "Tmax", "Tmin")
 
+    # From readme.txt
+    # Col. 1: date (yyyymmdd)
+    #      2: mean areal precipitation (mm)
+    #      3: climatic potential evaporation (mm)
+    #         (based NOAA Freewater Evaporation Atlas)
+    #      4: daily streamflow discharge (mm)
+    #      5: daily maximum air temperature (Celsius)
+    #      6: daily minimum air temperature (Celsius)
+
+    myTS <- zoo::zoo(x[,2:6], order.by = as.Date(x$date))
+    myTS$Q[myTS$Q == -99] <- NA
+
+    if (!is.null(timeExtent)){
+
+      myTS <- window(myTS,
+                     start=as.POSIXct(head(timeExtent)[1]),
+                     end=as.POSIXct(tail(timeExtent)[6]))
+
+    }
+
+    if (plotOption == TRUE){
+
+      locationMOPEX <- catalogueMOPEX(columnName = "stationID",
+                                      columnValue = stationID)
+      plot(myTS, main=locationMOPEX$basin, xlab="",
+           ylab = c("P [mm/day]","E [mm/day]",
+                    "Q [mm/day]", "Tmax [C]","Tmin [C]"))
+
+    }
+
+    return(myTS)
+
   }else{
-    message(paste("The connection with the data provider failed.",
-                  "No cached results available."))
-  }
 
-  # From readme.txt
-  # Col. 1: date (yyyymmdd)
-  #      2: mean areal precipitation (mm)
-  #      3: climatic potential evaporation (mm)
-  #         (based NOAA Freewater Evaporation Atlas)
-  #      4: daily streamflow discharge (mm)
-  #      5: daily maximum air temperature (Celsius)
-  #      6: daily minimum air temperature (Celsius)
-
-  myTS <- zoo::zoo(x[,2:6], order.by = as.Date(x$date))
-  myTS$Q[myTS$Q == -99] <- NA
-
-  if (!is.null(timeExtent)){
-
-    myTS <- window(myTS,
-                   start=as.POSIXct(head(timeExtent)[1]),
-                   end=as.POSIXct(tail(timeExtent)[6]))
-  }
-
-  if (plotOption == TRUE){
-
-    locationMOPEX <- catalogueMOPEX(columnName = "stationID",
-                                    columnValue = stationID)
-    plot(myTS, main=locationMOPEX$basin, xlab="",
-         ylab = c("P [mm/day]","E [mm/day]",
-                  "Q [mm/day]", "Tmax [C]","Tmin [C]"))
+    stop("Failed connection with the data provider, no cached data available.")
 
   }
-
-  return(myTS)
 
 }

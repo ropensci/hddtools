@@ -20,19 +20,19 @@
 #'
 #' @import rgdal
 #' @importFrom graphics axis legend lines plot polygon
-#' @importFrom stats window
-#' @importFrom utils download.file head read.csv read.fwf read.table tail untar unzip
-#' @importFrom zoo zoo merge.zoo
-#' @importFrom sp CRS SpatialPolygons Polygon Polygons
-#' @importFrom RCurl url.exists getURL
-#' @importFrom XML readHTMLTable
-#' @importFrom rnrfa catalogue
 #' @importFrom Hmisc monthDays
 #' @importFrom raster raster extract brick flip extent crop writeRaster extent
+#' @importFrom readxl read_xlsx
+#' @importFrom RCurl url.exists getURL
+#' @importFrom rnrfa catalogue
+#' @importFrom sp CRS SpatialPolygons Polygon Polygons
+#' @importFrom stats window
 #' @importFrom stringr str_pad
-#' @importFrom gdata read.xls
-#' @importFrom utils read.table
 #' @importFrom tibble as_tibble
+#' @importFrom utils read.table unzip
+#' @importFrom utils download.file head read.csv read.fwf read.table tail untar
+#' @importFrom XML readHTMLTable
+#' @importFrom zoo zoo merge.zoo
 #'
 NULL
 
