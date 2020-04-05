@@ -5,7 +5,7 @@
 \title{Data source: Global Runoff Data Centre catalogue}
 \usage{
 catalogueGRDC(areaBox = NULL, columnName = NULL, columnValue = NULL,
-  useCachedData = FALSE)
+  useCachedData = TRUE)
 }
 \arguments{
 \item{areaBox}{bounding box, a list made of 4 elements: minimum longitude

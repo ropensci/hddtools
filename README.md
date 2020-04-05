@@ -42,11 +42,11 @@ Get the stable version from CRAN:
 install.packages("hddtools")
 ```
 
-Or the development version from github using
-[devtools](https://github.com/hadley/devtools):
+Or the development version from GitHub using the package `remotes`:
 
 ``` r
-devtools::install_github("ropensci/hddtools")
+install.packages("remotes")
+remotes::install_github("ropensci/hddtools")
 ```
 
 Load the `hddtools` package:

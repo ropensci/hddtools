@@ -123,12 +123,20 @@ NULL
 #'   \item{\code{area}}{: catchment size, km2}
 #'   \item{\code{altitude}}{: height of gauge zero, m above sea level}
 #'   \item{\code{ds_stat_no}}{: GRDC station number of next downstream GRDC station}
+#'   \item{\code{d_start_day}}{: daily data available from day}
+#'   \item{\code{d_start_month}}{: daily data available from month}
 #'   \item{\code{d_start}}{: daily data available from year}
+#'   \item{\code{d_end_day}}{: daily data available until day}
+#'   \item{\code{d_end_month}}{: daily data available until month}
 #'   \item{\code{d_end}}{: daily data available until year}
 #'   \item{\code{d_yrs}}{: length of time series, daily data}
 #'   \item{\code{d_miss}}{: percentage of missing values (daily data)}
-#'   \item{\code{m_start}}{: monthly data available from}
-#'   \item{\code{m_end}}{: monthly data available until}
+#'   \item{\code{m_start_day}}{: monthly data available from day}
+#'   \item{\code{m_start_month}}{: monthly data available from month}
+#'   \item{\code{m_start}}{: monthly data available from year}
+#'   \item{\code{m_end_day}}{: monthly data available until day}
+#'   \item{\code{m_end_month}}{: monthly data available until month}
+#'   \item{\code{m_end}}{: monthly data available until year}
 #'   \item{\code{m_yrs}}{: length of time series, monthly data}
 #'   \item{\code{m_miss}}{: percentage of missing values (monthly data)}
 #'   \item{\code{t_start}}{: earliest data available}
@@ -137,6 +145,8 @@ NULL
 #'   \item{\code{lta_discharge}}{: mean annual streamflow, m3/s}
 #'   \item{\code{r_volume_yr}}{: mean annual volume, km3}
 #'   \item{\code{r_height_yr}}{: mean annual runoff depth, mm}
+#'   \item{\code{l_im_yr}}{: }
+#'   \item{\code{provider_id}}{: }
 #' }
 #'
 #' @keywords datasets

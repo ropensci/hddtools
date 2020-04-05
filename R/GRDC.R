@@ -71,7 +71,7 @@
 catalogueGRDC <- function(areaBox = NULL,
                           columnName = NULL,
                           columnValue = NULL,
-                          useCachedData = FALSE) {
+                          useCachedData = TRUE) {
 
   options(warn = -1)                                     # do not print warnings
 
