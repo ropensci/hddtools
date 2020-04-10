@@ -96,9 +96,7 @@ listed below. For examples of the various functionalities see the
     review [here](https://github.com/ropensci/onboarding/issues/73)) and
     the Journal of Open Source Software (see review status
     [here](https://github.com/openjournals/joss-reviews/issues/56)).
-  - Get citation information for `hddtools` in R doing `citation(package
-    =
-"hddtools")`
+  - Cite `hddtools`: `citation(package = "rdefra")`
 
 <br/>
 
