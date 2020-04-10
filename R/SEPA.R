@@ -31,9 +31,9 @@
 #'
 
 catalogueSEPA <- function(columnName = NULL, columnValue = NULL,
-                          useCachedData = TRUE){
+                          useCachedData = FALSE){
 
-  theurl <- paste0("http://apps.sepa.org.uk/database/riverlevels/",
+  theurl <- paste0("https://www2.sepa.org.uk/waterlevels/CSVs/",
                    "SEPA_River_Levels_Web.csv")
 
   if (RCurl::url.exists(theurl) == FALSE | useCachedData == TRUE){
@@ -120,7 +120,7 @@ tsSEPA <- function(stationID, plotOption = FALSE, timeExtent = NULL){
   for (id in as.list(stationID)){
     counter <- counter + 1
 
-    theurl <- paste("http://apps.sepa.org.uk/database/riverlevels/",
+    theurl <- paste("https://www2.sepa.org.uk/waterlevels/CSVs/",
                     id, "-SG.csv", sep = "")
 
     if(RCurl::url.exists(theurl)) {

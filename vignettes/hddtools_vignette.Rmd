@@ -30,20 +30,20 @@ Depending on the data license, functions can provide offline and/or online modes
 
 ## Installation
 Get the released version from CRAN:
-
-```{r installation1}
+  
+  ```{r installation1}
 install.packages("hddtools")
 ```
 
 Or the development version from github using [devtools](https://github.com/hadley/devtools):
-
-```{r installation2}
+  
+  ```{r installation2}
 devtools::install_github("ropensci/hddtools")
 ```
 
 Load the hddtools package:
-
-```{r loading, eval = TRUE}
+  
+  ```{r loading, eval = TRUE}
 library("hddtools")
 ```
 
@@ -61,7 +61,7 @@ The package hddtools contains a function to identify the updated Koppen-Greiger 
 areaBox <- raster::extent(-10, 5, 48, 62)
 
 # Extract climate zones from Peel's map:
-KGClimateClass(areaBox = areaBox, updatedBy = "Peel")
+  KGClimateClass(areaBox = areaBox, updatedBy = "Peel")
 ```
 
 ```{r KGClimateClass2, eval = TRUE}
@@ -73,7 +73,7 @@ KGClimateClass(areaBox = areaBox, updatedBy = "Kottek")
 The Global Runoff Data Centre (GRDC) is an international archive hosted by the Federal Institute of Hydrology in Koblenz, Germany. The Centre operates under the auspices of the World Meteorological Organisation and retains services and datasets for all the major rivers in the world. Catalogue, kml files and the product Long-Term Mean Monthly Discharges are open data and accessible via the hddtools.
 
 Information on all the GRDC stations can be retrieved using the function `catalogueGRDC` with no input arguments, as in the examle below:  
-```{r catalogueGRDC1, eval = FALSE}
+  ```{r catalogueGRDC1, eval = FALSE}
 # GRDC full catalogue
 GRDC_catalogue_all <- catalogueGRDC()
 ```
@@ -128,7 +128,6 @@ leaflet(data = GRDC_catalogue_bbox_stats) %>%
   addTiles() %>%  # Add default OpenStreetMap map tiles
   addMarkers(~long, ~lat, popup = ~station)
 ```
-
 ![](leaflet.png)
 
 Lastly, given a station ID number (this is stored in the column grdc_no of the catalogue) we can check whether monthly data is available and eventually plot it.
@@ -180,7 +179,6 @@ MorwickTSplot <- tsData60UK(stationID = stationID,
                             plotOption = TRUE,
                             twindow = twindow)
 ```
-
 #### MOPEX
 Dataset containing historical hydrometeorological data and river basin characteristics for hundreds of river basins from a range of climates in the US. 
 ```{r MOPEX, eval = TRUE, message = FALSE, fig.width = 7, fig.height = 7}
@@ -194,9 +192,9 @@ BroadRiver <- tsMOPEX(stationID = MOPEX_catalogue_all$stationID[1],
 
 ### SEPA river level data
 The Scottish Environment Protection Agency (SEPA) manages river level data for hundreds of gauging stations in the UK. The catalogue of stations is derived from the list here:
-http://apps.sepa.org.uk/database/riverlevels/SEPA_River_Levels_Web.csv.
+  http://apps.sepa.org.uk/database/riverlevels/SEPA_River_Levels_Web.csv.
 
-```{r SEPA1, eval = FALSE}
+```{r SEPA1, eval = TRUE}
 # SEPA unofficial catalogue
 SEPA_catalogue_all <- catalogueSEPA()
 ```
@@ -204,11 +202,11 @@ SEPA_catalogue_all <- catalogueSEPA()
 The time series of the last few days is available from SEPA website and can be downloaded using the following function:
 ```{r SEPA2, eval = TRUE, message = FALSE, fig.width = 7}
 # Single time series extraction
-Perth <- tsSEPA(stationID = catalogueSEPA()$LOCATION_CODE[1], plotOption = TRUE)
+Perth <- tsSEPA(stationID = SEPA_catalogue_all$LOCATION_CODE[1], plotOption = TRUE)
 ```
 
 Plese note that these data are updated every 15 minutes and the code will always generate different plots. 
-```{r SEPA3, eval=TRUE, message = FALSE, fig.width = 7}
+```{r SEPA3, eval=FALSE, message = FALSE, fig.width = 7}
 # Multiple time series extraction
 y <- tsSEPA(stationID = c("234253", "234174", "234305"))
 plot(y[[1]], ylim = c(0, max(y[[1]], y[[2]], y[[3]])), 

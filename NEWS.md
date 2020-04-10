@@ -1,3 +1,7 @@
+# hddtools 0.8.3
+
+* Updated URLs of SEPA and MOPEX data sources
+
 # hddtools 0.8.2
 
 * Connection to TRMM database removed as the web service is no longer available.

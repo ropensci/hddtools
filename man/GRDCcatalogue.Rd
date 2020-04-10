@@ -4,7 +4,8 @@
 \name{GRDCcatalogue}
 \alias{GRDCcatalogue}
 \title{Data set: The GRDC Catalogue}
-\format{A data frame with 9252 stations (rows) and 46 metadata fields.
+\format{
+A data frame with 9252 stations (rows) and 46 metadata fields.
 \describe{
   \item{\code{grdc_no}}{: GRDC station number}
   \item{\code{wmo_reg}}{: WMO region}
@@ -42,7 +43,8 @@
   \item{\code{r_height_yr}}{: mean annual runoff depth, mm}
   \item{\code{l_im_yr}}{: }
   \item{\code{provider_id}}{: }
-}}
+}
+}
 \source{
 \url{http://www.bafg.de/GRDC/EN/02_srvcs/21_tmsrs/211_ctlgs/catalogues_node.html}
 }

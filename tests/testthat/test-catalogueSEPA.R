@@ -6,7 +6,7 @@ test_that("Test full catalogueSEPA", {
   x1 <- catalogueSEPA(useCachedData = FALSE)
 
   expect_that("data.frame" %in% class(x1), equals(TRUE))
-  expect_that(all(dim(x1) == c(363, 20)), equals(TRUE))
+  expect_that(all(dim(x1) >= c(366, 20)), equals(TRUE))
 
 })
 

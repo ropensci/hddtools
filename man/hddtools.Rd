@@ -3,7 +3,6 @@
 \docType{package}
 \name{hddtools}
 \alias{hddtools}
-\alias{hddtools-package}
 \title{hddtools: Hydrological Data Discovery Tools}
 \description{
 Many governmental bodies and institutions are currently committed to publish open data as the result of a trend of increasing transparency, based on which a wide variety of information produced at public expense is now becoming open and freely available to improve public involvement in the process of decision and policy making. Discovery, access and retrieval of information is, however, not always a simple task. Especially when access to data APIs is not allowed, downloading a metadata catalogue, selecting the information needed, requesting datasets, de-compression, conversion, manual filtering and parsing can become rather tedious. The R package hddtools is an open source project, designed to make all the above operations more efficient by means of reusable functions.

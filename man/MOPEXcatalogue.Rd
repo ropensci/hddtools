@@ -4,7 +4,8 @@
 \name{MOPEXcatalogue}
 \alias{MOPEXcatalogue}
 \title{Data set: The MOPEX Catalogue}
-\format{A data frame with 431 stations (rows) and 12 metadata fields (columns).
+\format{
+A data frame with 431 stations (rows) and 12 metadata fields (columns).
 \describe{
   \item{\code{stationID}}{Station id number.}
   \item{\code{longitude}}{}
@@ -18,7 +19,8 @@
   \item{\code{state}}{}
   \item{\code{V11}}{}
   \item{\code{basin}}{String describing the river's name.}
-}}
+}
+}
 \source{
 \url{https://hydrology.nws.noaa.gov/gcip/mopex/US_Data/Basin_Characteristics/usgs431.txt}
 }

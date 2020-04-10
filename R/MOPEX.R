@@ -148,7 +148,7 @@ catalogueMOPEX <- function(areaBox = NULL,
 
 tsMOPEX <- function(stationID, plotOption = FALSE, timeExtent = NULL){
 
-  theurl <- paste0("https://hydrology.nws.noaa.gov/gcip/mopex/US_Data/",
+  theurl <- paste0("https://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/",
                    "Us_438_Daily/", stationID, ".dly")
 
   if(RCurl::url.exists(theurl)) {

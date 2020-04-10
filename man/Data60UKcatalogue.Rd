@@ -4,7 +4,8 @@
 \name{Data60UKcatalogue}
 \alias{Data60UKcatalogue}
 \title{Data set: The Data60UK Catalogue}
-\format{A data frame with 61 stations (rows) and 6 metadata fields (columns).
+\format{
+A data frame with 61 stations (rows) and 6 metadata fields (columns).
 \describe{
   \item{\code{stationID}}{Station id number.}
   \item{\code{River}}{String describing the river's name.}
@@ -12,7 +13,8 @@
   \item{\code{gridReference}}{British National Grid Reference.}
   \item{\code{Latitude}}{}
   \item{\code{Longitude}}{}
-}}
+}
+}
 \source{
 \url{http://nrfaapps.ceh.ac.uk/datauk60/data.html}
 }

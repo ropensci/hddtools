@@ -15,7 +15,7 @@ test_that("Test full catalogue - live version", {
     # Retrieve the whole catalogue
     x1b <- catalogueGRDC(useCachedData = FALSE)
     expect_equal("data.frame" %in% class(x1b), TRUE)
-    expect_true(all(dim(x1b) >= c(10124, 36)))
+    expect_true(all(dim(x1b) >= c(10123, 36)))
   }
   
 })

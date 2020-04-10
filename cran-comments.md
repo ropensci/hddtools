@@ -1,15 +1,14 @@
-This is a new release (hddtools v0.8.2).
+This is a resubmission due to bug fixing.
+New release (hddtools v0.8.3).
 
 ---------------------------------
 
 ## Release Summary
 
-* Connection to TRMM database removed as the web service is no longer available.
-* Fixed problem with Rd file which prevented the manual to be created.
-* Fixed problem with URL in DESCRIPTION file
+* Updated URLs of SEPA and MOPEX data sources
 
 ## Test environment
-* Ubuntu 16.04, R 3.4.3
+* Ubuntu 18.04, R 3.6.3
 
 ## R CMD check results
 

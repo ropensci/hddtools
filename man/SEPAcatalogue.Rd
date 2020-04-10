@@ -4,7 +4,8 @@
 \name{SEPAcatalogue}
 \alias{SEPAcatalogue}
 \title{Data set: The SEPA Catalogue}
-\format{A data frame with 830 observations on the following 8 variables.
+\format{
+A data frame with 830 observations on the following 8 variables.
 \itemize{
   \item{\code{SEPA_HYDROLOGY_OFFICE}}
   \item{\code{STATION_NAME}}
@@ -26,7 +27,8 @@
   \item{\code{UNITS}}
   \item{\code{WEB_MESSAGE}}
   \item{\code{NRFA_LINK}}
-}}
+}
+}
 \source{
 \url{http://apps.sepa.org.uk/database/riverlevels/SEPA_River_Levels_Web.csv}
 }

@@ -5,8 +5,7 @@
 \title{Convert a bounding box to a SpatialPolygons object
 Bounding box is first created (in lat/lon) then projected if specified}
 \usage{
-bboxSpatialPolygon(boundingbox, proj4stringFrom = NULL,
-  proj4stringTo = NULL)
+bboxSpatialPolygon(boundingbox, proj4stringFrom = NULL, proj4stringTo = NULL)
 }
 \arguments{
 \item{boundingbox}{Bounding box: a 2x2 numerical matrix of lat/lon
