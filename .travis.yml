@@ -20,6 +20,7 @@ after_success:
 
 deploy:
   provider: pages
+  strategy: git
   token: $GITHUB_PAT
   keep_history: true
   on:
