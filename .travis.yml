@@ -1,7 +1,6 @@
 language: r
 os: linux
 dist: trusty
-strategy: git
 
 addons:
   apt:
