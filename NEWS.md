@@ -1,6 +1,7 @@
 # hddtools 0.8.3
 
 * Updated URLs of SEPA and MOPEX data sources
+* Removed obsolete dependencies
 
 # hddtools 0.8.2
 

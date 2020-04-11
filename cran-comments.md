@@ -6,6 +6,7 @@ New release (hddtools v0.8.3).
 ## Release Summary
 
 * Updated URLs of SEPA and MOPEX data sources
+* Removed obsolete dependencies
 
 ## Test environment
 * Ubuntu 18.04, R 3.6.3
