@@ -25,7 +25,7 @@ This function returns a data frame made of 431 rows (gauging stations) and 12 co
 }
 \description{
 This function interfaces the MOPEX database catalogue (available
-from \url{https://hydrology.nws.noaa.gov/gcip/mopex/US_Data/Basin_Characteristics/usgs431.txt})
+from \url{https://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/Basin_Characteristics/usgs431.txt})
 containing 431 daily datasets.
 }
 \examples{

@@ -4,7 +4,7 @@
 #'
 #' @description This function provides the official SEPA database catalogue of
 #' river level data
-#' (from http://apps.sepa.org.uk/database/riverlevels/SEPA_River_Levels_Web.csv)
+#' (from https://www2.sepa.org.uk/waterlevels/CSVs/SEPA_River_Levels_Web.csv)
 #' containing info for hundreds of stations. Some are NRFA stations.
 #'
 #' @param columnName name of the column to filter

@@ -354,7 +354,8 @@ tsGRDC <- function(stationID, plotOption = FALSE, catalogue = NULL, ...) {
     tf <- tempfile(tmpdir = td, fileext = ".zip")
 
     # download into the placeholder file
-    utils::download.file(zipFile, tf, quiet = TRUE)
+    utils::download.file(url = zipFile, destfile = tf,
+                         method = "auto", quiet = TRUE)
 
     # Type of tables
     tablenames <- c("LTVD", "LTVM", "PVD", "PVM", "YVD", "YVM")

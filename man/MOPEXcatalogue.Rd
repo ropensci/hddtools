@@ -22,7 +22,7 @@ A data frame with 431 stations (rows) and 12 metadata fields (columns).
 }
 }
 \source{
-\url{https://hydrology.nws.noaa.gov/gcip/mopex/US_Data/Basin_Characteristics/usgs431.txt}
+\url{https://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/Basin_Characteristics/usgs431.txt}
 }
 \usage{
 data("MOPEXcatalogue")

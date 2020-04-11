@@ -77,7 +77,7 @@ NULL
 #'
 #' @keywords datasets
 #'
-#' @source \url{https://hydrology.nws.noaa.gov/gcip/mopex/US_Data/Basin_Characteristics/usgs431.txt}
+#' @source \url{https://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/Basin_Characteristics/usgs431.txt}
 "MOPEXcatalogue"
 
 #' Data set: The grdcLTMMD look-up table
@@ -183,6 +183,6 @@ NULL
 #' @keywords datasets
 #'
 #' @source
-#' \url{http://apps.sepa.org.uk/database/riverlevels/SEPA_River_Levels_Web.csv}
+#' \url{https://www2.sepa.org.uk/waterlevels/CSVs/SEPA_River_Levels_Web.csv}
 #'
 "SEPAcatalogue"

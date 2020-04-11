@@ -3,7 +3,7 @@
 #' @author Claudia Vitolo
 #'
 #' @description This function interfaces the MOPEX database catalogue (available
-#' from \url{https://hydrology.nws.noaa.gov/gcip/mopex/US_Data/Basin_Characteristics/usgs431.txt})
+#' from \url{https://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/Basin_Characteristics/usgs431.txt})
 #' containing 431 daily datasets.
 #'
 #' @param areaBox bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)
@@ -36,7 +36,7 @@ catalogueMOPEX <- function(areaBox = NULL,
                            columnName = NULL, columnValue = NULL,
                            useCachedData = TRUE){
 
-  theurl <- paste0("https://hydrology.nws.noaa.gov/gcip/mopex/US_Data/",
+  theurl <- paste0("https://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/",
                    "Basin_Characteristics/usgs431.txt")
 
   MOPEXcatalogue <- NULL

@@ -192,7 +192,7 @@ BroadRiver <- tsMOPEX(stationID = MOPEX_catalogue_all$stationID[1],
 
 ### SEPA river level data
 The Scottish Environment Protection Agency (SEPA) manages river level data for hundreds of gauging stations in the UK. The catalogue of stations is derived from the list here:
-  http://apps.sepa.org.uk/database/riverlevels/SEPA_River_Levels_Web.csv.
+https://www2.sepa.org.uk/waterlevels/CSVs/SEPA_River_Levels_Web.csv.
 
 ```{r SEPA1, eval = TRUE}
 # SEPA unofficial catalogue

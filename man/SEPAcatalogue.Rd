@@ -30,7 +30,7 @@ A data frame with 830 observations on the following 8 variables.
 }
 }
 \source{
-\url{http://apps.sepa.org.uk/database/riverlevels/SEPA_River_Levels_Web.csv}
+\url{https://www2.sepa.org.uk/waterlevels/CSVs/SEPA_River_Levels_Web.csv}
 }
 \usage{
 data("SEPAcatalogue")
