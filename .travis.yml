@@ -1,5 +1,7 @@
 language: r
+os: linux
 dist: trusty
+strategy: git
 
 addons:
   apt:
@@ -19,8 +21,7 @@ after_success:
 
 deploy:
   provider: pages
-  github-token: $GITHUB_PAT
-  keep-history: true
-  local-dir: docs
+  token: $GITHUB_PAT
+  keep_history: true
   on:
     branch: master
