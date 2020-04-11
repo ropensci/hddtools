@@ -176,7 +176,7 @@ catalogueGRDC <- function(areaBox = NULL,
 
   row.names(grdcTable) <- NULL
 
-  return(tibble::as_tibble(grdcTable))
+  return(grdcTable)
 
 }
 
@@ -354,7 +354,7 @@ tsGRDC <- function(stationID, plotOption = FALSE, catalogue = NULL, ...) {
     tf <- tempfile(tmpdir = td, fileext = ".zip")
 
     # download into the placeholder file
-    download.file(zipFile, tf, quiet = TRUE)
+    utils::download.file(zipFile, tf, quiet = TRUE)
 
     # Type of tables
     tablenames <- c("LTVD", "LTVM", "PVD", "PVM", "YVD", "YVM")
@@ -363,7 +363,7 @@ tsGRDC <- function(stationID, plotOption = FALSE, catalogue = NULL, ...) {
     fname <- paste0(stationID, "_Q_", tablenames, ".csv")
 
     # unzip the file to the temporary directory
-    unzip(tf, files = fname, exdir = td, overwrite = TRUE)
+    utils::unzip(tf, files = fname, exdir = td, overwrite = TRUE)
 
     # fpath is the full path to the extracted file
     fpath <- file.path(td, fname)

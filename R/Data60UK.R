@@ -153,9 +153,9 @@ tsData60UK <- function(stationID, plotOption = FALSE, twindow = NULL){
 
     if (is.null(twindow)){
 
-      twindow <- seq(as.Date("1980-01-01"),
-                     as.Date("1990-12-31"),
-                     by = "days")
+      twindow <- seq.Date(from = as.Date("1980-01-01"),
+                          to = as.Date("1990-12-31"),
+                          by = "days")
 
     }
 

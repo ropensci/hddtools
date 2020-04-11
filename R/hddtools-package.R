@@ -20,17 +20,13 @@
 #'
 #' @import rgdal
 #' @importFrom graphics axis legend lines plot polygon
-#' @importFrom Hmisc monthDays
 #' @importFrom raster raster extract brick flip extent crop writeRaster extent
 #' @importFrom readxl read_xlsx
 #' @importFrom RCurl url.exists getURL
 #' @importFrom rnrfa catalogue
 #' @importFrom sp CRS SpatialPolygons Polygon Polygons
 #' @importFrom stats window
-#' @importFrom stringr str_pad
-#' @importFrom tibble as_tibble
-#' @importFrom utils read.table unzip
-#' @importFrom utils download.file head read.csv read.fwf read.table tail untar
+#' @importFrom utils download.file read.csv read.fwf read.table untar unzip
 #' @importFrom XML readHTMLTable
 #' @importFrom zoo zoo merge.zoo
 #'

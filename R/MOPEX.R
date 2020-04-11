@@ -52,11 +52,12 @@ catalogueMOPEX <- function(areaBox = NULL,
 
   }else{
 
-    myTable <- read.fwf(file = url(theurl),
-                        widths = c(8, 10, 10, 11, 11, 8, 8, 4, 4, 3, 9, 50))
+    myTable <- utils::read.fwf(file = url(theurl),
+                               widths = c(8, 10, 10, 11, 11, 8,
+                                          8, 4, 4, 3, 9, 50))
 
-    myTable$V1 <- stringr::str_pad(myTable$V1, width = 8,
-                                   side = "left", pad = "0")
+    myTable$V1 <- sprintf("%08d", myTable$V1)
+    # stringr::str_pad(myTable$V1, width = 8, side = "left", pad = "0")
 
     names(myTable) <- c("stationID", "longitude", "latitude", "elevation", "V5",
                         "datestart", "dateend", "V8",
@@ -155,14 +156,12 @@ tsMOPEX <- function(stationID, plotOption = FALSE, timeExtent = NULL){
 
     message("Retrieving data from data provider.")
 
-    myTable <- read.fwf(
-      file = url(theurl),
-      widths = c(4, 2, 2, 10, 10, 10, 10, 10)
-    )
-    myTable[,2] <- stringr::str_pad(myTable[,2], width = 2,
-                                    side = "left", pad = "0")
-    myTable[,3] <- stringr::str_pad(myTable[,3], width = 2,
-                                    side = "left", pad = "0")
+    myTable <- utils::read.fwf(file = url(theurl),
+                               widths = c(4, 2, 2, 10, 10, 10, 10, 10))
+    myTable[,2] <- sprintf("%02d", myTable[,2])
+    # stringr::str_pad(myTable[,2], width = 2, side = "left", pad = "0")
+    myTable[,3] <- sprintf("%02d", myTable[,3])
+    # stringr::str_pad(myTable[,3], width = 2, side = "left", pad = "0")
 
     date <- paste(myTable[,1], "-", myTable[,2], "-", myTable[,3], sep = "")
     x <- data.frame(date, myTable[,4:8])
@@ -183,8 +182,8 @@ tsMOPEX <- function(stationID, plotOption = FALSE, timeExtent = NULL){
     if (!is.null(timeExtent)){
 
       myTS <- window(myTS,
-                     start=as.POSIXct(head(timeExtent)[1]),
-                     end=as.POSIXct(tail(timeExtent)[6]))
+                     start=as.POSIXct(range(timeExtent)[1]),
+                     end=as.POSIXct(range(timeExtent)[2]))
 
     }
 

@@ -35,9 +35,9 @@ KGClimateClass <- function(areaBox = NULL, updatedBy = "Peel", verbose = FALSE){
   if (updatedBy == "Kottek") {
 
     # MAP UPDATED BY KOTTEK
-    kgLegend <- read.table(system.file(file.path("extdata",
-                                                 "KOTTEK_Legend.txt"),
-                                       package = "hddtools"))
+    kgLegend <- utils::read.table(system.file(file.path("extdata",
+                                                        "KOTTEK_Legend.txt"),
+                                              package = "hddtools"))
 
     # message("OFFLINE results")
 
@@ -47,8 +47,8 @@ KGClimateClass <- function(areaBox = NULL, updatedBy = "Peel", verbose = FALSE){
     # create the placeholder file
     tf <- tempfile(tmpdir = td, fileext = ".tar.gz")
 
-    untar(system.file(file.path("extdata", "KOTTEK_KG.tar.gz"),
-                      package = "hddtools"), exdir = td)
+    utils::untar(system.file(file.path("extdata", "KOTTEK_KG.tar.gz"),
+                             package = "hddtools"), exdir = td)
 
     kgRaster <- raster::raster(paste0(td, "/KOTTEK_koeppen-geiger.tiff",
                                       sep = ""))
@@ -73,9 +73,10 @@ KGClimateClass <- function(areaBox = NULL, updatedBy = "Peel", verbose = FALSE){
   if (updatedBy == "Peel") {
 
     # MAP UPDATED BY PEEL
-    kgLegend <- read.table(system.file(file.path("extdata", "PEEL_Legend.txt"),
-                                       package = "hddtools"),
-                           header=TRUE)
+    kgLegend <- utils::read.table(system.file(file.path("extdata",
+                                                        "PEEL_Legend.txt"),
+                                              package = "hddtools"),
+                                  header = TRUE)
 
     # message("OFFLINE results")
 
@@ -85,8 +86,8 @@ KGClimateClass <- function(areaBox = NULL, updatedBy = "Peel", verbose = FALSE){
     # create the placeholder file
     tf <- tempfile(tmpdir = td, fileext = ".tar.gz")
 
-    untar(system.file(file.path("extdata", "PEEL_KG.tar.gz"),
-                      package = "hddtools"), exdir = td)
+    utils::untar(system.file(file.path("extdata", "PEEL_KG.tar.gz"),
+                             package = "hddtools"), exdir = td)
 
     kgRaster <- raster::raster(paste0(td, "/PEEL_koppen_ascii.txt", sep = ""))
 

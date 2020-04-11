@@ -49,7 +49,7 @@ catalogueSEPA <- function(columnName = NULL, columnValue = NULL,
 
     message("Retrieving data from data provider.")
 
-    catTMP <- read.csv(theurl, stringsAsFactors = FALSE)
+    catTMP <- utils::read.csv(theurl, stringsAsFactors = FALSE)
     catTMP$WEB_MESSAGE <- as.character(catTMP$WEB_MESSAGE)
 
   }
@@ -125,7 +125,7 @@ tsSEPA <- function(stationID, plotOption = FALSE, timeExtent = NULL){
 
     if(RCurl::url.exists(theurl)) {
       message("Retrieving data from data provider.")
-      sepaTS <- read.csv(theurl, skip = 6)
+      sepaTS <- utils::read.csv(theurl, skip = 6)
 
       # Coerse first column into a date
       datetime <- strptime(sepaTS[,1], "%d/%m/%Y %H:%M")
@@ -134,8 +134,8 @@ tsSEPA <- function(stationID, plotOption = FALSE, timeExtent = NULL){
       if ( !is.null(timeExtent) ){
 
         myTS <- window(myTS,
-                       start=as.POSIXct(head(timeExtent)[1]),
-                       end=as.POSIXct(tail(timeExtent)[6]))
+                       start=as.POSIXct(range(timeExtent)[1]),
+                       end=as.POSIXct(range(timeExtent)[2]))
 
       }
 
