@@ -1,25 +1,10 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 
-preparePackage.R
 CONDUCT.md
-README.Rmd
-README.html
-README_cache
-README_files
-assets
 cran-comments.md
-vignettes/hddtools_vignette_cache/*
 .travis.yml
 appveyor.yml
-review.md
-docs
-_pkgdown.yml
-figure$
-cache$
-inst/blog
-inst/tmp
 ^_pkgdown\.yml$
-^docs$
 inst/extdata/grdc
-toignore/*
+inst/experimental/*

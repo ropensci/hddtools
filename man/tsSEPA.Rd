@@ -4,25 +4,21 @@
 \alias{tsSEPA}
 \title{Interface for the MOPEX database of Daily Time Series}
 \usage{
-tsSEPA(stationID, plotOption = FALSE, timeExtent = NULL)
+tsSEPA(id)
 }
 \arguments{
-\item{stationID}{hydrometric reference number (string)}
-
-\item{plotOption}{boolean to define whether to plot the results. By default this is set to TRUE.}
-
-\item{timeExtent}{is a vector of dates and times for which the data should be retrieved}
+\item{id}{hydrometric reference number (string)}
 }
 \value{
-The function returns river level data in a zoo object.
+The function returns river level data in metres, as a zoo object.
 }
 \description{
-This function extract the dataset containing daily rainfall and streamflow discharge at one of the MOPEX locations.
+This function extract the dataset containing daily rainfall and
+streamflow discharge at one of the MOPEX locations.
 }
 \examples{
 \dontrun{
-  sampleID <- catalogueSEPA()$stationId[1]
-  sampleTS <- tsSEPA(stationID = sampleID, plotOption = TRUE)
+  sampleTS <- tsSEPA(id = "10048")
 }
 
 }

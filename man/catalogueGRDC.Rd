@@ -4,24 +4,7 @@
 \alias{catalogueGRDC}
 \title{Data source: Global Runoff Data Centre catalogue}
 \usage{
-catalogueGRDC(
-  areaBox = NULL,
-  columnName = NULL,
-  columnValue = NULL,
-  useCachedData = TRUE
-)
-}
-\arguments{
-\item{areaBox}{bounding box, a list made of 4 elements: minimum longitude
-(lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum
-latitude (latMax)}
-
-\item{columnName}{name of the column to filter}
-
-\item{columnValue}{value to look for in the column named columnName}
-
-\item{useCachedData}{logical, set to TRUE to use cached data, set to FALSE to
-retrive data from online source. This is TRUE by default.}
+catalogueGRDC()
 }
 \value{
 This function returns a data frame made of 9481 rows (gauging

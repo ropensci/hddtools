@@ -3,36 +3,31 @@
 \name{catalogueData60UK}
 \alias{catalogueData60UK}
 \title{Data source: Data60UK catalogue}
+\source{
+\url{http://nrfaapps.ceh.ac.uk/datauk60/data.html}
+}
 \usage{
-catalogueData60UK(
-  areaBox = NULL,
-  columnName = NULL,
-  columnValue = NULL,
-  useCachedData = TRUE
-)
+catalogueData60UK(areaBox = NULL)
 }
 \arguments{
 \item{areaBox}{bounding box, a list made of 4 elements: minimum longitude
 (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum
 latitude (latMax)}
-
-\item{columnName}{name of the column to filter}
-
-\item{columnValue}{value to look for in the column named columnName}
-
-\item{useCachedData}{logical, set to TRUE to use cached data, set to FALSE to
-retrieve data from online source. This is TRUE by default.}
 }
 \value{
-This function returns a data frame made of 61 rows (gauging stations)
-and 6 columns: "id" (hydrometric reference number), "River", "Location",
-"gridReference", "Latitude", "Longitude".
+This function returns a data frame containing the following columns:
+\describe{
+  \item{\code{id}}{Station id number.}
+  \item{\code{River}}{String describing the river's name.}
+  \item{\code{Location}}{String describing the location.}
+  \item{\code{gridReference}}{British National Grid Reference.}
+  \item{\code{Latitude}}{}
+  \item{\code{Longitude}}{}
+}
 }
 \description{
 This function interfaces the Data60UK database catalogue
-(available from http://nrfaapps.ceh.ac.uk/datauk60/data.html) containing 61
-datasets. Dataset catalogue is available from
-\url{http://nrfaapps.ceh.ac.uk/datauk60/data.html}.
+listing 61 gauging stations.
 }
 \examples{
 \dontrun{
@@ -42,10 +37,6 @@ datasets. Dataset catalogue is available from
   # Filter the catalogue based on a bounding box
   areaBox <- raster::extent(-4, -2, +52, +53)
   Data60UK_catalogue_bbox <- catalogueData60UK(areaBox)
-
-  # Filter the catalogue based on an ID
-  Data60UK_catalogue_ID <- catalogueData60UK(columnName = "stationID",
-                                             columnValue = "62001")
 }
 
 }

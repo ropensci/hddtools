@@ -1,6 +1,6 @@
-context("catalogueData60UK")
+context("Data60UK")
 
-test_that("Test full catalogueData60UK", {
+test_that("Test catalogueData60UK", {
 
   # Retrieve the whole catalogue
   x1 <- try(catalogueData60UK(), silent = TRUE)
@@ -21,11 +21,12 @@ test_that("Test catalogueData60UK bounding box", {
 
 })
 
-test_that("Test catalogueData60UK id", {
-
-  # Filter the catalogue based on an ID
-  x3 <- catalogueData60UK(columnName="stationID", columnValue="62001")
-
-  expect_that(x3$Location == "Glan Teifi", equals(TRUE))
-
+test_that("Test tsData60UK function", {
+  
+  # Retrieve sample data
+  x <- tsData60UK(id = 39015)
+  
+  expect_that(class(x) == "zoo", equals(TRUE))
+  expect_that(all(names(x) == c("P", "Q")), equals(TRUE))
+  
 })

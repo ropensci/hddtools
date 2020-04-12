@@ -1,13 +1,11 @@
 Package: hddtools
 Title: Hydrological Data Discovery Tools
-Version: 0.8.3
-Authors@R: c(person(given = "Claudia",
-                    family = "Vitolo",
-                    role = c("aut", "cre"),
-                    email = "cvitolodev@gmail.com",
+Version: 0.9.0
+Authors@R: c(person(given = "Claudia", family = "Vitolo",
+                    role = c("aut", "cre"), email = "cvitolodev@gmail.com",
                     comment = c(ORCID = "0000-0002-4252-1176")),
              person(given = "Wouter", family = "Buytaert", role = c("ctb"),
-                    comment = "This package was developed during Claudia's PhD at Imperial College London and Wouter was the PhD supervisor."),
+                    comment = "Supervisor"),
              person(given = "Erin", family = "Le Dell", role = c("ctb"),
                     comment = "Erin reviewed the package for rOpenSci, see https://github.com/ropensci/onboarding/issues/73"),
              person(given = "Michael", family = "Sumner", role = c("ctb"),
@@ -17,8 +15,8 @@ URL: http://docs.ropensci.org/hddtools, https://github.com/ropensci/hddtools
 BugReports: https://github.com/ropensci/hddtools/issues
 Description: Tools to discover hydrological data, accessing catalogues and databases from various data providers.
 Depends: R (>= 3.2.1), rgdal
-Imports: zoo, sp, RCurl, XML, rnrfa, raster, readxl
-Suggests: testthat, leaflet, rmarkdown, knitr, pkgdown, curl
+Imports: zoo, sp, RCurl, XML, rnrfa, raster, readxl, downloader, tidyr
+Suggests: testthat, leaflet, rmarkdown, knitr, pkgdown, curl, dplyr
 VignetteBuilder: knitr
 License: GPL-3
 Repository: CRAN

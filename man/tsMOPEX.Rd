@@ -4,20 +4,27 @@
 \alias{tsMOPEX}
 \title{Interface for the MOPEX database of Daily Time Series}
 \usage{
-tsMOPEX(stationID, plotOption = FALSE, timeExtent = NULL)
+tsMOPEX(id, MAP = TRUE)
 }
 \arguments{
-\item{stationID}{hydrometric reference number (string)}
+\item{id}{String for the station ID number (USGS_ID)}
 
-\item{plotOption}{boolean to define whether to plot the results. By default
-this is set to TRUE.}
-
-\item{timeExtent}{is a vector of dates and times for which the data should be
-retrieved}
+\item{MAP}{Boolean, TRUE by default. If FALSE it looks for data through all
+the 1861 potential MOPEX basins.
+If TRUE, it looks for data through the 438 MOPEX basins with MAP estimates.}
 }
 \value{
-The function returns a data frame containing 2 time series (as zoo
-objects): "P" (precipitation) and "Q" (discharge).
+If MAP = FALSE, this function returns a time series of daily
+streamflow discharge (Q, in mm). If MAP = TRUE, this function returns a data
+frame containing the following columns (as zoo object):
+\describe{
+  \item{\code{Date}}{Format is "yyyymmdd"}
+  \item{\code{P}}{Mean areal precipitation (mm)}
+  \item{\code{E}}{Climatic potential evaporation (mm, based NOAA Freewater Evaporation Atlas)}
+  \item{\code{Q}}{Daily streamflow discharge (mm)}
+  \item{\code{T_max}}{Daily maximum air temperature (Celsius)}
+  \item{\code{T_min}}{Daily minimum air temperature (Celsius)}
+}
 }
 \description{
 This function extract the dataset containing daily rainfall and
@@ -25,9 +32,7 @@ streamflow discharge at one of the MOPEX locations.
 }
 \examples{
 \dontrun{
-  stationID <- catalogueMOPEX()$stationID[1]
-  BroadRiver <- tsMOPEX(stationID = stationID)
-  BroadRiver <- tsMOPEX(stationID = stationID, plotOption = TRUE)
+  BroadRiver <- tsMOPEX(id = "01048000")
 }
 
 }

@@ -2,6 +2,8 @@
 
 * Updated URLs of SEPA and MOPEX data sources
 * Removed obsolete dependencies
+* Amended URLs
+* Switched from download.file to downloader::download() to better work cross platform
 
 # hddtools 0.8.2
 

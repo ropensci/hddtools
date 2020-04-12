@@ -3,45 +3,47 @@
 \name{catalogueMOPEX}
 \alias{catalogueMOPEX}
 \title{Data source: MOPEX catalogue}
+\source{
+https://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/Documentation/
+}
 \usage{
-catalogueMOPEX(
-  areaBox = NULL,
-  columnName = NULL,
-  columnValue = NULL,
-  useCachedData = TRUE
-)
+catalogueMOPEX(MAP = TRUE)
 }
 \arguments{
-\item{areaBox}{bounding box, a list made of 4 elements: minimum longitude (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum latitude (latMax)}
-
-\item{columnName}{name of the column to filter}
-
-\item{columnValue}{value to look for in the column named columnName}
-
-\item{useCachedData}{logical, set to TRUE to use cached data, set to FALSE to retrive data from online source. This is TRUE by default.}
+\item{MAP}{Boolean, TRUE by default. If FALSE it returns a list of the USGS
+station ID’s and the gage locations of all 1861 potential MOPEX basins.
+If TRUE, it return a list of the USGS station ID’s and the gage locations of
+the 438 MOPEX basins with MAP estimates.}
 }
 \value{
-This function returns a data frame made of 431 rows (gauging stations) and 12 columns containing stations metadata.
+This function returns a data frame containing the following columns:
+\describe{
+  \item{\code{USGS_ID}}{Station id number}
+  \item{\code{Longitude}}{Decimal degrees East}
+  \item{\code{Latitude}}{Decimal degrees North}
+  \item{\code{Drainage_Area}}{Square Miles}
+  \item{\code{R_gauges}}{Required number of precipitation gages to meet MAP accuracy criteria}
+  \item{\code{N_gauges}}{Number of gages in total gage window used to estimate MAP}
+  \item{\code{A_gauges}}{Avaliable number of gages in the basin}
+  \item{\code{Ratio_AR}}{Ratio of Available to Required number of gages in the basin}
+  \item{\code{Date_start}}{Date when recordings start}
+  \item{\code{Date_end}}{Date when recordings end}
+  \item{\code{State}}{State of the basin}
+  \item{\code{Name}}{Name of the basin}
+}
+Columns Date_start, Date_end, State, Name are taken from:
+https://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/Basin_Characteristics/usgs431.txt
+Date_start and Date_end are conventionally set to the first of the month
+here, however actual recordings my differ. Always refer to the recording date
+obtained as output of \code{tsMOPEX()}.
 }
 \description{
-This function interfaces the MOPEX database catalogue (available
-from \url{https://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/Basin_Characteristics/usgs431.txt})
-containing 431 daily datasets.
+This function retrieves the list of the MOPEX basins.
 }
 \examples{
 \dontrun{
   # Retrieve the MOPEX catalogue
-  MOPEX_catalogue_all <- catalogueMOPEX()
-
-  # Define a bounding box
-  areaBox <- raster::extent(-95, -92, 37, 41)
-  # Filter the catalogue based on bounding box
-  MOPEX_catalogue_bbox <- catalogueMOPEX(areaBox = areaBox)
-
-  # Get only catchments within NC
-  MOPEX_catalogue_state <- catalogueMOPEX(columnName = "state",
-                                          columnValue = "NC")
-
+  catalogue <- catalogueMOPEX()
 }
 
 }
