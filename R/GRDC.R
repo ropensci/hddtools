@@ -66,8 +66,8 @@ catalogueGRDC <- function() {
   tf <- tempfile(tmpdir = td, fileext = ".zip")
   
   # Retrieve the catalogue into the placeholder file
-  utils::download.file(url = file_url, destfile = tf, mode = "wb",
-                       quiet = TRUE, method = "auto")
+  x <- RCurl::getBinaryURL(file_url, ftp.use.epsv = FALSE, crlf = TRUE)
+  writeBin(object = x, con = tf)
   
   # Unzip the file to the temporary directory
   utils::unzip(tf, exdir = td, overwrite = TRUE)
@@ -78,7 +78,7 @@ catalogueGRDC <- function() {
   GRDCcatalogue <- readxl::read_xlsx(path = xlxs_file,
                                      sheet = "station_catalogue")
   
-  # Cleanup non
+  # Cleanup
   GRDCcatalogue <- data.frame(lapply(GRDCcatalogue,
                                      function(x) {gsub("n.a.|-999.0", NA, x)}),
                               stringsAsFactors = FALSE)
