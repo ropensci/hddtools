@@ -9,7 +9,7 @@ New release (hddtools v0.9.0).
 * Removed obsolete dependencies
 * Amended URLs
 * Simplified API
-* Switched from download.file to downloader::download() to better work cross platform
+* Removed evaluation of GRDC catalogue in vignette
 
 ## Test environment
 * Ubuntu 18.04, R 3.6.3
