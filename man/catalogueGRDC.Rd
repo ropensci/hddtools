@@ -7,22 +7,18 @@
 catalogueGRDC()
 }
 \value{
-This function returns a data frame made of 9481 rows (gauging
-stations, as per October 2017) and 26 columns:
+This function returns a data frame made with the following columns:
 \itemize{
   \item{\code{grdc_no}}{: GRDC station number}
   \item{\code{wmo_reg}}{: WMO region}
   \item{\code{sub_reg}}{: WMO subregion}
-  \item{\code{nat_id}}{: national station ID}
   \item{\code{river}}{: river name}
   \item{\code{station}}{: station name}
-  \item{\code{country_code}}{: country code (ISO 3166)}
+  \item{\code{country}}{: 2-letter country code (ISO 3166)}
   \item{\code{lat}}{: latitude, decimal degree}
   \item{\code{long}}{: longitude, decimal degree}
   \item{\code{area}}{: catchment size, km2}
   \item{\code{altitude}}{: height of gauge zero, m above sea level}
-  \item{\code{ds_stat_no}}{: GRDC station number of next downstream GRDC
-  station}
   \item{\code{d_start}}{: daily data available from year}
   \item{\code{d_end}}{: daily data available until year}
   \item{\code{d_yrs}}{: length of time series, daily data}
@@ -42,7 +38,7 @@ stations, as per October 2017) and 26 columns:
 }
 \description{
 This function interfaces the Global Runoff Data Centre database
-which provides river discharge data for about 9000 sites over 157 countries.
+which provides river discharge data for almost 1000 sites over 157 countries.
 }
 \examples{
 \dontrun{
