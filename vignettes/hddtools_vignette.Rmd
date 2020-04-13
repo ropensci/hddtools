@@ -78,7 +78,7 @@ KGClimateClass(areaBox = areaBox, updatedBy = "Kottek")
 The Global Runoff Data Centre (GRDC) is an international archive hosted by the Federal Institute of Hydrology in Koblenz, Germany. The Centre operates under the auspices of the World Meteorological Organisation and retains services and datasets for all the major rivers in the world. Catalogue, kml files and the product Long-Term Mean Monthly Discharges are open data and accessible via the hddtools.
 
 Information on all the GRDC stations can be retrieved using the function `catalogueGRDC` with no input arguments, as in the examle below:  
-```{r catalogueGRDC1, eval = TRUE}
+```{r catalogueGRDC1, eval = FALSE}
 # GRDC full catalogue
 GRDC_catalogue <- catalogueGRDC()
 ```
