@@ -53,7 +53,9 @@ catalogueMOPEX <- function(MAP = TRUE){
   # create a temporary file
   tf <- tempfile()
   # download into the placeholder file
-  downloader::download(url = file_url, destfile = tf, mode = "wb")
+  utils::download.file(url = file_url, destfile = tf, mode = "wb",
+                       quiet = TRUE, method = "curl", extra="-L")
+  
   # Read the file as a table
   mopexTable <- utils::read.table(file = tf)
   names(mopexTable) <- c("USGS_ID", "Longitude", "Latitude", "Drainage_Area",
@@ -134,7 +136,8 @@ tsMOPEX <- function(id, MAP = TRUE){
   # create a temporary file
   tf <- tempfile()
   # download into the placeholder file
-  downloader::download(url = file_url, destfile = tf, mode = "wb")
+  utils::download.file(url = file_url, destfile = tf, mode = "wb",
+                       quiet = TRUE, method = "curl", extra="-L")
   
   if (MAP == TRUE) {
     # Read the file as a table

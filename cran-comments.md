@@ -1,5 +1,5 @@
 This is a resubmission due to bug fixing.
-New release (hddtools v0.8.3).
+New release (hddtools v0.9.0).
 
 ---------------------------------
 
