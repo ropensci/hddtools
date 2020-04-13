@@ -19,12 +19,11 @@
 #' Discovery Tools, AGU Fall Meeting, 15-19 December 2014, San Francisco, USA.
 #'
 #' @import rgdal
-#' @importFrom raster raster extract brick flip extent crop writeRaster
+#' @importFrom raster raster extract extent
 #' @importFrom readxl read_xlsx
 #' @importFrom RCurl url.exists getURL
 #' @importFrom rnrfa catalogue
 #' @importFrom sp CRS SpatialPolygons Polygon Polygons
-#' @importFrom stats na.omit
 #' @importFrom tidyr pivot_longer
 #' @importFrom utils download.file read.csv read.fwf read.table untar unzip
 #' @importFrom XML readHTMLTable

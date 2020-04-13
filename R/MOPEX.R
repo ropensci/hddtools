@@ -162,7 +162,9 @@ tsMOPEX <- function(id, MAP = TRUE){
   }
 
   # Assemble date
-  date <- stats::na.omit(as.Date(paste(Year, Month, Day, sep = "-")))
+  date <- as.Date(paste(Year, Month, Day, sep = "-"))
+  # Remove dummy dates
+  date <- date[!is.na(date)]
 
   # Create time series
   mopexTS <- zoo::zoo(df, order.by = date)
