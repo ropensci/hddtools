@@ -67,7 +67,7 @@ catalogueGRDC <- function() {
   
   # Retrieve the catalogue into the placeholder file
   utils::download.file(url = file_url, destfile = tf, mode = "wb",
-                       quiet = TRUE, method = "auto", extra="-L")
+                       quiet = TRUE, method = "auto")
   
   # Unzip the file to the temporary directory
   utils::unzip(tf, exdir = td, overwrite = TRUE)
