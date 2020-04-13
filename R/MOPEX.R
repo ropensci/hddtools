@@ -54,7 +54,7 @@ catalogueMOPEX <- function(MAP = TRUE){
   tf <- tempfile()
   # download into the placeholder file
   utils::download.file(url = file_url, destfile = tf, mode = "wb",
-                       quiet = TRUE, method = "curl", extra="-L")
+                       quiet = TRUE, method = "auto", extra="-L")
   
   # Read the file as a table
   mopexTable <- utils::read.table(file = tf)
@@ -137,7 +137,7 @@ tsMOPEX <- function(id, MAP = TRUE){
   tf <- tempfile()
   # download into the placeholder file
   utils::download.file(url = file_url, destfile = tf, mode = "wb",
-                       quiet = TRUE, method = "curl", extra="-L")
+                       quiet = TRUE, method = "auto", extra="-L")
   
   if (MAP == TRUE) {
     # Read the file as a table
