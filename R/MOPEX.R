@@ -50,15 +50,8 @@ catalogueMOPEX <- function(MAP = TRUE){
   file_name <- ifelse(MAP == TRUE, "allrfc438.gls", "allrfc1861.gls")
   file_url <- paste(service_url, folder_name, file_name, sep = "/")
 
-  # Create a temporary file
-  tf <- tempfile()
-  
-  # Retrieve data into the temporary file
-  x <- RCurl::getBinaryURL(file_url)
-  writeBin(object = x, con = tf)
-  
   # Read the file as a table
-  mopexTable <- utils::read.table(tf)
+  mopexTable <- utils::read.table(file_url)
   names(mopexTable) <- c("USGS_ID", "Longitude", "Latitude", "Drainage_Area",
                          "R_gauges", "N_gauges", "A_gauges", "Ratio_AR")
 
