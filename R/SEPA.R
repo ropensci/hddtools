@@ -85,21 +85,13 @@ tsSEPA <- function(id){
     theurl <- paste("https://www2.sepa.org.uk/waterlevels/CSVs/",
                     id, "-SG.csv", sep = "")
 
-    if(RCurl::url.exists(theurl)) {
-      
-      sepaTS <- utils::read.csv(theurl, skip = 6)
-
-      # Coerse first column into a date
-      datetime <- strptime(sepaTS[,1], "%d/%m/%Y %H:%M")
-      myTS <- zoo::zoo(sepaTS[,2], order.by = datetime) # measured in m
-
-      myList[[counter]] <- myTS
-
-    }else{
-      message(paste("For station id", id,
-                    "the connection with the data provider failed.",
-                    "No cached results available."))
-    }
+    sepaTS <- utils::read.csv(theurl, skip = 6)
+    
+    # Coerse first column into a date
+    datetime <- strptime(sepaTS[,1], "%d/%m/%Y %H:%M")
+    myTS <- zoo::zoo(sepaTS[,2], order.by = datetime) # measured in m
+    
+    myList[[counter]] <- myTS
 
   }
 
