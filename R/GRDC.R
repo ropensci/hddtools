@@ -38,21 +38,8 @@
 #'
 #' @examples
 #' \dontrun{
-#'   # Retrieve the whole catalogue
+#'   # Retrieve the catalogue
 #'   GRDC_catalogue_all <- catalogueGRDC()
-#'
-#'   # Define a bounding box
-#'   areaBox <- raster::extent(-3.82, -3.63, 52.41, 52.52)
-#'   # Filter the catalogue based on bounding box
-#'   GRDC_catalogue_bbox <- catalogueGRDC(areaBox = areaBox)
-#'
-#'   # Get only catchments with area above 5000 Km2
-#'   GRDC_catalogue_area <- catalogueGRDC(columnName = "area",
-#'                                        columnValue = ">= 5000")
-#'
-#'   # Get only catchments within river Thames
-#'   GRDC_catalogue_river <- catalogueGRDC(columnName = "river",
-#'                                         columnValue = "Thames")
 #' }
 #'
 

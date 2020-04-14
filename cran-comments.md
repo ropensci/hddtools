@@ -10,6 +10,7 @@ New release (hddtools v0.9.0).
 * Amended URLs
 * Simplified API
 * Removed evaluation of GRDC catalogue in vignette
+* Using getBinaryURL() to retrieve zip file from ftp
 
 ## Test environment
 * Ubuntu 18.04, R 3.6.3

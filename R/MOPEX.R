@@ -50,14 +50,15 @@ catalogueMOPEX <- function(MAP = TRUE){
   file_name <- ifelse(MAP == TRUE, "allrfc438.gls", "allrfc1861.gls")
   file_url <- paste(service_url, folder_name, file_name, sep = "/")
 
-  # create a temporary file
+  # Create a temporary file
   tf <- tempfile()
-  # download into the placeholder file
-  utils::download.file(url = file_url, destfile = tf, mode = "wb",
-                       quiet = TRUE, method = "auto", extra="-L")
+  
+  # Retrieve data into the temporary file
+  x <- RCurl::getBinaryURL(file_url)
+  writeBin(object = x, con = tf)
   
   # Read the file as a table
-  mopexTable <- utils::read.table(file = tf)
+  mopexTable <- utils::read.table(tf)
   names(mopexTable) <- c("USGS_ID", "Longitude", "Latitude", "Drainage_Area",
                          "R_gauges", "N_gauges", "A_gauges", "Ratio_AR")
 
@@ -133,11 +134,12 @@ tsMOPEX <- function(id, MAP = TRUE){
   file_name <- ifelse(MAP == TRUE, paste0(id, ".dly"), paste0(id, ".dq"))
   file_url <- paste(service_url, folder_name, file_name, sep = "/")
   
-  # create a temporary file
+  # Create a temporary file
   tf <- tempfile()
-  # download into the placeholder file
-  utils::download.file(url = file_url, destfile = tf, mode = "wb",
-                       quiet = TRUE, method = "auto", extra="-L")
+  
+  # Retrieve data into the temporary file
+  x <- RCurl::getBinaryURL(file_url)
+  writeBin(object = x, con = tf)
   
   if (MAP == TRUE) {
     # Read the file as a table
