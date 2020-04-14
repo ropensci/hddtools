@@ -51,7 +51,7 @@ catalogueMOPEX <- function(MAP = TRUE){
   file_url <- paste(service_url, folder_name, file_name, sep = "/")
 
   # Read the file as a table
-  mopexTable <- utils::read.table(file_url)
+  mopexTable <- utils::read.table(curl::curl(file_url))
   names(mopexTable) <- c("USGS_ID", "Longitude", "Latitude", "Drainage_Area",
                          "R_gauges", "N_gauges", "A_gauges", "Ratio_AR")
 
@@ -129,7 +129,7 @@ tsMOPEX <- function(id, MAP = TRUE){
   
   if (MAP == TRUE) {
     # Read the file as a table
-    df <- utils::read.fwf(file = file_url,
+    df <- utils::read.fwf(file = curl::curl(file_url),
                           widths = c(4, 2, 2, 10, 10, 10, 10, 10))
     Year <- df$V1
     Month <- sprintf("%02d", df$V2)
