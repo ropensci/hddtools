@@ -15,7 +15,7 @@ URL: http://docs.ropensci.org/hddtools, https://github.com/ropensci/hddtools
 BugReports: https://github.com/ropensci/hddtools/issues
 Description: Tools to discover hydrological data, accessing catalogues and databases from various data providers.
 Depends: R (>= 3.2.1), rgdal
-Imports: zoo, sp, RCurl, XML, rnrfa, raster, readxl, tidyr
+Imports: zoo, sp, curl, RCurl, XML, rnrfa, raster, readxl, tidyr
 Suggests: testthat, leaflet, rmarkdown, knitr, pkgdown, curl, dplyr
 VignetteBuilder: knitr
 License: GPL-3
