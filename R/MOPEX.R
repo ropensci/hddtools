@@ -134,16 +134,10 @@ tsMOPEX <- function(id, MAP = TRUE){
   file_name <- ifelse(MAP == TRUE, paste0(id, ".dly"), paste0(id, ".dq"))
   file_url <- paste(service_url, folder_name, file_name, sep = "/")
   
-  # Create a temporary file
-  tf <- tempfile()
-  
-  # Retrieve data into the temporary file
-  x <- RCurl::getBinaryURL(file_url)
-  writeBin(object = x, con = tf)
-  
   if (MAP == TRUE) {
     # Read the file as a table
-    df <- utils::read.fwf(file = tf, widths = c(4, 2, 2, 10, 10, 10, 10, 10))
+    df <- utils::read.fwf(file = file_url,
+                          widths = c(4, 2, 2, 10, 10, 10, 10, 10))
     Year <- df$V1
     Month <- sprintf("%02d", df$V2)
     Day <- sprintf("%02d", df$V3)
@@ -152,7 +146,7 @@ tsMOPEX <- function(id, MAP = TRUE){
     df$Q[df$Q < 0] <- NA
   } else {
     # Read the file as a table
-    df <- utils::read.table(file = tf, header = FALSE, skip = 1)
+    df <- utils::read.table(file = file_url, header = FALSE, skip = 1)
     df <- tidyr::pivot_longer(data = df, cols = 2:32,
                               values_to = "Q", names_to = "Day")
     Year <- substr(x = df$V1, start = 1, stop = 4)

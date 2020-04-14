@@ -158,7 +158,7 @@ MorwickTS <- tsData60UK(id)
 
 #### MOPEX
 The MOPEX dataset contains river basin characteristics and data for hundreds of river basins from a range of climates in the US. The catalogue can be retrieved as follows:
-```{r MOPEX_meta, eval = TRUE, message = FALSE, fig.width = 7, fig.height = 7}
+```{r MOPEX_meta, eval = FALSE, message = FALSE, fig.width = 7, fig.height = 7}
 # MOPEX full catalogue
 MOPEX_catalogue <- catalogueMOPEX()
 
@@ -181,7 +181,7 @@ MOPEX_catalogue %>%
 
 For each station, historical hydrometeorological data  can also be retrieved.
 
-```{r MOPEX_data, eval = TRUE, message = FALSE, fig.width = 7, fig.height = 7}
+```{r MOPEX_data, eval = FALSE, message = FALSE, fig.width = 7, fig.height = 7}
 # Take the first record in the catalogue
 river_metadata <- MOPEX_catalogue[1,]
 
@@ -199,6 +199,8 @@ plot(river_ts_shorter,
      xlab = "",
      ylab = c("P [mm/day]","E [mm/day]", "Q [mm/day]", "Tmax [C]","Tmin [C]"))
 ```
+
+![](mopex.png)
 
 ### SEPA river level data
 The Scottish Environment Protection Agency (SEPA) manages river level data for hundreds of gauging stations in the UK. The catalogue of stations is derived from the list here:
