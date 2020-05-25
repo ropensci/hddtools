@@ -1,6 +1,6 @@
 Package: hddtools
 Title: Hydrological Data Discovery Tools
-Version: 0.9.0
+Version: 0.9.1
 Authors@R: c(person(given = "Claudia", family = "Vitolo",
                     role = c("aut", "cre"), email = "cvitolodev@gmail.com",
                     comment = c(ORCID = "0000-0002-4252-1176")),

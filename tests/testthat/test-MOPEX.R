@@ -2,7 +2,7 @@ context("MOPEX")
 
 test_that("Test catalogueMOPEX - MAP = FALSE", {
 
-  testthat::skip_on_cran('Not running on CRAN')
+  testthat::skip_on_cran()
 
   # Retrieve the MOPEX catalogue
   x1 <- catalogueMOPEX(MAP = FALSE)
@@ -15,7 +15,7 @@ test_that("Test catalogueMOPEX - MAP = FALSE", {
 
 test_that("Test catalogueMOPEX - MAP = TRUE", {
 
-  testthat::skip_on_cran('Not running on CRAN')
+  testthat::skip_on_cran()
 
   # Retrieve the MOPEX catalogue
   x2 <- catalogueMOPEX(MAP = TRUE)
@@ -28,7 +28,7 @@ test_that("Test catalogueMOPEX - MAP = TRUE", {
 
 test_that("Test tsMOPEX - MAP = FALSE", {
 
-  testthat::skip_on_cran('Not running on CRAN')
+  testthat::skip_on_cran()
 
   # Retrieve data
   x3 <- tsMOPEX(id = "01010000", MAP = FALSE)
@@ -41,7 +41,7 @@ test_that("Test tsMOPEX - MAP = FALSE", {
 
 test_that("Test tsMOPEX - MAP = TRUE", {
 
-  testthat::skip_on_cran('Not running on CRAN')
+  testthat::skip_on_cran()
 
   # Retrieve data
   x4 <- tsMOPEX(id = "01048000", MAP = TRUE)
