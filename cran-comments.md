@@ -1,16 +1,12 @@
 This is a resubmission due to bug fixing.
-New release (hddtools v0.9.0).
+New release (hddtools v0.9.3).
 
 ---------------------------------
 
 ## Release Summary
 
-* Updated URLs of SEPA and MOPEX data sources
-* Removed obsolete dependencies
-* Amended URLs
-* Simplified API
-* Removed evaluation of GRDC catalogue in vignette
-* Using getBinaryURL() to retrieve zip file from ftp
+* Updated URLs
+* SEPA tests now skipped if source is temporarily unavailable
 
 ## Test environment
 * Ubuntu 18.04, R 3.6.3

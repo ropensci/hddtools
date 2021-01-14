@@ -1,24 +1,24 @@
 Package: hddtools
 Title: Hydrological Data Discovery Tools
-Version: 0.9.1
+Version: 0.9.3
 Authors@R: c(person(given = "Claudia", family = "Vitolo",
                     role = c("aut", "cre"), email = "cvitolodev@gmail.com",
                     comment = c(ORCID = "0000-0002-4252-1176")),
              person(given = "Wouter", family = "Buytaert", role = c("ctb"),
                     comment = "Supervisor"),
              person(given = "Erin", family = "Le Dell", role = c("ctb"),
-                    comment = "Erin reviewed the package for rOpenSci, see https://github.com/ropensci/onboarding/issues/73"),
+                    comment = "Erin reviewed the package for rOpenSci, see https://github.com/ropensci/software-review/issues/73"),
              person(given = "Michael", family = "Sumner", role = c("ctb"),
-                    comment = "Michael reviewed the package for rOpenSci, see https://github.com/ropensci/onboarding/issues/73"))
+                    comment = "Michael reviewed the package for rOpenSci, see https://github.com/ropensci/software-review/issues/73"))
 Maintainer: Claudia Vitolo <cvitolodev@gmail.com>
-URL: http://docs.ropensci.org/hddtools, https://github.com/ropensci/hddtools
+URL: https://docs.ropensci.org/hddtools/, https://github.com/ropensci/hddtools
 BugReports: https://github.com/ropensci/hddtools/issues
 Description: Tools to discover hydrological data, accessing catalogues and databases from various data providers.
 Depends: R (>= 3.2.1), rgdal
 Imports: zoo, sp, curl, XML, rnrfa, raster, readxl, tidyr
-Suggests: testthat, leaflet, rmarkdown, knitr, pkgdown, dplyr
+Suggests: testthat, leaflet, rmarkdown, knitr, dplyr
 VignetteBuilder: knitr
 License: GPL-3
 Repository: CRAN
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 Encoding: UTF-8

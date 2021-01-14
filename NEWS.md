@@ -1,3 +1,17 @@
+# hddtools 0.9.3
+
+* Updated URLs
+* SEPA tests now skipped if source is temporarily unavailable
+
+# hddtools 0.9.0
+
+* Updated URLs of SEPA and MOPEX data sources
+* Removed obsolete dependencies
+* Amended URLs
+* Simplified API
+* Removed evaluation of GRDC catalogue in vignette
+* Using getBinaryURL() to retrieve zip file from ftp
+
 # hddtools 0.8.3
 
 * Updated URLs of SEPA and MOPEX data sources

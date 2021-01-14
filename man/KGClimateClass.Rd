@@ -29,7 +29,7 @@ Given a bounding box, the function identifies the overlapping climate zones.
 
 }
 \references{
-Kottek et al. (2006): \url{http://koeppen-geiger.vu-wien.ac.at/}. Peel et al. (2007): \url{http://people.eng.unimelb.edu.au/mpeel/koppen.html}.
+Kottek et al. (2006): \url{http://koeppen-geiger.vu-wien.ac.at/}. Peel et al. (2007): \url{https://people.eng.unimelb.edu.au/mpeel/koppen.html}.
 }
 \author{
 Claudia Vitolo

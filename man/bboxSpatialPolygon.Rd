@@ -31,5 +31,5 @@ Bounding box is first created (in lat/lon) then projected if specified
 
 }
 \references{
-\url{https://bit.ly/2NA5PSF}
+\url{https://gis.stackexchange.com/questions/46954/clip-spatial-object-to-bounding-box-in-r}
 }

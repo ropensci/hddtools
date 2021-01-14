@@ -8,7 +8,7 @@
 #' @param updatedBy this can either be "Kottek" or "Peel"
 #' @param verbose if TRUE more info are printed on the screen
 #'
-#' @references Kottek et al. (2006): \url{http://koeppen-geiger.vu-wien.ac.at/}. Peel et al. (2007): \url{http://people.eng.unimelb.edu.au/mpeel/koppen.html}.
+#' @references Kottek et al. (2006): \url{http://koeppen-geiger.vu-wien.ac.at/}. Peel et al. (2007): \url{https://people.eng.unimelb.edu.au/mpeel/koppen.html}.
 #'
 #' @return List of overlapping climate zones.
 #'

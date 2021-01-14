@@ -1,7 +1,7 @@
 # hddtools: Hydrological Data Discovery Tools
 
 [![DOI](https://zenodo.org/badge/22423032.svg)](https://zenodo.org/badge/latestdoi/22423032)
-[![status](http://joss.theoj.org/papers/3287a12e7ce5d7e89938a6b4f56fc225/status.svg)](http://joss.theoj.org/papers/3287a12e7ce5d7e89938a6b4f56fc225)
+[![status](https://joss.theoj.org/papers/10.21105/joss.00056/status.svg)](https://joss.theoj.org/papers/10.21105/joss.00056)
 
 [![CRAN Status
 Badge](http://www.r-pkg.org/badges/version/hddtools)](https://cran.r-project.org/package=hddtools)
@@ -15,7 +15,7 @@ Status](https://travis-ci.org/ropensci/hddtools.svg?branch=master)](https://trav
 [![AppVeyor Build
 Status](https://ci.appveyor.com/api/projects/status/github/ropensci/hddtools?branch=master&svg=true)](https://ci.appveyor.com/project/ropensci/hddtools)
 [![codecov.io](https://codecov.io/github/ropensci/hddtools/coverage.svg?branch=master)](https://codecov.io/github/ropensci/hddtools?branch=master)
-[![](https://badges.ropensci.org/73_status.svg)](https://github.com/ropensci/onboarding/issues/73)
+[![](https://badges.ropensci.org/73_status.svg)](https://github.com/ropensci/software-review/issues/73)
 
 `hddtools` stands for Hydrological Data Discovery Tools. This R package
 is an open source project designed to facilitate access to a variety of
@@ -77,7 +77,7 @@ listed below. For examples of the various functionalities see the
     contains historical hydrometeorological data and river basin
     characteristics for hundreds of river basins in the US.
 
-  - [SEPA](http://apps.sepa.org.uk/waterlevels/): The Scottish
+  - [SEPA](https://www2.sepa.org.uk/WaterLevels/): The Scottish
     Environment Protection Agency (SEPA) provides river level data for
     hundreds of gauging stations in the UK.
 
@@ -93,7 +93,7 @@ listed below. For examples of the various functionalities see the
   - This package was reviewed by [Erin Le
     Dell](https://github.com/ledell) and [Michael
     Sumner](https://github.com/mdsumner) for submission to ROpenSci (see
-    review [here](https://github.com/ropensci/onboarding/issues/73)) and
+    review [here](https://github.com/ropensci/software-review/issues/73)) and
     the Journal of Open Source Software (see review status
     [here](https://github.com/openjournals/joss-reviews/issues/56)).
   - Cite `hddtools`: `citation(package = "rdefra")`

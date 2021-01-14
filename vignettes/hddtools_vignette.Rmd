@@ -35,7 +35,7 @@ Get the released version from CRAN:
 install.packages("hddtools")
 ```
 
-Or the development version from github using [devtools](https://github.com/hadley/devtools):
+Or the development version from github using [devtools](https://github.com/r-lib/devtools):
   
 ```{r installation2}
 devtools::install_github("ropensci/hddtools")
@@ -206,13 +206,13 @@ plot(river_ts_shorter,
 The Scottish Environment Protection Agency (SEPA) manages river level data for hundreds of gauging stations in the UK. The catalogue of stations is derived from the list here:
 https://www2.sepa.org.uk/waterlevels/CSVs/SEPA_River_Levels_Web.csv.
 
-```{r SEPA1, eval = TRUE}
+```{r SEPA1, eval = FALSE}
 # SEPA catalogue
 SEPA_catalogue <- catalogueSEPA()
 ```
 
 The time series of the last few days is available from SEPA website and can be downloaded using the following function:
-```{r SEPA2, eval = TRUE, message = FALSE, fig.width = 7}
+```{r SEPA2, eval = FALSE, message = FALSE, fig.width = 7}
 # Take the first record in the catalogue
 Perth_metadata <- SEPA_catalogue[1,]
 
