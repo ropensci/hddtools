@@ -11,7 +11,7 @@ Downloads](http://cranlogs.r-pkg.org/badges/grand-total/hddtools)](https://cran.
 Downloads](http://cranlogs.r-pkg.org/badges/hddtools)](https://cran.r-project.org/package=hddtools)
 
 [![Travis-CI Build
-Status](https://travis-ci.org/ropensci/hddtools.svg?branch=master)](https://travis-ci.org/ropensci/hddtools)
+Status](https://travis-ci.com/ropensci/hddtools.svg?branch=master)](https://travis-ci.com/ropensci/hddtools)
 [![AppVeyor Build
 Status](https://ci.appveyor.com/api/projects/status/github/ropensci/hddtools?branch=master&svg=true)](https://ci.appveyor.com/project/ropensci/hddtools)
 [![codecov.io](https://codecov.io/github/ropensci/hddtools/coverage.svg?branch=master)](https://codecov.io/github/ropensci/hddtools?branch=master)
