@@ -1,6 +1,5 @@
 language: r
 os: linux
-dist: trusty
 
 addons:
   apt:
