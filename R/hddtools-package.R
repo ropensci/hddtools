@@ -22,7 +22,6 @@
 #' @importFrom curl curl_download
 #' @importFrom raster raster extract extent
 #' @importFrom readxl read_xlsx
-#' @importFrom rnrfa catalogue
 #' @importFrom sp CRS SpatialPolygons Polygon Polygons
 #' @importFrom tidyr pivot_longer
 #' @importFrom utils download.file read.csv read.fwf read.table untar unzip

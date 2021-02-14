@@ -45,7 +45,9 @@ catalogueData60UK <- function(areaBox = NULL){
   Data60UKcatalogue[] <- lapply(Data60UKcatalogue, as.character)
   
   # Find grid reference browsing the NRFA catalogue
-  temp <- rnrfa::catalogue()
+  # This was temp <- rnrfa::catalogue() but the catalogue has been saved as
+  # external data here so that the dependency from rnrfa could be removed.
+  temp <- readRDS(system.file("extdata", "rnrfa_cat.rds", package = "hddtools"))
   temp <- temp[which(temp$id %in% Data60UKcatalogue$id), ]
   
   Data60UKcatalogue$gridReference <- temp$`grid-reference`$ngr
