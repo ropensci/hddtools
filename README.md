@@ -1,5 +1,6 @@
 # hddtools: Hydrological Data Discovery Tools
 
+<!-- badges: start -->
 [![DOI](https://zenodo.org/badge/22423032.svg)](https://zenodo.org/badge/latestdoi/22423032)
 [![status](https://joss.theoj.org/papers/10.21105/joss.00056/status.svg)](https://joss.theoj.org/papers/10.21105/joss.00056)
 
@@ -10,12 +11,10 @@ Downloads](http://cranlogs.r-pkg.org/badges/grand-total/hddtools)](https://cran.
 [![CRAN Monthly
 Downloads](http://cranlogs.r-pkg.org/badges/hddtools)](https://cran.r-project.org/package=hddtools)
 
-[![Travis-CI Build
-Status](https://travis-ci.com/ropensci/hddtools.svg?branch=master)](https://travis-ci.com/ropensci/hddtools)
-[![AppVeyor Build
-Status](https://ci.appveyor.com/api/projects/status/github/ropensci/hddtools?branch=master&svg=true)](https://ci.appveyor.com/project/ropensci/hddtools)
+[![R-CMD-check](https://github.com/ropensci/hddtools/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/hddtools/actions)
 [![codecov.io](https://codecov.io/github/ropensci/hddtools/coverage.svg?branch=master)](https://codecov.io/github/ropensci/hddtools?branch=master)
 [![](https://badges.ropensci.org/73_status.svg)](https://github.com/ropensci/software-review/issues/73)
+<!-- badges: end -->
 
 `hddtools` stands for Hydrological Data Discovery Tools. This R package
 is an open source project designed to facilitate access to a variety of

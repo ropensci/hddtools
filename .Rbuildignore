@@ -8,3 +8,4 @@ appveyor.yml
 ^_pkgdown\.yml$
 inst/extdata/grdc
 inst/experimental/*
+^\.github$
