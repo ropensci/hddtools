@@ -1,12 +1,11 @@
-This is a resubmission due to bug fixing.
-New release (hddtools v0.9.3).
+This is a resubmission after the package was archived.
+New release (hddtools v0.9.4).
 
 ---------------------------------
 
 ## Release Summary
 
-* Updated URLs
-* SEPA tests now skipped if source is temporarily unavailable
+* Removed dependency from the rnrfa package
 
 ## Test environment
 * Ubuntu 18.04, R 3.6.3

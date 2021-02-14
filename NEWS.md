@@ -1,3 +1,7 @@
+# hddtools 0.9.4
+
+* Removed dependency from the rnrfa package
+
 # hddtools 0.9.3
 
 * Updated URLs
