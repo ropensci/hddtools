@@ -115,7 +115,7 @@ The GRDC catalogue (or a subset) can be used to create a map.
 ```{r catalogueGRDC7, eval = FALSE}
 # Visualise outlets on an interactive map
 library(leaflet)
-leaflet(data = GRDC_catalogue %>% filter(river == "PO, FIUME")) %>%
+leaflet(data = GRDC_catalogue %>% dplyr::filter(river == "PO, FIUME")) %>%
   addTiles() %>%  # Add default OpenStreetMap map tiles
   addMarkers(~long, ~lat, popup = ~station)
 ```
