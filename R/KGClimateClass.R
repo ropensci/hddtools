@@ -38,7 +38,7 @@ KGClimateClass <- function(areaBox = NULL, updatedBy = "Peel", verbose = FALSE){
     kgLegend <- utils::read.table(system.file(file.path("extdata",
                                                         "KOTTEK_Legend.txt"),
                                               package = "hddtools"))
-
+    kgLegend$V1 <- as.character(kgLegend$V1)
     # message("OFFLINE results")
 
     # create a temporary directory
@@ -53,10 +53,11 @@ KGClimateClass <- function(areaBox = NULL, updatedBy = "Peel", verbose = FALSE){
     kgRaster <- terra::rast(paste0(td, "/KOTTEK_koeppen-geiger.tiff",
                                       sep = ""))
 
-    temp <- data.frame(table(terra::extract(kgRaster, bbSP)))
+    temp <- data.frame(table(terra::extract(kgRaster, bbSP)))[,2:3]
+    colnames(temp)[1] <- "ID"
     temp$Class <- NA
     for (i in 1:dim(temp)[1]){
-      class1 <- which(kgLegend[,1] == temp[i,1])
+      class1 <- which(kgLegend[,1] == as.character(temp[i,1]))
       if (length(class1) > 0){
         temp$Class[i] <- as.character(kgLegend[class1,3])
       }
@@ -64,7 +65,7 @@ KGClimateClass <- function(areaBox = NULL, updatedBy = "Peel", verbose = FALSE){
 
     temp <- temp[which(!is.na(temp$Class)),]
 
-    df <- data.frame(ID = temp$Var1,
+    df <- data.frame(ID = temp$ID,
                      Class = temp$Class,
                      Frequency = temp$Freq)
 
@@ -77,7 +78,7 @@ KGClimateClass <- function(areaBox = NULL, updatedBy = "Peel", verbose = FALSE){
                                                         "PEEL_Legend.txt"),
                                               package = "hddtools"),
                                   header = TRUE)
-
+    kgLegend$ID <- as.character(kgLegend$ID)
     # message("OFFLINE results")
 
     # create a temporary directory
@@ -91,10 +92,11 @@ KGClimateClass <- function(areaBox = NULL, updatedBy = "Peel", verbose = FALSE){
 
     kgRaster <- terra::rast(paste0(td, "/PEEL_koppen_ascii.txt", sep = ""))
 
-    temp <- data.frame(table(terra::extract(kgRaster, bbSP)))
+    temp <- data.frame(table(terra::extract(kgRaster, bbSP)))[,2:3]
+    colnames(temp)[1] <- "ID"
     temp$Class <- NA
     for (i in 1:dim(temp)[1]){
-      class1 <- which(kgLegend[,1] == temp[i,1])
+      class1 <- which(kgLegend[,1] == as.character(temp[i,1]))
       if (length(class1) > 0){
         temp$Class[i] <- as.character(kgLegend[class1,2])
       }
@@ -102,7 +104,7 @@ KGClimateClass <- function(areaBox = NULL, updatedBy = "Peel", verbose = FALSE){
 
     temp <- temp[which(!is.na(temp$Class)),]
 
-    df <- data.frame(ID = temp$Var1,
+    df <- data.frame(ID = temp$ID,
                      Class = temp$Class,
                      Frequency = temp$Freq)
 

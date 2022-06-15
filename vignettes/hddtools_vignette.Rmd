@@ -63,7 +63,7 @@ The package hddtools contains a function to identify the updated Koppen-Greiger 
 
 ```{r KGClimateClass1, eval = TRUE}
 # Define a bounding box
-areaBox <- raster::extent(-10, 5, 48, 62)
+areaBox <- terra::ext(-10, 5, 48, 62)
 
 # Extract climate zones from Peel's map:
 KGClimateClass(areaBox = areaBox, updatedBy = "Peel")
