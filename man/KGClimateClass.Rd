@@ -22,7 +22,7 @@ Given a bounding box, the function identifies the overlapping climate zones.
 \examples{
 \dontrun{
   # Define a bounding box
-  areaBox <- raster::extent(-3.82, -3.63, 52.41, 52.52)
+  areaBox <- terra::ext(-3.82, -3.63, 52.41, 52.52)
   # Get climate classes
   KGClimateClass(areaBox = areaBox)
 }

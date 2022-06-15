@@ -17,7 +17,7 @@
 #' @examples
 #' \dontrun{
 #'   # Define a bounding box
-#'   areaBox <- raster::extent(-3.82, -3.63, 52.41, 52.52)
+#'   areaBox <- terra::ext(-3.82, -3.63, 52.41, 52.52)
 #'   # Get climate classes
 #'   KGClimateClass(areaBox = areaBox)
 #' }
@@ -28,7 +28,7 @@ KGClimateClass <- function(areaBox = NULL, updatedBy = "Peel", verbose = FALSE){
   # crop to bounding box
 
   if (is.null(areaBox)){
-    areaBox <- raster::extent(c(-180, +180, -90, +90))
+    areaBox <- terra::ext(c(-180, +180, -90, +90))
   }
   bbSP <- bboxSpatialPolygon(areaBox)
 
@@ -50,10 +50,10 @@ KGClimateClass <- function(areaBox = NULL, updatedBy = "Peel", verbose = FALSE){
     utils::untar(system.file(file.path("extdata", "KOTTEK_KG.tar.gz"),
                              package = "hddtools"), exdir = td)
 
-    kgRaster <- raster::raster(paste0(td, "/KOTTEK_koeppen-geiger.tiff",
+    kgRaster <- terra::rast(paste0(td, "/KOTTEK_koeppen-geiger.tiff",
                                       sep = ""))
 
-    temp <- data.frame(table(raster::extract(kgRaster, bbSP)))
+    temp <- data.frame(table(terra::extract(kgRaster, bbSP)))
     temp$Class <- NA
     for (i in 1:dim(temp)[1]){
       class1 <- which(kgLegend[,1] == temp[i,1])
@@ -89,9 +89,9 @@ KGClimateClass <- function(areaBox = NULL, updatedBy = "Peel", verbose = FALSE){
     utils::untar(system.file(file.path("extdata", "PEEL_KG.tar.gz"),
                              package = "hddtools"), exdir = td)
 
-    kgRaster <- raster::raster(paste0(td, "/PEEL_koppen_ascii.txt", sep = ""))
+    kgRaster <- terra::rast(paste0(td, "/PEEL_koppen_ascii.txt", sep = ""))
 
-    temp <- data.frame(table(raster::extract(kgRaster, bbSP)))
+    temp <- data.frame(table(terra::extract(kgRaster, bbSP)))
     temp$Class <- NA
     for (i in 1:dim(temp)[1]){
       class1 <- which(kgLegend[,1] == temp[i,1])

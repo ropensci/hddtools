@@ -15,7 +15,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' boundingbox <- raster::extent(-180, +180, -50, +50)
+#' boundingbox <- terra::ext(-180, +180, -50, +50)
 #' bbSP <- bboxSpatialPolygon(boundingbox = boundingbox)
 #' }
 #'
@@ -27,7 +27,7 @@ bboxSpatialPolygon <- function(boundingbox,
   }
 
   if (is.null(proj4stringFrom)) {
-    proj4stringFrom <- sf::st_crs("+proj=longlat +datum=WGS84")
+    proj4stringFrom <- "+proj=longlat +datum=WGS84"
   }
 
   if(is.matrix(boundingbox)) if(dim(boundingbox)==c(2,2)) bb <- boundingbox
@@ -65,12 +65,8 @@ bboxSpatialPolygon <- function(boundingbox,
     c(bb["lon", "min"], bb["lat", "min"])
   )
 
-  bboxSP <- bboxMat %>%
-    list() %>%
-    sf::st_polygon() %>%
-    sf::st_sfc(., crs = proj4stringFrom)
 
-
+  bboxSP <- terra::vect(bboxMat, "polygon", crs = proj4stringFrom)
 
   if (!is.null(proj4stringTo)) {
     stopifnot(class(proj4stringTo) == "crs")
