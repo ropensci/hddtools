@@ -7,7 +7,7 @@
 #'
 #' @param areaBox bounding box, a list made of 4 elements: minimum longitude
 #' (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum
-#' latitude (latMax)
+#' latitude (latMax) or an object of type "SpatExtent"
 #'
 #' @return This function returns a data frame containing the following columns:
 #' \describe{
@@ -56,10 +56,10 @@ catalogueData60UK <- function(areaBox = NULL){
 
   # Latitude is the Y axis, longitude is the X axis.
   if (!is.null(areaBox)){
-    lonMin <- areaBox@xmin
-    lonMax <- areaBox@xmax
-    latMin <- areaBox@ymin
-    latMax <- areaBox@ymax
+    lonMin <- areaBox$xmin
+    lonMax <- areaBox$xmax
+    latMin <- areaBox$ymin
+    latMax <- areaBox$ymax
   }else{
     lonMin <- -180
     lonMax <- +180

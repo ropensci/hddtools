@@ -134,7 +134,7 @@ The hddtools contain two functions to interact with this database: one to retrei
 Data60UK_catalogue_all <- catalogueData60UK()
 
 # Filter Data60UK catalogue based on bounding box
-areaBox <- raster::extent(-4, -3, 51, 53)
+areaBox <- terra::ext(-4, -3, 51, 53)
 Data60UK_catalogue_bbox <- catalogueData60UK(areaBox = areaBox)
 ```
 
