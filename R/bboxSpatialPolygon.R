@@ -23,7 +23,7 @@ bboxSpatialPolygon <- function(boundingbox,
                                proj4stringFrom = NULL,
                                proj4stringTo = NULL) {
   if (!is.null(proj4stringFrom)) {
-    stopifnot(class(proj4stringFrom) == "crs")
+    stopifnot(class(sf::st_crs(proj4stringFrom)) == "crs")
   }
 
   if (is.null(proj4stringFrom)) {
@@ -69,8 +69,8 @@ bboxSpatialPolygon <- function(boundingbox,
   bboxSP <- terra::vect(bboxMat, "polygon", crs = proj4stringFrom)
 
   if (!is.null(proj4stringTo)) {
-    stopifnot(class(proj4stringTo) == "crs")
-    bboxSP <- sf::sf_project(bboxSP, proj4stringTo)
+    stopifnot(class(sf::st_crs(proj4stringTo)) == "crs")
+    bboxSP <- terra::project(bboxSP, proj4stringTo)
   }
 
   return(bboxSP)
