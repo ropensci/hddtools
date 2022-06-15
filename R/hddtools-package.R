@@ -18,11 +18,8 @@
 #' Vitolo C, Buytaert W, 2014, HDDTOOLS: an R package serving Hydrological Data
 #' Discovery Tools, AGU Fall Meeting, 15-19 December 2014, San Francisco, USA.
 #'
-#' @import rgdal
 #' @importFrom curl curl_download
-#' @importFrom raster raster extract extent
 #' @importFrom readxl read_xlsx
-#' @importFrom sp CRS SpatialPolygons Polygon Polygons
 #' @importFrom tidyr pivot_longer
 #' @importFrom utils download.file read.csv read.fwf read.table untar unzip
 #' @importFrom XML readHTMLTable

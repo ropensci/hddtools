@@ -46,7 +46,7 @@
 #'   GRDC_catalogue_all <- catalogueGRDC()
 #'
 #'   # Define a bounding box
-#'   areaBox <- raster::extent(-3.82, -3.63, 52.41, 52.52)
+#'   areaBox <- terra::ext(-3.82, -3.63, 52.41, 52.52)
 #'   # Filter the catalogue based on bounding box
 #'   GRDC_catalogue_bbox <- catalogueGRDC(areaBox = areaBox)
 #'
@@ -61,39 +61,39 @@
 #'
 
 test_catalogueGRDC <- function() {
-  
+
   the_url <- "ftp://ftp.bafg.de/pub/REFERATE/GRDC/catalogue/"
-  
+
   # Retrieve the catalogue
   result <- RCurl::getURL(the_url, ftp.use.epsv=TRUE, dirlistonly = TRUE)
   list_of_files <- strsplit(result, "\r*\n")[[1]]
   yesterday <- gsub(pattern = "-", replacement = "_", Sys.Date() - 1)
   today <- gsub(pattern = "-", replacement = "_", Sys.Date())
-  latest_file <- 
+  latest_file <-
     ifelse(test = length(list_of_files[grep(pattern = today,
                                             x = list_of_files)]),
            yes = list_of_files[grep(pattern = today, x = list_of_files)],
            no = list_of_files[grep(pattern = yesterday, x = list_of_files)])
   latest_file <- paste0(the_url, latest_file)
-  
+
   my_tmp_file <- tempfile()
   x <- RCurl::getBinaryURL(latest_file, ftp.use.epsv = FALSE,crlf = TRUE)
   writeBin(object = x, con = my_tmp_file)
   GRDCcatalogue <- readxl::read_xlsx(my_tmp_file, sheet = "Catalogue")
-  
+
   # Cleanup non
   GRDCcatalogue <- data.frame(lapply(GRDCcatalogue,
                                      function(x) {gsub("n.a.|-999|-", NA, x)}),
                               stringsAsFactors = FALSE)
-  
+
   # Convert to numeric some of the columns
   colx <- which(!(names(GRDCcatalogue) %in% c("grdc_no", "wmo_reg", "sub_reg",
                                               "nat_id", "river", "station",
                                               "country", "provider_id")))
   GRDCcatalogue[, colx] <- lapply(GRDCcatalogue[, colx], as.numeric)
-  
+
   return(GRDCcatalogue)
-  
+
 }
 
 #' Interface for the Global Runoff Data Centre database of Monthly Time Series.
@@ -233,58 +233,58 @@ test_catalogueGRDC <- function() {
 #'
 
 test_tsGRDC <- function(id) {
-  
+
   options(warn = -1)
-  
+
   catalogueTmp <- catalogueGRDC()
   catalogueTmp <- catalogueTmp[which(catalogueTmp$grdc_no == id), ]
-  
+
   # Retrieve look-up table
   grdcLTMMD <- NULL
   load(system.file(file.path("data", "grdcLTMMD.rda"), package = "hddtools"))
-  
+
   # Retrieve WMO region from catalogue
   wmoRegion <- catalogueTmp$wmo_reg
-  
+
   # Retrieve ftp server location
   zipFile <- as.character(grdcLTMMD[which(grdcLTMMD$WMO_Region == wmoRegion),
                                     "Archive"])
-  
+
   # create a temporary directory
   td <- tempdir()
-  
+
   # create the placeholder file
   tf <- tempfile(tmpdir = td, fileext = ".zip")
-  
+
   # download into the placeholder file
   # Switched from downloader::download to utils::download.file
   # to ensure it works cross-platform
   downloader::download(url = zipFile, destfile = tf, mode = "wb")
-  
+
   # Type of tables
   tablenames <- c("LTVD", "LTVM", "PVD", "PVM", "YVD", "YVM")
-  
+
   # get the name of the file to unzip
   fname <- paste0(id, "_Q_", tablenames, ".csv")
-  
+
   # unzip the file to the temporary directory
   utils::unzip(tf, files = fname, exdir = td, overwrite = TRUE)
-  
+
   # fpath is the full path to the extracted file
   fpath <- file.path(td, fname)
-  
+
   if (!all(file.exists(fpath))) {
-    
+
     stop("Data are not available at this station")
-    
+
   }
-  
+
   # Initialise empty list of tables
   ltables <- list()
-  
+
   # Populate tables
   for (j in seq_along(fpath)) {
-    
+
     TS <- readLines(fpath[j])
     # find dataset content
     row_data <- grep(pattern = "# Data Set Content:", x = TS)
@@ -295,7 +295,7 @@ test_tsGRDC <- function(id) {
     data_names <- gsub(pattern = ")", replacement = "", x = data_names)
     data_names <- gsub(pattern = "\\(", replacement = "_", x = data_names)
     data_names <- gsub(pattern = "\\.", replacement = "_", x = data_names)
-    
+
     ## find data lines
     row_data_lines <- grep(pattern = "# Data lines:", x = TS)[1]
     chr_positions <- gregexpr(pattern = "[0-9]",
@@ -304,14 +304,14 @@ test_tsGRDC <- function(id) {
     rows_to_read <- as.numeric(substr(x = TS[row_data_lines],
                                       start = chr_positions[1],
                                       stop = chr_positions[lchr_positions]))
-    
+
     if (rows_to_read > 0) {
-      
+
       # find tables
       row_data <- grep(pattern = "DATA", x = TS, ignore.case = FALSE)
       row_start <- row_data + 2
       row_end <- row_start + rows_to_read - 1
-      
+
       # Read columns and assign names
       column_names <- c()
       for (k in seq_along(data_names)) {
@@ -322,7 +322,7 @@ test_tsGRDC <- function(id) {
         column_names <- c(column_names, paste0(data_names[k], "__",
                                                tempcolnames))
       }
-      
+
       for (w in seq_along(row_start)) {
         # Assemble data frame
         row_split <- unlist(strsplit(TS[row_start[w]:row_end[w]], ";"))
@@ -334,20 +334,20 @@ test_tsGRDC <- function(id) {
                                    byrow = TRUE))
         }
       }
-      
+
       df <- data.frame(tmp, stringsAsFactors = FALSE)
       names(df) <- column_names
-      
+
       ltables[[j]] <- df
     }else{
       message(paste(tablenames[j], "data are not available at this station"))
       ltables[[j]] <- NULL
     }
-    
+
   }
-  
+
   names(ltables) <- tablenames
-  
+
   return(ltables)
-  
+
 }
