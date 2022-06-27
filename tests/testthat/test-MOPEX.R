@@ -16,7 +16,7 @@ test_that("Test catalogueMOPEX - MAP = FALSE", {
 test_that("Test catalogueMOPEX - MAP = TRUE", {
 
   testthat::skip_on_cran()
-  testthat::ski_on_ci()
+  testthat::skip_on_ci()
 
 
   # Retrieve the MOPEX catalogue
@@ -31,7 +31,7 @@ test_that("Test catalogueMOPEX - MAP = TRUE", {
 test_that("Test tsMOPEX - MAP = FALSE", {
 
   testthat::skip_on_cran()
-  testthat::ski_on_ci()
+  testthat::skip_on_ci()
   # Retrieve data
   x3 <- tsMOPEX(id = "01010000", MAP = FALSE)
 
@@ -44,7 +44,7 @@ test_that("Test tsMOPEX - MAP = FALSE", {
 test_that("Test tsMOPEX - MAP = TRUE", {
 
   testthat::skip_on_cran()
-  testthat::ski_on_ci()
+  testthat::skip_on_ci()
   # Retrieve data
   x4 <- tsMOPEX(id = "01048000", MAP = TRUE)
 
