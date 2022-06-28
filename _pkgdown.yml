@@ -44,7 +44,6 @@ reference:
     Utility functions, mainly used internally
   contents:
   - bboxSpatialPolygon
-  - getContent
 
 - title: Cached catalogues
   desc: >
