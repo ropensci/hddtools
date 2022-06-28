@@ -45,14 +45,6 @@ reference:
   contents:
   - bboxSpatialPolygon
 
-- title: Cached catalogues
-  desc: >
-    Cached version of the output of the catalogue*() functions
-  contents:
-  - Data60UKcatalogue
-  - GRDCcatalogue
-  - MOPEXcatalogue
-  - SEPAcatalogue
 
 articles:
 - title: All articles
