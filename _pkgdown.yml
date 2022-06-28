@@ -34,7 +34,6 @@ reference:
     Get data from various providers
   contents:
   - tsData60UK
-  - tsGRDC
   - tsMOPEX
   - tsSEPA
   - grdcLTMMD
