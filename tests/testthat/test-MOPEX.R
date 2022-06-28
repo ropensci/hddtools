@@ -3,6 +3,7 @@ context("MOPEX")
 test_that("Test catalogueMOPEX - MAP = FALSE", {
 
   testthat::skip_on_cran()
+  testthat::skip_on_ci()
 
   # Retrieve the MOPEX catalogue
   x1 <- catalogueMOPEX(MAP = FALSE)
