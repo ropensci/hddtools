@@ -7,7 +7,7 @@
 #'
 #' @param areaBox bounding box, a list made of 4 elements: minimum longitude
 #' (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum
-#' latitude (latMax)
+#' latitude (latMax) or an object of type "SpatExtent"
 #'
 #' @return This function returns a data frame containing the following columns:
 #' \describe{
@@ -18,7 +18,7 @@
 #'   \item{\code{Latitude}}{}
 #'   \item{\code{Longitude}}{}
 #' }
-#' 
+#'
 #' @source \url{http://nrfaapps.ceh.ac.uk/datauk60/data.html}
 #'
 #' @export
@@ -29,7 +29,7 @@
 #'   Data60UK_catalogue_all <- catalogueData60UK()
 #'
 #'   # Filter the catalogue based on a bounding box
-#'   areaBox <- raster::extent(-4, -2, +52, +53)
+#'   areaBox <- terra::ext(-4, -2, +52, +53)
 #'   Data60UK_catalogue_bbox <- catalogueData60UK(areaBox)
 #' }
 #'
@@ -43,23 +43,23 @@ catalogueData60UK <- function(areaBox = NULL){
   Data60UKcatalogue <- tables[[which.max(n.rows)]]
   names(Data60UKcatalogue) <- c("id", "River", "Location")
   Data60UKcatalogue[] <- lapply(Data60UKcatalogue, as.character)
-  
+
   # Find grid reference browsing the NRFA catalogue
   # This was temp <- rnrfa::catalogue() but the catalogue has been saved as
   # external data here so that the dependency from rnrfa could be removed.
   temp <- readRDS(system.file("extdata", "rnrfa_cat.rds", package = "hddtools"))
   temp <- temp[which(temp$id %in% Data60UKcatalogue$id), ]
-  
+
   Data60UKcatalogue$gridReference <- temp$`grid-reference`$ngr
   Data60UKcatalogue$Latitude <- temp$latitude
   Data60UKcatalogue$Longitude <- temp$longitude
 
   # Latitude is the Y axis, longitude is the X axis.
   if (!is.null(areaBox)){
-    lonMin <- areaBox@xmin
-    lonMax <- areaBox@xmax
-    latMin <- areaBox@ymin
-    latMax <- areaBox@ymax
+    lonMin <- areaBox$xmin
+    lonMax <- areaBox$xmax
+    latMin <- areaBox$ymin
+    latMax <- areaBox$ymax
   }else{
     lonMin <- -180
     lonMax <- +180
@@ -103,16 +103,16 @@ tsData60UK <- function(id){
 
   temp <- utils::read.table(file_url)
   names(temp) <- c("P", "Q", "DayNumber", "Year", "nStations")
-  
+
   # Combine the first four columns into a character vector
   date_info <- with(temp, paste(Year, DayNumber))
   # Parse that character vector
   datetime <- strptime(date_info, "%Y %j")
   P <- zoo::zoo(temp$P, order.by = datetime) # measured in mm
   Q <- zoo::zoo(temp$Q, order.by = datetime) # measured in m3/s
-  
+
   myTS <- zoo::merge.zoo(P,Q)
-  
+
   return(myTS)
 
 }

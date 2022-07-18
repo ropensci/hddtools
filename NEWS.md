@@ -1,3 +1,7 @@
+# hddtools 0.9.5
+
+*Removed dependency fom rgdal and raster packages
+
 # hddtools 0.9.4
 
 * Removed dependency from the rnrfa package

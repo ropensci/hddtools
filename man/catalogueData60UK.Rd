@@ -12,7 +12,7 @@ catalogueData60UK(areaBox = NULL)
 \arguments{
 \item{areaBox}{bounding box, a list made of 4 elements: minimum longitude
 (lonMin), minimum latitude (latMin), maximum longitude (lonMax), maximum
-latitude (latMax)}
+latitude (latMax) or an object of type "SpatExtent"}
 }
 \value{
 This function returns a data frame containing the following columns:
@@ -35,7 +35,7 @@ listing 61 gauging stations.
   Data60UK_catalogue_all <- catalogueData60UK()
 
   # Filter the catalogue based on a bounding box
-  areaBox <- raster::extent(-4, -2, +52, +53)
+  areaBox <- terra::ext(-4, -2, +52, +53)
   Data60UK_catalogue_bbox <- catalogueData60UK(areaBox)
 }
 
