@@ -23,7 +23,7 @@ bboxSpatialPolygon <- function(boundingbox,
                                proj4stringFrom = NULL,
                                proj4stringTo = NULL) {
   if (!is.null(proj4stringFrom)) {
-    stopifnot(class(sf::st_crs(proj4stringFrom)) == "crs")
+    stopifnot(inherits(sf::st_crs(proj4stringFrom),"crs"))
   }
 
   if (is.null(proj4stringFrom)) {
@@ -33,7 +33,7 @@ bboxSpatialPolygon <- function(boundingbox,
   if(is.matrix(boundingbox)) if(dim(boundingbox)==c(2,2)) bb <- boundingbox
 
   #For compatibility with raster input bounding box objects
-  if(class(boundingbox) == "Extent"){
+  if(inherits(boundingbox, "Extent")){
   bb <- matrix(as.numeric(c(
     boundingbox@xmin, boundingbox@ymin,
     boundingbox@xmax, boundingbox@ymax
@@ -42,7 +42,7 @@ bboxSpatialPolygon <- function(boundingbox,
   )}
 
 
-  if(class(boundingbox) == "SpatExtent"){
+  if(inherits(boundingbox, "SpatExtent")){
     bb <- matrix(as.numeric(c(
       boundingbox$xmin, boundingbox$ymin,
       boundingbox$xmax, boundingbox$ymax
