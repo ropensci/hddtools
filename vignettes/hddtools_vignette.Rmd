@@ -100,15 +100,19 @@ GRDC_catalogue %>%
 
 # Filter the catalogue based on a geographical bounding box
 GRDC_catalogue %>%
-  filter(between(x = long, left = -10, right = 5),
-         between(x = lat, left = 48, right = 62))
+  filter(
+    between(x = long, left = -10, right = 5),
+    between(x = lat, left = 48, right = 62)
+  )
 
 # Combine filtering criteria
 GRDC_catalogue %>%
-  filter(between(x = long, left = -10, right = 5),
-         between(x = lat, left = 48, right = 62),
-         d_start >= 2000,
-         area > 1000)
+  filter(
+    between(x = long, left = -10, right = 5),
+    between(x = lat, left = 48, right = 62),
+    d_start >= 2000,
+    area > 1000
+  )
 ```
 
 The GRDC catalogue (or a subset) can be used to create a map.
@@ -116,7 +120,7 @@ The GRDC catalogue (or a subset) can be used to create a map.
 # Visualise outlets on an interactive map
 library(leaflet)
 leaflet(data = GRDC_catalogue %>% dplyr::filter(river == "PO, FIUME")) %>%
-  addTiles() %>%  # Add default OpenStreetMap map tiles
+  addTiles() %>% # Add default OpenStreetMap map tiles
   addMarkers(~long, ~lat, popup = ~station)
 ```
 ![](leaflet.png)
@@ -142,14 +146,14 @@ Data60UK_catalogue_bbox <- catalogueData60UK(areaBox = areaBox)
 # Visualise outlets on an interactive map
 library(leaflet)
 leaflet(data = Data60UK_catalogue_bbox) %>%
-  addTiles() %>%  # Add default OpenStreetMap map tiles
+  addTiles() %>% # Add default OpenStreetMap map tiles
   addMarkers(~Longitude, ~Latitude, popup = ~Location)
 ```
 
 ![](leaflet2.png)
 
 ```{r catalogueData60UK3, eval = TRUE, message = FALSE, fig.width = 7, fig.height = 7}
-# Extract time series 
+# Extract time series
 id <- catalogueData60UK()$id[1]
 
 # Extract only the time series
@@ -164,15 +168,19 @@ MOPEX_catalogue <- catalogueMOPEX()
 
 # Extract data within a geographic bounding box
 MOPEX_catalogue %>%
-  filter(dplyr::between(x = Longitude, left = -95, right = -92),
-         dplyr::between(x = Latitude, left = 37, right = 41))
+  filter(
+    dplyr::between(x = Longitude, left = -95, right = -92),
+    dplyr::between(x = Latitude, left = 37, right = 41)
+  )
 ```
 
 ```{r MOPEX_meta2, eval = FALSE, message = FALSE, fig.width = 7, fig.height = 7}
 # Get stations with recondings in the period 1st Jan to 31st Dec 1995
 MOPEX_catalogue %>%
-  filter(Date_start <= as.Date("1995-01-01"),
-         Date_end >= as.Date("1995-12-31"))
+  filter(
+    Date_start <= as.Date("1995-01-01"),
+    Date_end >= as.Date("1995-12-31")
+  )
 
 # Get only catchments within NC
 MOPEX_catalogue %>%
@@ -183,21 +191,23 @@ For each station, historical hydrometeorological data  can also be retrieved.
 
 ```{r MOPEX_data, eval = FALSE, message = FALSE, fig.width = 7, fig.height = 7}
 # Take the first record in the catalogue
-river_metadata <- MOPEX_catalogue[1,]
+river_metadata <- MOPEX_catalogue[1, ]
 
 # Get corresponding time series
 river_ts <- tsMOPEX(id = river_metadata$USGS_ID)
 
 # Extract data between 1st Jan and 31st December 1948
 river_ts_shorter <- window(river_ts,
-                           start = as.Date("1948-01-01"),
-                           end = as.Date("1948-12-31"))
+  start = as.Date("1948-01-01"),
+  end = as.Date("1948-12-31")
+)
 
 # Plot
 plot(river_ts_shorter,
-     main = river_metadata$Name,
-     xlab = "",
-     ylab = c("P [mm/day]","E [mm/day]", "Q [mm/day]", "Tmax [C]","Tmin [C]"))
+  main = river_metadata$Name,
+  xlab = "",
+  ylab = c("P [mm/day]", "E [mm/day]", "Q [mm/day]", "Tmax [C]", "Tmin [C]")
+)
 ```
 
 ![](mopex.png)
@@ -214,16 +224,17 @@ SEPA_catalogue <- catalogueSEPA()
 The time series of the last few days is available from SEPA website and can be downloaded using the following function:
 ```{r SEPA2, eval = FALSE, message = FALSE, fig.width = 7}
 # Take the first record in the catalogue
-Perth_metadata <- SEPA_catalogue[1,]
+Perth_metadata <- SEPA_catalogue[1, ]
 
 # Single time series extraction
 Perth_ts <- tsSEPA(id = Perth_metadata$LOCATION_CODE)
 
 # Plot
 plot(Perth_ts,
-     main = Perth_metadata$STATION_NAME,
-     xlab = "",
-     ylab = "Water level [m]")
+  main = Perth_metadata$STATION_NAME,
+  xlab = "",
+  ylab = "Water level [m]"
+)
 
 # Get only catchments with area above 4000 Km2
 SEPA_catalogue %>%
@@ -239,8 +250,10 @@ Please note that these data are updated every 15 minutes and the code will alway
 # Multiple time series extraction
 y <- tsSEPA(id = c("234253", "234174", "234305"))
 
-plot(y[[1]], ylim = c(0, max(y[[1]], y[[2]], y[[3]])), 
-     xlab = "", ylab = "Water level [m]")
+plot(y[[1]],
+  ylim = c(0, max(y[[1]], y[[2]], y[[3]])),
+  xlab = "", ylab = "Water level [m]"
+)
 lines(y[[2]], col = "red")
 lines(y[[3]], col = "blue")
 ```

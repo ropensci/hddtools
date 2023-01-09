@@ -36,13 +36,11 @@
 #'
 #' @examples
 #' \dontrun{
-#'   # Retrieve the MOPEX catalogue
-#'   catalogue <- catalogueMOPEX()
+#' # Retrieve the MOPEX catalogue
+#' catalogue <- catalogueMOPEX()
 #' }
 #'
-
-catalogueMOPEX <- function(MAP = TRUE){
-
+catalogueMOPEX <- function(MAP = TRUE) {
   service_url <- "https://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data"
   folder_name <- "Basin_Characteristics"
 
@@ -52,15 +50,21 @@ catalogueMOPEX <- function(MAP = TRUE){
 
   # Read the file as a table
   mopexTable <- utils::read.table(curl::curl(file_url))
-  names(mopexTable) <- c("USGS_ID", "Longitude", "Latitude", "Drainage_Area",
-                         "R_gauges", "N_gauges", "A_gauges", "Ratio_AR")
+  names(mopexTable) <- c(
+    "USGS_ID", "Longitude", "Latitude", "Drainage_Area",
+    "R_gauges", "N_gauges", "A_gauges", "Ratio_AR"
+  )
 
   # Get extra information for 431 basins only
   file_name <- "usgs431.txt"
   file_url <- paste(service_url, folder_name, file_name, sep = "/")
-  extra_info <- utils::read.fwf(file = file_url,
-                                widths = c(8, 10, 10, 11, 11, 8,
-                                           8, 4, 4, 3, 9, 50))
+  extra_info <- utils::read.fwf(
+    file = file_url,
+    widths = c(
+      8, 10, 10, 11, 11, 8,
+      8, 4, 4, 3, 9, 50
+    )
+  )
   extra_info <- extra_info[, c("V1", "V6", "V7", "V10", "V12")]
   names(extra_info) <- c("USGS_ID", "Date_start", "Date_end", "State", "Name")
 
@@ -85,7 +89,6 @@ catalogueMOPEX <- function(MAP = TRUE){
   df[, date_cols] <- lapply(df[, date_cols], as.Date, format = "%d/%m/%Y")
 
   return(df)
-
 }
 
 #' Interface for the MOPEX database of Daily Time Series
@@ -116,12 +119,10 @@ catalogueMOPEX <- function(MAP = TRUE){
 #'
 #' @examples
 #' \dontrun{
-#'   BroadRiver <- tsMOPEX(id = "01048000")
+#' BroadRiver <- tsMOPEX(id = "01048000")
 #' }
 #'
-
-tsMOPEX <- function(id, MAP = TRUE){
-
+tsMOPEX <- function(id, MAP = TRUE) {
   service_url <- "https://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data"
   folder_name <- ifelse(MAP == TRUE, "Us_438_Daily", "Daily%20Q%201800")
   file_name <- ifelse(MAP == TRUE, paste0(id, ".dly"), paste0(id, ".dq"))
@@ -129,8 +130,10 @@ tsMOPEX <- function(id, MAP = TRUE){
 
   if (MAP == TRUE) {
     # Read the file as a table
-    df <- utils::read.fwf(file = curl::curl(file_url),
-                          widths = c(4, 2, 2, 10, 10, 10, 10, 10))
+    df <- utils::read.fwf(
+      file = curl::curl(file_url),
+      widths = c(4, 2, 2, 10, 10, 10, 10, 10)
+    )
     Year <- df$V1
     Month <- sprintf("%02d", df$V2)
     Day <- sprintf("%02d", df$V3)
@@ -140,8 +143,10 @@ tsMOPEX <- function(id, MAP = TRUE){
   } else {
     # Read the file as a table
     df <- utils::read.table(file = file_url, header = FALSE, skip = 1)
-    df <- tidyr::pivot_longer(data = df, cols = 2:32,
-                              values_to = "Q", names_to = "Day")
+    df <- tidyr::pivot_longer(
+      data = df, cols = 2:32,
+      values_to = "Q", names_to = "Day"
+    )
     Year <- substr(x = df$V1, start = 1, stop = 4)
     Month <- substr(x = df$V1, start = 5, stop = 6)
     Day <- trimws(substr(x = df$Day, start = 2, stop = nchar(df$Day)))
@@ -159,5 +164,4 @@ tsMOPEX <- function(id, MAP = TRUE){
   mopexTS <- zoo::zoo(df, order.by = date)
 
   return(mopexTS)
-
 }

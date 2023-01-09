@@ -23,34 +23,38 @@ bboxSpatialPolygon <- function(boundingbox,
                                proj4stringFrom = NULL,
                                proj4stringTo = NULL) {
   if (!is.null(proj4stringFrom)) {
-    stopifnot(inherits(sf::st_crs(proj4stringFrom),"crs"))
+    stopifnot(inherits(sf::st_crs(proj4stringFrom), "crs"))
   }
 
   if (is.null(proj4stringFrom)) {
     proj4stringFrom <- "+proj=longlat +datum=WGS84"
   }
 
-  if(is.matrix(boundingbox)) if(dim(boundingbox)==c(2,2)) bb <- boundingbox
+  if (is.matrix(boundingbox)) if (dim(boundingbox) == c(2, 2)) bb <- boundingbox
 
-  #For compatibility with raster input bounding box objects
-  if(inherits(boundingbox, "Extent")){
-  bb <- matrix(as.numeric(c(
-    boundingbox@xmin, boundingbox@ymin,
-    boundingbox@xmax, boundingbox@ymax
-  )),
-  nrow = 2
-  )}
+  # For compatibility with raster input bounding box objects
+  if (inherits(boundingbox, "Extent")) {
+    bb <- matrix(
+      as.numeric(c(
+        boundingbox@xmin, boundingbox@ymin,
+        boundingbox@xmax, boundingbox@ymax
+      )),
+      nrow = 2
+    )
+  }
 
 
-  if(inherits(boundingbox, "SpatExtent")){
-    bb <- matrix(as.numeric(c(
-      boundingbox$xmin, boundingbox$ymin,
-      boundingbox$xmax, boundingbox$ymax
-    )),
-    nrow = 2
-    )}
+  if (inherits(boundingbox, "SpatExtent")) {
+    bb <- matrix(
+      as.numeric(c(
+        boundingbox$xmin, boundingbox$ymin,
+        boundingbox$xmax, boundingbox$ymax
+      )),
+      nrow = 2
+    )
+  }
 
-  if(!exists("bb")) stop("No valid bounding box provided")
+  if (!exists("bb")) stop("No valid bounding box provided")
 
   rownames(bb) <- c("lon", "lat")
   colnames(bb) <- c("min", "max")
