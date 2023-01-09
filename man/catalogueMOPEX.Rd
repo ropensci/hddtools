@@ -42,8 +42,8 @@ This function retrieves the list of the MOPEX basins.
 }
 \examples{
 \dontrun{
-  # Retrieve the MOPEX catalogue
-  catalogue <- catalogueMOPEX()
+# Retrieve the MOPEX catalogue
+catalogue <- catalogueMOPEX()
 }
 
 }

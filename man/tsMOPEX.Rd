@@ -32,7 +32,7 @@ streamflow discharge at one of the MOPEX locations.
 }
 \examples{
 \dontrun{
-  BroadRiver <- tsMOPEX(id = "01048000")
+BroadRiver <- tsMOPEX(id = "01048000")
 }
 
 }

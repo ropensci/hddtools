@@ -18,7 +18,7 @@ streamflow discharge at one of the MOPEX locations.
 }
 \examples{
 \dontrun{
-  sampleTS <- tsSEPA(id = "10048")
+sampleTS <- tsSEPA(id = "10048")
 }
 
 }
