@@ -45,19 +45,19 @@ catalogueSEPA <- function(){
 
   theurl <- paste0("https://www2.sepa.org.uk/waterlevels/CSVs/",
                    "SEPA_River_Levels_Web.csv")
-  
+
   SEPAcatalogue <- utils::read.csv(theurl, stringsAsFactors = FALSE)
-  
+
   if (ncol(SEPAcatalogue) > 1){
-    
+
     SEPAcatalogue$CATCHMENT_NAME[SEPAcatalogue$CATCHMENT_NAME == "---"] <- NA
     SEPAcatalogue$WEB_MESSAGE[SEPAcatalogue$WEB_MESSAGE == ""] <- NA
-    
+
   }else{
-    
+
     message("Website temporarily unavailable")
     SEPAcatalogue <- NULL
-    
+
   }
 
   return(SEPAcatalogue)
@@ -73,7 +73,7 @@ catalogueSEPA <- function(){
 #'
 #' @param id hydrometric reference number (string)
 #'
-#' @return The function returns river level data in metres, as a zoo object.
+#' @return The function returns river level data in meters, as a zoo object.
 #'
 #' @export
 #'
@@ -96,26 +96,26 @@ tsSEPA <- function(id){
                     id, "-SG.csv", sep = "")
 
     sepaTS <- utils::read.csv(theurl, skip = 6)
-    
+
     if (ncol(sepaTS) > 1){
-      
+
       # Coerse first column into a date
       datetime <- strptime(sepaTS[,1], "%d/%m/%Y %H:%M")
       myTS <- zoo::zoo(sepaTS[,2], order.by = datetime) # measured in m
-      
+
       myList[[counter]] <- myTS
-      
+
     }else{
-      
+
       message("Website temporarily unavailable")
       myList <- NULL
-      
+
     }
 
   }
-  
+
   if (!is.null(myList) & counter == 1) {myList <- myTS}
-  
+
   return(myList)
 
 }

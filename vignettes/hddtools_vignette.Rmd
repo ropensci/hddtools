@@ -77,7 +77,7 @@ KGClimateClass(areaBox = areaBox, updatedBy = "Kottek")
 ### The Global Runoff Data Centre
 The Global Runoff Data Centre (GRDC) is an international archive hosted by the Federal Institute of Hydrology in Koblenz, Germany. The Centre operates under the auspices of the World Meteorological Organisation and retains services and datasets for all the major rivers in the world. Catalogue, kml files and the product Long-Term Mean Monthly Discharges are open data and accessible via the hddtools.
 
-Information on all the GRDC stations can be retrieved using the function `catalogueGRDC` with no input arguments, as in the examle below:  
+Information on all the GRDC stations can be retrieved using the function `catalogueGRDC` with no input arguments, as in the example below:  
 ```{r catalogueGRDC1, eval = FALSE}
 # GRDC full catalogue
 GRDC_catalogue <- catalogueGRDC()
@@ -127,7 +127,7 @@ The Top-Down modelling Working Group (TDWG) for the Prediction in Ungauged Basin
 #### The Data60UK dataset
 The Data60UK initiative collated datasets of areal precipitation and streamflow discharge across 61 gauging sites in England and Wales (UK). The database was prepared from source databases for research purposes, with the intention to make it re-usable. This is now available in the public domain free of charge. 
 
-The hddtools contain two functions to interact with this database: one to retreive the catalogue and another to retreive time series of areal precipitation and streamflow discharge.
+The hddtools contain two functions to interact with this database: one to retrieve the catalogue and another to retrieve time series of areal precipitation and streamflow discharge.
 
 ```{r catalogueData60UK1, eval = TRUE}
 # Data60UK full catalogue
@@ -234,7 +234,7 @@ SEPA_catalogue %>%
   filter(RIVER_NAME == "Ayr")
 ```
 
-Plese note that these data are updated every 15 minutes and the code will always generate different plots. 
+Please note that these data are updated every 15 minutes and the code will always generate different plots. 
 ```{r SEPA3, eval=FALSE, message = FALSE, fig.width = 7}
 # Multiple time series extraction
 y <- tsSEPA(id = c("234253", "234174", "234305"))

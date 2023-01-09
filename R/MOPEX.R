@@ -3,7 +3,7 @@
 #' @author Claudia Vitolo
 #'
 #' @description This function retrieves the list of the MOPEX basins.
-#' 
+#'
 #' @param MAP Boolean, TRUE by default. If FALSE it returns a list of the USGS
 #' station ID’s and the gage locations of all 1861 potential MOPEX basins.
 #' If TRUE, it return a list of the USGS station ID’s and the gage locations of
@@ -17,7 +17,7 @@
 #'   \item{\code{Drainage_Area}}{Square Miles}
 #'   \item{\code{R_gauges}}{Required number of precipitation gages to meet MAP accuracy criteria}
 #'   \item{\code{N_gauges}}{Number of gages in total gage window used to estimate MAP}
-#'   \item{\code{A_gauges}}{Avaliable number of gages in the basin}
+#'   \item{\code{A_gauges}}{Available number of gauges in the basin}
 #'   \item{\code{Ratio_AR}}{Ratio of Available to Required number of gages in the basin}
 #'   \item{\code{Date_start}}{Date when recordings start}
 #'   \item{\code{Date_end}}{Date when recordings end}
@@ -31,7 +31,7 @@
 #' obtained as output of \code{tsMOPEX()}.
 #'
 #' @export
-#' 
+#'
 #' @source https://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data/Documentation/
 #'
 #' @examples
@@ -63,21 +63,21 @@ catalogueMOPEX <- function(MAP = TRUE){
                                            8, 4, 4, 3, 9, 50))
   extra_info <- extra_info[, c("V1", "V6", "V7", "V10", "V12")]
   names(extra_info) <- c("USGS_ID", "Date_start", "Date_end", "State", "Name")
-  
+
   # Join mopexTable and extra_info
   df <- merge(x = mopexTable, y = extra_info, by = "USGS_ID", all = TRUE)
 
   # Ensure USGS_ID is made of 8 digits, add leading zeros if needed
   # This is needed for consistency with the names of the time series files.
   df$USGS_ID <- sprintf("%08d", df$USGS_ID)
-  
+
   # Convert all the factor to character
   character_cols <- c("Date_start", "Date_end", "State", "Name")
   df[, character_cols] <- lapply(df[, character_cols], as.character)
-  
+
   # Remove spaces at the leading and trailing ends, not inside the string values
   df[, character_cols] <- lapply(df[, character_cols], trimws)
-  
+
   # Convert dates
   date_cols <- c("Date_start", "Date_end")
   df$Date_start <- paste0("01/", df$Date_start)
@@ -121,12 +121,12 @@ catalogueMOPEX <- function(MAP = TRUE){
 #'
 
 tsMOPEX <- function(id, MAP = TRUE){
-  
+
   service_url <- "https://hydrology.nws.noaa.gov/pub/gcip/mopex/US_Data"
   folder_name <- ifelse(MAP == TRUE, "Us_438_Daily", "Daily%20Q%201800")
   file_name <- ifelse(MAP == TRUE, paste0(id, ".dly"), paste0(id, ".dq"))
   file_url <- paste(service_url, folder_name, file_name, sep = "/")
-  
+
   if (MAP == TRUE) {
     # Read the file as a table
     df <- utils::read.fwf(file = curl::curl(file_url),

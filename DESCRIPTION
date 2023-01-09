@@ -21,5 +21,5 @@ Suggests: testthat, leaflet, rmarkdown, knitr, dplyr
 VignetteBuilder: knitr
 License: GPL-3
 Repository: CRAN
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.3
 Encoding: UTF-8
