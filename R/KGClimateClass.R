@@ -123,7 +123,7 @@ KGClimateClass <- function(areaBox = NULL, updatedBy = "Peel", verbose = FALSE){
                                                          length(thirdPart)))
 
 
-  for (j in 1:length(description)){
+  for (j in seq_len(length(description))){
 
     if (firstPart[j] == "A"){
 
