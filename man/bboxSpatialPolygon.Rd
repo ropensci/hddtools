@@ -11,7 +11,7 @@ bboxSpatialPolygon(boundingbox, proj4stringFrom = NULL, proj4stringTo = NULL)
 \item{boundingbox}{Bounding box: a 2x2 numerical matrix of lat/lon
 coordinates}
 
-\item{proj4stringFrom}{Projection string for the current boundingbox
+\item{proj4stringFrom}{Projection string for the current bounding box
 coordinates (defaults to lat/lon, WGS84)}
 
 \item{proj4stringTo}{Projection string, or NULL to not project}

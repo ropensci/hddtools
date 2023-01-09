@@ -17,7 +17,7 @@ This function extract the dataset containing daily rainfall and streamflow disch
 }
 \examples{
 \dontrun{
-  Morwick <- tsData60UK(id = "22001")
+Morwick <- tsData60UK(id = "22001")
 }
 
 }

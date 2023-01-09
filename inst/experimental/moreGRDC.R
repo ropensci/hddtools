@@ -42,58 +42,70 @@
 #'
 #' @examples
 #' \dontrun{
-#'   # Retrieve the whole catalogue
-#'   GRDC_catalogue_all <- catalogueGRDC()
+#' # Retrieve the whole catalogue
+#' GRDC_catalogue_all <- catalogueGRDC()
 #'
-#'   # Define a bounding box
-#'   areaBox <- terra::ext(-3.82, -3.63, 52.41, 52.52)
-#'   # Filter the catalogue based on bounding box
-#'   GRDC_catalogue_bbox <- catalogueGRDC(areaBox = areaBox)
+#' # Define a bounding box
+#' areaBox <- terra::ext(-3.82, -3.63, 52.41, 52.52)
+#' # Filter the catalogue based on bounding box
+#' GRDC_catalogue_bbox <- catalogueGRDC(areaBox = areaBox)
 #'
-#'   # Get only catchments with area above 5000 Km2
-#'   GRDC_catalogue_area <- catalogueGRDC(columnName = "area",
-#'                                        columnValue = ">= 5000")
+#' # Get only catchments with area above 5000 Km2
+#' GRDC_catalogue_area <- catalogueGRDC(
+#'   columnName = "area",
+#'   columnValue = ">= 5000"
+#' )
 #'
-#'   # Get only catchments within river Thames
-#'   GRDC_catalogue_river <- catalogueGRDC(columnName = "river",
-#'                                         columnValue = "Thames")
+#' # Get only catchments within river Thames
+#' GRDC_catalogue_river <- catalogueGRDC(
+#'   columnName = "river",
+#'   columnValue = "Thames"
+#' )
 #' }
 #'
-
 test_catalogueGRDC <- function() {
-
   the_url <- "ftp://ftp.bafg.de/pub/REFERATE/GRDC/catalogue/"
 
   # Retrieve the catalogue
-  result <- RCurl::getURL(the_url, ftp.use.epsv=TRUE, dirlistonly = TRUE)
+  result <- RCurl::getURL(the_url, ftp.use.epsv = TRUE, dirlistonly = TRUE)
   list_of_files <- strsplit(result, "\r*\n")[[1]]
   yesterday <- gsub(pattern = "-", replacement = "_", Sys.Date() - 1)
   today <- gsub(pattern = "-", replacement = "_", Sys.Date())
   latest_file <-
-    ifelse(test = length(list_of_files[grep(pattern = today,
-                                            x = list_of_files)]),
-           yes = list_of_files[grep(pattern = today, x = list_of_files)],
-           no = list_of_files[grep(pattern = yesterday, x = list_of_files)])
+    ifelse(test = length(list_of_files[grep(
+      pattern = today,
+      x = list_of_files
+    )]),
+    yes = list_of_files[grep(pattern = today, x = list_of_files)],
+    no = list_of_files[grep(pattern = yesterday, x = list_of_files)]
+    )
   latest_file <- paste0(the_url, latest_file)
 
   my_tmp_file <- tempfile()
-  x <- RCurl::getBinaryURL(latest_file, ftp.use.epsv = FALSE,crlf = TRUE)
+  x <- RCurl::getBinaryURL(latest_file, ftp.use.epsv = FALSE, crlf = TRUE)
   writeBin(object = x, con = my_tmp_file)
   GRDCcatalogue <- readxl::read_xlsx(my_tmp_file, sheet = "Catalogue")
 
   # Cleanup non
-  GRDCcatalogue <- data.frame(lapply(GRDCcatalogue,
-                                     function(x) {gsub("n.a.|-999|-", NA, x)}),
-                              stringsAsFactors = FALSE)
+  GRDCcatalogue <- data.frame(
+    lapply(
+      GRDCcatalogue,
+      function(x) {
+        gsub("n.a.|-999|-", NA, x)
+      }
+    ),
+    stringsAsFactors = FALSE
+  )
 
   # Convert to numeric some of the columns
-  colx <- which(!(names(GRDCcatalogue) %in% c("grdc_no", "wmo_reg", "sub_reg",
-                                              "nat_id", "river", "station",
-                                              "country", "provider_id")))
+  colx <- which(!(names(GRDCcatalogue) %in% c(
+    "grdc_no", "wmo_reg", "sub_reg",
+    "nat_id", "river", "station",
+    "country", "provider_id"
+  )))
   GRDCcatalogue[, colx] <- lapply(GRDCcatalogue[, colx], as.numeric)
 
   return(GRDCcatalogue)
-
 }
 
 #' Interface for the Global Runoff Data Centre database of Monthly Time Series.
@@ -228,12 +240,10 @@ test_catalogueGRDC <- function() {
 #'
 #' @examples
 #' \dontrun{
-#'   Adaitu <- tsGRDC(id = "1577602")
+#' Adaitu <- tsGRDC(id = "1577602")
 #' }
 #'
-
 test_tsGRDC <- function(id) {
-
   options(warn = -1)
 
   catalogueTmp <- catalogueGRDC()
@@ -247,8 +257,10 @@ test_tsGRDC <- function(id) {
   wmoRegion <- catalogueTmp$wmo_reg
 
   # Retrieve ftp server location
-  zipFile <- as.character(grdcLTMMD[which(grdcLTMMD$WMO_Region == wmoRegion),
-                                    "Archive"])
+  zipFile <- as.character(grdcLTMMD[
+    which(grdcLTMMD$WMO_Region == wmoRegion),
+    "Archive"
+  ])
 
   # create a temporary directory
   td <- tempdir()
@@ -274,9 +286,7 @@ test_tsGRDC <- function(id) {
   fpath <- file.path(td, fname)
 
   if (!all(file.exists(fpath))) {
-
     stop("Data are not available at this station")
-
   }
 
   # Initialise empty list of tables
@@ -284,12 +294,13 @@ test_tsGRDC <- function(id) {
 
   # Populate tables
   for (j in seq_along(fpath)) {
-
     TS <- readLines(fpath[j])
     # find dataset content
     row_data <- grep(pattern = "# Data Set Content:", x = TS)
-    data_names <- trimws(x = unlist(strsplit(TS[row_data], ":")),
-                         which = "both")
+    data_names <- trimws(
+      x = unlist(strsplit(TS[row_data], ":")),
+      which = "both"
+    )
     data_names <- data_names[seq(2, length(data_names), 2)]
     data_names <- gsub(pattern = " ", replacement = "", x = data_names)
     data_names <- gsub(pattern = ")", replacement = "", x = data_names)
@@ -298,15 +309,18 @@ test_tsGRDC <- function(id) {
 
     ## find data lines
     row_data_lines <- grep(pattern = "# Data lines:", x = TS)[1]
-    chr_positions <- gregexpr(pattern = "[0-9]",
-                              text = TS[row_data_lines])[[1]]
+    chr_positions <- gregexpr(
+      pattern = "[0-9]",
+      text = TS[row_data_lines]
+    )[[1]]
     lchr_positions <- length(chr_positions)
-    rows_to_read <- as.numeric(substr(x = TS[row_data_lines],
-                                      start = chr_positions[1],
-                                      stop = chr_positions[lchr_positions]))
+    rows_to_read <- as.numeric(substr(
+      x = TS[row_data_lines],
+      start = chr_positions[1],
+      stop = chr_positions[lchr_positions]
+    ))
 
     if (rows_to_read > 0) {
-
       # find tables
       row_data <- grep(pattern = "DATA", x = TS, ignore.case = FALSE)
       row_start <- row_data + 2
@@ -317,10 +331,14 @@ test_tsGRDC <- function(id) {
       for (k in seq_along(data_names)) {
         tempcolnames <- unlist(strsplit(TS[row_data[k] + 1], ";"))
         tempcolnames <- trimws(tempcolnames, which = "both")
-        tempcolnames <- gsub(pattern = "-", replacement = "_",
-                             x = tempcolnames)
-        column_names <- c(column_names, paste0(data_names[k], "__",
-                                               tempcolnames))
+        tempcolnames <- gsub(
+          pattern = "-", replacement = "_",
+          x = tempcolnames
+        )
+        column_names <- c(column_names, paste0(
+          data_names[k], "__",
+          tempcolnames
+        ))
       }
 
       for (w in seq_along(row_start)) {
@@ -330,8 +348,10 @@ test_tsGRDC <- function(id) {
         if (w == 1) {
           tmp <- matrix(no_spaces, nrow = rows_to_read, byrow = TRUE)
         } else {
-          tmp <- cbind(tmp, matrix(no_spaces, nrow = rows_to_read,
-                                   byrow = TRUE))
+          tmp <- cbind(tmp, matrix(no_spaces,
+            nrow = rows_to_read,
+            byrow = TRUE
+          ))
         }
       }
 
@@ -339,15 +359,13 @@ test_tsGRDC <- function(id) {
       names(df) <- column_names
 
       ltables[[j]] <- df
-    }else{
+    } else {
       message(paste(tablenames[j], "data are not available at this station"))
       ltables[[j]] <- NULL
     }
-
   }
 
   names(ltables) <- tablenames
 
   return(ltables)
-
 }

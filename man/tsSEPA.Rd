@@ -10,7 +10,7 @@ tsSEPA(id)
 \item{id}{hydrometric reference number (string)}
 }
 \value{
-The function returns river level data in metres, as a zoo object.
+The function returns river level data in meters, as a zoo object.
 }
 \description{
 This function extract the dataset containing daily rainfall and
@@ -18,7 +18,7 @@ streamflow discharge at one of the MOPEX locations.
 }
 \examples{
 \dontrun{
-  sampleTS <- tsSEPA(id = "10048")
+sampleTS <- tsSEPA(id = "10048")
 }
 
 }

@@ -25,17 +25,15 @@
 #'
 #' @examples
 #' \dontrun{
-#'   # Retrieve the whole catalogue
-#'   Data60UK_catalogue_all <- catalogueData60UK()
+#' # Retrieve the whole catalogue
+#' Data60UK_catalogue_all <- catalogueData60UK()
 #'
-#'   # Filter the catalogue based on a bounding box
-#'   areaBox <- terra::ext(-4, -2, +52, +53)
-#'   Data60UK_catalogue_bbox <- catalogueData60UK(areaBox)
+#' # Filter the catalogue based on a bounding box
+#' areaBox <- terra::ext(-4, -2, +52, +53)
+#' Data60UK_catalogue_bbox <- catalogueData60UK(areaBox)
 #' }
 #'
-
-catalogueData60UK <- function(areaBox = NULL){
-
+catalogueData60UK <- function(areaBox = NULL) {
   file_url <- "http://nrfaapps.ceh.ac.uk/datauk60/data.html"
 
   tables <- XML::readHTMLTable(file_url)
@@ -55,28 +53,29 @@ catalogueData60UK <- function(areaBox = NULL){
   Data60UKcatalogue$Longitude <- temp$longitude
 
   # Latitude is the Y axis, longitude is the X axis.
-  if (!is.null(areaBox)){
+  if (!is.null(areaBox)) {
     lonMin <- areaBox$xmin
     lonMax <- areaBox$xmax
     latMin <- areaBox$ymin
     latMax <- areaBox$ymax
-  }else{
+  } else {
     lonMin <- -180
     lonMax <- +180
     latMin <- -90
     latMax <- +90
   }
 
-  Data60UKcatalogue <- subset(Data60UKcatalogue,
-                              (Data60UKcatalogue$Latitude <= latMax &
-                                 Data60UKcatalogue$Latitude >= latMin &
-                                 Data60UKcatalogue$Longitude <= lonMax &
-                                 Data60UKcatalogue$Longitude >= lonMin))
+  Data60UKcatalogue <- subset(
+    Data60UKcatalogue,
+    (Data60UKcatalogue$Latitude <= latMax &
+      Data60UKcatalogue$Latitude >= latMin &
+      Data60UKcatalogue$Longitude <= lonMax &
+      Data60UKcatalogue$Longitude >= lonMin)
+  )
 
   row.names(Data60UKcatalogue) <- NULL
 
   return(Data60UKcatalogue)
-
 }
 
 #' Interface for the Data60UK database of Daily Time Series
@@ -93,12 +92,10 @@ catalogueData60UK <- function(areaBox = NULL){
 #'
 #' @examples
 #' \dontrun{
-#'   Morwick <- tsData60UK(id = "22001")
+#' Morwick <- tsData60UK(id = "22001")
 #' }
 #'
-
-tsData60UK <- function(id){
-
+tsData60UK <- function(id) {
   file_url <- paste0("http://nrfaapps.ceh.ac.uk/datauk60/data/rq", id, ".txt")
 
   temp <- utils::read.table(file_url)
@@ -111,8 +108,7 @@ tsData60UK <- function(id){
   P <- zoo::zoo(temp$P, order.by = datetime) # measured in mm
   Q <- zoo::zoo(temp$Q, order.by = datetime) # measured in m3/s
 
-  myTS <- zoo::merge.zoo(P,Q)
+  myTS <- zoo::merge.zoo(P, Q)
 
   return(myTS)
-
 }

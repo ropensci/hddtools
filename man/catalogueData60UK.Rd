@@ -31,12 +31,12 @@ listing 61 gauging stations.
 }
 \examples{
 \dontrun{
-  # Retrieve the whole catalogue
-  Data60UK_catalogue_all <- catalogueData60UK()
+# Retrieve the whole catalogue
+Data60UK_catalogue_all <- catalogueData60UK()
 
-  # Filter the catalogue based on a bounding box
-  areaBox <- terra::ext(-4, -2, +52, +53)
-  Data60UK_catalogue_bbox <- catalogueData60UK(areaBox)
+# Filter the catalogue based on a bounding box
+areaBox <- terra::ext(-4, -2, +52, +53)
+Data60UK_catalogue_bbox <- catalogueData60UK(areaBox)
 }
 
 }

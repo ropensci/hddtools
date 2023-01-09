@@ -1,6 +1,6 @@
 # hddtools 0.9.5
 
-*Removed dependency fom rgdal and raster packages
+*Removed dependency from rgdal and raster packages
 
 # hddtools 0.9.4
 

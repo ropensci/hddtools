@@ -9,3 +9,4 @@ appveyor.yml
 inst/extdata/grdc
 inst/experimental/*
 ^\.github$
+^cran-comments\.md$

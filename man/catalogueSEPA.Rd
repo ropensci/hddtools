@@ -40,8 +40,8 @@ The function has no input arguments.
 }
 \examples{
 \dontrun{
-  # Retrieve the whole catalogue
-  SEPA_catalogue_all <- catalogueSEPA()
+# Retrieve the whole catalogue
+SEPA_catalogue_all <- catalogueSEPA()
 }
 
 }

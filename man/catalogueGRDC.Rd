@@ -42,8 +42,8 @@ which provides river discharge data for almost 1000 sites over 157 countries.
 }
 \examples{
 \dontrun{
-  # Retrieve the catalogue
-  GRDC_catalogue_all <- catalogueGRDC()
+# Retrieve the catalogue
+GRDC_catalogue_all <- catalogueGRDC()
 }
 
 }

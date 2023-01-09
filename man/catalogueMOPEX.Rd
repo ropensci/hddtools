@@ -24,7 +24,7 @@ This function returns a data frame containing the following columns:
   \item{\code{Drainage_Area}}{Square Miles}
   \item{\code{R_gauges}}{Required number of precipitation gages to meet MAP accuracy criteria}
   \item{\code{N_gauges}}{Number of gages in total gage window used to estimate MAP}
-  \item{\code{A_gauges}}{Avaliable number of gages in the basin}
+  \item{\code{A_gauges}}{Available number of gauges in the basin}
   \item{\code{Ratio_AR}}{Ratio of Available to Required number of gages in the basin}
   \item{\code{Date_start}}{Date when recordings start}
   \item{\code{Date_end}}{Date when recordings end}
@@ -42,8 +42,8 @@ This function retrieves the list of the MOPEX basins.
 }
 \examples{
 \dontrun{
-  # Retrieve the MOPEX catalogue
-  catalogue <- catalogueMOPEX()
+# Retrieve the MOPEX catalogue
+catalogue <- catalogueMOPEX()
 }
 
 }

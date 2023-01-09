@@ -36,32 +36,27 @@
 #'
 #' @examples
 #' \dontrun{
-#'   # Retrieve the whole catalogue
-#'   SEPA_catalogue_all <- catalogueSEPA()
+#' # Retrieve the whole catalogue
+#' SEPA_catalogue_all <- catalogueSEPA()
 #' }
 #'
+catalogueSEPA <- function() {
+  theurl <- paste0(
+    "https://www2.sepa.org.uk/waterlevels/CSVs/",
+    "SEPA_River_Levels_Web.csv"
+  )
 
-catalogueSEPA <- function(){
-
-  theurl <- paste0("https://www2.sepa.org.uk/waterlevels/CSVs/",
-                   "SEPA_River_Levels_Web.csv")
-  
   SEPAcatalogue <- utils::read.csv(theurl, stringsAsFactors = FALSE)
-  
-  if (ncol(SEPAcatalogue) > 1){
-    
+
+  if (ncol(SEPAcatalogue) > 1) {
     SEPAcatalogue$CATCHMENT_NAME[SEPAcatalogue$CATCHMENT_NAME == "---"] <- NA
     SEPAcatalogue$WEB_MESSAGE[SEPAcatalogue$WEB_MESSAGE == ""] <- NA
-    
-  }else{
-    
+  } else {
     message("Website temporarily unavailable")
     SEPAcatalogue <- NULL
-    
   }
 
   return(SEPAcatalogue)
-
 }
 
 #' Interface for the MOPEX database of Daily Time Series
@@ -73,49 +68,45 @@ catalogueSEPA <- function(){
 #'
 #' @param id hydrometric reference number (string)
 #'
-#' @return The function returns river level data in metres, as a zoo object.
+#' @return The function returns river level data in meters, as a zoo object.
 #'
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#'   sampleTS <- tsSEPA(id = "10048")
+#' sampleTS <- tsSEPA(id = "10048")
 #' }
 #'
-
-tsSEPA <- function(id){
-
+tsSEPA <- function(id) {
   myTS <- NULL
   myList <- list()
   counter <- 0
 
-  for (id in as.list(id)){
+  for (id in as.list(id)) {
     counter <- counter + 1
 
     theurl <- paste("https://www2.sepa.org.uk/waterlevels/CSVs/",
-                    id, "-SG.csv", sep = "")
+      id, "-SG.csv",
+      sep = ""
+    )
 
     sepaTS <- utils::read.csv(theurl, skip = 6)
-    
-    if (ncol(sepaTS) > 1){
-      
+
+    if (ncol(sepaTS) > 1) {
       # Coerse first column into a date
-      datetime <- strptime(sepaTS[,1], "%d/%m/%Y %H:%M")
-      myTS <- zoo::zoo(sepaTS[,2], order.by = datetime) # measured in m
-      
+      datetime <- strptime(sepaTS[, 1], "%d/%m/%Y %H:%M")
+      myTS <- zoo::zoo(sepaTS[, 2], order.by = datetime) # measured in m
+
       myList[[counter]] <- myTS
-      
-    }else{
-      
+    } else {
       message("Website temporarily unavailable")
       myList <- NULL
-      
     }
-
   }
-  
-  if (!is.null(myList) & counter == 1) {myList <- myTS}
-  
-  return(myList)
 
+  if (!is.null(myList) & counter == 1) {
+    myList <- myTS
+  }
+
+  return(myList)
 }

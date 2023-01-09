@@ -1,25 +1,44 @@
 Package: hddtools
 Title: Hydrological Data Discovery Tools
 Version: 0.9.5
-Authors@R: c(person(given = "Claudia", family = "Vitolo",
-                    role = c("aut"), email = "cvitolodev@gmail.com",
-                    comment = c(ORCID = "0000-0002-4252-1176")),
-             person(given = "Wouter", family = "Buytaert", role = c("ctb"),
-                    comment = "Supervisor"),
-             person(given = "Erin", family = "Le Dell", role = c("ctb"),
-                    comment = "Erin reviewed the package for rOpenSci, see https://github.com/ropensci/software-review/issues/73"),
-             person(given = "Michael", family = "Sumner", role = c("ctb"),
-                    comment = "Michael reviewed the package for rOpenSci, see https://github.com/ropensci/software-review/issues/73"),
-             person(given = "Dorothea", family = "Hug Peter", role = c("aut", "cre"), email = "dorothea.hug@wsl.ch"))
+Authors@R: c(
+    person("Claudia", "Vitolo", , "cvitolodev@gmail.com", role = "aut",
+           comment = c(ORCID = "0000-0002-4252-1176")),
+    person("Wouter", "Buytaert", role = "ctb",
+           comment = "Supervisor"),
+    person("Erin", "Le Dell", role = "ctb",
+           comment = "Erin reviewed the package for rOpenSci, see https://github.com/ropensci/software-review/issues/73"),
+    person("Michael", "Sumner", role = "ctb",
+           comment = "Michael reviewed the package for rOpenSci, see https://github.com/ropensci/software-review/issues/73"),
+    person("Dorothea", "Hug Peter", , "dorothea.hug@wsl.ch", role = c("aut", "cre"))
+  )
 Maintainer: Dorothea Hug Peter <dorothea.hug@wsl.ch>
-URL: https://docs.ropensci.org/hddtools/, https://github.com/ropensci/hddtools
-BugReports: https://github.com/ropensci/hddtools/issues
-Description: Tools to discover hydrological data, accessing catalogues and databases from various data providers. The package is described in Vitolo (2017) "hddtools: Hydrological Data Discovery Tools" <doi:10.21105/joss.00056>.
-Depends: R (>= 3.5.0)
-Imports: zoo, curl, XML, terra, readxl, tidyr, sf
-Suggests: testthat, leaflet, rmarkdown, knitr, dplyr
-VignetteBuilder: knitr
+Description: Tools to discover hydrological data, accessing catalogues and
+    databases from various data providers. The package is described in
+    Vitolo (2017) "hddtools: Hydrological Data Discovery Tools"
+    <doi:10.21105/joss.00056>.
 License: GPL-3
-Repository: CRAN
-RoxygenNote: 7.2.0
+URL: https://docs.ropensci.org/hddtools/,
+    https://github.com/ropensci/hddtools
+BugReports: https://github.com/ropensci/hddtools/issues
+Depends: 
+    R (>= 3.5.0)
+Imports: 
+    curl,
+    readxl,
+    sf,
+    terra,
+    tidyr,
+    XML,
+    zoo
+Suggests: 
+    dplyr,
+    knitr,
+    leaflet,
+    rmarkdown,
+    testthat
+VignetteBuilder: 
+    knitr
 Encoding: UTF-8
+Repository: CRAN
+RoxygenNote: 7.2.3

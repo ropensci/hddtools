@@ -1,4 +1,4 @@
-library('testthat')
-library('hddtools')
+library("testthat")
+library("hddtools")
 
-test_check('hddtools')
+test_check("hddtools")
